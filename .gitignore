@@ -1,0 +1,9 @@
+index.php
+App/Runtime/
+config.inc.php
+data
+.settings
+.buildpath
+.zfproject.xml
+.settings
+.project
