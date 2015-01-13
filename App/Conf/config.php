@@ -139,6 +139,7 @@ $custom= array (
 		'STATUS_ACCESS' => '4001',				//非法访问
 		'STATUS_DATA_LOST' => '5001',			//上传数据丢失
 		'STATUS_OTHER' => '9999',				//其他错误
+		'STATUS_DATA_ERROR' => '2000',			//数据不对称
 		'STATUS_NOT_CHECK'=>'6001',				//验证不通过
 			
 );

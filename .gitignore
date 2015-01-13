@@ -7,3 +7,5 @@ data
 .zfproject.xml
 .settings
 .project
+ThinkPHP
+config.inc.php
