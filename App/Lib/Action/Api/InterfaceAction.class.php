@@ -110,7 +110,7 @@ class InterfaceAction extends ApiBaseAction {
 	{
 		$id = $this->token_arr[0];
 		$article_id = $this->_post('photo_id');
-		$this->
+		//$this->
 	}
 
 	//照片投票
