@@ -73,7 +73,12 @@ class UsersModel extends ApiBaseModel {
 	}
 
 	
-	
+	public function selectFriend($user_name,$id)
+	{
+		$where['nickname'] = array('like',$user_name.'%');
+		$where['id'] = array('neq',$id);
+		return $this->where($where)->field('id,nickname,head_img,city_id')->select();
+	}
 	
 	
 }
