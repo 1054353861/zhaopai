@@ -110,8 +110,19 @@ class InterfaceAction extends ApiBaseAction {
 	{
 		$id = $this->token_arr[0];
 		$article_id = $this->_post('photo_id');
-		$list = $this->db['Article']->article_info($user_id,$article_id);
+		$list = $this->db['Article']->article_info($id,$article_id);
 		parent::callback(C('STATUS_SUCCESS'),'',$list);
+	}
+
+	//照片详情讨论
+	public function photo_verify_content()
+	{
+		$id = $this->token_arr[0];
+		$article_id = $this->_post('photo_id');
+		$p = $this->_post('p');	//第几页
+		$index = $this->_post('index');	//多少条
+		$list = $this->db['Comment']->select_info($p,$index,$article_id);
+	 	parent::callback(C('STATUS_SUCCESS'),'',$list);
 	}
 
 	//照片投票
