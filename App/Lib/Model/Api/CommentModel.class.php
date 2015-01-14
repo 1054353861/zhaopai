@@ -11,7 +11,8 @@ class CommentModel extends ApiBaseModel {
 			$new_add = array(
 				'article_id' => $article_id,
 				'user_id' => $id,
-				'content' => $comment_content
+				'content' => $comment_content,
+				'create_time' => time()
 			);
 			$bool = $this->add($new_add);
 			return $bool ? true : false;

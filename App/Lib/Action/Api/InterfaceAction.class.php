@@ -110,7 +110,8 @@ class InterfaceAction extends ApiBaseAction {
 	{
 		$id = $this->token_arr[0];
 		$article_id = $this->_post('photo_id');
-		//$this->
+		$list = $this->db['Article']->article_info($user_id,$article_id);
+		parent::callback(C('STATUS_SUCCESS'),'',$list);
 	}
 
 	//照片投票
