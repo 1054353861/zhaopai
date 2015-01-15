@@ -704,6 +704,28 @@ function pass_encryption ($str){
     	return $suffix ? $slice.'...' : $slice;
     }
     
-  
+    /**
+     * 获取随机数最大边界
+     * @param INT $count	(总条数)
+     * @param INT $num		(需要获取的条数)
+     * 使用方法：代码块
+     
+     $num = 100; //需要获取的数据条数
+	 $count = D('TABLE')->where(xxx)->count(); //先获取总条数
+	 $ofset = get_sj_max_num($count,$num);
+	 $data = D('TABLE')->where(xxx)->limit($ofset,',',$num)->select(); //随机数
+	 
+     */
+    function get_sj_max_num ($count,$num) {
+    	$sj = 0;
+    	if ($count - $num < 0 ){
+    		$sj = 0;
+    	} elseif ($count - $num < $num) {
+    		$sj = 0;
+    	} else {
+    		$sj = $count - $num;
+    	}
+    	return $sj;
+    }
     
 ?>
