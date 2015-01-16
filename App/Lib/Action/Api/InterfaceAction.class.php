@@ -25,7 +25,10 @@ class InterfaceAction extends ApiBaseAction {
 		'IntegralAll' => 'IntegralAll',
 		'UserFriends' => 'UserFriends',
 		'Comment' => 'Comment',
-		'Article' => 'Article'
+		'Article' => 'Article',
+		'ContentPraise' => 'ContentPraise',
+		'Attention' => 'Attention',
+		'Collection' => 'Collection'
 	);
 
 	//http://localhost/zhaopai/index.php/Api/Login/login
@@ -88,21 +91,8 @@ class InterfaceAction extends ApiBaseAction {
 		$type = $this->_post('type');
 		$index = $this->_post('index');
 		$page_count = $this->_post('page_count');
-		if($index!=''&&$page_count!='')
-		{
-			switch($type)
-			{
-				//最新
-				case 1:
-
-				break;
-				//最近
-				case 2:
-
-				break;
-			}
-		}
-		
+		$list = $this->db['Article']->article_index($city,$type,$index,$page_count);
+		parent::callback(C('STATUS_SUCCESS'),'',$list);
 	}
 
 	//照片详情
@@ -148,7 +138,12 @@ class InterfaceAction extends ApiBaseAction {
 	//赞的列表
 	public function like_list()
 	{
-
+		$id = $this->token_arr[0];
+		$like_id = $this->_post('like_id');
+		$p = $this->_post('p');
+		$index = $this->_post('index');
+		$list = $this->db['ContentPraise']->getLike($like_id,$p,$index);
+		parent::callback(C('STATUS_SUCCESS'),'',$list);
 	}
 
 	//申请好友
@@ -163,19 +158,28 @@ class InterfaceAction extends ApiBaseAction {
 	//动态-动态
 	public function news_active()
 	{
-
+		$id = $this->token_arr[0];
+		$p = $this->_post('p');
+		$index = $this->_post('index');
+		$list = $this->db['Attention']->getNewsList($id,$p,$index);
+		parent::callback(C('STATUS_SUCCESS'),'',$list);
 	}
 
 	//动态收藏
 	public function news_save()
 	{
-
+		$id = $this->token_arr[0];
+		$p = $this->_post('p');
+		$index = $this->_post('index');
+		$list = $this->db['Collection']->getCollList($id,$p,$index);
+		parent::callback(C('STATUS_SUCCESS'),'',$list);
 	}
 
 	//动态推荐
 	public function news_hot()
 	{
-
+		$list = $this->db['Article']->getRemmend();
+		parent::callback(C('STATUS_SUCCESS'),'',$list);
 	}
 
 	//拍友

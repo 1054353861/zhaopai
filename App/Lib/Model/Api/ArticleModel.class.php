@@ -35,6 +35,7 @@ class ArticleModel extends ApiBaseModel {
 		}
 	}
 
+	//照片详情
 	public function article_info($user_id,$article_id)
 	{
 		$big_arr = array();
@@ -50,12 +51,83 @@ class ArticleModel extends ApiBaseModel {
 		$ContentPraise = D('ContentPraise');
 		$big_arr['photo_info']['like_list'] = $ContentPraise->where(array('c.article_id'=>$article_id))
 		->table('app_content_praise as c')->join('app_users as u on u.id = c.user_praise_id')
-		->field('u.id,u.head_img')->limit(8)->select();
+		->field('u.id,u.head_img')->limit(7)->select();
 
 		$big_arr['photo_info']['like_num'] = $ContentPraise->where(array('article_id'=>$article_id))
 		->count();
 
 		return $big_arr;
 	}
+
+	//首页
+	public function article_index($city,$type,$index,$page_count)
+	{
+		if($city!='')
+			$where['city_id'] = $city;
+		$p = $index =='' ? 0 : $index;
+		$page_count = $page_count == '' ? 5 : $page_count;
+		switch($type)
+		{
+			//最新
+			case 1:
+				$list_info = $this->where($where)->limit($p,$page_count)->order('create_time desc')->select();
+				$list = array();
+				$ContentPraise = D('ContentPraise');
+
+				$LabelArticle = D('LabelArticle');
+
+				$Users = D('Users');
+
+				foreach($list_info as $key=>$value)
+				{
+
+					$list[$key]['user_info'] = $Users->where(array('id'=>$value['user_id']))
+					->field('id,nickname,head_img,city_id')->find();
+
+					$list[$key]['photo_info'] = $value;
+
+					$list[$key]['photo_info']['photo_time'] = date('Y-m-d H:i:s',$value['create_time']);
+
+					$list[$key]['photo_info']['tag_info'] = $LabelArticle->where(array('a.article_id'=>$value['id']))
+					->table('app_label_article as a')->join('app_label as l on l.id = a.label_id')
+					->field('l.id,l.label_name')->select();
+
+					$list[$key]['photo_info']['like_info']['like_num'] = $ContentPraise->where(array('article_id'=>$value['id']))
+					->count();
+
+					$list[$key]['photo_info']['like_info']['like_list'] = $ContentPraise->where(array('c.article_id'=>$value['id']))
+					->table('app_content_praise as c')->join('app_users as u on u.id = c.user_praise_id')
+					->field('u.id,u.head_img')->limit(7)->select();
+				}
+				return $list;
+			break;
+			//最近
+			case 2:
+
+			break;
+		}
+	}
+
+	//推荐文章
+	public function getRemmend()
+	{
+		$list = $this->where(array('recommend'=>1))->select();
+
+		$list_arr = array();
+
+		$Users = D('Users');
+
+		$ContentPraise = D('ContentPraise');
+		
+		foreach($list as $key=>$value)
+		{
+			$list_arr[$key]['user_info'] = $Users->where(array('id'=>$value['user_id']))->field('id,nickname,head_img,city_id')->find();
+			$list_arr[$key]['content_info'] = $value;
+			$list_arr[$key]['rem_num'] = $ContentPraise->where(array('article_id'=>$value['id']))->count();
+		}
+
+		return $list_arr;
+	}
+
 
 }
