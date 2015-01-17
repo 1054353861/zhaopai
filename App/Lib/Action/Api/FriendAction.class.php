@@ -23,7 +23,7 @@ class FriendAction extends ApiBaseAction {
 		'Users' => 'Users'
 	);
 
-		//申请好友
+	//申请好友
 	public function friend_add()
 	{
 		$id = $this->oUser->id;

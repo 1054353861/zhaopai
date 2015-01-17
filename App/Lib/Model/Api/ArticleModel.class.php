@@ -81,8 +81,9 @@ class ArticleModel extends ApiBaseModel {
 				foreach($list_info as $key=>$value)
 				{
 
-					$list[$key]['user_info'] = $Users->where(array('id'=>$value['user_id']))
-					->field('id,nickname,head_img,city_id')->find();
+					$list[$key]['user_info'] = $Users->where(array('u.id'=>$value['user_id']))
+					->table('app_users as u')->join('app_city as c on c.id = u.city_id')
+					->field('u.id,u.nickname,u.head_img,c.title')->find();
 
 					$list[$key]['photo_info'] = $value;
 

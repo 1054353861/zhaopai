@@ -75,9 +75,13 @@ class UsersModel extends ApiBaseModel {
 	
 	public function selectFriend($user_name,$id)
 	{
-		$where['nickname'] = array('like',$user_name.'%');
-		$where['id'] = array('neq',$id);
-		return $this->where($where)->field('id,nickname,head_img,city_id')->select();
+		$where['u.nickname'] = array('like',$user_name.'%');
+		$where['u.id'] = array('neq',$id);
+		$list = $this->where($where)->table('app_users as u')
+		->join('app_city as c on c.id = u.city_id and c.parent_id = 0')
+		->field('u.id,u.nickname,u.head_img,c.title')
+		->select();
+		return $list;
 	}
 	
 	

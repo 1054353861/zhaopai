@@ -25,12 +25,13 @@ class CollectionModel extends ApiBaseModel {
 
 		foreach($list as $key=>$value)
 		{
-			$list_arr[$key]['user_info'] = $Users->where(array('id'=>$value['user_id']))
-			->field('id,nickname,head_img,city_id')->find();
-
-			$list_arr[$key]['user_info']['time'] = date('Y-m-d H:i:s',$value['create_time']);
+			$list_arr[$key]['user_info'] = $Users->where(array('u.id'=>$value['user_id']))
+			->table('app_users as u')->join('app_city as c on c.id = u.city_id and parent_id = 0')
+			->field('u.id,u.nickname,u.head_img,c.title')->find();
 
 			$list_arr[$key]['content'] = $value;
+			
+			$list_arr[$key]['content']['time'] = date('Y-m-d H:i:s',$value['create_time']);
 		}
 
 		$list_arr['news_num'] = $this->where(array('user_id'=>$id))->count();

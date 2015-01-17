@@ -26,8 +26,9 @@ class AttentionModel extends ApiBaseModel {
 
 		foreach($list as $key=>$value)
 		{
-			$list_arr[$key]['user_info'] = $Users->where(array('id'=>$value['user_id']))
-			->field('id,nickname,head_img,city_id')->find();
+			$list_arr[$key]['user_info'] = $Users->where(array('u.id'=>$value['user_id']))
+			->table('app_users as u')->join('app_city as c on c.id = u.city_id and c.parent_id = 0')
+			->field('u.id,u.nickname,u.head_img,c.title')->find();
 			$list_arr[$key]['content']['type'] = $value['status'];
 			$list_arr[$key]['content']['info'] = D('Article')
 			->where(array('id'=>$value['attention_id']))->field('content,article_img')->find();

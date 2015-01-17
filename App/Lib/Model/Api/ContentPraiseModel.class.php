@@ -15,7 +15,8 @@ class ContentPraiseModel extends ApiBaseModel {
 		$list = array();
 		$list['like_list'] = $this->where(array('p.article_id'=>$id))->table('app_content_praise as p')
 		->join('app_users as u on u.id = p.user_praise_id')
-		->field('u.id,u.nickname,u.head_img,u.city_id,p.create_time')->limit($first,$offset)->select();
+		->join('app_city as c on c.id = u.city_id and c.parent_id = 0')
+		->field('u.id,u.nickname,u.head_img,c.title,p.create_time')->limit($first,$offset)->select();
 		$list['like_num'] = $this->where(array('article_id'=>$id))->count();
 		return $list;
 	}

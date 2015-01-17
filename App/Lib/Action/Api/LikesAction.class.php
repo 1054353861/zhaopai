@@ -5,7 +5,7 @@
  */
 
 
-class LikeAction extends ApiBaseAction {
+class LikesAction extends ApiBaseAction {
 	
 	//每个类都要重写此变量
 	protected  $is_check_rbac = true;		//当前控制是否开启身份验证

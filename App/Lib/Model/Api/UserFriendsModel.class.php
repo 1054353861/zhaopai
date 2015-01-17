@@ -16,7 +16,9 @@ class UserFriendsModel extends ApiBaseModel {
 	public function friends_list($id,$type)
 	{
 		$list = $this->where(array('user_id'=>$id,'friend_statis'=>$type))->table('app_user_friends as f')
-		->join('app_users as u on u.id = f.friend_id')->field('u.id,u.nickname,u.head_img,u.city_id')->select();
+		->join('app_users as u on u.id = f.friend_id')
+		->join('app_city as c on c.id = u.city_id and c.parent_id = 0')
+		->field('u.id,u.nickname,u.head_img,u.city_id,c.title')->select();
 		return $list;
 	}
 
