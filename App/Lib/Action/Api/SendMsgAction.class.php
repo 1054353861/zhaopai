@@ -89,6 +89,7 @@ class SendMsgAction extends ApiBaseAction {
 			exit;
 		}
 		
+		
 		//$this->assign('name','telephone');
 		//$this->display('Login:sendSHP');
 	}
@@ -113,8 +114,8 @@ class SendMsgAction extends ApiBaseAction {
 			exit;
 		}
 		
-		$this->assign('name','telephone');
-		$this->display('Login:sendSHP');
+		//$this->assign('name','telephone');
+		//$this->display('Login:sendSHP');
 	}
 	
 	
@@ -137,9 +138,12 @@ class SendMsgAction extends ApiBaseAction {
 			exit;
 		}
 	
-		$this->assign('name','telephone');
-		$this->display('Login:sendSHP');
+		//$this->assign('name','telephone');
+		//$this->display('Login:sendSHP');
 	}
+	
+	
+	
 	
 	
 	
