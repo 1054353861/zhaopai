@@ -93,9 +93,7 @@ $custom= array (
 		//用户类型
 		'ACCOUNT_TYPE' => array (
 			'ADMIN' => 0,			//管理员
-			'Media' => 1,			//媒体主
-			'Advert' => 2,			//广告主
-			'Salesman'=>3,			//销售员
+			'USER'=>1,    		//普通用户，短信接口也用到
 		),
 		//上传文件目录
 		'UPLOAD_DIR' => array(
@@ -110,22 +108,25 @@ $custom= array (
  				//'domain' =>	'http://local_cwq.com/',
 				'dir' => 'files/zhaopai/',							//项目文件目录
 		),
+		
+		
 		//短信平台账号
 		'SHP' => array(
-// 			'TYPE' => 'SHP',	//使用哪种短信接口
-//  				'NAME'=>'cheshen_gd',
-//  				'PWD'=>'cheshen801'
-// 				'NAME'=>'rikee',
-// 				'PWD'=>'zyzylove2'	
-				
-			'TYPE' => 'RD_SHP',				//使用哪种短信接口
-				'NAME'=>'gztzwl',
-				'PWD'=>'gztzwl'
+			'TYPE' => 'SHP',	//使用哪种短信接口
+//  			'NAME'=>'cheshen_gd',
+//  			'PWD'=>'cheshen801'
+				'NAME'=>'rikee',
+				'PWD'=>'rikee818'	
+
+// 			'TYPE' => 'RD_SHP',				//使用哪种短信接口
+// 				'NAME'=>'',
+// 				'PWD'=>''
 		),
 		
 		//系统配置属性
 		'WEB_SYSTEM' => array(
 			'base_id'=>1,		//system_base 表ID
+			'sms_id'=>1,
 		),
 		
 		

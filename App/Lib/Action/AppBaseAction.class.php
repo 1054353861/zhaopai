@@ -73,14 +73,14 @@ class AppBaseAction extends GlobalParameterAction {
 			$shp_password = C('SHP.PWD');		 
 		}
 
-
+		
 		switch ($shp_type) {
 			case 'SHP' :
 				import("@.Tool.SHP");				//SHP短信发送类
 				$SHP = new SHP($shp_name,$shp_password);			//账号信息
 				$send = $SHP->send($telephone,$msg);		//执行发送
 				break;
-			case 'RD_SHP'	 :
+			case 'RD_SHP':
 				import("@.Tool.RD_SHP");		//RD_SHP短信发送类
 				$SHP = new RD_SHP($shp_name,$shp_password);			//账号信息
 				$send = $SHP->send($telephone,$msg);		//执行发送

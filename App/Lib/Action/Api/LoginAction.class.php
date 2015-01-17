@@ -16,7 +16,6 @@ class LoginAction extends ApiBaseAction {
 		'Verify'=>'Verify',
 	);
 	
-	
 	public function __construct() {
 		
 		parent:: __construct();			//重写父类构造方法
@@ -62,11 +61,19 @@ class LoginAction extends ApiBaseAction {
 					$Users->up_login_info($user_info['id']);
 					//查找会员信息
 
-// 					$result = array(
-// 						'token'=>$identity_encryption,
-// 					);
-					
-					$result = $user_info;
+					//$result = $user_info;
+					$result = array(
+						'account'=>$user_info['account'],
+						'nickname'=>$user_info['nickname'],
+						'city_id'=>$user_info['city_id'],
+						'head_img'=>$user_info['head_img'],
+						'sex'=>$user_info['sex'],
+						'background_img'=>$user_info['background_img'],
+						'integral'=>$user_info['integral'],
+						'last_login_time'=>date('Y-m-d H:i:s',$user_info['last_login_time']),
+						'login_count'=>$user_info['login_count'],
+						'create_time'=>date('Y-m-d H:i:s',$user_info['create_time']),
+					);
 
 					//返回给客户端数据
 					parent::callback(C('STATUS_SUCCESS'),'登录成功',$result,array('token'=>$identity_encryption));
@@ -93,10 +100,10 @@ class LoginAction extends ApiBaseAction {
 			}
 			
 			//短信验证模块
-			parent::check_verify($account,1);			//验证类型1为注册验证
+			//parent::check_verify($account,1);			//验证类型1为注册验证
 			
 			//数据库验证
-			$Users = $this->db['Member'];						//用户表模型	
+			$Users = $this->db['Users'];						//用户表模型	
 			
 			//账号验证、数据写入模块
 			$is_have = $Users->account_is_have($account);		//查看账号是否存在
@@ -145,7 +152,7 @@ class LoginAction extends ApiBaseAction {
 		//数据验证
 		if (Validate::checkNull($this->request['account'])) parent::callback(C('STATUS_OTHER'),'账号为空');
 		if ($this->request['account'] != 'admin') {
-			//if (!Validate::checkPhone($this->request['account'])) parent::callback(C('STATUS_OTHER'),'账号必须为11位的手机号码');
+			if (!Validate::checkPhone($this->request['account'])) parent::callback(C('STATUS_OTHER'),'账号必须为11位的手机号码');
 		}
 		if (Validate::checkNull($this->request['password'])) parent::callback(C('STATUS_OTHER'),'密码为空');		
 	}
