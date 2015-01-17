@@ -37,14 +37,14 @@ class ApiBaseAction extends AppBaseAction {
 	
 	private function check_system_info() {
 		
-		if ($this->is_check_rbac == true) {
+		if ($this->is_check_rbac == true && !in_array(ACTION_NAME,$this->not_check_fn)) {
 			
 			$this->deciphering_user_info();
 			
 			$check_result = $this->init_check($this->oUser);
 			
 			if ($check_result['status'] == false) parent::callback(C('STATUS_RBAC'),$check_result['message']);
-		}
+		} 
 	}
 	
 

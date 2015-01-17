@@ -7,7 +7,7 @@ class DemoAction extends ApiBaseAction {
 	
 	protected  $is_check_rbac = true;		//当前控制是否开启身份验证
 	
-	protected  $not_check_fn = array();	//登陆后无需登录验证方法
+	protected  $not_check_fn = array('index_two');	//登陆后无需登录验证方法
 	
 	//和构造方法
 	public function __construct() {
@@ -24,6 +24,10 @@ class DemoAction extends ApiBaseAction {
 		print_r($this->oUser);
 	}
 	
+	
+	public function index_two () {
+		
+	}
 	
 	
 }

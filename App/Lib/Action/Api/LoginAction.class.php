@@ -55,7 +55,7 @@ class LoginAction extends ApiBaseAction {
 				} else {
 					
 					//生成秘钥
-					$encryption = $user_info['id'].':'.$user_info['nickname'].':'.date('Y-m-d');					//生成解密后的数据
+					$encryption = $user_info['id'].':'.$user_info['account'].':'.date('Y-m-d');					//生成解密后的数据
 					$identity_encryption = passport_encrypt($encryption,C('UNLOCAKING_KEY'));	//生成加密字符串,给客户端
 					
 					//更新用户登录信息
@@ -112,7 +112,7 @@ class LoginAction extends ApiBaseAction {
 					$identity_encryption = passport_encrypt($encryption,C('UNLOCAKING_KEY'));	//生成加密字符串,给客户端
 					
 					//返回客户端
-					$return_data = array('user_key' => $identity_encryption);
+					$return_data = array('token' => $identity_encryption);
 					parent::callback(C('STATUS_SUCCESS'),'注册成功',$return_data);
 				} else {
 					parent::callback(C('STATUS_UPDATE_DATA'),'注册失败');
