@@ -123,6 +123,21 @@ class LoginAction extends ApiBaseAction {
 		//$this->display('Login:register');
 	}
 	
+	
+	//注册手机号验证
+	public function regeister_cell_veritify()
+	{
+		$cell_phone = $this->_post('cell_phone');
+		$user_val = $this->db['Users']->where(array('phone'=>$cell_phone))->find();
+		if($user_val!='')
+		{
+			parent::callback(C('STATUS_HAVE_DATA'),'手机号已被注册');
+		}else{
+			parent::callback(C('STATUS_SUCCESS'),'手机号未被注册');
+		}
+	}
+
+	
 
 	//验证提交数据
 	private function check_me() {
@@ -134,6 +149,34 @@ class LoginAction extends ApiBaseAction {
 		}
 		if (Validate::checkNull($this->request['password'])) parent::callback(C('STATUS_OTHER'),'密码为空');		
 	}
+
+
+	//登入
+	public function login_bak()
+	{
+		$cell_phone = $this->_post('cell_phone');
+		$password = $this->_post('password');
+		if($cell_phone!='' && $password!='')
+		{
+			$user_val = $this->db['Users']->where(array('phone'=>$cell_phone))->find();
+			if($user_val!='')
+			{
+				if($user_val['password']==pass_encryption($password))
+				{
+					//生成秘钥
+					$encryption = $user_val['id'].':'.$user_val['account'].':'.date('Y-m-d');
+					//返回数据
+					parent::callback(C('STATUS_SUCCESS'),'登录成功',$user_val,array('token'=>passport_encrypt($encryption,C('UNLOCAKING_KEY'))));
+				}else{
+					parent::callback(C('STATUS_DATA_ERROR'),'密码错误');
+				}
+			}else{
+				parent::callback(C('STATUS_NOT_DATA'),'手机号不存在');
+			}
+		}
+	}
+
+
 }
 
 ?>

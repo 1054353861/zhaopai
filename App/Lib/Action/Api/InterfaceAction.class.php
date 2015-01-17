@@ -84,17 +84,6 @@ class InterfaceAction extends ApiBaseAction {
 		}
 	}
 
-	//首页
-	public function home_data()
-	{
-		$city = $this->_post('city');
-		$type = $this->_post('type');
-		$index = $this->_post('index');
-		$page_count = $this->_post('page_count');
-		$list = $this->db['Article']->article_index($city,$type,$index,$page_count);
-		parent::callback(C('STATUS_SUCCESS'),'',$list);
-	}
-
 	//照片详情
 	public function photo_verify()
 	{
