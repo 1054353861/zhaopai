@@ -14,6 +14,11 @@ class CommentModel extends ApiBaseModel {
 				'content' => $comment_content,
 				'create_time' => time()
 			);
+
+			$log = array('user_id'=>$id,'attention_id'=>$article_id,'status'=>1);
+			
+			parent::listen(__CLASS__,__FUNCTION__,$log);
+
 			$bool = $this->add($new_add);
 			return $bool ? true : false;
 		}else{

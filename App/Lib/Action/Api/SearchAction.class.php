@@ -10,7 +10,7 @@ class SearchAction extends ApiBaseAction {
 	//每个类都要重写此变量
 	protected  $is_check_rbac = true;		//当前控制是否开启身份验证
 	
-	protected  $not_check_fn = array('search_friends','search_friends_random');	//无需登录和验证rbac的方法名
+	protected  $not_check_fn = array();	//无需登录和验证rbac的方法名
 
 	public function __construct()
 	{
@@ -25,9 +25,12 @@ class SearchAction extends ApiBaseAction {
 	//搜索-拍友
 	public function search_friends()
 	{
+		$where['u.id'] = array('neq',$this->oUser->id);
 		$user_name = $this->_post('user_name');
-		$where['nickname'] = array('like',$user_name.'%');
-		$list = $this->db['Users']->where($where)->field('id,nickname,head_img,city_id')->select();
+		$where['u.nickname'] = array('like',$user_name.'%');
+		$list = $this->db['Users']->where($where)->table('app_users as u')
+		->join('app_city as c on c.id = u.city_id and c.parent_id = 0')
+		->field('u.id,u.nickname,u.head_img,c.title')->select();
 		parent::callback(C('STATUS_SUCCESS'),'',$list);
 	}
 
@@ -46,7 +49,8 @@ class SearchAction extends ApiBaseAction {
 	//搜索-拍友-随机
 	public function search_friends_random()
 	{
-		$user = $this->db['Users']->order('rand()')->field('id,nickname,head_img,city_id')->limit(10)->select();
+		$user = $this->db['Users']->where(array('id'=>array('neq',$this->oUser->id)))->order('rand()')
+		->field('id,nickname,head_img,city_id')->limit(10)->select();
 		parent::callback(C('STATUS_SUCCESS'),'',$user);
 	}
 	

@@ -27,6 +27,8 @@ class ArticleModel extends ApiBaseModel {
 					$bool = $this->where(array('id'=>$article_id))->save($super);
 				break;
 			}
+			$log = array('user_id'=>$id,'attention_id'=>$article_id,'status'=>1);
+			parent::listen(__CLASS__,__FUNCTION__,$log);
 			$new_arr = array('article_id'=>$article_id,'user_id'=>$id);
 			$ArticleBehaviorLog->add($new_arr);
 			return $bool ? true : false;
@@ -40,7 +42,9 @@ class ArticleModel extends ApiBaseModel {
 	{
 		$big_arr = array();
 
-		$big_arr['user_info'] = D('Users')->where(array('id'=>$user_id))->field('id,nickname,head_img,city_id')->find();
+		$big_arr['user_info'] = D('Users')->where(array('u.id'=>$user_id))
+		->table('app_users as u')->join('app_city as c on c.id = u.city_id and c.parent_id = 0')
+		->field('u.id,u.nickname,u.head_img,c.title')->find();
 		
 		$big_arr['photo_info'] = $this->where(array('id'=>$article_id))->find();
 		
@@ -122,7 +126,9 @@ class ArticleModel extends ApiBaseModel {
 		
 		foreach($list as $key=>$value)
 		{
-			$list_arr[$key]['user_info'] = $Users->where(array('id'=>$value['user_id']))->field('id,nickname,head_img,city_id')->find();
+			$list_arr[$key]['user_info'] = $Users->where(array('u.id'=>$value['user_id']))->table('app_users as u')
+			->join('app_city as c on c.id = u.city_id and c.parent_id = 0')
+			->field('u.id,u.nickname,u.head_img,c.title')->find();
 			$list_arr[$key]['content_info'] = $value;
 			$list_arr[$key]['rem_num'] = $ContentPraise->where(array('article_id'=>$value['id']))->count();
 		}
