@@ -1,6 +1,9 @@
 # 接口文档
 
+
 ## 一、登录接口
+
+## 1.用户中心接口
 
 #### Request
 ```
@@ -35,8 +38,7 @@ POST /Api/Login/login
 
 ```
 
-
-## 二、注册接口
+## 2.注册用户接口
 
 #### Request
 ```
@@ -63,9 +65,58 @@ POST /Api/Login/login
 ```
 
 
+## 3.注册短信接口
+
+#### Request
+```
+POST /Api/SendMsg/user_account_register
+```
+
+##### Parameters：
+- `telephone` 账号(手机号)
+
+#### Response
+```json
+{
+  "status": "0",
+  "msg": "发送成功",
+  "data":
+  [
+  ],
+  "num": "0"
+}
+```
 
 
+## 二、新闻动态接口
+
+### 1.动态-动态
+
+#### Request
+```
+POST /Api/News/news_active
+```
+
+##### Parameters：
+- `token` 用户登录后拿去的用户标示
+
+#### Response
+```json
+
+```
 
 
+### 2.动态-动态
 
-  
+#### Request
+```
+POST /Api/News/news_save
+```
+
+##### Parameters：
+- `token` 用户登录后拿去的用户标示
+
+#### Response
+```json
+
+```
