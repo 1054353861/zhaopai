@@ -137,4 +137,69 @@ class ArticleModel extends ApiBaseModel {
 	}
 
 
+	//获得个人中心数据
+	public function getOwnInfo($p,$index,$user_id,$type,$other_id=NULL)
+	{
+		$first = $p == '' ? 0 : $p;
+		$offset = $index == '' ? 10 : $index;
+		$arr_list = array();
+
+		$Users = D('Users');
+
+		$arr_list['user_info'] = $Users->where(array('u.id'=>$user_id))->table('app_users as u')
+		->join('app_city as c on c.id = u.city_id and c.parent_id = 0')
+		->field('u.nickname,u.head_img,u.background_img,u.integral,c.title')->find();
+
+		$arr_list['user_info']['photo_num'] = $this->where(array('user_id'=>$user_id))->count();
+
+		$arr_list['user_info']['save_num'] = D('Collection')->where(array('user_id'=>$user_id))->count();
+
+		$arr_list['user_info']['friend_num_yes'] = D('UserFriends')->where(array('user_id'=>$user_id,'friend_statis'=>1))->count();
+
+		$arr_list['user_info']['artcile_num'] = $this->where(array('user_id'=>$user_id))->count();
+		
+		if($type==false)
+		{
+			$arr_list['user_info']['friend_num_no'] = D('UserFriends')->where(array('user_id'=>$user_id,'friend_statis'=>0))->count();
+		}
+
+		if($type==true)
+		{
+			$count = D('UserFriends')->where(array('user_id'=>$other_id,'friend_id'=>$user_id,'friend_statis'=>1))->count();
+			if($count==0)
+			{
+				$arr_list['user_info']['is_friend'] = 2;
+			}else{
+				$arr_list['user_info']['is_friend'] = 1;
+			}
+		}
+
+		$list = $this->where(array('user_id'=>$user_id))->limit($first,$offset)
+		->field('id,content,article_img,create_time,longitude,latitude')->select();
+
+		$LabelArticle = D('LabelArticle');
+
+		$ContentPraise = D('ContentPraise');
+
+		$Comment = D('Comment');
+		foreach($list as $key=>$value)
+		{
+			$arr_list['photo_info'][$key]['time'] = date('Y-m-d H:i:s',$value['create_time']);
+			$arr_list['photo_info'][$key] = $value;
+
+			$arr_list['photo_info'][$key]['tag_info'] = $LabelArticle->table('app_label_article as a')
+			->where(array('a.article_id'=>$value['id']))->join('app_label as l on l.id = a.label_id')
+			->field('l.id,l.label_name')->select();
+
+			$arr_list['photo_info'][$key]['like_info'] = $ContentPraise->table('app_content_praise as p')
+			->where(array('p.article_id'=>$value['id']))->join('app_users as u on u.id = p.user_praise_id')
+			->field('u.id,u.head_img')->order('p.create_time desc')->limit(7)->select();
+
+			$arr_list['photo_info'][$key]['like_num'] = $ContentPraise->where(array('article_id'=>$value['id']))->count();
+			
+			$arr_list['photo_info'][$key]['comment_num'] = $Comment->where(array('article_id'=>$value['id']))->count();
+		}
+
+		return $arr_list;
+	}
 }

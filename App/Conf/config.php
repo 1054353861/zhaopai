@@ -98,7 +98,7 @@ $custom= array (
 		//上传文件目录
 		'UPLOAD_DIR' => array(
 				'web_dir' => $_SERVER['DOCUMENT_ROOT'].'/',
-				'image' => 'files/chengwai/images/',		//图片地址
+				'image' => 'files/zhaopai/images/',		//图片地址
 		),
 		
 		//外部文件访问地址(用来填写专用的文件服务器)

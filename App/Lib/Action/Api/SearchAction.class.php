@@ -19,7 +19,8 @@ class SearchAction extends ApiBaseAction {
 
 	//初始化数据库连接
 	protected  $db = array(
-		'Users' => 'Users'
+		'Users' => 'Users',
+		'Label' => 'Label'
 	);
 
 	//搜索-拍友
@@ -37,13 +38,22 @@ class SearchAction extends ApiBaseAction {
 	//搜索-标签-随机
 	public function search_tag_random()
 	{
-
+		$id = $this->oUser->id;
+		$p = $this->_post('p');
+		$index = $this->_post('index');
+		$list = $this->db['Label']->getLabelInfo($user_name,$p,$index,false);
+		parent::callback(C('STATUS_SUCCESS'),'',$list);
 	}
 
 	//搜索-标签
 	public function search_tag()
 	{
-
+		$id = $this->oUser->id;
+		$p = $this->_post('p');
+		$index = $this->_post('index');
+		$user_name = $this->_post('user_name');
+		$list = $this->db['Label']->getLabelInfo($user_name,$p,$index,true);
+		parent::callback(C('STATUS_SUCCESS'),'',$list);
 	}
 
 	//搜索-拍友-随机

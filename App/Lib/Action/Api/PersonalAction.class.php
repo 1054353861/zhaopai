@@ -20,26 +20,40 @@ class PersonalAction extends ApiBaseAction {
 	//初始化数据库连接
 	protected  $db = array(
 		'IntegralAll' => 'IntegralAll',
-		'Users' => 'Users'
+		'Users' => 'Users',
+		'Article' => 'Article'
 	);
 
 	
 	//个人中心-他人
 	public function personal_other()
 	{
-
+		$id = $this->oUser->id;
+		$friend_id = $this->_post('user_id');
+		$p = $this->_post('p');
+		$index = $this->_post('index');
+		$list = $this->db['Article']->getOwnInfo($p,$index,$friend_id,true,$id);
+		parent::callback(C('STATUS_SUCCESS'),'',$list);
 	}
 
 	//个人中心-自己
 	public function personal_owner()
 	{
-
+		$id = $this->oUser->id;
+		$p = $this->_post('p');
+		$index = $this->_post('index');
+		$list = $this->db['Article']->getOwnInfo($p,$index,$id,false);
+		parent::callback(C('STATUS_SUCCESS'),'',$list);
 	}
 
 	//个人中心-话题
 	public function personal_news()
 	{
-
+		$id = $this->oUser->id;
+		$p = $this->_post('p');
+		$index = $this->_post('index');
+		$list = $this->db['Article']->getOwnInfo($p,$index,$id,false);
+		parent::callback(C('STATUS_SUCCESS'),'',$list);
 	}
 
 	//个人中心-积分
@@ -54,6 +68,18 @@ class PersonalAction extends ApiBaseAction {
 	//个人中心-头像
 	public function personal_edit_head()
 	{
+		$id = $this->oUser->id;
+		$path = C('UPLOAD_DIR');
+		$dir = $path['web_dir'].$path['image'];
+		$file_list = parent::upload_file($_FILES['data'],$dir);
+		if($file_list['status']==true)
+		{
+			$url = array('head_img'=>$file_list['info'][0]['savename']);
+			$bool = $this->db['Users']->where(array('id'=>$id))->save($url);
+			$bool ? parent::callback(C('STATUS_SUCCESS'),'','') : parent::callback(C('STATUS_DATA_ERROR'),'','');
+		}else{
+			parent::callback(C('STATUS_DATA_ERROR'),'','');
+		}
 
 	}
 
