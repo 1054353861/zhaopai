@@ -20,7 +20,8 @@ class PhotoAction extends ApiBaseAction {
 	//初始化数据库连接
 	protected  $db = array(
 		'Comment' => 'Comment',
-		'Article' => 'Article'
+		'Article' => 'Article',
+		'ContentPraise' => 'ContentPraise'
 	);
 
 	//照片详情
@@ -63,5 +64,12 @@ class PhotoAction extends ApiBaseAction {
 		$bool ? parent::callback(C('STATUS_SUCCESS'),'','') : parent::callback(C('STATUS_DATA_ERROR'),'','');
 	}
 
-	
+	//照片赞
+	public function photo_like()
+	{
+		$id = $this->oUser->id;
+		$article_id = $this->_post('photo_id');
+		$bool = $this->db['ContentPraise']->set_like($id,$article_id);
+		$bool ? parent::callback(C('STATUS_SUCCESS'),'','') : parent::callback(C('STATUS_DATA_ERROR'),'','');
+	}
 }

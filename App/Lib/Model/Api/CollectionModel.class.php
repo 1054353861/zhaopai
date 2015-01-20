@@ -38,4 +38,18 @@ class CollectionModel extends ApiBaseModel {
 
 		return $list_arr;
 	}
+
+	public function collect_like($id,$photo_id)
+	{
+		$where = array('user_id'=>$id,'article_coll_id'=>$photo_id);
+		$count = $this->where($where)->count();
+		if($count==0)
+		{
+			$where['create_time'] = time();
+			$bool = $this->add($where);
+			$log = array('user_id'=>$id,'attention_id'=>$photo_id,'status'=>2);
+			parent::listen(__CLASS__,__FUNCTION__,$log);
+			return $bool ? true : false;
+		}
+	}
 }

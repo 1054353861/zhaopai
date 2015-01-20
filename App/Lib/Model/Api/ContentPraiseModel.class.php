@@ -20,4 +20,20 @@ class ContentPraiseModel extends ApiBaseModel {
 		$list['like_num'] = $this->where(array('article_id'=>$id))->count();
 		return $list;
 	}
+
+	public function set_like($user_id,$article_id)
+	{
+		$where = array('article_id'=>$article_id,'user_praise_id'=>$user_id);
+		$count = $this->where($where)->count();
+		if($count==0)
+		{
+			$where['create_time'] = time();
+			$bool = $this->add($where);
+			$log = array('user_id'=>$user_id,'attention_id'=>$article_id,'status'=>1);
+			parent::listen(__CLASS__,__FUNCTION__,$log);
+			return $bool ? true : false;
+		}else{
+			return false;
+		}
+	}
 }

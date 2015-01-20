@@ -33,4 +33,12 @@ class LikesAction extends ApiBaseAction {
 		parent::callback(C('STATUS_SUCCESS'),'',$list);
 	}
 	
+	//收藏
+	public function like_comment()
+	{
+		$id = $this->oUser->id;
+		$photo_id = $this->_post('photo_id');
+		$bool = $this->db['Collection']->collect_like($id,$photo_id);
+		$bool ? parent::callback(C('STATUS_SUCCESS'),'','') : parent::callback(C('STATUS_DATA_ERROR'),'','');
+	}
 }

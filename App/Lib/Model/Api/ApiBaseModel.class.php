@@ -17,15 +17,19 @@ class ApiBaseModel extends AppBaseModel {
 		{
 			case 'ArticleModel':
 				if($function = 'article_vote')
-				{
 					$this->insert_att($log);
-				}
 			break;
 			case 'CommentModel':
 				if($function = 'add_comment')
-				{
 					$this->insert_att($log);
-				}
+			break;
+			case 'ContentPraiseModel':
+				if($function = 'photo_like')
+					$this->insert_att($log);
+			break;
+			case 'CollectionModel':
+				if($function = 'collect_like')
+					$this->insert_att($log);
 			break;
 		}
 	}
