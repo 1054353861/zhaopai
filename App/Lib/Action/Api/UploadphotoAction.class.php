@@ -19,7 +19,9 @@ class UploadphotoAction extends ApiBaseAction {
 
 	//初始化数据库连接
 	protected  $db = array(
-		'Label' => 'Label'
+		'Label' => 'Label',
+		'Article' => 'Article',
+		'LabelArticle' => 'LabelArticle'
 	);
 
 	//上传图片-热门标签
@@ -41,7 +43,48 @@ class UploadphotoAction extends ApiBaseAction {
 	//上传图片
 	public function upload_photo()
 	{
-
+		$arr['user_id'] = $this->oUser->id;
+		$arr['content'] = $this->_post('content');
+		$arr['longitude'] = $this->_post('longitude');
+		$arr['latitude'] = $this->_post('latitude');
+		$arr['city_id'] = $this->_post('city_id');
+		$tags = $this->_post('tags');
+		if($_FILES['img']!='')
+		{
+			$path = C('UPLOAD_DIR');
+			$dir = $path['web_dir'].$path['image'];
+			$file_list = parent::upload_file($_FILES['img'],$dir,89920000,array('mp4','jpg', 'gif', 'png', 'jpeg'));
+			if($file_list['status']==true)
+			{
+				$file_url = $file_list['info'][0]['savename'];
+				if(pathinfo($file_url)['extension']=='mp4')
+				{
+					//开始处理
+					//检测有没有加载插件
+					if(extension_loaded('ffmpeg'))
+					{
+						$y_url = $dir.$file_url;
+						$z_url = pathinfo($y_url);
+						$n_url = $z_url['dirname'].'\\'.$z_url['filename'].'.gif';
+						$ffm_url = 'D:\wamp\bin\ffmpeg.exe';
+						if(file_exists($ffm_url))
+						{
+							$exc = $ffm_url.' '.$y_url.' '.$n_url;
+							exec($exc);
+						}
+						$arr['article_img'] = $path['image'].$z_url['filename'].'.gif';
+					}
+				}else{
+					$arr['article_img'] = $file_url;
+				}
+				//处理结束
+				$arr['create_time'] = time();
+				$bool = $this->db['Article']->upload_article($arr,$tags)
+				$bool ? parent::callback(C('STATUS_SUCCESS'),'','') : parent::callback(C('STATUS_DATA_ERROR'),'','');
+			}else{
+				parent::callback(C('STATUS_DATA_ERROR'),'','');
+			}
+		}
 	}
 
 	//上传图片-标签-随机

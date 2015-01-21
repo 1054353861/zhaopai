@@ -217,4 +217,19 @@ class ArticleModel extends ApiBaseModel {
 
 		return $arr_list;
 	}
+
+	//上传文章
+	public function upload_article($arr,$tags)
+	{
+		$new_insert_id = $this->add($arr);
+		if(is_array($tags))
+		{
+			foreach($tags as $value)
+			{
+				$tag_arr = array('article_id'=>$new_insert_id,'label_id'=>$value);
+				D('LabelArticle')->add($tag_arr);
+			}
+		}
+		return $new_insert_id =='' ? false : true;
+	}
 }
