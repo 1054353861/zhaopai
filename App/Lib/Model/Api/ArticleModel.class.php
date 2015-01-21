@@ -78,6 +78,7 @@ class ArticleModel extends ApiBaseModel {
 			break;
 			//最近
 			case 2:
+				//计算经纬度
 				$square_arr = _SquarePoint($lng,$lat);
 
 				$l_where['longitude'] = array(array('gt',$square_arr['left-top']['lng']),array('lt',$square_arr['right-bottom']['lng']),'AND');
@@ -85,40 +86,46 @@ class ArticleModel extends ApiBaseModel {
 				$l_where['latitude'] = array(array('gt',$square_arr['left-top']['lat']),array('lt',$square_arr['right-bottom']['lat']),'AND');
 
 				$list_info = $this->where($l_where)->limit($p,$page_count)->select();
+				
 			break;
 		}
-		
-		$list = array();
 
-		$ContentPraise = D('ContentPraise');
-
-		$LabelArticle = D('LabelArticle');
-
-		$Users = D('Users');
-
-		foreach($list_info as $key=>$value)
+		if($list_info!='')
 		{
 
-			$list[$key]['user_info'] = $Users->where(array('u.id'=>$value['user_id']))
-			->table('app_users as u')->join('app_city as c on c.id = u.city_id')
-			->field('u.id,u.nickname,u.head_img,c.title')->find();
+			$list = array();
 
-			$list[$key]['photo_info'] = $value;
+			$ContentPraise = D('ContentPraise');
 
-			$list[$key]['photo_info']['photo_time'] = date('Y-m-d H:i:s',$value['create_time']);
+			$LabelArticle = D('LabelArticle');
 
-			$list[$key]['photo_info']['tag_info'] = $LabelArticle->where(array('a.article_id'=>$value['id']))
-			->table('app_label_article as a')->join('app_label as l on l.id = a.label_id')
-			->field('l.id,l.label_name')->select();
+			$Users = D('Users');
 
-			$list[$key]['photo_info']['like_info']['like_num'] = $ContentPraise->where(array('article_id'=>$value['id']))
-			->count();
+			foreach($list_info as $key=>$value)
+			{
 
-			$list[$key]['photo_info']['like_info']['like_list'] = $ContentPraise->where(array('c.article_id'=>$value['id']))
-			->table('app_content_praise as c')->join('app_users as u on u.id = c.user_praise_id')
-			->field('u.id,u.head_img')->limit(7)->select();
+				$list[$key]['user_info'] = $Users->where(array('u.id'=>$value['user_id']))
+				->table('app_users as u')->join('app_city as c on c.id = u.city_id')
+				->field('u.id,u.nickname,u.head_img,c.title')->find();
+
+				$list[$key]['photo_info'] = $value;
+
+				$list[$key]['photo_info']['photo_time'] = date('Y-m-d H:i:s',$value['create_time']);
+
+				$list[$key]['photo_info']['tag_info'] = $LabelArticle->where(array('a.article_id'=>$value['id']))
+				->table('app_label_article as a')->join('app_label as l on l.id = a.label_id')
+				->field('l.id,l.label_name')->select();
+
+				$list[$key]['photo_info']['like_info']['like_num'] = $ContentPraise->where(array('article_id'=>$value['id']))
+				->count();
+
+				$list[$key]['photo_info']['like_info']['like_list'] = $ContentPraise->where(array('c.article_id'=>$value['id']))
+				->table('app_content_praise as c')->join('app_users as u on u.id = c.user_praise_id')
+				->field('u.id,u.head_img')->limit(7)->select();
+			}
+			return $list;
+
 		}
-		return $list;
 	}
 
 	//推荐文章

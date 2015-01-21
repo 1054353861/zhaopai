@@ -26,7 +26,7 @@ class HomeAction extends ApiBaseAction {
 	public function home_data()
 	{
 		$city = $this->_post('city');
-		$type = $this->_post('type');
+		$type = $this->_post('type');	//1是根据 2是根据最近
 		$index = $this->_post('index');
 		$lng = $this->_post('lng');	//精度
 		$lat = $this->_post('lat');	//纬度
