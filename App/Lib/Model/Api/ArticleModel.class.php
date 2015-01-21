@@ -222,14 +222,21 @@ class ArticleModel extends ApiBaseModel {
 	public function upload_article($arr,$tags)
 	{
 		$new_insert_id = $this->add($arr);
-		if(is_array($tags))
+		if($new_insert_id!='')
 		{
-			foreach($tags as $value)
+			$log = array('user_id'=>$arr['user_id'],'attention_id'=>$new_insert_id,'status'=>3);
+			parent::listen(__CLASS__,__FUNCTION__,$log);
+			if(is_array($tags))
 			{
-				$tag_arr = array('article_id'=>$new_insert_id,'label_id'=>$value);
-				D('LabelArticle')->add($tag_arr);
+				foreach($tags as $value)
+				{
+					$tag_arr = array('article_id'=>$new_insert_id,'label_id'=>$value);
+					D('LabelArticle')->add($tag_arr);
+				}
 			}
+			return true;
+		}else{
+			return false;
 		}
-		return $new_insert_id =='' ? false : true;
 	}
 }

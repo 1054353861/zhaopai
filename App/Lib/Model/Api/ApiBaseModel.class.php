@@ -18,6 +18,8 @@ class ApiBaseModel extends AppBaseModel {
 			case 'ArticleModel':
 				if($function = 'article_vote')
 					$this->insert_att($log);
+				if($function = 'upload_article')
+					$this->insert_att($log);
 			break;
 			case 'CommentModel':
 				if($function = 'add_comment')
