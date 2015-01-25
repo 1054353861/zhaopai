@@ -70,11 +70,16 @@ class ArticleModel extends ApiBaseModel {
 			$where['city_id'] = $city;
 		$p = $index =='' ? 0 : $index;
 		$page_count = $page_count == '' ? 5 : $page_count;
+
+
+		$list = array();
+		
 		switch($type)
 		{
 			//最新
 			case 1:
 				$list_info = $this->where($where)->limit($p,$page_count)->order('create_time desc')->select();
+				$list['all_count'] = $this->where($where)->count();
 			break;
 			//最近
 			case 2:
@@ -87,13 +92,13 @@ class ArticleModel extends ApiBaseModel {
 
 				$list_info = $this->where($l_where)->limit($p,$page_count)->select();
 				
+				$list['all_count'] = $this->where($l_where)->count();
+
 			break;
 		}
 
 		if($list_info!='')
 		{
-
-			$list = array();
 
 			$ContentPraise = D('ContentPraise');
 
@@ -104,22 +109,22 @@ class ArticleModel extends ApiBaseModel {
 			foreach($list_info as $key=>$value)
 			{
 
-				$list[$key]['user_info'] = $Users->where(array('u.id'=>$value['user_id']))
+				$list['info'][$key]['user_info'] = $Users->where(array('u.id'=>$value['user_id']))
 				->table('app_users as u')->join('app_city as c on c.id = u.city_id')
 				->field('u.id,u.nickname,u.head_img,c.title')->find();
 
-				$list[$key]['photo_info'] = $value;
+				$list['info'][$key]['photo_info'] = $value;
 
-				$list[$key]['photo_info']['photo_time'] = date('Y-m-d H:i:s',$value['create_time']);
+				$list['info'][$key]['photo_info']['photo_time'] = date('Y-m-d H:i:s',$value['create_time']);
 
-				$list[$key]['photo_info']['tag_info'] = $LabelArticle->where(array('a.article_id'=>$value['id']))
+				$list['info'][$key]['photo_info']['tag_info'] = $LabelArticle->where(array('a.article_id'=>$value['id']))
 				->table('app_label_article as a')->join('app_label as l on l.id = a.label_id')
 				->field('l.id,l.label_name')->select();
 
-				$list[$key]['photo_info']['like_info']['like_num'] = $ContentPraise->where(array('article_id'=>$value['id']))
+				$list['info'][$key]['photo_info']['like_info']['like_num'] = $ContentPraise->where(array('article_id'=>$value['id']))
 				->count();
 
-				$list[$key]['photo_info']['like_info']['like_list'] = $ContentPraise->where(array('c.article_id'=>$value['id']))
+				$list['info'][$key]['photo_info']['like_info']['like_list'] = $ContentPraise->where(array('c.article_id'=>$value['id']))
 				->table('app_content_praise as c')->join('app_users as u on u.id = c.user_praise_id')
 				->field('u.id,u.head_img')->limit(7)->select();
 			}

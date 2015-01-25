@@ -27,11 +27,11 @@ class HomeAction extends ApiBaseAction {
 	{
 		$city = $this->_post('city');
 		$type = $this->_post('type');	//1是根据 2是根据最近
-		$index = $this->_post('index');
+		$p = $this->_post('p');
 		$lng = $this->_post('lng');	//精度
 		$lat = $this->_post('lat');	//纬度
-		$page_count = $this->_post('page_count');
-		$list = $this->db['Article']->article_index($city,$type,$index,$page_count,$lng,$lat);
+		$count = $this->_post('count');
+		$list = $this->db['Article']->article_index($city,$type,$p,$count,$lng,$lat);
 		parent::callback(C('STATUS_SUCCESS'),'',$list);
 	}
 

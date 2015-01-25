@@ -27,7 +27,7 @@ class FriendAction extends ApiBaseAction {
 	public function friend_add()
 	{
 		$id = $this->oUser->id;
-		$new_friend = $this->_post('user_id');
+		$new_friend = $this->_post('friend_id');
 		$bool = $this->db['UserFriends']->add_friends($new_friend,$id);
 		$bool ? parent::callback(C('STATUS_SUCCESS'),'','') : parent::callback(C('STATUS_DATA_ERROR'),'','');
 	}
@@ -52,7 +52,7 @@ class FriendAction extends ApiBaseAction {
 	public function friend_agree()
 	{
 		$id = $this->oUser->id;
-		$user_ids = $this->_post('user_ids');
+		$user_ids = $this->_post('friend_id');
 		$bool = $this->db['UserFriends']->agree_friends($user_ids,$id);
 		$bool ? parent::callback(C('STATUS_SUCCESS'),'','') : parent::callback(C('STATUS_DATA_ERROR'),'','');
 	}

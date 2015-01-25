@@ -19,17 +19,18 @@ class LikesAction extends ApiBaseAction {
 
 	//初始化数据库连接
 	protected  $db = array(
-		'ContentPraise' => 'ContentPraise'
+		'ContentPraise' => 'ContentPraise',
+		'Collection' => 'Collection'
 	);
 
 	//赞的列表
 	public function like_list()
 	{
 		$id = $this->oUser->id;
-		$like_id = $this->_post('like_id');
+		$article_id = $this->_post('article_id');
 		$p = $this->_post('p');
 		$index = $this->_post('index');
-		$list = $this->db['ContentPraise']->getLike($like_id,$p,$index);
+		$list = $this->db['ContentPraise']->getLike($article_id,$p,$index);
 		parent::callback(C('STATUS_SUCCESS'),'',$list);
 	}
 	
@@ -37,8 +38,8 @@ class LikesAction extends ApiBaseAction {
 	public function like_comment()
 	{
 		$id = $this->oUser->id;
-		$photo_id = $this->_post('photo_id');
-		$bool = $this->db['Collection']->collect_like($id,$photo_id);
+		$article_id = $this->_post('article_id');
+		$bool = $this->db['Collection']->collect_like($id,$article_id);
 		$bool ? parent::callback(C('STATUS_SUCCESS'),'','') : parent::callback(C('STATUS_DATA_ERROR'),'','');
 	}
 }
