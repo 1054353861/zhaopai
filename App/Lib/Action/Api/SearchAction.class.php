@@ -51,8 +51,8 @@ class SearchAction extends ApiBaseAction {
 		$id = $this->oUser->id;
 		$p = $this->_post('p');
 		$index = $this->_post('index');
-		$user_name = $this->_post('user_name');
-		$list = $this->db['Label']->getLabelInfo($user_name,$p,$index,true);
+		$label_name = $this->_post('label_name');
+		$list = $this->db['Label']->getLabelInfo($label_name,$p,$index,true);
 		parent::callback(C('STATUS_SUCCESS'),'',$list);
 	}
 

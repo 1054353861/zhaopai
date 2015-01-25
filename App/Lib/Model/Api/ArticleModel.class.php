@@ -219,6 +219,7 @@ class ArticleModel extends ApiBaseModel {
 			
 			$arr_list['photo_info'][$key]['comment_num'] = $Comment->where(array('article_id'=>$value['id']))->count();
 		}
+		$arr_list['article_num'] = $this->where(array('user_id'=>$user_id))->count();
 
 		return $arr_list;
 	}

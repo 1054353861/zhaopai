@@ -21,20 +21,22 @@ class AttentionModel extends ApiBaseModel {
 		$list = $this->where($where)->order('create_time desc')->limit($first,$offset)->select();
 
 		$list_arr = array();
+		
+		$list_arr['all_num'] = $this->where($where)->count();
 
 		$Users = D('Users');
 
 		foreach($list as $key=>$value)
 		{
-			$list_arr[$key]['user_info'] = $Users->where(array('u.id'=>$value['user_id']))
+			$list_arr['info'][$key]['user_info'] = $Users->where(array('u.id'=>$value['user_id']))
 			->table('app_users as u')->join('app_city as c on c.id = u.city_id and c.parent_id = 0')
 			->field('u.id,u.nickname,u.head_img,c.title')->find();
-			$list_arr[$key]['content']['type'] = $value['status'];
-			$list_arr[$key]['content']['info'] = D('Article')
+			$list_arr['info'][$key]['content']['type'] = $value['status'];
+			$list_arr['info'][$key]['content']['info'] = D('Article')
 			->where(array('id'=>$value['attention_id']))->field('content,article_img')->find();
-			$list_arr[$key]['content']['info']['like_num'] = D('ContentPraise')
+			$list_arr['info'][$key]['content']['info']['like_num'] = D('ContentPraise')
 			->where(array('article_id'=>$value['attention_id']))->count();
-			$list_arr[$key]['time'] = date('Y-m-d H:i:s',$value['create_time']);
+			$list_arr['info'][$key]['time'] = date('Y-m-d H:i:s',$value['create_time']);
 		}
 
 		return $list_arr;

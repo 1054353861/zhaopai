@@ -105,7 +105,7 @@ class PersonalAction extends ApiBaseAction {
 	public function personal_edit_city()
 	{
 		$id = $this->oUser->id;
-		$city['city_id'] = $this->_post('city');
+		$city['city_id'] = $this->_post('city_id');
 		$bool = $this->db['Users']->where(array('id'=>$id))->save($city);
 		$bool ? parent::callback(C('STATUS_SUCCESS'),'','') : parent::callback(C('STATUS_DATA_ERROR'),'','');
 	}

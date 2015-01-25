@@ -79,7 +79,7 @@ class UploadphotoAction extends ApiBaseAction {
 				}
 				//处理结束
 				$arr['create_time'] = time();
-				$bool = $this->db['Article']->upload_article($arr,$tags)
+				$bool = $this->db['Article']->upload_article($arr,$tags);
 				$bool ? parent::callback(C('STATUS_SUCCESS'),'','') : parent::callback(C('STATUS_DATA_ERROR'),'','');
 			}else{
 				parent::callback(C('STATUS_DATA_ERROR'),'','');

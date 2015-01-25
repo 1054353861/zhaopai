@@ -36,7 +36,7 @@ class MarkeAction extends ApiBaseAction {
 	public function marke_detail()
 	{
 		$user_id = $this->oUser->id;	//用户ID
-		$shop_id = $this->_post('id');
+		$shop_id = $this->_post('shop_id');
 		$list = $this->db['Shop']->where(array('id'=>$shop_id))
 		->field('shop_name,shop_content,shop_number,shop_integral')->find();
 		$list['image_list'] = $this->db['ShopPhoto']->where(array('shop_id'=>$shop_id))->getField('shop_url',0);
@@ -47,7 +47,7 @@ class MarkeAction extends ApiBaseAction {
 	public function market_get()
 	{
 		$user_id = $this->oUser->id;	//用户ID
-		$shop_id = $this->_post('id');	//商品ID
+		$shop_id = $this->_post('shop_id');	//商品ID
 		$name = $this->_post('name');	//姓名
 		$cellphone = $this->_post('cellphone');	//手机号
 		$address = $this->_post('address');
