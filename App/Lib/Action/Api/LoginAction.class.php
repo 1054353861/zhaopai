@@ -109,44 +109,53 @@ class LoginAction extends ApiBaseAction {
 			//数据库验证
 			$Users = $this->db['Users'];						//用户表模型	
 			
-			//账号验证、数据写入模块
-			$is_have = $Users->phone_is_have($arr['cell_phone']);		//查看账号是否存在
-			if ($is_have) {
-				parent::callback(C('STATUS_OTHER'),'此手机号已存在');
-			} else {		
-				//添加注册用户
+			$is_nickname = $Users->nickname_is_have($arr['nickname']);
 
-				if($_FILES['user_avater']!='')
-				{
-					$path = C('UPLOAD_DIR');
-					$dir = $path['web_dir'].$path['image'];
-					$file_list = parent::upload_file($_FILES['user_avater'],$dir);
-					if($file_list['status']==true)
-					{
-						$arr['head_img'] = $file_list['info'][0]['savename'];
-					}
-				}
-
-				$id = $Users->add_info($arr,C('ACCOUNT_TYPE.USER'));		//写入数据库
-
-				if ($id) {
-					
-					//生成秘钥
-					$encryption = $id.':'.$arr['nickname'].':'.date('Y-m-d');					//生成解密后的数据
-					$identity_encryption = passport_encrypt($encryption,C('UNLOCAKING_KEY'));	//生成加密字符串,给客户端
-					
-					$list = $this->db['Users']->get_id_info($id);
-
-					//返回客户端
-					$return_data = array('token' => $identity_encryption,'user_info'=>$list);
-					parent::callback(C('STATUS_SUCCESS'),'注册成功',$return_data);
-				} else {
-					parent::callback(C('STATUS_UPDATE_DATA'),'注册失败');
-				}	
+			if ($is_nickname!='')
+			{
+				parent::callback(C('STATUS_OTHER'),'昵称已经存在');
 			}
-		} 
-			
-		//$this->display('Login:register');
+
+			//手机号唯一
+			$is_have = $Users->phone_is_have($arr['cell_phone']);		//查看账号是否存在
+
+			if ($is_have!='') {
+				parent::callback(C('STATUS_OTHER'),'此手机号已存在');
+			}
+
+			//添加注册用户
+			//上传头像
+			if($_FILES['user_avater']!='')
+			{
+				$path = C('UPLOAD_DIR');
+				$dir = $path['web_dir'].$path['image'];
+				$file_list = parent::upload_file($_FILES['user_avater'],$dir);
+				if($file_list['status']==true)
+				{
+					$arr['head_img'] = $file_list['info'][0]['savename'];
+				}
+			}
+
+			$id = $Users->add_info($arr,C('ACCOUNT_TYPE.USER'));		//写入数据库
+
+			if ($id) {
+				
+				//生成秘钥
+				$encryption = $id.':'.$arr['nickname'].':'.date('Y-m-d');					//生成解密后的数据
+				$identity_encryption = passport_encrypt($encryption,C('UNLOCAKING_KEY'));	//生成加密字符串,给客户端
+				
+				$list = $this->db['Users']->get_id_info($id);
+
+				//返回客户端
+				$return_data = array('token' => $identity_encryption,'user_info'=>$list);
+				parent::callback(C('STATUS_SUCCESS'),'注册成功',$return_data);
+			} else {
+				
+				parent::callback(C('STATUS_UPDATE_DATA'),'注册失败');
+			}
+
+
+		}
 	}
 	
 	

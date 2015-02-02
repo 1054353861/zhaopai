@@ -61,6 +61,12 @@ class UsersModel extends ApiBaseModel {
 		return $this->where(array('account'=>$account))->getField('id');
 	}
 	
+	//验证昵称是否存在
+	public function nickname_is_have($nickname)
+	{
+		return $this->where(array('nickname'=>$nickname))->getField('id');
+	}
+
 	//通过手机号是否存在
 	public function phone_is_have ($phone) {
 
