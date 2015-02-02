@@ -63,6 +63,10 @@ POST /Api/Login/login
   "data":
   {
     "token": "CW1bMwJhCjADZABhVzYCNgI+UWMMMAVmV2NWbFdlVTAAbVcwUC8JMFw9AHoGZwM2"
+    "user_info":
+      {
+
+      }
     },
     "num": "1"
   }
