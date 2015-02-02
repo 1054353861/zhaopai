@@ -20,7 +20,33 @@ class UsersModel extends ApiBaseModel {
 		return $this->add();
 	}
 	
+
+	//注册
+	public function add_info($arr,$type)
+	{
+		$this->password = pass_encryption($arr['password']);
+		$this->nickname = $arr['nickname'];
+		$this->sex = $arr['user_sex'];
+		$this->cell_phone = $arr['cell_phone'];
+		$this->city = $arr['city'];
+		$this->last_login_time = time();
+		$this->last_login_ip = get_client_ip();
+		$this->create_time = time();
+		$this->update_time = time();
+		$this->type = $type;				//用户类型
+		return $this->add();
+	}
 	
+
+	//获取数据
+	public function get_id_info($id)
+	{
+		$info = $this->where(array('id'=>$id))->table('app_users as u')
+		->join('app_city as c on c.id = u.city_id and c.parent_id = 0')->field('u.*,c.title')->find();
+		return $info;
+	}
+
+
 	//获取普通可用用户信息
 	public function get_available_pt_user_info ($account) {
 		return $this->where(array('account'=>$account,'type'=>1,'is_del'=>0,'status'=>0))->find();
@@ -33,6 +59,12 @@ class UsersModel extends ApiBaseModel {
 		return $this->where(array('account'=>$account))->getField('id');
 	}
 	
+	//通过手机号是否存在
+	public function phone_is_have ($phone) {
+
+		return $this->where(array('phone'=>$phone))->getField('id');
+	}
+
 	//获取账号数据
 	public function get_user_info ($condition) {
 		return $this->where($condition)->find();

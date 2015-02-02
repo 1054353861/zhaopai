@@ -46,9 +46,13 @@ POST /Api/Login/login
 ```
 
 #### Parameters：
-- `account` 账号(手机号)
+- `nickname` 昵称
 - `password` 密码
 - `password_confirm` 重复密码
+- `user_sex` 用户性别
+- `cell_phone` 手机号
+- `user_city` 城市ID
+- `$_FILES['user_avater']` 用户头像
 
 
 #### Response
