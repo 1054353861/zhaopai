@@ -24,24 +24,26 @@ class UsersModel extends ApiBaseModel {
 	//注册
 	public function add_info($arr,$type)
 	{
-		$this->password = pass_encryption($arr['password']);
-		$this->nickname = $arr['nickname'];
-		$this->sex = $arr['user_sex'];
-		$this->cell_phone = $arr['cell_phone'];
-		$this->city = $arr['city'];
-		$this->last_login_time = time();
-		$this->last_login_ip = get_client_ip();
-		$this->create_time = time();
-		$this->update_time = time();
-		$this->type = $type;				//用户类型
-		return $this->add();
+		$arr_db['nickname'] = $arr['nickname'];
+		$arr_db['sex'] = $arr['sex'];
+		$arr_db['phone'] = $arr['cell_phone'];
+		$arr_db['account'] = $arr['cell_phone'];
+		$arr_db['city_id'] = $arr['city'];
+		$arr_db['password'] = pass_encryption($arr['password']);
+		$arr_db['head_img'] = $arr['head_img']!='' ? $arr['head_img'] : '';
+		$arr_db['last_login_time'] = time();
+		$arr_db['last_login_ip'] = get_client_ip();
+		$arr_db['create_time'] = time();
+		$arr_db['update_time'] = time();
+		$arr_db['type'] = $type;				//用户类型
+		return $this->add($arr_db);
 	}
 	
 
 	//获取数据
 	public function get_id_info($id)
 	{
-		$info = $this->where(array('id'=>$id))->table('app_users as u')
+		$info = $this->where(array('u.id'=>$id))->table('app_users as u')
 		->join('app_city as c on c.id = u.city_id and c.parent_id = 0')->field('u.*,c.title')->find();
 		return $info;
 	}

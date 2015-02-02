@@ -90,13 +90,13 @@ class LoginAction extends ApiBaseAction {
 		if ($this->isPost()) {		
 			//初始化数据
 			//验证提交数据
-			$this->check_me();		
-			$arr['nickname'] = $this->request['nickname'];										//注册账号	
-			$arr['password'] = $this->request['password'];								//密码
-			$password_confirm = $this->request['password_confirm'];				//密码确认
-			$arr['sex'] = $this->request['user_sex'];
-			$arr['cell_phone'] = $this->request['cell_phone'];
-			$arr['city'] = $this->request['user_city'];
+			//$this->check_me();		
+			$arr['nickname'] = $this->_post('nickname');							//注册账号	
+			$arr['password'] = $this->_post('password');							//密码
+			$password_confirm = $this->_post('password_confirm');					//密码确认
+			$arr['sex'] = $this->_post('user_sex');
+			$arr['cell_phone'] = $this->_post('cell_phone');
+			$arr['city'] = $this->_post('user_city');
 
 			//密码确认验证
 			if ($arr['password'] != $password_confirm) {
@@ -126,8 +126,6 @@ class LoginAction extends ApiBaseAction {
 						$arr['head_img'] = $file_list['info'][0]['savename'];
 					}
 				}
-
-				$Users->create();
 
 				$id = $Users->add_info($arr,C('ACCOUNT_TYPE.USER'));		//写入数据库
 

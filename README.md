@@ -58,18 +58,36 @@ POST /Api/Login/login
 #### Response
 ```json
 {
-  "status": "0",
-  "msg": "注册成功",
-  "data":
-  {
-    "token": "CW1bMwJhCjADZABhVzYCNgI+UWMMMAVmV2NWbFdlVTAAbVcwUC8JMFw9AHoGZwM2"
-    "user_info":
-      {
-
-      }
-    },
-    "num": "1"
-  }
+   "status": "0",
+   "msg": "注册成功",
+   "data":
+   {
+       "token": "DmNbOVQ8C+YH6gbxALVU/AayDTRcZVc3BzdQZVN+Wz4BbwF+BmQLMA==",
+       "user_info":
+       {
+           "id": "10",
+           "account": "13472798999",
+           "nickname": "你好",
+           "password": "e10adc3949ba59abbe56e057f20f883e",
+           "phone": "13472798999",
+           "city_id": "1",
+           "head_img": "",
+           "sex": "1",
+           "background_img": "",
+           "integral": "0",
+           "last_login_time": "1422850289",
+           "last_login_ip": "0.0.0.0",
+           "login_count": "0",
+           "create_time": "1422850289",
+           "update_time": "1422850289",
+           "type": "1",
+           "status": "0",
+           "is_del": "0",
+           "title": "上海市"
+       }
+   },
+   "num": "2"
+}
 ```
 
 
