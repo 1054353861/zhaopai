@@ -175,7 +175,13 @@ class ArticleModel extends ApiBaseModel {
 		$arr_list['user_info']['friend_num_yes'] = D('UserFriends')->where(array('user_id'=>$user_id,'friend_statis'=>1))->count();
 
 		$arr_list['user_info']['artcile_num'] = $this->where(array('user_id'=>$user_id))->count();
-		
+
+		$int_all_count = D('IntegralAll')->count();
+
+		$now_count = D('IntegralSameday')->where(array('sameday'=>array('eq',strtotime(date('Y-m-d')))))->count();
+
+		$arr_list['user_info']['integral_num'] = $int_all_count - $now_count;
+
 		if($type==false)
 		{
 			$arr_list['user_info']['friend_num_no'] = D('UserFriends')->where(array('user_id'=>$user_id,'friend_statis'=>0))->count();
