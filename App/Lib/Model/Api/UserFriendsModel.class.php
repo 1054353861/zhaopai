@@ -15,10 +15,14 @@ class UserFriendsModel extends ApiBaseModel {
 
 	public function friends_list($id,$type)
 	{
-		$list = $this->where(array('user_id'=>$id,'friend_statis'=>$type))->table('app_user_friends as f')
+		$list['info'] = $this->where(array('f.user_id'=>$id,'f.friend_statis'=>$type))->table('app_user_friends as f')
 		->join('app_users as u on u.id = f.friend_id')
 		->join('app_city as c on c.id = u.city_id and c.parent_id = 0')
 		->field('u.id,u.nickname,u.head_img,u.city_id,c.title')->select();
+		if($type==1)
+		{
+			$list['no_friends'] = $this->where(array('user_id'=>$id,'friend_statis'=>0))->count();
+		}
 		return $list;
 	}
 
