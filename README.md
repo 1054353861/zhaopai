@@ -176,22 +176,26 @@ POST /Api/Friend/friend_list
    "status": "0",
    "msg": "",
    "data":
-   [
-       {
-           "id": "4",
-           "nickname": "朱十2",
-           "head_img": "",
-           "city_id": "1",
-           "title": "上海市"
-       },
-       {
-           "id": "8",
-           "nickname": "朱十5",
-           "head_img": "",
-           "city_id": "0",
-           "title": ""
-       }
-   ],
+   {
+       "info":
+       [
+           {
+               "id": "4",
+               "nickname": "朱十2",
+               "head_img": "",
+               "city_id": "1",
+               "title": "上海市"
+           },
+           {
+               "id": "8",
+               "nickname": "朱十5",
+               "head_img": "",
+               "city_id": "0",
+               "title": ""
+           }
+       ],
+       "no_friends": "0"
+   },
    "num": "2"
 }
 ```

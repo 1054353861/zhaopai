@@ -158,7 +158,11 @@ class LoginAction extends ApiBaseAction {
 		}
 	}
 	
-	
+	public function ceshi()
+	{
+		$this->display();
+	}
+
 	//注册手机号验证
 	public function regeister_cell_veritify()
 	{
