@@ -170,8 +170,6 @@ class ArticleModel extends ApiBaseModel {
 		->join('app_city as c on c.id = u.city_id and c.parent_id = 0')
 		->field('u.nickname,u.head_img,u.background_img,u.integral,c.title')->find();
 
-		$arr_list['user_info']['photo_num'] = $this->where(array('user_id'=>$user_id))->count();
-
 		$arr_list['user_info']['save_num'] = D('Collection')->where(array('user_id'=>$user_id))->count();
 
 		$arr_list['user_info']['friend_num_yes'] = D('UserFriends')->where(array('user_id'=>$user_id,'friend_statis'=>1))->count();
