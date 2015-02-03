@@ -106,6 +106,8 @@ class ArticleModel extends ApiBaseModel {
 
 			$Users = D('Users');
 
+			$Comment = D('Comment');
+
 			foreach($list_info as $key=>$value)
 			{
 
@@ -127,6 +129,8 @@ class ArticleModel extends ApiBaseModel {
 				$list['info'][$key]['photo_info']['like_info']['like_list'] = $ContentPraise->where(array('c.article_id'=>$value['id']))
 				->table('app_content_praise as c')->join('app_users as u on u.id = c.user_praise_id')
 				->field('u.id,u.head_img')->limit(7)->select();
+
+				$list['info'][$key]['photo_info']['comment_num'] = $Comment->where(array('article_id'=>array('eq',$value['id'])))->count();
 			}
 			return $list;
 
