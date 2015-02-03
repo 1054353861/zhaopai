@@ -209,11 +209,11 @@ class ArticleModel extends ApiBaseModel {
 			->where(array('a.article_id'=>$value['id']))->join('app_label as l on l.id = a.label_id')
 			->field('l.id,l.label_name')->select();
 
-			$arr_list['photo_info'][$key]['like_info'] = $ContentPraise->table('app_content_praise as p')
+			$arr_list['photo_info'][$key]['like_info']['like_list'] = $ContentPraise->table('app_content_praise as p')
 			->where(array('p.article_id'=>$value['id']))->join('app_users as u on u.id = p.user_praise_id')
 			->field('u.id,u.head_img')->order('p.create_time desc')->limit(7)->select();
 
-			$arr_list['photo_info'][$key]['like_num'] = $ContentPraise->where(array('article_id'=>$value['id']))->count();
+			$arr_list['photo_info'][$key]['like_info']['like_num'] = $ContentPraise->where(array('article_id'=>$value['id']))->count();
 			
 			$arr_list['photo_info'][$key]['comment_num'] = $Comment->where(array('article_id'=>$value['id']))->count();
 		}
