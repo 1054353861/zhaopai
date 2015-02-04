@@ -106,7 +106,7 @@ class UploadphotoAction extends ApiBaseAction {
 				parent::callback(C('STATUS_DATA_ERROR'),'','');
 			}
 		}else{
-			parent::callback(C('STATUS_DATA_ERROR'),'','图片不能为空');
+			parent::callback(C('STATUS_DATA_ERROR'),'',$arr['user_id']);
 		}
 	}
 
