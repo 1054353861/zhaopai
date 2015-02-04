@@ -35,14 +35,9 @@ class UploadAction extends ApiBaseAction {
 	//上传图片
 	public function image () {
 		//上传地址
-		$upload_dir = C('UPLOAD_DIR');
-		$dir = $upload_dir['web_dir'].$upload_dir['image'];	
 		
 		//域名、文件目录
-		$public_file_dir =  C('PUBLIC_VISIT.domain').C('PUBLIC_VISIT.dir').'images/';			
-		$_ckefn = $_GET['CKEditorFuncNum'];//ckeditor 图片接收
-		
-		$Arr_result = parent::upload_file($this->Arr_file,$dir,5120000);
+		$Arr_result = parent::upload_file($this->Arr_file);
 		if ($Arr_result['status'] == true) {
 			$_path =  $public_file_dir.$Arr_result['info'][0]['savename'];
 			echo "<script type='text/javascript'>window.parent.CKEDITOR.tools.callFunction($_ckefn,\"$_path\",'图片上传成功!');</script>";
