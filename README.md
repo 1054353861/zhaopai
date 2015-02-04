@@ -2053,3 +2053,36 @@ POST /Api/Uploadphoto/upload_tags_random
    "num": "7"
 }
 ```
+
+
+## 十二、城市
+
+### 1.获取可用城市列表
+
+#### Request
+```
+POST /Api/City/index
+```
+
+#### Response
+```json
+{
+  "status": "0",
+  "msg": "获取成功",
+  "data": [
+  {
+    "city_id": "1",
+    "city_name": "上海市"
+    },
+    {
+      "city_id": "2",
+      "city_name": "北京市"
+      },
+      {
+        "city_id": "3",
+        "city_name": "广州市"
+      }
+      ],
+      "num": "3"
+    }
+```
