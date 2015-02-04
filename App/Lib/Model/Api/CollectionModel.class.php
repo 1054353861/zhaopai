@@ -23,6 +23,8 @@ class CollectionModel extends ApiBaseModel {
 		->order('c.create_time desc')->order('a.create_time desc')
 		->field('a.id,a.content,a.article_img,a.user_id,a.create_time')->select();
 
+		parent::public_file_dir($list,array('article_img'));
+
 		$Users = D('Users');
 
 		foreach($list as $key=>$value)
@@ -30,6 +32,8 @@ class CollectionModel extends ApiBaseModel {
 			$list_arr['info'][$key]['user_info'] = $Users->where(array('u.id'=>$value['user_id']))
 			->table('app_users as u')->join('app_city as c on c.id = u.city_id and parent_id = 0')
 			->field('u.id,u.nickname,u.head_img,c.title')->find();
+
+			parent::public_file_dir($list_arr['info'][$key],array('head_img'));
 
 			$list_arr['info'][$key]['content'] = $value;
 			

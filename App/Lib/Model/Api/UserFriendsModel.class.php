@@ -19,6 +19,9 @@ class UserFriendsModel extends ApiBaseModel {
 		->join('app_users as u on u.id = f.friend_id')
 		->join('app_city as c on c.id = u.city_id and c.parent_id = 0')
 		->field('u.id,u.nickname,u.head_img,u.city_id,c.title')->select();
+
+		parent::public_file_dir($list['info'],array('head_img'));
+
 		if($type==1)
 		{
 			$list['no_friends'] = $this->where(array('user_id'=>$id,'friend_statis'=>0))->count();

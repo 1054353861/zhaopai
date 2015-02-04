@@ -66,7 +66,7 @@ class LoginAction extends ApiBaseAction {
 						'account'=>$user_info['account'],
 						'nickname'=>$user_info['nickname'],
 						'city_id'=>$user_info['city_id'],
-						'head_img'=>$user_info['head_img'],
+						'head_img'=>C('PUBLIC_VISIT.domain_dir').C('PUBLIC_VISIT.app_dir').$user_info['head_img'],
 						'sex'=>$user_info['sex'],
 						'background_img'=>$user_info['background_img'],
 						'integral'=>$user_info['integral'],

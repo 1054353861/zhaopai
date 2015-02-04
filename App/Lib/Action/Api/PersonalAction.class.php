@@ -69,9 +69,7 @@ class PersonalAction extends ApiBaseAction {
 	public function personal_edit_head()
 	{
 		$id = $this->oUser->id;
-		$path = C('UPLOAD_DIR');
-		$dir = $path['web_dir'].$path['image'];
-		$file_list = parent::upload_file($_FILES['data'],$dir);
+		$file_list = parent::upload_file($_FILES['data']);
 		if($file_list['status']==true)
 		{
 			$url = array('head_img'=>$file_list['info'][0]['savename']);

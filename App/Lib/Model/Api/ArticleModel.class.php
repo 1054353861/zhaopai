@@ -45,7 +45,7 @@ class ArticleModel extends ApiBaseModel {
 		$big_arr['user_info'] = D('Users')->where(array('u.id'=>$user_id))
 		->table('app_users as u')->join('app_city as c on c.id = u.city_id and c.parent_id = 0')
 		->field('u.id,u.nickname,u.head_img,c.title')->find();
-		
+
 		$big_arr['photo_info'] = $this->where(array('id'=>$article_id))->find();
 		
 		$big_arr['photo_info']['tag_info'] = D('LabelArticle')->where(array('a.article_id'=>$article_id))
@@ -59,6 +59,10 @@ class ArticleModel extends ApiBaseModel {
 
 		$big_arr['photo_info']['like_num'] = $ContentPraise->where(array('article_id'=>$article_id))
 		->count();
+
+		parent::public_file_dir($big_arr,array('head_img','article_img'));
+
+		parent::public_file_dir($big_arr['photo_info']['like_list'],array('head_img'));
 
 		return $big_arr;
 	}
@@ -115,7 +119,11 @@ class ArticleModel extends ApiBaseModel {
 				->table('app_users as u')->join('app_city as c on c.id = u.city_id')
 				->field('u.id,u.nickname,u.head_img,c.title')->find();
 
+				parent::public_file_dir($list['info'][$key],array('head_img'));
+
 				$list['info'][$key]['photo_info'] = $value;
+
+				parent::public_file_dir($list['info'][$key],array('article_img'));
 
 				$list['info'][$key]['photo_info']['photo_time'] = date('Y-m-d H:i:s',$value['create_time']);
 
@@ -130,8 +138,11 @@ class ArticleModel extends ApiBaseModel {
 				->table('app_content_praise as c')->join('app_users as u on u.id = c.user_praise_id')
 				->field('u.id,u.head_img')->limit(7)->select();
 
+				parent::public_file_dir($list['info'][$key]['photo_info']['like_info']['like_list'],array('head_img'));
+
 				$list['info'][$key]['photo_info']['comment_num'] = $Comment->where(array('article_id'=>array('eq',$value['id'])))->count();
 			}
+
 			return $list;
 
 		}
@@ -153,7 +164,11 @@ class ArticleModel extends ApiBaseModel {
 			$list_arr[$key]['user_info'] = $Users->where(array('u.id'=>$value['user_id']))->table('app_users as u')
 			->join('app_city as c on c.id = u.city_id and c.parent_id = 0')
 			->field('u.id,u.nickname,u.head_img,c.title')->find();
+
 			$list_arr[$key]['content_info'] = $value;
+
+			parent::public_file_dir($list_arr[$key],array('head_img','article_img'));
+
 			$list_arr[$key]['rem_num'] = $ContentPraise->where(array('article_id'=>$value['id']))->count();
 		}
 
@@ -173,6 +188,8 @@ class ArticleModel extends ApiBaseModel {
 		$arr_list['user_info'] = $Users->where(array('u.id'=>$user_id))->table('app_users as u')
 		->join('app_city as c on c.id = u.city_id and c.parent_id = 0')
 		->field('u.nickname,u.head_img,u.background_img,u.integral,c.title')->find();
+
+		parent::public_file_dir($arr_list,array('head_img','background_img'));
 
 		$arr_list['user_info']['save_num'] = D('Collection')->where(array('user_id'=>$user_id))->count();
 
@@ -215,6 +232,8 @@ class ArticleModel extends ApiBaseModel {
 			$arr_list['photo_info'][$key]['time'] = date('Y-m-d H:i:s',$value['create_time']);
 			$arr_list['photo_info'][$key] = $value;
 
+			parent::public_file_dir($arr_list['photo_info'],array('article_img'));
+
 			$arr_list['photo_info'][$key]['tag_info'] = $LabelArticle->table('app_label_article as a')
 			->where(array('a.article_id'=>$value['id']))->join('app_label as l on l.id = a.label_id')
 			->field('l.id,l.label_name')->select();
@@ -222,6 +241,8 @@ class ArticleModel extends ApiBaseModel {
 			$arr_list['photo_info'][$key]['like_info']['like_list'] = $ContentPraise->table('app_content_praise as p')
 			->where(array('p.article_id'=>$value['id']))->join('app_users as u on u.id = p.user_praise_id')
 			->field('u.id,u.head_img')->order('p.create_time desc')->limit(7)->select();
+
+			parent::public_file_dir($arr_list['photo_info'][$key]['like_info']['like_list'],array('head_img'));
 
 			$arr_list['photo_info'][$key]['like_info']['like_num'] = $ContentPraise->where(array('article_id'=>$value['id']))->count();
 			

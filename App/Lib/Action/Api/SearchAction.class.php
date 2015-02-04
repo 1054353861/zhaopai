@@ -32,6 +32,9 @@ class SearchAction extends ApiBaseAction {
 		$list = $this->db['Users']->where($where)->table('app_users as u')
 		->join('app_city as c on c.id = u.city_id and c.parent_id = 0')
 		->field('u.id,u.nickname,u.head_img,c.title')->select();
+
+		parent::public_file_dir($list,array('head_img'));
+
 		parent::callback(C('STATUS_SUCCESS'),'',$list);
 	}
 
@@ -61,6 +64,9 @@ class SearchAction extends ApiBaseAction {
 	{
 		$user = $this->db['Users']->where(array('id'=>array('neq',$this->oUser->id)))->order('rand()')
 		->field('id,nickname,head_img,city_id')->limit(10)->select();
+
+		parent::public_file_dir($user,array('head_img'));
+
 		parent::callback(C('STATUS_SUCCESS'),'',$user);
 	}
 	

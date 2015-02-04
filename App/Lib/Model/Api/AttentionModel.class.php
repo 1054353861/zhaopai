@@ -31,11 +31,18 @@ class AttentionModel extends ApiBaseModel {
 			$list_arr['info'][$key]['user_info'] = $Users->where(array('u.id'=>$value['user_id']))
 			->table('app_users as u')->join('app_city as c on c.id = u.city_id and c.parent_id = 0')
 			->field('u.id,u.nickname,u.head_img,c.title')->find();
+
+			parent::public_file_dir($list_arr['info'][$key],array('head_img'));
+
 			$list_arr['info'][$key]['content']['type'] = $value['status'];
 			$list_arr['info'][$key]['content']['info'] = D('Article')
 			->where(array('id'=>$value['attention_id']))->field('content,article_img')->find();
+
+			parent::public_file_dir($list_arr['info'][$key]['content'],array('article_img'));
+
 			$list_arr['info'][$key]['content']['info']['like_num'] = D('ContentPraise')
 			->where(array('article_id'=>$value['attention_id']))->count();
+
 			$list_arr['info'][$key]['time'] = date('Y-m-d H:i:s',$value['create_time']);
 		}
 

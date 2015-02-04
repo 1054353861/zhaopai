@@ -49,6 +49,9 @@
 				->field('u.id,u.nickname,u.head_img,c.title')->find();
 
 				$arr_list[$key]['content'] = $value;
+
+				parent::public_file_dir($arr_list[$key],array('head_img','article_img'));
+
 				$arr_list[$key]['content']['time'] = date('Y-m-d H:i:s',$value['create_time']);
 
 				$arr_list[$key]['content']['list_num'] = $ContentPraise->where(array('article_id'=>$value['id']))->count();

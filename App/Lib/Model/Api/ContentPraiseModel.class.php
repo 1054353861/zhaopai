@@ -17,6 +17,9 @@ class ContentPraiseModel extends ApiBaseModel {
 		->join('app_users as u on u.id = p.user_praise_id')
 		->join('app_city as c on c.id = u.city_id and c.parent_id = 0')
 		->field('u.id,u.nickname,u.head_img,c.title,p.create_time')->limit($first,$offset)->select();
+
+		parent::public_file_dir($list['like_list'],array('head_img'));
+
 		$list['like_num'] = $this->where(array('article_id'=>$id))->count();
 		return $list;
 	}

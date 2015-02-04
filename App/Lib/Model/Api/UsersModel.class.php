@@ -121,6 +121,9 @@ class UsersModel extends ApiBaseModel {
 		->join('app_city as c on c.id = u.city_id and c.parent_id = 0')
 		->field('u.id,u.nickname,u.head_img,c.title')
 		->select();
+
+		parent::public_file_dir($list,array('head_img'));
+
 		return $list;
 	}
 	

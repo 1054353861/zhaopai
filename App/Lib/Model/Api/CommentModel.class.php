@@ -40,6 +40,9 @@ class CommentModel extends ApiBaseModel {
 			$value['create_time'] = date('Y-m-d H:i:s',$value['create_time']);
 			$new_list['commemt_info'][$key] = $value;
 		}
+
+		parent::public_file_dir($new_list['commemt_info'],array('head_img'));
+		
 		return $new_list;
 	}
 }
