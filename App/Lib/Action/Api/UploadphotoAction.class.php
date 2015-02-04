@@ -48,7 +48,7 @@ class UploadphotoAction extends ApiBaseAction {
 		$arr['longitude'] = $this->_post('longitude');
 		$arr['latitude'] = $this->_post('latitude');
 		$arr['city_id'] = $this->_post('city_id');
-		$tags = $this->_post('tags');
+		$tags = json_decode($this->_post('tags'));
 		if($_FILES['img']!='')
 		{
 			$path = C('UPLOAD_DIR');
