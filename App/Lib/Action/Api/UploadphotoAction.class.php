@@ -28,7 +28,30 @@ class UploadphotoAction extends ApiBaseAction {
 	public function upload_tags()
 	{
 		$list = $this->db['Label']->where('is_hot = 1')->limit(9)->select();
-		parent::callback(C('STATUS_SUCCESS'),'',$list);
+		$sort_arr = array();
+		foreach($list as $key=>$value)
+		{
+			$list[$key]['strlen'] = mb_strlen($value['label_name']);
+			$sort_arr[] = mb_strlen($value['label_name']);
+		}
+
+		$array_unique = array_values(array_unique($sort_arr));
+		rsort($array_unique);
+
+		$new_list = array();
+
+		foreach($array_unique as $value)
+		{
+			foreach($list as $val)
+			{
+				if($value==$val['strlen'])
+				{
+					$new_list[] = $val;
+				}
+			}
+		}
+
+		parent::callback(C('STATUS_SUCCESS'),'',$new_list);
 	}
 
 	//上传图片-标签搜索
