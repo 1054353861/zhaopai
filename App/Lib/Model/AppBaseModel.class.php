@@ -182,5 +182,27 @@ class AppBaseModel extends Model {
 		return $Arr_result;
 	}
 	
+	
+	/**
+	 * 组合图片外部访问地址
+	 * @param Array $arr		 //要组合地址的数组
+	 * @param String Or Array	 //组合的字段key  如：pic 或  array('pic','head')
+	 */
+	protected function public_file_dir (Array &$arr,$field) {
+	     
+	    $public_file_dir =  C('PUBLIC_VISIT.domain_dir').C('PUBLIC_VISIT.app_dir');
+	    //递归
+	    if (is_array($field)) {
+	        for ($i=0;$i<count($field);$i++) {
+	            self::public_file_dir($arr,$field[$i],$dir_type);
+	        }
+	    } else {
+	        foreach ($arr AS $key=>$val) {
+	            if (empty($arr[$key][$field])) continue;
+	            $arr[$key][$field] = $public_file_dir.$val[$field];
+	        }
+	    }
+	}
+	
 }
 ?>
