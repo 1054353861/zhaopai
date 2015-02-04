@@ -53,30 +53,30 @@ class UploadphotoAction extends ApiBaseAction {
 		{
 			$path = C('UPLOAD_DIR');
 			$dir = $path['web_dir'].$path['image'];
-			$file_list = parent::upload_file($_FILES['img'],$dir,89920000,array('mp4','jpg', 'gif', 'png', 'jpeg'));
+			$file_list = parent::upload_file($_FILES['img'],$dir);
 			if($file_list['status']==true)
 			{
-				$file_url = $file_list['info'][0]['savename'];
-				if(pathinfo($file_url)['extension']=='mp4')
-				{
-					//开始处理
-					//检测有没有加载插件
-					if(extension_loaded('ffmpeg'))
-					{
-						$y_url = $dir.$file_url;
-						$z_url = pathinfo($y_url);
-						$n_url = $z_url['dirname'].'\\'.$z_url['filename'].'.gif';
-						$ffm_url = 'D:\wamp\bin\ffmpeg.exe';
-						if(file_exists($ffm_url))
-						{
-							$exc = $ffm_url.' '.$y_url.' '.$n_url;
-							exec($exc);
-						}
-						$arr['article_img'] = $path['image'].$z_url['filename'].'.gif';
-					}
-				}else{
-					$arr['article_img'] = $file_url;
-				}
+				// $file_url = $file_list['info'][0]['savename'];
+				// if(pathinfo($file_url)['extension']=='mp4')
+				// {
+				// 	//开始处理
+				// 	//检测有没有加载插件
+				// 	if(extension_loaded('ffmpeg'))
+				// 	{
+				// 		$y_url = $dir.$file_url;
+				// 		$z_url = pathinfo($y_url);
+				// 		$n_url = $z_url['dirname'].'\\'.$z_url['filename'].'.gif';
+				// 		$ffm_url = 'D:\wamp\bin\ffmpeg.exe';
+				// 		if(file_exists($ffm_url))
+				// 		{
+				// 			$exc = $ffm_url.' '.$y_url.' '.$n_url;
+				// 			exec($exc);
+				// 		}
+				// 		$arr['article_img'] = $path['image'].$z_url['filename'].'.gif';
+				// 	}
+				// }else{
+				$arr['article_img'] = $file_list['info'][0]['savename'];
+				//}
 				//处理结束
 				$arr['create_time'] = time();
 				$bool = $this->db['Article']->upload_article($arr,$tags);

@@ -1988,6 +1988,7 @@ POST /Api/Uploadphoto/upload_photo
 - `longitude` 经度
 - `latitude` 纬度
 - `city_id` 城市ID
+- `tags` 标签数组
 - `$_FILES['img']` 图片信息
 
 #### Response
