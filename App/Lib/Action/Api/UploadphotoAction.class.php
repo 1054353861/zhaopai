@@ -27,7 +27,7 @@ class UploadphotoAction extends ApiBaseAction {
 	//上传图片-热门标签
 	public function upload_tags()
 	{
-		$list = $this->db['Label']->where('is_hot = 1')->select();
+		$list = $this->db['Label']->where('is_hot = 1')->limit(9)->select();
 		parent::callback(C('STATUS_SUCCESS'),'',$list);
 	}
 
