@@ -95,18 +95,17 @@ $custom= array (
 			'ADMIN' => 0,			//管理员
 			'USER'=>1,    		//普通用户，短信接口也用到
 		),
+    
 		//上传文件目录
 		'UPLOAD_DIR' => array(
-				'web_dir' => $_SERVER['DOCUMENT_ROOT'].'/',
-				'image' => 'files/zhaopai/images/',		//图片地址
+			'domain_dir' => $_SERVER['DOCUMENT_ROOT'].'/', //图片域
+			'app_dir' => 'App/Uploads/',
 		),
 		
 		//外部文件访问地址(用来填写专用的文件服务器)
 		'PUBLIC_VISIT' => array(
- 				//'domain' =>	'http://'.$_SERVER['SERVER_NAME'].'/',
-				'domain' =>	'http://'.$_SERVER['SERVER_ADDR'].'/',
- 				//'domain' =>	'http://local_cwq.com/',
-				'dir' => 'files/zhaopai/',							//项目文件目录
+ 		     'domain_dir' =>'http://'.$_SERVER['SERVER_NAME'].'/',
+			 'app_dir' =>	'App/Uploads/',
 		),
 		
 		

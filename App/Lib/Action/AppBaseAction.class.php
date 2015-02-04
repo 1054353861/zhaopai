@@ -118,29 +118,6 @@ class AppBaseAction extends GlobalParameterAction {
 		exit(JSON($return));
 	}
 	
-
-	
-	/**
-	 * 组合图片外部访问地址
-	 * @param Array $arr								//要组合地址的数组
-	 * @param String Or Array	 $field			//组合的字段key  如：pic 或  array('pic','head')
-	 * @param String $dir_type						//目录类型  如：images/
-	 */
-	protected function public_file_dir (Array &$arr,$field,$dir_type) {
-		$public_file_dir =  C('PUBLIC_VISIT.domain').C('PUBLIC_VISIT.dir').$dir_type;			//域名、文件目录
-		//递归
-		if (is_array($field)) {
-			for ($i=0;$i<count($field);$i++) {
-				self::public_file_dir($arr,$field[$i],$dir_type);
-			}
-		} else {
-			foreach ($arr AS $key=>$val) {
-				if (empty($arr[$key][$field])) continue;
-				$arr[$key][$field] = $public_file_dir.$val[$field];
-			}
-		}
-	}
-	
 	
 	/**
 	 * 全局模板变量
@@ -316,6 +293,60 @@ class AppBaseAction extends GlobalParameterAction {
 		} else {
 			return array('status'=>true,'message'=>'放行，权限验证已关闭。');
 		}
+	}
+	
+	
+	/**
+	 * 上传文件
+	 * @param Array   $file  $_FILES['pic'  上传的数组
+	 * @param Array   $type   上传文件类型  
+	 * @return Array  上传成功返回文件保存信息，失败返回错误信息
+	 */
+	protected function upload_file($file,$size = 3145728,$type=array('jpg', 'gif', 'png', 'jpeg')) {
+	    import('@.ORG.Util.UploadFile');				//引入上传类
+
+	    //上传文件目录
+	    $dir =  C('UPLOAD_DIR.domain_dir').C('UPLOAD_DIR.app_dir');
+	    
+	    $upload = new UploadFile();
+	    $upload->maxSize  =  $size;					// 设置附件上传大小
+	    $upload->allowExts  = $type;				// 上传文件的(后缀)（留空为不限制），，
+	    //上传保存
+	    $upload->savePath =  $dir;					// 设置附件上传目录
+	    $upload->autoSub = true;					// 是否使用子目录保存上传文件
+	    $upload->subType = 'date';					// 子目录创建方式，默认为hash，可以设置为hash或者date日期格式的文件夹名
+	    $upload->saveRule =  'uniqid';				// 上传文件的保存规则，必须是一个无需任何参数的函数名
+	
+	    //执行上传
+	    $execute = $upload->uploadOne($file);
+	    //执行上传操作
+	    if(!$execute) {						// 上传错误提示错误信息
+	        return array('status'=>false,'info'=>$upload->getErrorMsg());
+	    }else{	//上传成功 获取上传文件信息
+	        return array('status'=>true,'info'=>$execute);
+	    }
+	}
+	
+	
+	/**
+	 * 组合图片外部访问地址
+	 * @param Array $arr		 //要组合地址的数组
+	 * @param String Or Array	 //组合的字段key  如：pic 或  array('pic','head')
+	 */
+	protected function public_file_dir (Array &$arr,$field) {
+	    
+	    $public_file_dir =  C('PUBLIC_VISIT.domain_dir').C('PUBLIC_VISIT.app_dir');
+	    //递归
+	    if (is_array($field)) {
+	        for ($i=0;$i<count($field);$i++) {
+	            self::public_file_dir($arr,$field[$i],$dir_type);
+	        }
+	    } else {
+	        foreach ($arr AS $key=>$val) {
+	            if (empty($arr[$key][$field])) continue;
+	            $arr[$key][$field] = $public_file_dir.$val[$field];
+	        }
+	    }
 	}
 	
 }
