@@ -127,9 +127,7 @@ class LoginAction extends ApiBaseAction {
 			//上传头像
 			if($_FILES['user_avater']!='')
 			{
-				$path = C('UPLOAD_DIR');
-				$dir = $path['web_dir'].$path['image'];
-				$file_list = parent::upload_file($_FILES['user_avater'],$dir);
+				$file_list = parent::upload_file($_FILES['user_avater']);
 				if($file_list['status']==true)
 				{
 					$arr['head_img'] = $file_list['info'][0]['savename'];

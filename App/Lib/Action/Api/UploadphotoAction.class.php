@@ -51,9 +51,7 @@ class UploadphotoAction extends ApiBaseAction {
 		$tags = json_decode($this->_post('tags'));
 		if($_FILES['img']!='')
 		{
-			$path = C('UPLOAD_DIR');
-			$dir = $path['web_dir'].$path['image'];
-			$file_list = parent::upload_file($_FILES['img'],$dir);
+			$file_list = parent::upload_file($_FILES['img']);
 			if($file_list['status']==true)
 			{
 				// $file_url = $file_list['info'][0]['savename'];
