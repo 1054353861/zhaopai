@@ -1989,13 +1989,27 @@ POST /Api/Uploadphoto/upload_photo
 - `latitude` 纬度
 - `city_id` 城市ID
 - `tags` 标签数组
-- `$_FILES['img']` 图片信息
+- `img` 图片信息
 
 #### Response
 ```json
 需要讨论视频如何处理,LINUX需要安装ffmpng
 ```
 
+### 3.1.上传图片
+
+#### Request
+```
+POST /Api/Uploadphoto/upload_afile
+```
+
+#### Parameters：
+- `img` 图片信息
+
+#### Response
+```json
+返回文件名称
+```
 
 ### 4.上传图片-标签-随机
 
