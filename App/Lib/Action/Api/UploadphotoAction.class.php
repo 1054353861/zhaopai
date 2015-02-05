@@ -77,36 +77,32 @@ class UploadphotoAction extends ApiBaseAction {
 			$file_list = parent::upload_file($_FILES['img']);
 			if($file_list['status']==true)
 			{
-				// $file_url = $file_list['info'][0]['savename'];
-				// if(pathinfo($file_url)['extension']=='mp4')
-				// {
-				// 	//开始处理
-				// 	//检测有没有加载插件
-				// 	if(extension_loaded('ffmpeg'))
-				// 	{
-				// 		$y_url = $dir.$file_url;
-				// 		$z_url = pathinfo($y_url);
-				// 		$n_url = $z_url['dirname'].'\\'.$z_url['filename'].'.gif';
-				// 		$ffm_url = 'D:\wamp\bin\ffmpeg.exe';
-				// 		if(file_exists($ffm_url))
-				// 		{
-				// 			$exc = $ffm_url.' '.$y_url.' '.$n_url;
-				// 			exec($exc);
-				// 		}
-				// 		$arr['article_img'] = $path['image'].$z_url['filename'].'.gif';
-				// 	}
-				// }else{
 				$arr['article_img'] = $file_list['info'][0]['savename'];
-				//}
-				//处理结束
-				$arr['create_time'] = time();
-				$bool = $this->db['Article']->upload_article($arr,$tags);
-				$bool ? parent::callback(C('STATUS_SUCCESS'),'','') : parent::callback(C('STATUS_DATA_ERROR'),'','');
 			}else{
-				parent::callback(C('STATUS_DATA_ERROR'),'','');
+				parent::callback(C('STATUS_DATA_ERROR'),'','照片参数有误');
 			}
 		}else{
-			parent::callback(C('STATUS_DATA_ERROR'),'',$arr['user_id']);
+			if($this->_post('article_img')!='')
+			{
+				$arr['article_img'] = $this->_post('article_img');
+			}else{
+				parent::callback(C('STATUS_DATA_ERROR'),'','请上传照片');
+			}
+		}
+		$arr['create_time'] = time();
+		$bool = $this->db['Article']->upload_article($arr,$tags);
+		$bool ? parent::callback(C('STATUS_SUCCESS'),'','') : parent::callback(C('STATUS_DATA_ERROR'),'','');
+	}
+
+	//上传文件
+	public function upload_afile()
+	{
+		$file_list = parent::upload_file($_FILES['img']);
+		if($file_list['status']==true)
+		{
+			parent::callback(C('STATUS_SUCCESS'),'',$file_list['info'][0]['savename']);
+		}else{
+			parent::callback(C('STATUS_DATA_ERROR'),'','请上传照片');
 		}
 	}
 
