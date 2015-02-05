@@ -302,7 +302,7 @@ POST /Api/Friend/friend_search
 
 ## 三、首页接口
 
-### 1.申请好友
+### 1.首页
 
 #### Request
 ```
