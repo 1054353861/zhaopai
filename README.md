@@ -325,139 +325,162 @@ POST /Api/Home/home_data
    "msg": "",
    "data":
    {
-       "all_count": "2",
+       "all_count": "102",
        "info":
        [
            {
                "user_info":
                {
                    "id": "3",
-                   "nickname": "zhuchencong",
-                   "head_img": "",
-                   "title": "上海市"
+                   "nickname": "朱大爷",
+                   "head_img": "http://localhost/App/Uploads/20150204/54d1b2b28e39b.jpg",
+                   "title": "北京市"
                },
                "photo_info":
                {
-                   "id": "1",
+                   "id": "102",
                    "user_id": "3",
-                   "content": "文明靠大家",
-                   "city_id": "0",
-                   "article_img": "www.baidu.com",
-                   "create_time": "198283727",
-                   "support": "112",
-                   "nonsupport": "222",
-                   "recommend": "1",
-                   "longitude": "999.99999999999999999",
-                   "latitude": "999.99999999999999999",
-                   "photo_time": "1976-04-14 06:48:47",
-                   "tag_info":
-                   [
-                       {
-                           "id": "1",
-                           "label_name": "软妹子"
-                       },
-                       {
-                           "id": "2",
-                           "label_name": "女汉子"
-                       },
-                       {
-                           "id": "3",
-                           "label_name": "抹茶"
-                       }
-                   ],
+                   "content": "哈哈哈哈哈",
+                   "city_id": "1",
+                   "article_img": "http://localhost/App/Uploads/20150205/54d312e93e00c.jpg",
+                   "create_time": "1423119082",
+                   "support": "0",
+                   "nonsupport": "0",
+                   "recommend": "0",
+                   "longitude": "121.42825800000000000",
+                   "latitude": "31.26601900000000000",
+                   "photo_time": "2015-02-05 14:51:22",
+                   "tag_info": "",
                    "like_info":
                    {
-                       "like_num": "20",
-                       "like_list":
-                       [
-                           {
-                               "id": "3",
-                               "head_img": ""
-                           },
-                           {
-                               "id": "3",
-                               "head_img": ""
-                           },
-                           {
-                               "id": "3",
-                               "head_img": ""
-                           },
-                           {
-                               "id": "3",
-                               "head_img": ""
-                           },
-                           {
-                               "id": "3",
-                               "head_img": ""
-                           },
-                           {
-                               "id": "3",
-                               "head_img": ""
-                           },
-                           {
-                               "id": "3",
-                               "head_img": ""
-                           }
-                       ]
-                   }
+                       "like_num": "0",
+                       "like_list": ""
+                   },
+                   "comment_num": "0"
                }
            },
            {
                "user_info":
                {
                    "id": "3",
-                   "nickname": "zhuchencong",
-                   "head_img": "",
-                   "title": "上海市"
+                   "nickname": "朱大爷",
+                   "head_img": "http://localhost/App/Uploads/20150204/54d1b2b28e39b.jpg",
+                   "title": "北京市"
                },
                "photo_info":
                {
-                   "id": "2",
+                   "id": "101",
                    "user_id": "3",
-                   "content": "文明靠大家",
-                   "city_id": "0",
-                   "article_img": "www.baidu.com",
-                   "create_time": "198283727",
-                   "support": "112",
-                   "nonsupport": "222",
-                   "recommend": "1",
-                   "longitude": "999.99999999999999999",
-                   "latitude": "999.99999999999999999",
-                   "photo_time": "1976-04-14 06:48:47",
-                   "tag_info":
-                   [
-                       {
-                           "id": "3",
-                           "label_name": "抹茶"
-                       },
-                       {
-                           "id": "2",
-                           "label_name": "女汉子"
-                       }
-                   ],
+                   "content": "",
+                   "city_id": "1",
+                   "article_img": "http://localhost/App/Uploads/20150205/54d30e0a07680.jpg",
+                   "create_time": "1423117835",
+                   "support": "0",
+                   "nonsupport": "0",
+                   "recommend": "0",
+                   "longitude": "121.42825800000000000",
+                   "latitude": "31.26601900000000000",
+                   "photo_time": "2015-02-05 14:30:35",
+                   "tag_info": "",
                    "like_info":
                    {
-                       "like_num": "4",
-                       "like_list":
-                       [
-                           {
-                               "id": "3",
-                               "head_img": ""
-                           },
-                           {
-                               "id": "3",
-                               "head_img": ""
-                           },
-                           {
-                               "id": "3",
-                               "head_img": ""
-                           },
-                           {
-                               "id": "3",
-                               "head_img": ""
-                           }
-                       ]
-                   }
+                       "like_num": "0",
+                       "like_list": ""
+                   },
+                   "comment_num": "0"
+               }
+           },
+           {
+               "user_info":
+               {
+                   "id": "11",
+                   "nickname": "Kidddd",
+                   "head_img": "http://localhost/App/Uploads/20150204/54d1bfd75abde.jpg",
+                   "title": ""
+               },
+               "photo_info":
+               {
+                   "id": "100",
+                   "user_id": "11",
+                   "content": "ios测试",
+                   "city_id": "1",
+                   "article_img": "http://localhost/App/Uploads/20150205/54d2e3e8c9c6c.jpg",
+                   "create_time": "1423107048",
+                   "support": "0",
+                   "nonsupport": "0",
+                   "recommend": "0",
+                   "longitude": "1.00000000000000000",
+                   "latitude": "1.00000000000000000",
+                   "photo_time": "2015-02-05 11:30:48",
+                   "tag_info": "",
+                   "like_info":
+                   {
+                       "like_num": "0",
+                       "like_list": ""
+                   },
+                   "comment_num": "0"
+               }
+           },
+           {
+               "user_info":
+               {
+                   "id": "3",
+                   "nickname": "朱大爷",
+                   "head_img": "http://localhost/App/Uploads/20150204/54d1b2b28e39b.jpg",
+                   "title": "北京市"
+               },
+               "photo_info":
+               {
+                   "id": "99",
+                   "user_id": "3",
+                   "content": "ios测试",
+                   "city_id": "1",
+                   "article_img": "http://localhost/App/Uploads/20150204/54d1d1ff370ca.jpg",
+                   "create_time": "1423036927",
+                   "support": "0",
+                   "nonsupport": "0",
+                   "recommend": "0",
+                   "longitude": "1.00000000000000000",
+                   "latitude": "1.00000000000000000",
+                   "photo_time": "2015-02-04 16:02:07",
+                   "tag_info": "",
+                   "like_info":
+                   {
+                       "like_num": "0",
+                       "like_list": ""
+                   },
+                   "comment_num": "0"
+               }
+           },
+           {
+               "user_info":
+               {
+                   "id": "11",
+                   "nickname": "Kidddd",
+                   "head_img": "http://localhost/App/Uploads/20150204/54d1bfd75abde.jpg",
+                   "title": ""
+               },
+               "photo_info":
+               {
+                   "id": "98",
+                   "user_id": "11",
+                   "content": "ios测试",
+                   "city_id": "1",
+                   "article_img": "http://localhost/App/Uploads/20150204/54d1c683e1da7.jpg",
+                   "create_time": "1423033987",
+                   "support": "0",
+                   "nonsupport": "0",
+                   "recommend": "0",
+                   "longitude": "1.00000000000000000",
+                   "latitude": "1.00000000000000000",
+                   "photo_time": "2015-02-04 15:13:07",
+                   "tag_info": "",
+                   "like_info":
+                   {
+                       "like_num": "0",
+                       "like_list": ""
+                   },
+                   "comment_num": "0"
                }
            }
        ]
