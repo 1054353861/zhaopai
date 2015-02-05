@@ -92,7 +92,7 @@ class UploadphotoAction extends ApiBaseAction {
 		{
 			parent::callback(C('STATUS_SUCCESS'),'',$file_list['info'][0]['savename']);
 		}else{
-			parent::callback(C('STATUS_DATA_ERROR'),'',$_FILES['img']);
+			parent::callback(C('STATUS_DATA_ERROR'),'','图片格式不正确');
 		}
 	}
 
