@@ -10,7 +10,7 @@ class UploadphotoAction extends ApiBaseAction {
 	//每个类都要重写此变量
 	protected  $is_check_rbac = true;		//当前控制是否开启身份验证
 	
-	protected  $not_check_fn = array('upload_tags','upload_tag_search','upload_tags_random');	//无需登录和验证rbac的方法名
+	protected  $not_check_fn = array('upload_tags','upload_tag_search','upload_tags_random','upload_afile');	//无需登录和验证rbac的方法名
 
 	public function __construct()
 	{
