@@ -75,19 +75,9 @@ class UploadphotoAction extends ApiBaseAction {
 		if($_FILES['img']!='')
 		{
 			$file_list = parent::upload_file($_FILES['img']);
-			if($file_list['status']==true)
-			{
-				$arr['article_img'] = $file_list['info'][0]['savename'];
-			}else{
-				parent::callback(C('STATUS_DATA_ERROR'),'','照片参数有误');
-			}
+			$file_list['status']==true ? $arr['article_img'] = $file_list['info'][0]['savename'] : parent::callback(C('STATUS_DATA_ERROR'),'','照片参数有误');
 		}else{
-			if($this->_post('article_img')!='')
-			{
-				$arr['article_img'] = $this->_post('article_img');
-			}else{
-				parent::callback(C('STATUS_DATA_ERROR'),'','请上传照片');
-			}
+			$this->_post('article_img')!='' ? $arr['article_img'] = $this->_post('article_img') : parent::callback(C('STATUS_DATA_ERROR'),'','请上传照片');
 		}
 		$arr['create_time'] = time();
 		$bool = $this->db['Article']->upload_article($arr,$tags);
