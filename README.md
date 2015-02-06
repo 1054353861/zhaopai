@@ -1431,6 +1431,30 @@ POST /Api/Personal/personal_edit_city
 }
 ```
 
+### 9.个人中心-修改全部数据
+
+#### Request
+```
+POST /Api/Personal/personal_all_change
+```
+
+#### Parameters：
+- `token` 用户登录后拿去的用户标示
+- `niakname` 昵称
+- `user_sex` 性别
+- `city_id` 城市ID
+- `img` 用户头像可传可以不传
+
+#### Response
+```json
+{
+   "status": "0",
+   "msg": "",
+   "data": "",
+   "num": "1"
+}
+```
+
 ## 八、照片详情
 
 ### 1.照片详情
