@@ -650,7 +650,7 @@ POST /Api/Marke/marke_list
 
 #### Request
 ```
-POST /Api/Marke/marke_list
+POST /Api/Marke/marke_detail
 ```
 
 #### Parameters：
