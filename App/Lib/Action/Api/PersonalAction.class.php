@@ -115,6 +115,8 @@ class PersonalAction extends ApiBaseAction {
 		$arr['sex'] = $this->_post('user_sex');
 		$arr['city_id'] = $this->_post('city_id');
 		$arr['nickname'] = $this->_post('nickname');
+		if($this->_post('article_img')!='')
+			$arr['head_img'] = $this->_post('article_img');
 		if($_FILES['img']!='')
 		{
 			$file_list = parent::upload_file($_FILES['img']);

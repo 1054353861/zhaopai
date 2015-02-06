@@ -1443,6 +1443,7 @@ POST /Api/Personal/personal_all_change
 - `niakname` 昵称
 - `user_sex` 性别
 - `city_id` 城市ID
+- `article_img` 给安卓哥们使用的接口
 - `img` 用户头像可传可以不传
 
 #### Response
