@@ -47,7 +47,9 @@ class ArticleModel extends ApiBaseModel {
 		->field('u.id,u.nickname,u.head_img,c.title')->find();
 
 		$big_arr['photo_info'] = $this->where(array('id'=>$article_id))->find();
-		
+
+        $big_arr['photo_info']['time'] = date('Y-m-d H:i:s',$big_arr['photo_info']['create_time']);
+
 		$big_arr['photo_info']['tag_info'] = D('LabelArticle')->where(array('a.article_id'=>$article_id))
 		->table('app_label_article as a')->join('app_label as l on l.id = a.label_id')
 		->field('l.id,l.label_name')->select();
