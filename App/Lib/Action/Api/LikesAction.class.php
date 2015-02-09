@@ -40,6 +40,6 @@ class LikesAction extends ApiBaseAction {
 		$id = $this->oUser->id;
 		$article_id = $this->_post('article_id');
 		$bool = $this->db['Collection']->collect_like($id,$article_id);
-		$bool ? parent::callback(C('STATUS_SUCCESS'),'','') : parent::callback(C('STATUS_DATA_ERROR'),'','');
+		$bool ? parent::callback(C('STATUS_SUCCESS'),'','收藏成功') : parent::callback(C('STATUS_DATA_ERROR'),'','请勿重复收藏');
 	}
 }
