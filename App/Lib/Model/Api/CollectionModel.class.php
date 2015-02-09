@@ -27,6 +27,8 @@ class CollectionModel extends ApiBaseModel {
 
 		$Users = D('Users');
 
+        $content_praise = D('content_praise');
+
 		foreach($list as $key=>$value)
 		{
 			$list_arr['info'][$key]['user_info'] = $Users->where(array('u.id'=>$value['user_id']))
@@ -38,6 +40,9 @@ class CollectionModel extends ApiBaseModel {
 			$list_arr['info'][$key]['content'] = $value;
 			
 			$list_arr['info'][$key]['content']['time'] = date('Y-m-d H:i:s',$value['create_time']);
+
+            $list_arr['info'][$key]['content']['like_num'] = $content_praise
+                ->where(array('article_id'=>array('eq',$value['id'])))->count();
 		}
 
 		$list_arr['news_num'] = $this->where(array('user_id'=>array('IN',$friend_list)))->count();
