@@ -61,7 +61,8 @@ class PhotoAction extends ApiBaseAction {
 		$article_id = $this->_post('photo_id');
 		$comment_content = $this->_post('comment_content');
 		$bool = $this->db['Comment']->add_comment($id,$article_id,$comment_content);
-		$bool ? parent::callback(C('STATUS_SUCCESS'),'','') : parent::callback(C('STATUS_DATA_ERROR'),'','');
+        $list = $this->db['Comment']->select_info('','',$article_id);
+		$bool ? parent::callback(C('STATUS_SUCCESS'),'',$list) : parent::callback(C('STATUS_DATA_ERROR'),'',$list);
 	}
 
 	//照片赞

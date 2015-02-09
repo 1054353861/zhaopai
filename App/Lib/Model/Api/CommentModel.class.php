@@ -34,7 +34,7 @@ class CommentModel extends ApiBaseModel {
 		$new_list['count'] = $this->where(array('article_id'=>$article_id))->count();
 		$list = $this->where(array('c.article_id'=>$article_id))
 		->table('app_comment as c')->join('app_users as u on u.id = c.user_id')->limit($first,$long)
-		->field('c.id,c.content,c.create_time,u.id as user_id,u.nickname,u.head_img')->select();
+		->field('c.id,c.content,c.create_time,u.id as user_id,u.nickname,u.head_img')->order('c.create_time desc')->select();
 		foreach($list as $key=>$value)
 		{
 			$value['create_time'] = date('Y-m-d H:i:s',$value['create_time']);
