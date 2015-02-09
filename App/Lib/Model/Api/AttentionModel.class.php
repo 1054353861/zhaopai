@@ -36,7 +36,7 @@ class AttentionModel extends ApiBaseModel {
 
 			$list_arr['info'][$key]['content']['type'] = $value['status'];
 			$list_arr['info'][$key]['content']['info'] = D('Article')
-			->where(array('id'=>$value['attention_id']))->field('content,article_img')->find();
+			->where(array('id'=>$value['attention_id']))->field('id,content,article_img')->find();
 
 			parent::public_file_dir($list_arr['info'][$key]['content'],array('article_img'));
 
