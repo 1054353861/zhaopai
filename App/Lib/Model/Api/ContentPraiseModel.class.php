@@ -14,9 +14,10 @@ class ContentPraiseModel extends ApiBaseModel {
 		$offset = $index == '' ? 10 : $index;
 		$list = array();
 		$list['like_list'] = $this->where(array('p.article_id'=>$id))->table('app_content_praise as p')
-		->join('app_users as u on u.id = p.user_praise_id')
-		->join('app_city as c on c.id = u.city_id and c.parent_id = 0')
-		->field('u.id,u.nickname,u.head_img,c.title,p.create_time')->limit($first,$offset)->select();
+            ->join('app_users as u on u.id = p.user_praise_id')
+            ->join('app_city as c on c.id = u.city_id and c.parent_id = 0')
+            ->field('u.id,u.nickname,u.head_img,c.title,p.create_time')
+            ->order('p.create_time desc')->limit($first,$offset)->select();
 
 		parent::public_file_dir($list['like_list'],array('head_img'));
 
