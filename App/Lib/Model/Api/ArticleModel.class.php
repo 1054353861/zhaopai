@@ -231,8 +231,8 @@ class ArticleModel extends ApiBaseModel {
 		$Comment = D('Comment');
 		foreach($list as $key=>$value)
 		{
-			$arr_list['photo_info'][$key]['time'] = date('Y-m-d H:i:s',$value['create_time']);
 			$arr_list['photo_info'][$key] = $value;
+            $arr_list['photo_info'][$key]['create_time'] = date('Y-m-d H:i:s',$value['create_time']);
 
 			parent::public_file_dir($arr_list['photo_info'],array('article_img'));
 
