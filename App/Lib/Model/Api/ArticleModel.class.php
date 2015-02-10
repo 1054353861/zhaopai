@@ -75,7 +75,7 @@ class ArticleModel extends ApiBaseModel {
 		if($city!='')
 			$where['city_id'] = $city;
 		$p = $index =='' ? 0 : $index;
-		$page_count = $page_count == '' ? 5 : $page_count;
+		$page_count = $page_count == '' ? 10 : $page_count;
 
 
 		$list = array();
@@ -231,7 +231,6 @@ class ArticleModel extends ApiBaseModel {
             $ContentPraise = D('ContentPraise');
 
             $Comment = D('Comment');
-            
             foreach($list as $key=>$value)
             {
                 $arr_list['photo_info'][$key] = $value;
@@ -269,12 +268,13 @@ class ArticleModel extends ApiBaseModel {
 		{
 			$log = array('user_id'=>$arr['user_id'],'attention_id'=>$new_insert_id,'status'=>3);
 			parent::listen(__CLASS__,__FUNCTION__,$log);
+            $LabelArticle = D('LabelArticle');
 			if(is_array($tags))
 			{
 				foreach($tags as $value)
 				{
 					$tag_arr = array('article_id'=>$new_insert_id,'label_id'=>$value);
-					D('LabelArticle')->add($tag_arr);
+                    $LabelArticle->add($tag_arr);
 				}
 			}
 			return true;
