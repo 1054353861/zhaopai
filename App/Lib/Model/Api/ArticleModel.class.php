@@ -268,9 +268,9 @@ class ArticleModel extends ApiBaseModel {
 		{
 			$log = array('user_id'=>$arr['user_id'],'attention_id'=>$new_insert_id,'status'=>3);
 			parent::listen(__CLASS__,__FUNCTION__,$log);
-            $LabelArticle = D('LabelArticle');
 			if(is_array($tags))
 			{
+                $LabelArticle = D('LabelArticle');
 				foreach($tags as $value)
 				{
 					$tag_arr = array('article_id'=>$new_insert_id,'label_id'=>$value);
