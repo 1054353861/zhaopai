@@ -6,14 +6,14 @@
 </head>
 <body>
 
-<form action="{:U('Api/Login/register')}" method="post" accept-charset="utf-8" enctype="multipart/form-data">
-	<p>nickname:<input type="text" name="nickname" value="" /></p>
-	<p>password:<input type="password" name="password" value="" /></p>
-	<p>password:<input type="password" name="password_confirm" value="" /></p>
-	<p>user_sex:<input type="radio" name="user_sex" value="1" checked />man<input type="radio" name="user_sex" value="0"/>woman</p>
-	<p>cell_phone:<input type="text" name="cell_phone" value="" /></p>
-	<p>city:<input type="text" name="user_city" value="1" /></p>
-	<p>img:<input type="file" name="user_avater"/></p>
+<form action="{:U('Api/Uploadphoto/upload_photo')}" method="post" accept-charset="utf-8" enctype="multipart/form-data">
+	<p>content:<input type="text" name="content" value="" /></p>
+    <p>user_id:<input type="text" name="token" value="" /></p>
+	<p>longitude:<input type="text" name="longitude" value="" /></p>
+	<p>latitude:<input type="text" name="latitude" value="" /></p>
+	<p>city_id:<input type="text" name="city_id" value="1" checked /></p>
+	<p>tags:<input type="text" name="tags" value="" /></p>
+	<p>img:<input type="file" name="img"/></p>
 	<p><input type="submit" value="Continue" /></p>
 </form>
 </body>

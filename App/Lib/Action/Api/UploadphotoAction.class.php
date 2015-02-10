@@ -71,7 +71,7 @@ class UploadphotoAction extends ApiBaseAction {
 		$arr['longitude'] = $this->_post('longitude');
 		$arr['latitude'] = $this->_post('latitude');
 		$arr['city_id'] = $this->_post('city_id');
-		$tags = $this->_post('tags');
+		$tags = explode(':',$this->_post('tags'));
 		if($_FILES['img']!='')
 		{
 			$file_list = parent::upload_file($_FILES['img']);
@@ -80,7 +80,7 @@ class UploadphotoAction extends ApiBaseAction {
 			$this->_post('article_img')!='' ? $arr['article_img'] = $this->_post('article_img') : parent::callback(C('STATUS_DATA_ERROR'),'','请上传照片');
 		}
 		$arr['create_time'] = time();
-		$bool = $this->db['Article']->upload_article($arr,json_decode($tags));
+		$bool = $this->db['Article']->upload_article($arr,$tags);
 		$bool ? parent::callback(C('STATUS_SUCCESS'),'','') : parent::callback(C('STATUS_DATA_ERROR'),'','');
 	}
 
