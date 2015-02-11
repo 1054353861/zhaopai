@@ -63,6 +63,7 @@ class LoginAction extends ApiBaseAction {
 
 					//$result = $user_info;
 					$result = array(
+                        'id'=>$user_info['id'],
 						'account'=>$user_info['account'],
 						'nickname'=>$user_info['nickname'],
 						'city_id'=>$user_info['city_id'],
@@ -99,9 +100,8 @@ class LoginAction extends ApiBaseAction {
 			$arr['city'] = $this->_post('user_city');
 
 			//密码确认验证
-			if ($arr['password'] != $password_confirm) {
-				parent::callback(C('STATUS_OTHER'),'二次密码输入不一致');
-			}
+			if ($arr['password'] != $password_confirm)
+				parent::callback(C('STATUS_OTHER'),'','二次密码输入不一致');
 			
 			//短信验证模块
 			//parent::check_verify($account,1);			//验证类型1为注册验证
@@ -112,26 +112,28 @@ class LoginAction extends ApiBaseAction {
 			$is_nickname = $Users->nickname_is_have($arr['nickname']);
 
 			if ($is_nickname!='')
-			{
-				parent::callback(C('STATUS_OTHER'),'昵称已经存在');
-			}
+				parent::callback(C('STATUS_OTHER'),'','昵称已经存在');
 
 			//手机号唯一
 			$is_have = $Users->phone_is_have($arr['cell_phone']);		//查看账号是否存在
 
-			if ($is_have!='') {
-				parent::callback(C('STATUS_OTHER'),'此手机号已存在');
-			}
+			if ($is_have!='')
+				parent::callback(C('STATUS_OTHER'),'','此手机号已存在');
 
-			//添加注册用户
-			//上传头像
+
+            //添加注册用户
+            //上传头像
+            if($this->_post('head_img')!='')
+                $arr['head_img'] = $this->_post('head_img');
+
 			if($_FILES['user_avater']!='')
 			{
 				$file_list = parent::upload_file($_FILES['user_avater']);
-				$file_list['status']==true ? $arr['head_img'] = $file_list['info'][0]['savename'] : parent::callback(C('STATUS_OTHER'),'','请重新上传头像');
-			}else{
-                $this->_post('head_img')!='' ? $arr['head_img'] = $this->_post('head_img') : parent::callback(C('STATUS_OTHER'),'','请重新上传头像');
-            }
+				$arr['head_img'] = $file_list['info'][0]['savename'];
+			}
+
+            if($arr['head_img']=='')
+                parent::callback(C('STATUS_OTHER'),'','上传头像不能为空');
 
 			$id = $Users->add_info($arr,C('ACCOUNT_TYPE.USER'));		//写入数据库
 
