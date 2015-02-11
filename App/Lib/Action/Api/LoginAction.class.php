@@ -128,11 +128,10 @@ class LoginAction extends ApiBaseAction {
 			if($_FILES['user_avater']!='')
 			{
 				$file_list = parent::upload_file($_FILES['user_avater']);
-				if($file_list['status']==true)
-				{
-					$arr['head_img'] = $file_list['info'][0]['savename'];
-				}
-			}
+				$file_list['status']==true ? $arr['head_img'] = $file_list['info'][0]['savename'] : parent::callback(C('STATUS_OTHER'),'请重新上传头像');
+			}else{
+                $this->_post('head_img')!='' ? $arr['head_img'] = $this->_post('head_img') : parent::callback(C('STATUS_OTHER'),'请重新上传头像');
+            }
 
 			$id = $Users->add_info($arr,C('ACCOUNT_TYPE.USER'));		//写入数据库
 

@@ -52,8 +52,8 @@ POST /Api/Login/login
 - `user_sex` 用户性别
 - `cell_phone` 手机号
 - `user_city` 城市ID
-- `$_FILES['user_avater']` 用户头像
-
+- `user_avater` 用户头像
+- `head_img` 黑长直专用头像接口
 
 #### Response
 ```json
