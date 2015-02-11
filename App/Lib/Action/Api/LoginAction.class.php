@@ -129,7 +129,8 @@ class LoginAction extends ApiBaseAction {
 			if($_FILES['user_avater']!='')
 			{
 				$file_list = parent::upload_file($_FILES['user_avater']);
-				$arr['head_img'] = $file_list['info'][0]['savename'];
+                if($file_list['status']==true)
+				    $arr['head_img'] = $file_list['info'][0]['savename'];
 			}
 
             if($arr['head_img']=='')
