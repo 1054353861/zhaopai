@@ -127,7 +127,33 @@ class UsersModel extends ApiBaseModel {
 		return $list;
 	}
 	
-	
+	//随机找朋友
+    public function get_random_friends($id)
+    {
+        $list = $this->where(array('u.id'=>array('neq',$id)))
+            ->table('app_users as u')->join('app_city as c on c.id = u.city_id')->order('rand()')
+            ->field('u.id,u.nickname,u.head_img,c.title')->limit(10)->select();
+
+        $user_friend = D('UserFriends');
+
+        parent::public_file_dir($list,array('head_img'));
+
+        $new_list = array();
+
+        foreach($list as $key=>$value)
+        {
+            $status = $user_friend->where(array('user_id'=>$id,'friend_id'=>$value['id'],'friend_statis'=>1))->find();
+            $new_list[$key] = $value;
+            if($status!='')
+            {
+                $new_list[$key]['is_friend'] = 1;
+            }else {
+                $new_list[$key]['is_friend'] = 2;
+            }
+        }
+
+        return $new_list;
+    }
 }
 
 ?>
