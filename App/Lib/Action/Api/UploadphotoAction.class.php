@@ -103,5 +103,12 @@ class UploadphotoAction extends ApiBaseAction {
 		parent::callback(C('STATUS_SUCCESS'),'',$list);
 	}
 
-	
+	//上传标签
+    public function upload_tags_name()
+    {
+        $id = $this->oUser->id;
+        $name = $this->_post('name');
+        $list = $this->db['Label']->get_tagnames($name);
+        parent::callback(C('STATUS_SUCCESS'),'',$list);
+    }
 }

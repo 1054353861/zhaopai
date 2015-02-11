@@ -60,5 +60,17 @@
 			return $arr_list;
 		}
 
-
+        //上传标签
+        public function get_tagnames($name)
+        {
+            $where['label_name'] = $name;
+            $val = $this->where($where)->find();
+            if($val!='')
+            {
+                return $val;
+            }else{
+                $insert_id = $this->add($where);
+                return array('id'=>$insert_id,'label_name'=>$name,'is_hot'=>0);
+            }
+        }
 	}

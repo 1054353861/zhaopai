@@ -2116,6 +2116,31 @@ POST /Api/Uploadphoto/upload_tags_random
 }
 ```
 
+### 5.上传标签
+
+#### Request
+```
+POST /Api/Uploadphoto/upload_tags_name
+```
+
+#### Parameters：
+- `token` 用户登录后拿去的用户标示
+- `name` 上传标签名称
+
+#### Response
+```json
+        {
+           "status": "0",
+           "msg": "",
+           "data":
+           {
+               "id": "12",
+               "label_name": "萨米耶",
+               "is_hot": "0"
+           },
+           "num": "3"
+        }
+```
 
 ## 十二、城市
 
