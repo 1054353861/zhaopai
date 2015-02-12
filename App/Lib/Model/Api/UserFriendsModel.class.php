@@ -12,7 +12,7 @@ class UserFriendsModel extends ApiBaseModel {
 
         $new_where['friend_id'] = $user_ids;
         $new_where['user_id'] = $id;
-        $bool = $this->($new_where)->save($update);
+        $bool = $this->where($new_where)->save($update);
 
 		return $bool ? true : false;
 	}
