@@ -5,10 +5,14 @@ class UserFriendsModel extends ApiBaseModel {
 
 	public function agree_friends($user_ids,$id)
 	{
-		$where['friend_id'] = array('in',$user_ids);
-		$where['user_id'] = $id;
+		$where['user_id'] = $user_ids;
+		$where['friend_id'] = $id;
 		$update = array('friend_statis'=>1);
-		$bool = $this->where($where)->save($update);
+		$this->where($where)->save($update);
+
+        $new_add = array('user_id'=>$id,'friend_id'=>$user_ids,'friend_statis'=>1);
+        $bool = $this->add($new_add);
+        
 		return $bool ? true : false;
 	}
 
