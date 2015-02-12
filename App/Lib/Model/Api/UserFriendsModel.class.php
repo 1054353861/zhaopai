@@ -13,21 +13,30 @@ class UserFriendsModel extends ApiBaseModel {
 	}
 
 
-	public function friends_list($id,$type)
+	public function friends_list($id)
 	{
-		$list['info'] = $this->where(array('f.user_id'=>$id,'f.friend_statis'=>$type))->table('app_user_friends as f')
+		$list['info'] = $this->where(array('f.user_id'=>$id,'f.friend_statis'=>1))->table('app_user_friends as f')
 		->join('app_users as u on u.id = f.friend_id')
 		->join('app_city as c on c.id = u.city_id and c.parent_id = 0')
 		->field('u.id,u.nickname,u.head_img,u.city_id,c.title')->select();
 
 		parent::public_file_dir($list['info'],array('head_img'));
 
-		if($type==1)
-		{
-			$list['no_friends'] = $this->where(array('user_id'=>$id,'friend_statis'=>0))->count();
-		}
+		$list['no_friends'] = $this->where(array('friend_id'=>$id,'friend_statis'=>0))->count();
+
 		return $list;
 	}
+
+    public function new_friends_list($id)
+    {
+        $list['info'] = $this->where(array('f.friend_id'=>$id,'f.friend_statis'=>0))->table('app_user_friends as f')
+            ->join('app_users as u on u.id = f.friend_id')
+            ->join('app_city as c on c.id = u.city_id and c.parent_id = 0')
+            ->field('u.id,u.nickname,u.head_img,u.city_id,c.title')->select();
+
+        parent::public_file_dir($list['info'],array('head_img'));
+        return $list;
+    }
 
 	public function add_friends($new_friend,$id)
 	{
