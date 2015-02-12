@@ -13,14 +13,15 @@ class ContentPraiseModel extends ApiBaseModel {
 		$first = $p =='' ? 0 : $p;
 		$offset = $index == '' ? 10 : $index;
 		$list = array();
-		$like_list = $this->where(array('p.article_id'=>array('eq',$id),'u.id'=>array('neq',$user_id)))
+
+		$like_list = $this->where(array('p.article_id'=>array('eq',$id)))
             ->table('app_content_praise as p')
             ->join('app_users as u on u.id = p.user_praise_id')
             ->join('app_city as c on c.id = u.city_id')
             ->field('u.id,u.nickname,u.head_img,c.title,p.create_time')
             ->order('p.create_time desc')->limit($first,$offset)->select();
 
-        $list['like_num'] = $this->where(array('article_id'=>array('eq',$id),'user_praise_id'=>array('neq',$user_id)))
+        $list['like_num'] = $this->where(array('article_id'=>array('eq',$id)))
             ->count();
 
         if($like_list!='')
