@@ -10,7 +10,7 @@ class SearchAction extends ApiBaseAction {
 	//每个类都要重写此变量
 	protected  $is_check_rbac = true;		//当前控制是否开启身份验证
 	
-	protected  $not_check_fn = array();	//无需登录和验证rbac的方法名
+	protected  $not_check_fn = array('search_tag_id');	//无需登录和验证rbac的方法名
 
 	public function __construct()
 	{
@@ -20,7 +20,8 @@ class SearchAction extends ApiBaseAction {
 	//初始化数据库连接
 	protected  $db = array(
 		'Users' => 'Users',
-		'Label' => 'Label'
+		'Label' => 'Label',
+        'LabelArticle' => 'LabelArticle'
 	);
 
 	//搜索-拍友
@@ -66,5 +67,14 @@ class SearchAction extends ApiBaseAction {
         $list = $this->db['Users']->get_random_friends($id);
 		parent::callback(C('STATUS_SUCCESS'),'',$list);
 	}
-	
+
+    //搜索－拍友－tag_id
+    public function search_tag_id()
+    {
+        $tag_id = $this->_post('tag_id');
+        $p = $this->_post('p');
+        $index = $this->_post('index');
+        $list = $this->db['LabelArticle']->get_tag_info($tag_id,$p,$index);
+        parent::callback(C('STATUS_SUCCESS'),'',$list);
+    }
 }

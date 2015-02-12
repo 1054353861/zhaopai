@@ -510,80 +510,18 @@ POST /Api/Likes/like_list
    "msg": "",
    "data":
    {
+       "like_num": "1",
        "like_list":
        [
            {
-               "id": "3",
-               "nickname": "zhuchencong",
-               "head_img": "",
-               "title": "上海市",
-               "create_time": "0"
-           },
-           {
-               "id": "3",
-               "nickname": "zhuchencong",
-               "head_img": "",
-               "title": "上海市",
-               "create_time": "0"
-           },
-           {
-               "id": "3",
-               "nickname": "zhuchencong",
-               "head_img": "",
-               "title": "上海市",
-               "create_time": "0"
-           },
-           {
-               "id": "3",
-               "nickname": "zhuchencong",
-               "head_img": "",
-               "title": "上海市",
-               "create_time": "0"
-           },
-           {
-               "id": "3",
-               "nickname": "zhuchencong",
-               "head_img": "",
-               "title": "上海市",
-               "create_time": "0"
-           },
-           {
-               "id": "3",
-               "nickname": "zhuchencong",
-               "head_img": "",
-               "title": "上海市",
-               "create_time": "0"
-           },
-           {
-               "id": "3",
-               "nickname": "zhuchencong",
-               "head_img": "",
-               "title": "上海市",
-               "create_time": "0"
-           },
-           {
-               "id": "3",
-               "nickname": "zhuchencong",
-               "head_img": "",
-               "title": "上海市",
-               "create_time": "0"
-           },
-           {
-               "id": "3",
-               "nickname": "zhuchencong",
-               "head_img": "",
-               "title": "上海市",
-               "create_time": "0"
-           },
-           {
-               "id": "3",
-               "nickname": "zhuchencong",
-               "head_img": "",
-               "title": "上海市",
-               "create_time": "0"
+               "id": "11",
+               "nickname": "Kidddd",
+               "head_img": "http://localhost/App/Uploads/20150204/54d1bfd75abde.jpg",
+               "title": "",
+               "create_time": "2015-02-09 13:20:31",
+               "is_friend": "1"
            }
-       ],
-       "like_num": "20"
+       ]
    },
    "num": "2"
 }
@@ -1952,6 +1890,229 @@ POST /Api/Search/search_friends_random
 }
 ```
 
+### 6.搜索-根据标签ID
+
+#### Request
+```
+POST /Api/Search/search_tag_id
+```
+
+#### Parameters：
+- `tag_id` 标签ID
+
+#### Response
+```json
+{
+    "status": "0",
+    "msg": "",
+    "data":
+    {
+       "all_count": "4",
+       "info":
+       [
+           {
+               "user_info":
+               {
+                   "id": "11",
+                   "nickname": "Kidddd",
+                   "head_img": "20150204/54d1bfd75abde.jpg",
+                   "title": ""
+               },
+               "photo_info":
+               {
+                   "id": "128",
+                   "article_id": "128",
+                   "label_id": "2",
+                   "user_id": "11",
+                   "content": "",
+                   "city_id": "1",
+                   "article_img": "http://localhost/App/Uploads/20150211/54dafb5417afc.jpg",
+                   "create_time": "1423637332",
+                   "support": "0",
+                   "nonsupport": "0",
+                   "recommend": "0",
+                   "longitude": "1.00000000000000000",
+                   "latitude": "1.00000000000000000",
+                   "photo_time": "2015-02-11 14:48:52",
+                   "tag_info":
+                   [
+                       {
+                           "id": "2",
+                           "label_name": "女汉子"
+                       },
+                       {
+                           "id": "9",
+                           "label_name": "二炮手"
+                       }
+                   ],
+                   "like_info":
+                   {
+                       "like_num": "1",
+                       "like_list":
+                       [
+                           {
+                               "id": "11",
+                               "head_img": "20150204/54d1bfd75abde.jpg"
+                           }
+                       ]
+                   },
+                   "comment_num": "0"
+               }
+           },
+           {
+               "user_info":
+               {
+                   "id": "3",
+                   "nickname": "wish…xy",
+                   "head_img": "20150211/54dafbb1668ec.jpg",
+                   "title": "上海市"
+               },
+               "photo_info":
+               {
+                   "id": "119",
+                   "article_id": "119",
+                   "label_id": "2",
+                   "user_id": "3",
+                   "content": "",
+                   "city_id": "1",
+                   "article_img": "http://localhost/App/Uploads/20150210/54d9bce2888d6.jpg",
+                   "create_time": "1423555811",
+                   "support": "0",
+                   "nonsupport": "0",
+                   "recommend": "0",
+                   "longitude": "121.42888300000000000",
+                   "latitude": "31.26616700000000000",
+                   "photo_time": "2015-02-10 16:10:11",
+                   "tag_info":
+                   [
+                       {
+                           "id": "9",
+                           "label_name": "二炮手"
+                       },
+                       {
+                           "id": "5",
+                           "label_name": "千奇百怪的奇葩"
+                       },
+                       {
+                           "id": "2",
+                           "label_name": "女汉子"
+                       }
+                   ],
+                   "like_info":
+                   {
+                       "like_num": "1",
+                       "like_list":
+                       [
+                           {
+                               "id": "11",
+                               "head_img": "20150204/54d1bfd75abde.jpg"
+                           }
+                       ]
+                   },
+                   "comment_num": "0"
+               }
+           },
+           {
+               "user_info":
+               {
+                   "id": "3",
+                   "nickname": "wish…xy",
+                   "head_img": "20150211/54dafbb1668ec.jpg",
+                   "title": "上海市"
+               },
+               "photo_info":
+               {
+                   "id": "1",
+                   "article_id": "1",
+                   "label_id": "2",
+                   "user_id": "3",
+                   "content": "文明靠大家",
+                   "city_id": "1",
+                   "article_img": "http://localhost/App/Uploads/20150204/54d1b2b28e39b.jpg",
+                   "create_time": "198283727",
+                   "support": "112",
+                   "nonsupport": "222",
+                   "recommend": "1",
+                   "longitude": "999.99999999999999999",
+                   "latitude": "999.99999999999999999",
+                   "photo_time": "1976-04-14 06:48:47",
+                   "tag_info":
+                   [
+                       {
+                           "id": "1",
+                           "label_name": "软妹子"
+                       },
+                       {
+                           "id": "2",
+                           "label_name": "女汉子"
+                       },
+                       {
+                           "id": "3",
+                           "label_name": "抹茶"
+                       }
+                   ],
+                   "like_info":
+                   {
+                       "like_num": "1",
+                       "like_list":
+                       [
+                           {
+                               "id": "11",
+                               "head_img": "20150204/54d1bfd75abde.jpg"
+                           }
+                       ]
+                   },
+                   "comment_num": "22"
+               }
+           },
+           {
+               "user_info":
+               {
+                   "id": "3",
+                   "nickname": "wish…xy",
+                   "head_img": "20150211/54dafbb1668ec.jpg",
+                   "title": "上海市"
+               },
+               "photo_info":
+               {
+                   "id": "2",
+                   "article_id": "2",
+                   "label_id": "2",
+                   "user_id": "3",
+                   "content": "文明靠大家",
+                   "city_id": "1",
+                   "article_img": "http://localhost/App/Uploads/20150204/54d1b2b28e39b.jpg",
+                   "create_time": "198283727",
+                   "support": "113",
+                   "nonsupport": "222",
+                   "recommend": "1",
+                   "longitude": "999.99999999999999999",
+                   "latitude": "999.99999999999999999",
+                   "photo_time": "1976-04-14 06:48:47",
+                   "tag_info":
+                   [
+                       {
+                           "id": "3",
+                           "label_name": "抹茶"
+                       },
+                       {
+                           "id": "2",
+                           "label_name": "女汉子"
+                       }
+                   ],
+                   "like_info":
+                   {
+                       "like_num": "0",
+                       "like_list": ""
+                   },
+                   "comment_num": "4"
+               }
+           }
+       ]
+    },
+"num": "2"
+}
+```
 
 ## 十一、上传照片
 

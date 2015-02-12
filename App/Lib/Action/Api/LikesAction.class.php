@@ -30,7 +30,7 @@ class LikesAction extends ApiBaseAction {
 		$article_id = $this->_post('article_id');
 		$p = $this->_post('p');
 		$index = $this->_post('index');
-		$list = $this->db['ContentPraise']->getLike($article_id,$p,$index);
+		$list = $this->db['ContentPraise']->getLike($article_id,$p,$index,$id);
 		parent::callback(C('STATUS_SUCCESS'),'',$list);
 	}
 	

@@ -77,4 +77,6 @@
                 return array('id'=>$insert_id,'label_name'=>$name,'is_hot'=>0);
             }
         }
+
+
 	}

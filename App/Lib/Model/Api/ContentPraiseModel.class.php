@@ -8,20 +8,44 @@
 
 class ContentPraiseModel extends ApiBaseModel {
 
-	public function getLike($id,$p,$index)
+	public function getLike($id,$p,$index,$user_id)
 	{
 		$first = $p =='' ? 0 : $p;
 		$offset = $index == '' ? 10 : $index;
 		$list = array();
-		$list['like_list'] = $this->where(array('p.article_id'=>$id))->table('app_content_praise as p')
+		$like_list = $this->where(array('p.article_id'=>array('eq',$id),'u.id'=>array('neq',$user_id)))
+            ->table('app_content_praise as p')
             ->join('app_users as u on u.id = p.user_praise_id')
-            ->join('app_city as c on c.id = u.city_id and c.parent_id = 0')
+            ->join('app_city as c on c.id = u.city_id')
             ->field('u.id,u.nickname,u.head_img,c.title,p.create_time')
             ->order('p.create_time desc')->limit($first,$offset)->select();
 
-		parent::public_file_dir($list['like_list'],array('head_img'));
+        $list['like_num'] = $this->where(array('article_id'=>$id))->count();
 
-		$list['like_num'] = $this->where(array('article_id'=>$id))->count();
+        if($like_list!='')
+        {
+            parent::public_file_dir($like_list, array('head_img'));
+
+            $UserFriends = D('UserFriends');
+
+            foreach ($like_list as $key => $value) {
+                $list['like_list'][$key] = $value;
+                $list['like_list'][$key]['create_time'] = date('Y-m-d H:i:s', $value['create_time']);
+
+                $user_status = $UserFriends->where(array('user_id' => $user_id, 'friend_id' => $value['id'], 'friend_statis' => 1))
+                    ->find();
+
+                if ($user_status != '') {
+                    $list['like_list'][$key]['is_friend'] = 1;
+                } else {
+                    $list['like_list'][$key]['is_friend'] = 2;
+                }
+            }
+        }else{
+            $list['like_list'] = '';
+        }
+
+
 		return $list;
 	}
 
