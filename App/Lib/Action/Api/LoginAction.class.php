@@ -141,7 +141,7 @@ class LoginAction extends ApiBaseAction {
 			if ($id) {
 				
 				//生成秘钥
-				$encryption = $id.':'.$arr['nickname'].':'.date('Y-m-d');					//生成解密后的数据
+				$encryption = $id.':'.$arr['cell_phone'].':'.date('Y-m-d');					//生成解密后的数据
 				$identity_encryption = passport_encrypt($encryption,C('UNLOCAKING_KEY'));	//生成加密字符串,给客户端
 				
 				$list = $this->db['Users']->get_id_info($id);
