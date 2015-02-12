@@ -25,7 +25,7 @@ class UserFriendsModel extends ApiBaseModel {
 
 		parent::public_file_dir($list['info'],array('head_img'));
 
-		$list['no_friends'] = $this->where(array('friend_id'=>$id,'friend_statis'=>0))->count();
+		$list['no_friends'] = $this->where(array('user_id'=>$id,'friend_statis'=>0))->count();
 
 		return $list;
 	}
