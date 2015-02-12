@@ -70,8 +70,10 @@ class PhotoAction extends ApiBaseAction {
 	{
 		$id = $this->oUser->id;
 		$article_id = $this->_post('photo_id');
+        $p = $this->_post('p');	//第几页
+        $index = $this->_post('index');	//多少条
 		$bool = $this->db['ContentPraise']->set_like($id,$article_id);
-        $list = $this->db['ContentPraise']->getLike($article_id);
+        $list = $this->db['ContentPraise']->getLike($article_id,$p,$index,$id);
 		$bool ? parent::callback(C('STATUS_SUCCESS'),'',$list) : parent::callback(C('STATUS_DATA_ERROR'),'',$list);
 	}
 }
