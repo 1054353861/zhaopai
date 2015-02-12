@@ -160,7 +160,7 @@ class ArticleModel extends ApiBaseModel {
 		$Users = D('Users');
 
 		$ContentPraise = D('ContentPraise');
-		
+
 		foreach($list as $key=>$value)
 		{
 			$list_arr[$key]['user_info'] = $Users->where(array('u.id'=>$value['user_id']))->table('app_users as u')
@@ -169,9 +169,11 @@ class ArticleModel extends ApiBaseModel {
 
 			$list_arr[$key]['content_info'] = $value;
 
+            $list_arr[$key]['content_info']['create_time'] = date('Y-m-d H:i:s',$value['create_time']);
+
 			parent::public_file_dir($list_arr[$key],array('head_img','article_img'));
 
-			$list_arr[$key]['rem_num'] = $ContentPraise->where(array('article_id'=>$value['id']))->count();
+			$list_arr[$key]['like_num'] = $ContentPraise->where(array('article_id'=>$value['id']))->count();
 		}
 
 		return $list_arr;
