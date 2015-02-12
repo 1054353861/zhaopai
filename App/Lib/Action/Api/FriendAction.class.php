@@ -36,7 +36,7 @@ class FriendAction extends ApiBaseAction {
 	public function friend_list()
 	{
 		$id = $this->oUser->id;
-		$list = $this->db['UserFriends']->friends_list($id);
+		$list = $this->db['UserFriends']->friends_list($id,1);
 		parent::callback(C('STATUS_SUCCESS'),'',$list);
 	}
 
@@ -44,7 +44,7 @@ class FriendAction extends ApiBaseAction {
 	public function friend_new_list()
 	{
 		$id = $this->oUser->id;
-		$list = $this->db['UserFriends']->new_friends_list($id);
+		$list = $this->db['UserFriends']->friends_list($id,0);
 		parent::callback(C('STATUS_SUCCESS'),'',$list);
 	}
 
