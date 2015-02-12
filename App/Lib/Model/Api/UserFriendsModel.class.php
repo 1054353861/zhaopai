@@ -12,7 +12,7 @@ class UserFriendsModel extends ApiBaseModel {
 
         $new_add = array('user_id'=>$id,'friend_id'=>$user_ids,'friend_statis'=>1);
         $bool = $this->add($new_add);
-        
+
 		return $bool ? true : false;
 	}
 

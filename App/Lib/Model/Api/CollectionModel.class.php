@@ -12,11 +12,11 @@ class CollectionModel extends ApiBaseModel {
 	{
 		$first = $p == '' ? 0 : $p;
 
-		$offset = $index =='' ? 6 : $index;
+		$offset = $index =='' ? 10 : $index;
 
 		$list_arr = array();
 
-		$friend_list =	D('UserFriends')->where(array('user_id'=>array('eq',3)))->getField('friend_id',0);
+		$friend_list =	D('UserFriends')->where(array('user_id'=>array('eq',$id)))->getField('friend_id',0);
 
 		$list = $this->where(array('c.user_id'=>array('IN',$friend_list)))->table('app_collection as c')
 		->join('app_article as a on a.id = c.article_coll_id')->limit($first,$offset)
