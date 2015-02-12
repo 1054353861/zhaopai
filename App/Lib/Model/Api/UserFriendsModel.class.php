@@ -5,15 +5,13 @@ class UserFriendsModel extends ApiBaseModel {
 
 	public function agree_friends($user_ids,$id)
 	{
-		$where['user_id'] = $user_ids;
-		$where['friend_id'] = $id;
-		$update = array('friend_statis'=>1);
-		$this->where($where)->save($update);
+        $where['user_id'] = $id;
+        $where['friend_id'] = $user_ids;
+        $update = array('friend_statis'=>1);
+        $this->where($where)->save($update);
 
-        $new_where['friend_id'] = $user_ids;
-        $new_where['user_id'] = $id;
-        $bool = $this->where($new_where)->save($update);
-
+        $new_add = array('user_id'=>$user_ids,'friend_id'=>$id,'friend_statis'=>1);
+        $bool = $this->add($new_add);
 		return $bool ? true : false;
 	}
 
@@ -35,13 +33,11 @@ class UserFriendsModel extends ApiBaseModel {
 
 	public function add_friends($new_friend,$id)
 	{
-		$is_friend = $this->where(array('user_id'=>$id,'friend_id'=>$new_friend))->count();
+		$is_friend = $this->where(array('user_id'=>$new_friend,'friend_id'=>$id))->count();
 		if($is_friend==0)
 		{
-			$add = array('user_id'=>$id,'friend_id'=>$new_friend,'friend_statis'=>0);
-			$this->add($add);
-            $new_add = array('user_id'=>$new_friend,'friend_id'=>$id,'friend_statis'=>0);
-            $bool = $this->add($new_add);
+			$add = array('user_id'=>$new_friend,'friend_id'=>$id,'friend_statis'=>0);
+			$bool = $this->add($add);
 			return $bool ? true : false;
 		}else{
 			return false;
