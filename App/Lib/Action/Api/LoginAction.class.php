@@ -134,7 +134,7 @@ class LoginAction extends ApiBaseAction {
 			}
 
             if($arr['head_img']=='')
-                $arr['head_img'] ＝ '';
+                $arr['head_img'] = '';
 
 			$id = $Users->add_info($arr,C('ACCOUNT_TYPE.USER'));		//写入数据库
 
