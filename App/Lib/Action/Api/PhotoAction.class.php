@@ -71,7 +71,7 @@ class PhotoAction extends ApiBaseAction {
 		$id = $this->oUser->id;
 		$article_id = $this->_post('photo_id');
 		$bool = $this->db['ContentPraise']->set_like($id,$article_id);
-        $list = $this->db['ContentPraise']->getLike('','',$index);
+        $list = $this->db['ContentPraise']->getLike($article_id,'','');
 		$bool ? parent::callback(C('STATUS_SUCCESS'),'',$list) : parent::callback(C('STATUS_DATA_ERROR'),'',$list);
 	}
 }
