@@ -8,7 +8,7 @@
 
 class ContentPraiseModel extends ApiBaseModel {
 
-	public function getLike($id,$p,$index,$user_id)
+	public function getLike($id,$p,$index)
 	{
 		$first = $p =='' ? 0 : $p;
 		$offset = $index == '' ? 10 : $index;
