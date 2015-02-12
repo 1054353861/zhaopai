@@ -134,7 +134,7 @@ class LoginAction extends ApiBaseAction {
 			}
 
             if($arr['head_img']=='')
-                parent::callback(C('STATUS_OTHER'),'','上传头像不能为空');
+                $arr['head_img'] ＝ '';
 
 			$id = $Users->add_info($arr,C('ACCOUNT_TYPE.USER'));		//写入数据库
 
