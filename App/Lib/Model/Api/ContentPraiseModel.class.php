@@ -20,7 +20,8 @@ class ContentPraiseModel extends ApiBaseModel {
             ->field('u.id,u.nickname,u.head_img,c.title,p.create_time')
             ->order('p.create_time desc')->limit($first,$offset)->select();
 
-        $list['like_num'] = $this->where(array('article_id'=>$id))->count();
+        $list['like_num'] = $this->where(array('article_id'=>array('eq',$id),'user_praise_id'=>array('neq',$user_id)))
+            ->count();
 
         if($like_list!='')
         {
