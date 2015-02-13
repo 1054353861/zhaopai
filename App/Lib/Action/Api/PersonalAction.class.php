@@ -85,16 +85,26 @@ class PersonalAction extends ApiBaseAction {
     public function personal_edit_background()
     {
         $id = $this->oUser->id;
-        $file_list = parent::upload_file($_FILES['background_img']);
-        if($file_list['status']==true)
+        
+        if($this->_post('background_url')!='')
+            $url['background_img'] = $this->_post('background_url'));
+
+        if($_FILES['background_img']!='')
         {
-            $url = array('background_img'=>$file_list['info'][0]['savename']);
-            $bool = $this->db['Users']->where(array('id'=>$id))->save($url);
-            $bool ? parent::callback(C('STATUS_SUCCESS'),'','') : parent::callback(C('STATUS_DATA_ERROR'),'','');
-        }else{
-            parent::callback(C('STATUS_DATA_ERROR'),'','');
+            $file_list = parent::upload_file($_FILES['background_img']);
+            if($file_list['status']==true)
+            {
+                $url['background_img'] = $file_list['info'][0]['savename'];
+            }else{
+                parent::callback(C('STATUS_DATA_ERROR'),'','图片上传有误');
+            }
         }
 
+        if($url['background_img']=='')
+            parent::callback(C('STATUS_DATA_ERROR'),'','图片上传有误');
+
+        $bool = $this->db['Users']->where(array('id'=>$id))->save($url);
+        $bool ? parent::callback(C('STATUS_SUCCESS'),'','') : parent::callback(C('STATUS_DATA_ERROR'),'','');
     }
 
 	//个人中心-昵称
