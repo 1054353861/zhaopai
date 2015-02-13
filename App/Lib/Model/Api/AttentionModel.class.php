@@ -12,7 +12,7 @@ class AttentionModel extends ApiBaseModel {
 	public function getNewsList($id,$p,$index)
 	{
 		$first = $p == '' ? 0 : $p;
-		$offset = $index =='' ? 6 : $index;
+		$offset = $index =='' ? 10 : $index;
 
 		$freind_arr = D('UserFriends')->where(array('user_id'=>$id,'friend_statis'=>1))->getField('friend_id',0);
 
@@ -29,7 +29,7 @@ class AttentionModel extends ApiBaseModel {
 		foreach($list as $key=>$value)
 		{
 			$list_arr['info'][$key]['user_info'] = $Users->where(array('u.id'=>$value['user_id']))
-			->table('app_users as u')->join('app_city as c on c.id = u.city_id and c.parent_id = 0')
+			->table('app_users as u')->join('app_city as c on c.id = u.city_id')
 			->field('u.id,u.nickname,u.head_img,c.title')->find();
 
 			parent::public_file_dir($list_arr['info'][$key],array('head_img'));
