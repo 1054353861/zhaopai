@@ -703,19 +703,7 @@ function pass_encryption ($str){
     	}
     	return $suffix ? $slice.'...' : $slice;
     }
-    
-    /**
-     * 获取随机数最大边界
-     * @param INT $count	(总条数)
-     * @param INT $num		(需要获取的条数)
-     * 使用方法：代码块
-     
-     $num = 100; //需要获取的数据条数
-	 $count = D('TABLE')->where(xxx)->count(); //先获取总条数
-	 $ofset = get_sj_max_num($count,$num);
-	 $data = D('TABLE')->where(xxx)->limit($ofset,',',$num)->select(); //随机数
-	 
-     */
+
     function get_sj_max_num ($count,$num) {
     	$sj = 0;
     	if ($count - $num < 0 ){
@@ -727,5 +715,20 @@ function pass_encryption ($str){
     	}
     	return $sj;
     }
-    
+
+    //计算距离
+    function getdistances($lng1,$lat1,$lng2,$lat2){
+        //将角度转为狐度
+        $radLat1 = deg2rad($lat1);//deg2rad()函数将角度转换为弧度
+        $radLat2 = deg2rad($lat2);
+        $radLng1 = deg2rad($lng1);
+        $radLng2 = deg2rad($lng2);
+
+        $a = $radLat1-$radLat2;
+        $b = $radLng1-$radLng2;
+
+        $s = 2*asin(sqrt(pow(sin($a/2),2) + cos($radLat1) * cos($radLat2) * pow(sin($b/2),2))) * 6378.137 * 1000;
+
+        return $s;
+    }
 ?>

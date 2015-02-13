@@ -125,6 +125,9 @@ class ArticleModel extends ApiBaseModel {
 
 				$list['info'][$key]['photo_info'] = $value;
 
+                if($lng!='' && $lat!='')
+                $list['info'][$key]['photo_info']['distance'] = getdistances($lng,$lat,$value['longitude'],$value['latitude']);
+
 				parent::public_file_dir($list['info'][$key],array('article_img'));
 
 				$list['info'][$key]['photo_info']['photo_time'] = date('Y-m-d H:i:s',$value['create_time']);
