@@ -16,12 +16,11 @@ class CollectionModel extends ApiBaseModel {
 
 		$list_arr = array();
 
-		$friend_list =	D('UserFriends')->where(array('user_id'=>array('eq',$id)))->getField('friend_id',0);
-
-		$list = $this->where(array('c.user_id'=>array('IN',$friend_list)))->table('app_collection as c')
-		->join('app_article as a on a.id = c.article_coll_id')->limit($first,$offset)
-		->order('c.create_time desc')->order('a.create_time desc')
-		->field('a.id,a.content,a.article_img,a.user_id,a.create_time')->select();
+		$list = $this->where(array('c.user_id'=>array('eq',$id)))
+            ->table('app_collection as c')
+            ->join('app_article as a on a.id = c.article_coll_id')->limit($first,$offset)
+            ->order('c.create_time desc')->order('a.create_time desc')
+            ->field('a.id,a.content,a.article_img,a.user_id,a.create_time')->select();
 
 		parent::public_file_dir($list,array('article_img'));
 
@@ -45,7 +44,7 @@ class CollectionModel extends ApiBaseModel {
                 ->where(array('article_id'=>array('eq',$value['id'])))->count();
 		}
 
-		$list_arr['news_num'] = $this->where(array('user_id'=>array('IN',$friend_list)))->count();
+		$list_arr['news_num'] = $this->where(array('user_id'=>array('eq',$id)))->count();
 
 		return $list_arr;
 	}
