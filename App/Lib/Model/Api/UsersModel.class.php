@@ -26,6 +26,7 @@ class UsersModel extends ApiBaseModel {
 	{
 		$arr_db['nickname'] = $arr['nickname'];
 		$arr_db['sex'] = $arr['sex'];
+        $arr_db['background_img'] = C('UPLOAD_DIR.default_background_img');
 		$arr_db['phone'] = $arr['cell_phone'];
 		$arr_db['account'] = $arr['cell_phone'];
 		$arr_db['city_id'] = $arr['city'];

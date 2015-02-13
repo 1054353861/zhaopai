@@ -81,6 +81,22 @@ class PersonalAction extends ApiBaseAction {
 
 	}
 
+    //个人中心-背景
+    public function personal_edit_background()
+    {
+        $id = $this->oUser->id;
+        $file_list = parent::upload_file($_FILES['background_img']);
+        if($file_list['status']==true)
+        {
+            $url = array('background_img'=>$file_list['info'][0]['savename']);
+            $bool = $this->db['Users']->where(array('id'=>$id))->save($url);
+            $bool ? parent::callback(C('STATUS_SUCCESS'),'','') : parent::callback(C('STATUS_DATA_ERROR'),'','');
+        }else{
+            parent::callback(C('STATUS_DATA_ERROR'),'','');
+        }
+
+    }
+
 	//个人中心-昵称
 	public function personal_edit_nickname()
 	{

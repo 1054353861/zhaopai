@@ -1394,6 +1394,27 @@ POST /Api/Personal/personal_all_change
 }
 ```
 
+### 10.个人中心-头像
+
+#### Request
+```
+POST /Api/Personal/personal_edit_background
+```
+
+#### Parameters：
+- `token` 用户登录后拿去的用户标示
+- `background_img`
+
+#### Response
+```json
+{
+   "status": "0",
+   "msg": "",
+   "data": "",
+   "num": "1"
+}
+```
+
 ## 八、照片详情
 
 ### 1.照片详情

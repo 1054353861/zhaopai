@@ -16,8 +16,7 @@ $system  = array(
 	    'DB_SQL_BUILD_QUEUE'    => 'file',   // SQL缓存队列的缓存方式 支持 file xcache和apc
 	    'DB_SQL_BUILD_LENGTH'   => 20, // SQL缓存的队列长度
 	    'DB_SQL_LOG'            => false, // SQL执行日志记录
-	    
-		
+
 		/* SESSOIN配置 */
 		'SESSION_AUTO_START'    => true,		//常开
 		/* URL配置 */
@@ -100,6 +99,7 @@ $custom= array (
 		'UPLOAD_DIR' => array(
 			'domain_dir' => $_SERVER['DOCUMENT_ROOT'].'/', //图片域
 			'app_dir' => 'App/Uploads/',
+            'default_background_img' => 'center_bg.png' //默认图片
 		),
 		
 		//外部文件访问地址(用来填写专用的文件服务器)
