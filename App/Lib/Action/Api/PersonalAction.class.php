@@ -85,9 +85,9 @@ class PersonalAction extends ApiBaseAction {
     public function personal_edit_background()
     {
         $id = $this->oUser->id;
-        
+
         if($this->_post('background_url')!='')
-            $url['background_img'] = $this->_post('background_url'));
+            $url['background_img'] = $this->_post('background_url');
 
         if($_FILES['background_img']!='')
         {
