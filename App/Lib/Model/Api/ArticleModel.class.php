@@ -96,7 +96,7 @@ class ArticleModel extends ApiBaseModel {
 
 				$l_where['latitude'] = array(array('gt',$square_arr['left-top']['lat']),array('lt',$square_arr['right-bottom']['lat']),'AND');
 
-				$list_info = $this->where($l_where)->limit($p,$page_count)->select();
+				$list_info = $this->where($l_where)->limit($p,$page_count)->order('longitude desc')->order('latitude desc')->select();
 				
 				$list['all_count'] = $this->where($l_where)->count();
 
