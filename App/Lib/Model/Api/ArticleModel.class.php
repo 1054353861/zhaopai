@@ -217,7 +217,7 @@ class ArticleModel extends ApiBaseModel {
 
 		if($type==true)
 		{
-			$count = D('UserFriends')->where(array('user_id'=>$other_id,'friend_id'=>$user_id,'friend_statis'=>1))->count();
+			$count = D('UserFriends')->where(array('user_id'=>$user_id,'friend_id'=>$other_id,'friend_statis'=>1))->count();
 			if($count==0)
 			{
 				$arr_list['user_info']['is_friend'] = 2;
