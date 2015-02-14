@@ -14,33 +14,33 @@ class AttentionModel extends ApiBaseModel {
 		$first = $p == '' ? 0 : $p;
 		$offset = $index =='' ? 10 : $index;
 
-		$freind_arr = D('UserFriends')->where(array('user_id'=>$id,'friend_statis'=>1))->getField('friend_id',0);
-
-		$where['user_id'] = array('IN',$freind_arr);
-
-		$list = $this->where($where)->order('create_time desc')->limit($first,$offset)->select();
+        $list = D('UserFriends')->table('app_user_friends as f')->where(array('u.user_id'=>$id,'friend_statis'=>1))
+            ->join('app_attention as a on f.friend_id = a.user_id')->order('a.create_time desc')
+            ->limit($first,$offset)->select();
 
 		$list_arr = array();
 		
-		$list_arr['all_num'] = $this->where($where)->count();
+		$list_arr['all_num'] = D('UserFriends')->table('app_user_friends as f')
+            ->where(array('u.user_id'=>$id,'friend_statis'=>1))
+            ->join('app_attention as a on f.friend_id = a.user_id')->count();
 
-		$Users = D('Users');
+        $Article = D('Article');
+
+        $ContentPraise = D('ContentPraise');
 
 		foreach($list as $key=>$value)
 		{
-			$list_arr['info'][$key]['user_info'] = $Users->where(array('u.id'=>$value['user_id']))
-			->table('app_users as u')->join('app_city as c on c.id = u.city_id')
-			->field('u.id,u.nickname,u.head_img,c.title')->find();
+            $list_arr['info'][$key]['user_info'] = parent::get_user_info($value['user_id']);
 
 			parent::public_file_dir($list_arr['info'][$key],array('head_img'));
 
 			$list_arr['info'][$key]['content']['type'] = $value['status'];
-			$list_arr['info'][$key]['content']['info'] = D('Article')
-			->where(array('id'=>$value['attention_id']))->field('id,content,article_img')->find();
+			$list_arr['info'][$key]['content']['info'] = $Article->where(array('id'=>$value['attention_id']))
+                ->field('id,content,article_img')->find();
 
 			parent::public_file_dir($list_arr['info'][$key]['content'],array('article_img'));
 
-			$list_arr['info'][$key]['content']['info']['like_num'] = D('ContentPraise')
+			$list_arr['info'][$key]['content']['info']['like_num'] = $ContentPraise
 			->where(array('article_id'=>$value['attention_id']))->count();
 
 			$list_arr['info'][$key]['time'] = date('Y-m-d H:i:s',$value['create_time']);
