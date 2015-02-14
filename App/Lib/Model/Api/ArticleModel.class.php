@@ -42,11 +42,9 @@ class ArticleModel extends ApiBaseModel {
 	{
 		$big_arr = array();
 
-		$big_arr['user_info'] = D('Users')->where(array('u.id'=>$user_id))
-		->table('app_users as u')->join('app_city as c on c.id = u.city_id and c.parent_id = 0')
-		->field('u.id,u.nickname,u.head_img,c.title')->find();
-
 		$big_arr['photo_info'] = $this->where(array('id'=>$article_id))->find();
+
+        $big_arr['user_info'] = parent::get_user_info($big_arr['photo_info']['user_id']);
 
         $big_arr['photo_info']['time'] = date('Y-m-d H:i:s',$big_arr['photo_info']['create_time']);
 
@@ -62,7 +60,7 @@ class ArticleModel extends ApiBaseModel {
 		$big_arr['photo_info']['like_num'] = $ContentPraise->where(array('article_id'=>$article_id))
 		->count();
 
-		parent::public_file_dir($big_arr,array('head_img','article_img'));
+		parent::public_file_dir($big_arr,array('head_img','article_img','background_img'));
 
 		parent::public_file_dir($big_arr['photo_info']['like_list'],array('head_img'));
 
@@ -117,9 +115,7 @@ class ArticleModel extends ApiBaseModel {
 			foreach($list_info as $key=>$value)
 			{
 
-				$list['info'][$key]['user_info'] = $Users->where(array('u.id'=>$value['user_id']))
-				->table('app_users as u')->join('app_city as c on c.id = u.city_id')
-				->field('u.id,u.nickname,u.head_img,c.title')->find();
+                $list['info'][$key]['user_info'] = parent::get_user_info($value['user_id']);
 
 				parent::public_file_dir($list['info'][$key],array('head_img'));
 

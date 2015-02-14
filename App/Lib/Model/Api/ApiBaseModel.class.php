@@ -46,5 +46,14 @@ class ApiBaseModel extends AppBaseModel {
 			$attention->add($log);
 		}
 	}
+
+    //封装调用用户信息方法
+    public function get_user_info($user_id)
+    {
+        $list = D('Users')->where(array('u.id'=>$user_id))
+            ->table('app_users as u')->join('app_city as c on c.id = u.city_id and c.parent_id = 0')
+            ->field('u.id,u.nickname,u.head_img,c.title,u.background_img')->find();
+        return $list;
+    }
 }
 ?>
