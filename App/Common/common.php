@@ -278,7 +278,7 @@ function find_string ($find,$str) {
  *
  *参考资料：http://www.flyphp.cn/phpmysql-%E6%A0%B9%E6%8D%AE%E4%B8%80%E4%B8%AA%E7%BB%99%E5%AE%9A%E7%BB%8F%E7%BA%AC%E5%BA%A6%E7%9A%84%E7%82%B9%EF%BC%8C%E8%BF%9B%E8%A1%8C%E9%99%84%E8%BF%91%E7%9A%84%E4%BA%BA%E6%9F%A5%E8%AF%A2.html
  */
-function _SquarePoint($lng, $lat,$distance = 0.5){		//经度、纬度、范围
+function _SquarePoint($lng, $lat,$distance = 1){		//经度、纬度、范围
 
 	define('EARTH_RADIUS', 6371);	//地球半径，平均半径为6371km
 	$dlng = 2 * asin(sin($distance / (2 * EARTH_RADIUS)) / cos(deg2rad($lat)));
