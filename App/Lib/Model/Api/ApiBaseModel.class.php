@@ -51,7 +51,7 @@ class ApiBaseModel extends AppBaseModel {
     public function get_user_info($user_id)
     {
         $list = D('Users')->where(array('u.id'=>$user_id))
-            ->table('app_users as u')->join('app_city as c on c.id = u.city_id and c.parent_id = 0')
+            ->table('app_users as u')->join('app_city as c on c.id = u.city_id')
             ->field('u.*,c.title')->find();
         return $list;
     }
