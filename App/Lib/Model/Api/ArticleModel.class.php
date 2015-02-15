@@ -48,17 +48,11 @@ class ArticleModel extends ApiBaseModel {
 
         $big_arr['photo_info']['time'] = date('Y-m-d H:i:s',$big_arr['photo_info']['create_time']);
 
-		$big_arr['photo_info']['tag_info'] = D('LabelArticle')->where(array('a.article_id'=>$article_id))
-		->table('app_label_article as a')->join('app_label as l on l.id = a.label_id')
-		->field('l.id,l.label_name')->select();
+        $big_arr['photo_info']['tag_info'] = parent::get_label_info($article_id);
 
-		$ContentPraise = D('ContentPraise');
-		$big_arr['photo_info']['like_list'] = $ContentPraise->where(array('c.article_id'=>$article_id))
-		->table('app_content_praise as c')->join('app_users as u on u.id = c.user_praise_id')
-		->field('u.id,u.head_img')->limit(7)->select();
+        $big_arr['photo_info']['like_list'] = parent::get_contentpraise_info($article_id);
 
-		$big_arr['photo_info']['like_num'] = $ContentPraise->where(array('article_id'=>$article_id))
-		->count();
+		$big_arr['photo_info']['like_num'] = parent::get_contentpraise_count($article_id);
 
 		parent::public_file_dir($big_arr,array('head_img','article_img','background_img'));
 
@@ -113,15 +107,6 @@ class ArticleModel extends ApiBaseModel {
 
 		if($list_info!='')
 		{
-
-			$ContentPraise = D('ContentPraise');
-
-			$LabelArticle = D('LabelArticle');
-
-			$Users = D('Users');
-
-			$Comment = D('Comment');
-
 			foreach($list_info as $key=>$value)
 			{
 
@@ -138,20 +123,15 @@ class ArticleModel extends ApiBaseModel {
 
 				$list['info'][$key]['photo_info']['photo_time'] = date('Y-m-d H:i:s',$value['create_time']);
 
-				$list['info'][$key]['photo_info']['tag_info'] = $LabelArticle->where(array('a.article_id'=>$value['id']))
-				->table('app_label_article as a')->join('app_label as l on l.id = a.label_id')
-				->field('l.id,l.label_name')->select();
+                $list['info'][$key]['photo_info']['tag_info'] = parent::get_label_info($value['id']);
 
-				$list['info'][$key]['photo_info']['like_info']['like_num'] = $ContentPraise->where(array('article_id'=>$value['id']))
-				->count();
+                $list['info'][$key]['photo_info']['like_info']['like_num'] = parent::get_contentpraise_count($value['id']);
 
-				$list['info'][$key]['photo_info']['like_info']['like_list'] = $ContentPraise->where(array('c.article_id'=>$value['id']))
-				->table('app_content_praise as c')->join('app_users as u on u.id = c.user_praise_id')
-				->field('u.id,u.head_img')->limit(7)->select();
+                $list['info'][$key]['photo_info']['like_info']['like_list'] = parent::get_contentpraise_info($value['id']);
 
 				parent::public_file_dir($list['info'][$key]['photo_info']['like_info']['like_list'],array('head_img'));
 
-				$list['info'][$key]['photo_info']['comment_num'] = $Comment->where(array('article_id'=>array('eq',$value['id'])))->count();
+                $list['info'][$key]['photo_info']['comment_num'] = parent::get_comment_count($value['id']);
 			}
 
 			return $list;
@@ -168,15 +148,9 @@ class ArticleModel extends ApiBaseModel {
 
 		$list_arr = array();
 
-		$Users = D('Users');
-
-		$ContentPraise = D('ContentPraise');
-
 		foreach($list as $key=>$value)
 		{
-			$list_arr[$key]['user_info'] = $Users->where(array('u.id'=>$value['user_id']))->table('app_users as u')
-			->join('app_city as c on c.id = u.city_id and c.parent_id = 0')
-			->field('u.id,u.nickname,u.head_img,c.title')->find();
+            $list_arr[$key]['user_info'] = parent::get_user_info($value['user_id']);
 
 			$list_arr[$key]['content_info'] = $value;
 
@@ -184,7 +158,7 @@ class ArticleModel extends ApiBaseModel {
 
 			parent::public_file_dir($list_arr[$key],array('head_img','article_img'));
 
-			$list_arr[$key]['like_num'] = $ContentPraise->where(array('article_id'=>$value['id']))->count();
+            $list_arr[$key]['like_num'] = parent::get_contentpraise_count($value['id']);
 		}
 
 		return $list_arr;
@@ -197,8 +171,6 @@ class ArticleModel extends ApiBaseModel {
 		$first = $p == '' ? 0 : $p;
 		$offset = $index == '' ? 10 : $index;
 		$arr_list = array();
-
-		$Users = D('Users');
 
         $arr_list['user_info'] = parent::get_user_info($user_id);
 
@@ -239,32 +211,21 @@ class ArticleModel extends ApiBaseModel {
         if($list!='')
         {
             parent::public_file_dir($list,array('article_img'));
-
-            $LabelArticle = D('LabelArticle');
-
-            $ContentPraise = D('ContentPraise');
-
-            $Comment = D('Comment');
             
             foreach($list as $key=>$value)
             {
                 $arr_list['photo_info'][$key] = $value;
                 $arr_list['photo_info'][$key]['create_time'] = date('Y-m-d H:i:s',$value['create_time']);
 
+                $arr_list['photo_info'][$key]['tag_info'] = parent::get_label_info($value['id']);
 
-                $arr_list['photo_info'][$key]['tag_info'] = $LabelArticle->table('app_label_article as a')
-                ->where(array('a.article_id'=>$value['id']))->join('app_label as l on l.id = a.label_id')
-                ->field('l.id,l.label_name')->select();
-
-                $arr_list['photo_info'][$key]['like_info']['like_list'] = $ContentPraise->table('app_content_praise as p')
-                ->where(array('p.article_id'=>$value['id']))->join('app_users as u on u.id = p.user_praise_id')
-                ->field('u.id,u.head_img')->order('p.create_time desc')->limit(7)->select();
+                $arr_list['photo_info'][$key]['like_info']['like_list'] = parent::get_contentpraise_info($value['id']);
 
                 parent::public_file_dir($arr_list['photo_info'][$key]['like_info']['like_list'],array('head_img'));
 
-                $arr_list['photo_info'][$key]['like_info']['like_num'] = $ContentPraise->where(array('article_id'=>$value['id']))->count();
+                $arr_list['photo_info'][$key]['like_info']['like_num'] = parent::get_contentpraise_count($value['id']);
 
-                $arr_list['photo_info'][$key]['comment_num'] = $Comment->where(array('article_id'=>$value['id']))->count();
+                $arr_list['photo_info'][$key]['comment_num'] = parent::get_comment_count($value['id']);
             }
         }else{
             $arr_list['photo_info'] = array();
@@ -313,31 +274,20 @@ class ArticleModel extends ApiBaseModel {
         {
             parent::public_file_dir($list,array('article_img'));
 
-            $LabelArticle = D('LabelArticle');
-
-            $ContentPraise = D('ContentPraise');
-
-            $Comment = D('Comment');
-
             foreach($list as $key=>$value)
             {
                 $arr_list['photo_info'][$key] = $value;
                 $arr_list['photo_info'][$key]['create_time'] = date('Y-m-d H:i:s',$value['create_time']);
 
+                $arr_list['photo_info'][$key]['tag_info'] = parent::get_label_info($value['id']);
 
-                $arr_list['photo_info'][$key]['tag_info'] = $LabelArticle->table('app_label_article as a')
-                    ->where(array('a.article_id'=>$value['id']))->join('app_label as l on l.id = a.label_id')
-                    ->field('l.id,l.label_name')->select();
-
-                $arr_list['photo_info'][$key]['like_info']['like_list'] = $ContentPraise->table('app_content_praise as p')
-                    ->where(array('p.article_id'=>$value['id']))->join('app_users as u on u.id = p.user_praise_id')
-                    ->field('u.id,u.head_img')->order('p.create_time desc')->limit(7)->select();
+                $arr_list['photo_info'][$key]['like_info']['like_list'] = parent::get_contentpraise_info($value['id']);
 
                 parent::public_file_dir($arr_list['photo_info'][$key]['like_info']['like_list'],array('head_img'));
 
-                $arr_list['photo_info'][$key]['like_info']['like_num'] = $ContentPraise->where(array('article_id'=>$value['id']))->count();
+                $arr_list['photo_info'][$key]['like_info']['like_num'] = parent::get_contentpraise_count($value['id']);
 
-                $arr_list['photo_info'][$key]['comment_num'] = $Comment->where(array('article_id'=>$value['id']))->count();
+                $arr_list['photo_info'][$key]['comment_num'] = parent::get_comment_count($value['id']);
             }
         }else{
             $arr_list['photo_info'] = array();

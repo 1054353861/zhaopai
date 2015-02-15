@@ -24,15 +24,9 @@ class CollectionModel extends ApiBaseModel {
 
 		parent::public_file_dir($list,array('article_img'));
 
-		$Users = D('Users');
-
-        $content_praise = D('content_praise');
-
 		foreach($list as $key=>$value)
 		{
-			$list_arr['info'][$key]['user_info'] = $Users->where(array('u.id'=>$value['user_id']))
-			->table('app_users as u')->join('app_city as c on c.id = u.city_id and parent_id = 0')
-			->field('u.id,u.nickname,u.head_img,c.title')->find();
+            $list_arr['info'][$key]['user_info'] = parent::get_user_info($value['user_id']);
 
 			parent::public_file_dir($list_arr['info'][$key],array('head_img'));
 
@@ -40,8 +34,7 @@ class CollectionModel extends ApiBaseModel {
 			
 			$list_arr['info'][$key]['content']['time'] = date('Y-m-d H:i:s',$value['create_time']);
 
-            $list_arr['info'][$key]['content']['like_num'] = $content_praise
-                ->where(array('article_id'=>array('eq',$value['id'])))->count();
+            $list_arr['info'][$key]['content']['like_num'] = parent::get_contentpraise_count($value['id']);
 		}
 
 		$list_arr['news_num'] = $this->where(array('user_id'=>array('eq',$id)))->count();

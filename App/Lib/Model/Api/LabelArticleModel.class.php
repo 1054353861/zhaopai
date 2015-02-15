@@ -27,15 +27,6 @@ class LabelArticleModel extends ApiBaseModel
 
         if($list!='')
         {
-
-            $ContentPraise = D('ContentPraise');
-
-            $LabelArticle = D('LabelArticle');
-
-            $Users = D('Users');
-
-            $Comment = D('Comment');
-
             foreach($list as $key=>$value) {
 
                 $new_list['info'][$key]['user_info'] = parent::get_user_info($value['user_id']);
@@ -46,20 +37,15 @@ class LabelArticleModel extends ApiBaseModel
 
                 $new_list['info'][$key]['photo_info']['photo_time'] = date('Y-m-d H:i:s', $value['create_time']);
 
-                $new_list['info'][$key]['photo_info']['tag_info'] = $LabelArticle->where(array('a.article_id' => $value['id']))
-                    ->table('app_label_article as a')->join('app_label as l on l.id = a.label_id')
-                    ->field('l.id,l.label_name')->select();
+                $new_list['info'][$key]['photo_info']['tag_info'] = parent::get_label_info($value['id']);
 
-                $new_list['info'][$key]['photo_info']['like_info']['like_num'] = $ContentPraise->where(array('article_id' => $value['id']))
-                    ->count();
+                $new_list['info'][$key]['photo_info']['like_info']['like_num'] = parent::get_contentpraise_count($value['id']);
 
-                $new_list['info'][$key]['photo_info']['like_info']['like_list'] = $ContentPraise->where(array('c.article_id' => $value['id']))
-                    ->table('app_content_praise as c')->join('app_users as u on u.id = c.user_praise_id')
-                    ->field('u.id,u.head_img')->limit(7)->select();
+                $new_list['info'][$key]['photo_info']['like_info']['like_list'] = parent::get_contentpraise_info($value['id']);
 
                 parent::public_file_dir($list['info'][$key]['photo_info']['like_info']['like_list'], array('head_img'));
 
-                $new_list['info'][$key]['photo_info']['comment_num'] = $Comment->where(array('article_id' => array('eq', $value['id'])))->count();
+                $new_list['info'][$key]['photo_info']['comment_num'] = parent::get_comment_count($value['id']);
             }
 
             return $new_list;

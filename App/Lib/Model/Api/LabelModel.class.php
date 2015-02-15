@@ -39,15 +39,10 @@
                 $list = D('Article')->where(array('id'=>array('IN',$new_list)))->limit($first * $offset,$offset)
                 ->order('create_time desc')->select();
 
-                $Users = D('Users');
-
-                $ContentPraise = D('ContentPraise');
-
                 foreach($list as $key=>$value)
                 {
-                    $arr_list[$key]['user_info'] = $Users->where(array('u.id'=>$value['user_id']))
-                        ->table('app_users as u')->join('app_city as c on c.id = u.city_id')
-                        ->field('u.id,u.nickname,u.head_img,c.title')->find();
+
+                    $arr_list[$key]['user_info'] = parent::get_user_info($value['user_id']);
 
                     $arr_list[$key]['content'] = $value;
 
@@ -55,7 +50,7 @@
 
                     $arr_list[$key]['content']['time'] = date('Y-m-d H:i:s',$value['create_time']);
 
-                    $arr_list[$key]['content']['list_num'] = $ContentPraise->where(array('article_id'=>$value['id']))->count();
+                    $arr_list[$key]['content']['list_num'] = parent::get_contentpraise_count($value['id']);
                 }
 
 			    return $arr_list;
