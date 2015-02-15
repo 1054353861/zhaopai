@@ -1415,6 +1415,196 @@ POST /Api/Personal/personal_edit_background
 }
 ```
 
+### 11.个人中心-他人的话题
+
+#### Request
+```
+POST /Api/Personal/personal_other_news
+```
+
+#### Parameters：
+- `token` 用户登录后拿去的用户标示
+- `other_user_id` 他人的ID
+
+#### Response
+```json
+{
+   "status": "0",
+   "msg": "",
+   "data":
+   {
+       "photo_info":
+       [
+           {
+               "id": "13",
+               "content": "123",
+               "article_img": "http://zhaopai.jsonlin.cn/App/Uploads/20150215/54e0b1171392a.jpg",
+               "create_time": "2015-02-15 22:45:43",
+               "longitude": "121.45180000000000000",
+               "latitude": "31.18942000000000000",
+               "tag_info":
+               [
+                   {
+                       "id": "8",
+                       "label_name": "我爱波霸"
+                   }
+               ],
+               "like_info":
+               {
+                   "like_list": "",
+                   "like_num": "0"
+               },
+               "comment_num": "0"
+           },
+           {
+               "id": "12",
+               "content": "看下吧",
+               "article_img": "http://zhaopai.jsonlin.cn/App/Uploads/20150215/54e0b0c1264fe.jpg",
+               "create_time": "2015-02-15 22:44:17",
+               "longitude": "121.45180000000000000",
+               "latitude": "31.18940000000000000",
+               "tag_info":
+               [
+                   {
+                       "id": "3",
+                       "label_name": "贱贱"
+                   }
+               ],
+               "like_info":
+               {
+                   "like_list": "",
+                   "like_num": "0"
+               },
+               "comment_num": "0"
+           },
+           {
+               "id": "7",
+               "content": "定位咯",
+               "article_img": "http://zhaopai.jsonlin.cn/App/Uploads/20150215/54e064a64cae6.jpg",
+               "create_time": "2015-02-15 17:19:34",
+               "longitude": "121.43470000000000000",
+               "latitude": "31.27253000000000000",
+               "tag_info":
+               [
+                   {
+                       "id": "8",
+                       "label_name": "我爱波霸"
+                   }
+               ],
+               "like_info":
+               {
+                   "like_list":
+                   [
+                       {
+                           "id": "4",
+                           "head_img": "http://zhaopai.jsonlin.cn/App/Uploads/20150215/54e045e4e98b3.jpg"
+                       },
+                       {
+                           "id": "12",
+                           "head_img": "http://zhaopai.jsonlin.cn/App/Uploads/20150215/54e05668e7b88.jpg"
+                       }
+                   ],
+                   "like_num": "2"
+               },
+               "comment_num": "1"
+           },
+           {
+               "id": "4",
+               "content": "",
+               "article_img": "http://zhaopai.jsonlin.cn/App/Uploads/20150215/54e03b75a6b86.jpg",
+               "create_time": "2015-02-15 14:23:49",
+               "longitude": "1.00000000000000000",
+               "latitude": "1.00000000000000000",
+               "tag_info":
+               [
+                   {
+                       "id": "2",
+                       "label_name": "草根"
+                   }
+               ],
+               "like_info":
+               {
+                   "like_list":
+                   [
+                       {
+                           "id": "2",
+                           "head_img": "http://zhaopai.jsonlin.cn/App/Uploads/20150215/54e004decf241.jpg"
+                       },
+                       {
+                           "id": "4",
+                           "head_img": "http://zhaopai.jsonlin.cn/App/Uploads/20150215/54e045e4e98b3.jpg"
+                       }
+                   ],
+                   "like_num": "2"
+               },
+               "comment_num": "2"
+           },
+           {
+               "id": "3",
+               "content": "好男人就是我，我就是好男人",
+               "article_img": "http://zhaopai.jsonlin.cn/App/Uploads/20150215/54e011752c45b.jpg",
+               "create_time": "2015-02-15 11:24:37",
+               "longitude": "1.00000000000000000",
+               "latitude": "1.00000000000000000",
+               "tag_info":
+               [
+                   {
+                       "id": "13",
+                       "label_name": "呵呵"
+                   }
+               ],
+               "like_info":
+               {
+                   "like_list":
+                   [
+                       {
+                           "id": "2",
+                           "head_img": "http://zhaopai.jsonlin.cn/App/Uploads/20150215/54e004decf241.jpg"
+                       }
+                   ],
+                   "like_num": "1"
+               },
+               "comment_num": "2"
+           },
+           {
+               "id": "1",
+               "content": "好男人加班",
+               "article_img": "http://zhaopai.jsonlin.cn/App/Uploads/20150215/54dff6039a52d.jpg",
+               "create_time": "2015-02-15 09:27:31",
+               "longitude": "1.00000000000000000",
+               "latitude": "1.00000000000000000",
+               "tag_info":
+               [
+                   {
+                       "id": "3",
+                       "label_name": "贱贱"
+                   }
+               ],
+               "like_info":
+               {
+                   "like_list":
+                   [
+                       {
+                           "id": "1",
+                           "head_img": "http://zhaopai.jsonlin.cn/App/Uploads/20150215/54dffe04ef775.jpg"
+                       },
+                       {
+                           "id": "2",
+                           "head_img": "http://zhaopai.jsonlin.cn/App/Uploads/20150215/54e004decf241.jpg"
+                       }
+                   ],
+                   "like_num": "2"
+               },
+               "comment_num": "1"
+           }
+       ],
+       "article_num": "6"
+   },
+   "num": "2"
+}
+```
+
+
 ## 八、照片详情
 
 ### 1.照片详情

@@ -56,7 +56,7 @@ class PersonalAction extends ApiBaseAction {
 		parent::callback(C('STATUS_SUCCESS'),'',$list);
 	}
 
-    //个人中心-话题
+    //个人中心-他人话题
     public function personal_other_news()
     {
         $id = $this->oUser->id;
