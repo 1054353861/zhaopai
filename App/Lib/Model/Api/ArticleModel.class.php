@@ -222,20 +222,23 @@ class ArticleModel extends ApiBaseModel {
 
 		$list = $this->where(array('user_id'=>$user_id))->limit($first * $offset,$offset)
 		->field('id,content,article_img,create_time,longitude,latitude')->select();
+
+
         if($list!='')
         {
+            parent::public_file_dir($list,array('article_img'));
 
             $LabelArticle = D('LabelArticle');
 
             $ContentPraise = D('ContentPraise');
 
             $Comment = D('Comment');
+            
             foreach($list as $key=>$value)
             {
                 $arr_list['photo_info'][$key] = $value;
                 $arr_list['photo_info'][$key]['create_time'] = date('Y-m-d H:i:s',$value['create_time']);
 
-                parent::public_file_dir($arr_list['photo_info'],array('article_img'));
 
                 $arr_list['photo_info'][$key]['tag_info'] = $LabelArticle->table('app_label_article as a')
                 ->where(array('a.article_id'=>$value['id']))->join('app_label as l on l.id = a.label_id')
