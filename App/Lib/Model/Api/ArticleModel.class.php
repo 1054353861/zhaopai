@@ -82,7 +82,7 @@ class ArticleModel extends ApiBaseModel {
 		{
 			//最新
 			case 1:
-				$list_info = $this->where($where)->limit($p,$page_count)->order('create_time desc')->select();
+				$list_info = $this->where($where)->limit($p * $page_count,$page_count)->order('create_time desc')->select();
 				$list['all_count'] = $this->where($where)->count();
 			break;
 			//最近
@@ -94,7 +94,7 @@ class ArticleModel extends ApiBaseModel {
 
 				$l_where['latitude'] = array(array('gt',$square_arr['left-top']['lat']),array('lt',$square_arr['right-bottom']['lat']),'AND');
 
-				$list_info = $this->where($l_where)->limit($p,$page_count)->order('longitude desc')->order('latitude desc')->select();
+				$list_info = $this->where($l_where)->limit($p * $page_count,$page_count)->order('longitude desc')->order('latitude desc')->select();
 				
 				$list['all_count'] = $this->where($l_where)->count();
 
@@ -188,9 +188,7 @@ class ArticleModel extends ApiBaseModel {
 
 		$Users = D('Users');
 
-		$arr_list['user_info'] = $Users->where(array('u.id'=>$user_id))->table('app_users as u')
-		->join('app_city as c on c.id = u.city_id and c.parent_id = 0')
-		->field('u.nickname,u.head_img,u.background_img,u.integral,c.title')->find();
+        $arr_list['user_info'] = parent::get_user_info($user_id);
 
 		parent::public_file_dir($arr_list,array('head_img','background_img'));
 
@@ -222,7 +220,7 @@ class ArticleModel extends ApiBaseModel {
 			}
 		}
 
-		$list = $this->where(array('user_id'=>$user_id))->limit($first,$offset)
+		$list = $this->where(array('user_id'=>$user_id))->limit($first * $offset,$offset)
 		->field('id,content,article_img,create_time,longitude,latitude')->select();
         if($list!='')
         {

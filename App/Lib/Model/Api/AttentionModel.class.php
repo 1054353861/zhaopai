@@ -16,7 +16,7 @@ class AttentionModel extends ApiBaseModel {
 
         $list = D('UserFriends')->table('app_user_friends as f')->where(array('f.user_id'=>$id,'f.friend_statis'=>1))
                 ->join('app_attention as a on f.friend_id = a.user_id')->order('a.create_time desc')
-            ->limit($first,$offset)->select();
+            ->limit($first * $offset,$offset)->select();
 
 		$list_arr = array();
 		

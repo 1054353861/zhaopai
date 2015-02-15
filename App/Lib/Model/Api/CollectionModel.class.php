@@ -18,7 +18,7 @@ class CollectionModel extends ApiBaseModel {
 
 		$list = $this->where(array('c.user_id'=>array('eq',$id)))
             ->table('app_collection as c')
-            ->join('app_article as a on a.id = c.article_coll_id')->limit($first,$offset)
+            ->join('app_article as a on a.id = c.article_coll_id')->limit($first * $offset,$offset)
             ->order('c.create_time desc')->order('a.create_time desc')
             ->field('a.id,a.content,a.article_img,a.user_id,a.create_time')->select();
 

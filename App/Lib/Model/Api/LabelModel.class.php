@@ -36,7 +36,7 @@
 
                 $arr_list = array();
 
-                $list = D('Article')->where(array('id'=>array('IN',$new_list)))->limit($first,$offset)
+                $list = D('Article')->where(array('id'=>array('IN',$new_list)))->limit($first * $offset,$offset)
                 ->order('create_time desc')->select();
 
                 $Users = D('Users');
