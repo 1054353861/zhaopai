@@ -296,4 +296,54 @@ class ArticleModel extends ApiBaseModel {
 			return false;
 		}
 	}
+
+    //获得他人中心数据
+    public function getOtherInfo($p,$index,$user_id)
+    {
+        $first = $p == '' ? 0 : $p;
+        $offset = $index == '' ? 10 : $index;
+
+        $arr_list = array();
+
+        $list = $this->where(array('user_id'=>$user_id))->limit($first * $offset,$offset)
+            ->field('id,content,article_img,create_time,longitude,latitude')->order('create_time desc')->select();
+
+
+        if($list!='')
+        {
+            parent::public_file_dir($list,array('article_img'));
+
+            $LabelArticle = D('LabelArticle');
+
+            $ContentPraise = D('ContentPraise');
+
+            $Comment = D('Comment');
+
+            foreach($list as $key=>$value)
+            {
+                $arr_list['photo_info'][$key] = $value;
+                $arr_list['photo_info'][$key]['create_time'] = date('Y-m-d H:i:s',$value['create_time']);
+
+
+                $arr_list['photo_info'][$key]['tag_info'] = $LabelArticle->table('app_label_article as a')
+                    ->where(array('a.article_id'=>$value['id']))->join('app_label as l on l.id = a.label_id')
+                    ->field('l.id,l.label_name')->select();
+
+                $arr_list['photo_info'][$key]['like_info']['like_list'] = $ContentPraise->table('app_content_praise as p')
+                    ->where(array('p.article_id'=>$value['id']))->join('app_users as u on u.id = p.user_praise_id')
+                    ->field('u.id,u.head_img')->order('p.create_time desc')->limit(7)->select();
+
+                parent::public_file_dir($arr_list['photo_info'][$key]['like_info']['like_list'],array('head_img'));
+
+                $arr_list['photo_info'][$key]['like_info']['like_num'] = $ContentPraise->where(array('article_id'=>$value['id']))->count();
+
+                $arr_list['photo_info'][$key]['comment_num'] = $Comment->where(array('article_id'=>$value['id']))->count();
+            }
+        }else{
+            $arr_list['photo_info'] = array();
+        }
+        $arr_list['article_num'] = $this->where(array('user_id'=>$user_id))->count();
+
+        return $arr_list;
+    }
 }

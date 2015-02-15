@@ -56,6 +56,17 @@ class PersonalAction extends ApiBaseAction {
 		parent::callback(C('STATUS_SUCCESS'),'',$list);
 	}
 
+    //个人中心-话题
+    public function personal_other_news()
+    {
+        $id = $this->oUser->id;
+        $other_id = $this->_post('other_user_id');
+        $p = $this->_post('p');
+        $index = $this->_post('index');
+        $list = $this->db['Article']->getOtherInfo($p,$index,$other_id);
+        parent::callback(C('STATUS_SUCCESS'),'',$list);
+    }
+
 	//个人中心-积分
 	public function personal_score()
 	{
