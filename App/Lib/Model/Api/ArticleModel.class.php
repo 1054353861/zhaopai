@@ -109,7 +109,7 @@ class ArticleModel extends ApiBaseModel {
 
 			break;
 		}
-
+        return $l_where;
 
 		if($list_info!='')
 		{
