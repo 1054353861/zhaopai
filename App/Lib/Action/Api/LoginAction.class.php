@@ -66,6 +66,7 @@ class LoginAction extends ApiBaseAction {
                         'id'=>$user_info['id'],
 						'account'=>$user_info['account'],
 						'nickname'=>$user_info['nickname'],
+                        'city_id' => $user_info['city_id'],
 						'title'=>D('City')->where(array('id'=>$user_info['city_id']))->getField('title'),
 						'head_img'=>C('PUBLIC_VISIT.domain_dir').C('PUBLIC_VISIT.app_dir').$user_info['head_img'],
 						'sex'=>$user_info['sex'],
