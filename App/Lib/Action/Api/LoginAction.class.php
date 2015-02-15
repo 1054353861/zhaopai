@@ -70,7 +70,7 @@ class LoginAction extends ApiBaseAction {
 						'title'=>D('City')->where(array('id'=>$user_info['city_id']))->getField('title'),
 						'head_img'=>C('PUBLIC_VISIT.domain_dir').C('PUBLIC_VISIT.app_dir').$user_info['head_img'],
 						'sex'=>$user_info['sex'],
-						'background_img'=>$user_info['background_img'],
+						'background_img'=>C('PUBLIC_VISIT.domain_dir').C('PUBLIC_VISIT.app_dir').$user_info['background_img'],
 						'integral'=>$user_info['integral'],
 						'last_login_time'=>date('Y-m-d H:i:s',$user_info['last_login_time']),
 						'login_count'=>$user_info['login_count'],
