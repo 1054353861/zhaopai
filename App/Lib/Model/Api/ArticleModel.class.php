@@ -233,7 +233,7 @@ class ArticleModel extends ApiBaseModel {
 		}
 
 		$list = $this->where(array('user_id'=>$user_id))->limit($first * $offset,$offset)
-		->field('id,content,article_img,create_time,longitude,latitude')->select();
+		->field('id,content,article_img,create_time,longitude,latitude')->order('create_time desc')->select();
 
 
         if($list!='')
