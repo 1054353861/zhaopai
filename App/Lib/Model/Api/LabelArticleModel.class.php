@@ -38,11 +38,9 @@ class LabelArticleModel extends ApiBaseModel
 
             foreach($list as $key=>$value) {
 
-                $new_list['info'][$key]['user_info'] = $Users->where(array('u.id' => $value['user_id']))
-                    ->table('app_users as u')->join('app_city as c on c.id = u.city_id')
-                    ->field('u.id,u.nickname,u.head_img,c.title')->find();
+                $new_list['info'][$key]['user_info'] = parent::get_user_info($value['user_id']);
 
-                parent::public_file_dir($list['info'][$key], array('head_img'));
+                parent::public_file_dir($list['info'][$key], array('head_img','background_img'));
 
                 $new_list['info'][$key]['photo_info'] = $value;
 
