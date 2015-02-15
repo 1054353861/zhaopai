@@ -102,13 +102,16 @@ class ArticleModel extends ApiBaseModel {
 				    array('lt',$square_arr['right-bottom']['lng']),
 				);
 				
-				$list_info = $this->where($l_where)->limit($p * $page_count,$page_count)->order('longitude desc')->order('latitude desc')->select();
+				$list_info = $this->where($l_where)->limit($p * $page_count,$page_count)
+                    ->order('longitude desc')->order('latitude desc')->select();
 				
 				$list['all_count'] = $this->where($l_where)->count();
 
 			break;
 		}
 
+        return $l_where;
+        
 		if($list_info!='')
 		{
 
@@ -154,7 +157,9 @@ class ArticleModel extends ApiBaseModel {
 
 			return $list;
 
-		}
+		}else{
+            return '';
+        }
 	}
 
 	//推荐文章
