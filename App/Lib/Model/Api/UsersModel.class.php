@@ -44,8 +44,10 @@ class UsersModel extends ApiBaseModel {
 	//获取数据
 	public function get_id_info($id)
 	{
-		$info = $this->where(array('u.id'=>$id))->table('app_users as u')
-		->join('app_city as c on c.id = u.city_id and c.parent_id = 0')->field('u.*,c.title')->find();
+		$info = parent::get_user_info($id);
+
+        parent::public_file_dir($info,array('head_img','background_img'));
+        
 		return $info;
 	}
 
