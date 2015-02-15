@@ -52,7 +52,7 @@ class ApiBaseModel extends AppBaseModel {
     {
         $list = D('Users')->where(array('u.id'=>$user_id))
             ->table('app_users as u')->join('app_city as c on c.id = u.city_id and c.parent_id = 0')
-            ->field('u.id,u.nickname,u.head_img,c.title,u.background_img')->find();
+            ->field('u.*,c.title')->find();
         return $list;
     }
 }
