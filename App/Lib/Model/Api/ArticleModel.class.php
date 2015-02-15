@@ -88,12 +88,20 @@ class ArticleModel extends ApiBaseModel {
 			//最近
 			case 2:
 				//计算经纬度
-				$square_arr = _SquarePoint($lng,$lat);
-
-				$l_where['longitude'] = array(array('gt',$square_arr['left-top']['lng']),array('lt',$square_arr['right-bottom']['lng']),'AND');
-
-				$l_where['latitude'] = array(array('gt',$square_arr['left-top']['lat']),array('lt',$square_arr['right-bottom']['lat']),'AND');
-
+				$square_arr = _SquarePoint($lng,$lat,1);
+                
+				//纬度
+				$l_where['latitude'] = array(
+				    array('gt',$square_arr['right-bottom']['lat']),
+				    array('lt',$square_arr['left-top']['lat']),
+				);
+				 
+				//经度
+				$l_where['longitude'] = array(
+				    array('gt',$square_arr['left-top']['lng']),
+				    array('lt',$square_arr['right-bottom']['lng']),
+				);
+				
 				$list_info = $this->where($l_where)->limit($p * $page_count,$page_count)->order('longitude desc')->order('latitude desc')->select();
 				
 				$list['all_count'] = $this->where($l_where)->count();

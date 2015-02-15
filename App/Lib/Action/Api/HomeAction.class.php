@@ -25,14 +25,18 @@ class HomeAction extends ApiBaseAction {
 	//首页
 	public function home_data()
 	{
-		$city = $this->_post('city');
-		$type = $this->_post('type');	//1是根据 2是根据最近
-		$p = $this->_post('p');
-		$lng = $this->_post('lng');	//精度
-		$lat = $this->_post('lat');	//纬度
-		$count = $this->_post('count');
-		$list = $this->db['Article']->article_index($city,$type,$p,$count,$lng,$lat);
-		parent::callback(C('STATUS_SUCCESS'),'',$list);
+	   
+	    if ($this->isPost()) {
+	        $city = $this->_post('city');
+	        $type = $this->_post('type');	//1是根据 2是根据最近
+	        $p = $this->_post('p');
+	        $lng = $this->_post('lng');	//精度
+	        $lat = $this->_post('lat');	//纬度
+	        $count = $this->_post('count');
+	        $list = $this->db['Article']->article_index($city,$type,$p,$count,$lng,$lat);
+	        parent::callback(C('STATUS_SUCCESS'),'获取成功',$list);
+	    } 
+		
 	}
 
 	
