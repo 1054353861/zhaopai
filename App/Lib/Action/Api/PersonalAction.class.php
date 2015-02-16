@@ -149,22 +149,44 @@ class PersonalAction extends ApiBaseAction {
 	public function personal_all_change()
 	{
 		$id = $this->oUser->id;
-		$arr['sex'] = $this->_post('user_sex');
-		$arr['city_id'] = $this->_post('city_id');
-		$arr['nickname'] = $this->_post('nickname');
-		if($this->_post('article_img')!='')
-			$arr['head_img'] = $this->_post('article_img');
-		if($_FILES['img']!='')
-		{
-			$file_list = parent::upload_file($_FILES['img']);
-			if($file_list['status']==true)
-			{
-				$arr['head_img'] = $file_list['info'][0]['savename'];
-			}else{
-				parent::callback(C('STATUS_DATA_ERROR'),'','图片格式不正确');
-			}
+		
+		if ($this->isPost()) {
+		    $arr = array();
+		    $format_fields = array('user_sex'=>'sex');//需要格式化的字段
+            
+            foreach ($this->_post() as $key=>$val) {
+               if ($val != '') {
+                   if (!empty($format_fields[$key])) {
+                       $arr[$format_fields[$key]] = $val;
+                   } else {
+                       $arr[$key] = $val;
+                   }
+               }
+            }
+            
+//     		$arr['sex'] = $this->_post('user_sex');
+//     		$arr['city_id'] = $this->_post('city_id');
+//     		$arr['nickname'] = $this->_post('nickname');
+    		
+//     		$arr['interest'] = $this->_post('interest');  //兴趣
+//     		$arr['name'] = $this->_post('name');  //收获地址姓名
+//     		$arr['address'] = $this->_post('address');    //收获地址
+//     		$arr['address_phone'] = $this->_post('address_phone');//收货人联系电话
+    		
+    		if($this->_post('article_img')!='')
+    			$arr['head_img'] = $this->_post('article_img');
+    		if($_FILES['img']!='')
+    		{
+    			$file_list = parent::upload_file($_FILES['img']);
+    			if($file_list['status']==true)
+    			{
+    				$arr['head_img'] = $file_list['info'][0]['savename'];
+    			}else{
+    				parent::callback(C('STATUS_DATA_ERROR'),'','图片格式不正确');
+    			}
+    		}
+    		$bool = $this->db['Users']->where(array('id'=>$id))->save($arr);
+    		$bool ? parent::callback(C('STATUS_SUCCESS'),'修改成功','') : parent::callback(C('STATUS_DATA_ERROR'),'修改失败','');
 		}
-		$bool = $this->db['Users']->where(array('id'=>$id))->save($arr);
-		$bool ? parent::callback(C('STATUS_SUCCESS'),'','') : parent::callback(C('STATUS_DATA_ERROR'),'','');
 	}
 }
