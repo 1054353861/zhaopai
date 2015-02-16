@@ -356,6 +356,86 @@ function quickSort(&$array,$field){
      return $array;
 }
 
+/**
+ * 对查询结果集进行排序
+ * @access public
+ * @param array $list 查询结果
+ * @param string $field 排序的字段名
+ * @param array $sortby 排序类型
+ * asc正向排序 desc逆向排序 nat自然排序
+ * @return array
+ */
+function list_sort_by($list,$field, $sortby='asc') {
+    if(is_array($list)){
+        $refer = $resultSet = array();
+        foreach ($list as $i => $data)
+            $refer[$i] = &$data[$field];
+        switch ($sortby) {
+        	case 'asc': // 正向排序
+        	    asort($refer);
+        	    break;
+        	case 'desc':// 逆向排序
+        	    arsort($refer);
+        	    break;
+        	case 'nat': // 自然排序
+        	    natcasesort($refer);
+        	    break;
+        }
+        foreach ( $refer as $key=> $val)
+            $resultSet[] = &$list[$key];
+        return $resultSet;
+    }
+    return false;
+}
+
+/**
+ * 快速排序
+ * @param Array $array
+ * @param String $field	//需要排序的字段
+ * @param String $sort	//asc 从小到大   desc 从大到下
+ */
+ function quickSortTwo(&$array,$field,$sort = 'asc'){
+    $count = count ($array);
+    if ($count <= 1) return $array;
+
+    $key = $array [0];
+
+    $left_array = array ();
+    $middle_array = array ();
+    $right_array = array ();
+
+    foreach ($array as $k => $val ) {
+        //这里改变大于小于，改变数组的排序
+        //如if ($key[$field] > $val[$field]) {
+        if ($sort == 'asc') {
+            if ($key[$field] > $val[$field]) {
+                $left_array[] = $val;
+            } else if ($key[$field] == $val[$field]) {
+                $middle_array [] = $val;					 	//直接插入
+            } else {
+                $right_array [] = $val;
+            }
+        } elseif ($sort == 'desc') {
+            if ($key[$field] < $val[$field]) {
+                $left_array[] = $val;
+            } else if ($key[$field] == $val[$field]) {
+                $middle_array [] = $val;					 	//直接插入
+            } else {
+                $right_array [] = $val;
+            }
+        }
+
+       }
+
+        //递归
+        $left_array = quickSortTwo($left_array,$field,$sort);
+        $right_array = quickSortTwo($right_array,$field,$sort);
+
+        //合并数组
+        $array = array_merge ($left_array, $middle_array, $right_array);
+        return $array;
+    }
+
 
 /**
  * 比较二个数组，计算出需要插入和删除的数据
