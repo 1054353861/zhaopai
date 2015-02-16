@@ -1378,19 +1378,25 @@ POST /Api/Personal/personal_all_change
 
 #### Parameters：
 - `token` 用户登录后拿去的用户标示
-- `niakname` 昵称
+- `nickname` 昵称
 - `user_sex` 性别
 - `city_id` 城市ID
 - `article_img` 给安卓哥们使用的接口
 - `img` 用户头像可传可以不传
 
+- `interest` 兴趣爱好
+- `name` 收货地址姓名
+- `address` 收获地址
+- `address_phone` 收获地址电话
+
+
 #### Response
 ```json
 {
-   "status": "0",
-   "msg": "",
-   "data": "",
-   "num": "1"
+  "status":"0",
+  "msg":"修改成功",
+  "data":"",
+  "num":"1"
 }
 ```
 
