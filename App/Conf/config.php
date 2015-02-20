@@ -87,14 +87,8 @@ $system  = array(
 );
 /* 自定设置 */
 $custom= array (		
-		'SESSION_DOMAIN' => 'chengwai',	//项目session域
+		'SESSION_DOMAIN' => 'zhaopai',	//项目session域
 		
-		//用户类型
-		'ACCOUNT_TYPE' => array (
-			'ADMIN' => 0,			//管理员
-			'USER'=>1,    		//普通用户，短信接口也用到
-		),
-    
 		//上传文件目录
 		'UPLOAD_DIR' => array(
 			'domain_dir' => $_SERVER['DOCUMENT_ROOT'].'/', //图片域
@@ -107,7 +101,6 @@ $custom= array (
  		     'domain_dir' =>'http://'.$_SERVER['SERVER_NAME'].'/',
 			 'app_dir' =>	'App/Uploads/',
 		),
-		
 		
 		//短信平台账号
 		'SHP' => array(
@@ -128,6 +121,18 @@ $custom= array (
 			'sms_id'=>1,
 		),
     
+        //用户类型
+        'ACCOUNT_TYPE' => array (
+            'ADMIN' => 0,			//管理员
+            'USER' => 1,    		//普通用户
+        ),
+    
+        //商品状态
+        'USER_STATUS' => array(
+            0 => array('status'=>0,'explain'=>'正常'),
+            1 => array('status'=>1,'explain'=>'禁用'),
+        ),
+    
         //商品状态
         'SHOP_STATUS' => array(
 			0 => array('status'=>0,'explain'=>'正常'),
@@ -138,6 +143,12 @@ $custom= array (
         'INTEGRAL_STATUS' => array(
             0 => array('status'=>0,'explain'=>'启用'),
             1 => array('status'=>1,'explain'=>'禁用'),
+        ),
+    
+        //用户性别
+        'USER_SEX_STATUS' => array(
+            1 => array('status'=>1,'explain'=>'男'),
+            2 => array('status'=>2,'explain'=>'女'),
         ),
 		
 		

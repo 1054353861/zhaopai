@@ -83,18 +83,24 @@ function time_conversion_2($data){
  * @param string $field
  * return Array
  */
-function getArrayByField(&$arr,$field, $key = '') {
-	$aRet = array();
-	if ($key !== '') {
-		foreach ($arr AS $aVal) {
-			$aRet[$aVal[$key]] = $aVal[$field];
-		}
-	} else {
-		foreach ($arr AS $aVal) {
-			$aRet[] = $aVal[$field];
-		}
-	}
-	return $aRet;
+function getArrayByField($arr,$field, $key = '')
+{
+    $result = array();
+
+    if (empty($arr)) {
+        return $result;
+    }
+
+    if ($key !== '') {
+        foreach ($arr AS $val) {
+            $result[$val[$key]] = $val[$field];
+        }
+    } else {
+        foreach ($arr AS $val) {
+            $result[] = $val[$field];
+        }
+    }
+    return $result;
 }
 
 /**
@@ -104,19 +110,23 @@ function getArrayByField(&$arr,$field, $key = '') {
  * @param Boole $old			//是否按照原数组的排序
  * @return Array
  */
-function regroupKey(&$arr,$k,$old = false) {
-	if (empty($arr)) return false;
-	$aRet = array();
-	if ($old == true) {
-		foreach ($arr AS $key=>$val) {
-			$aRet[$val[$k]] = $val;
-		}
-	} else {
-		foreach ($arr AS $key=>$val) {
-			$aRet[$val[$k]][] = $val;
-		}
-	}
-	return $aRet;
+function regroupKey(&$arr,$k,$old = false)
+{
+    $aRet = array();
+    if (empty($arr)) {
+        return $aRet;
+    }
+
+    if ($old == true) {
+        foreach ($arr AS $key=>$val) {
+            $aRet[$val[$k]] = $val;
+        }
+    } else {
+        foreach ($arr AS $key=>$val) {
+            $aRet[$val[$k]][] = $val;
+        }
+    }
+    return $aRet;
 }
 
 

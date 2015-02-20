@@ -3,6 +3,23 @@
 //用户数据模型
 class UsersModel extends AdminBaseModel {
 	
+    private $user_status;
+    
+    private $member_type;
+    
+    private $admin_type;
+    
+    public function __construct() {
+        parent::__construct();
+        
+        $this->user_status = C('USER_STATUS');
+        
+        $this->member_type = C('ACCOUNT_TYPE.USER');
+        
+        $this->admin_type = C('ACCOUNT_TYPE.ADMIN');
+        
+    }
+    
 	public function get_account_count ($where) {
 		return $this->where($where)->count();
 	}
@@ -73,79 +90,31 @@ class UsersModel extends AdminBaseModel {
 		return $data;
 	}
 
-	
-	public function get_user_detail_info_list ($type,$offset=0,$limit=500) {
-		$users_fields = parent::field_add_prefix('Users','bs_','u.');
-		$result = array();
-		
-		//媒体主
-		if ($type == C('ACCOUNT_TYPE.Media')) {
-			
-			$user_media_fields = parent::field_add_prefix('UserMedia','mt_','m.');	
-			$result = $this->field($users_fields.','.$user_media_fields)
-			->table($this->prefix.'users AS u')
-			->join($this->prefix.'user_media AS m ON u.id = m.users_id')
-			->where(array('u.type'=>$type,'u.is_del'=>0))
-			->limit($offset.','.$limit)
-			->select();
 
-		//广告主	
-		} elseif ($type == C('ACCOUNT_TYPE.Advert')) {
-			
-			$user_advertisement_fields = parent::field_add_prefix('UserAdvertisement','ad_','a.');
-			$result = $this->field($users_fields.','.$user_advertisement_fields)
-			->table($this->prefix.'users AS u')
-			->join($this->prefix.'user_advertisement AS a ON u.id = a.users_id')
-			->where(array('u.type'=>$type,'u.is_del'=>0))
-			->limit($offset.','.$limit)
-			->select();
-		}
-	
-		/*//统计订单总数  
-		foreach ($result as $key=>$val) {
-			$result[$key]['ac_news_num'] = D('AccountNews')->where(array('users_id'=>$val['bs_id']))->count();
-			$result[$key]['ac_weibo_num'] = D('AccountWeibo')->where(array('users_id'=>$val['bs_id']))->count();
-			$result[$key]['ac_weixin_num'] = D('AccountWeixin')->where(array('users_id'=>$val['bs_id']))->count();
-			$result[$key]['pg_all_account_num'] = $result[$key]['ac_news_num'] + $result[$key]['ac_weibo_num'] + $result[$key]['ac_weixin_num'];
-		}*/
-		
-		
-		parent::set_all_time($result, array('bs_last_login_time'));
-		parent::set_all_time($result, array('bs_create_time'));
-		
-		return $result;
-	}
-	
-	
-	public function get_user_detail_info_one ($id = 2) {
-		$user_status = C('ACCOUNT_STATUS');		//状态
-		$result = array();
-		
-		$users_fields = parent::field_add_prefix('Users','bs_');
-		
-		$user_base  = $this->field($users_fields)->where(array('id'=>$id))->find();
-		
-		//媒体主
-		if ($user_base['bs_type'] == C('ACCOUNT_TYPE.Media')) {
-			$user_media_fields = parent::field_add_prefix('UserMedia','mt_');
-			$user_media_info = D('UserMedia')->field($user_media_fields)->where(array('users_id'=>$id))->find();
-		
-			$result  = array_merge($user_base,$user_media_info);
-		}elseif ($user_base['bs_type'] == C('ACCOUNT_TYPE.Advert')) {
-			$user_advertisement_fields = parent::field_add_prefix('UserAdvertisement','ad_');
-			$user_advert_info = D('UserAdvertisement')->field($user_advertisement_fields)->where(array('users_id'=>$id))->find();
-
-			$result  = array_merge($user_base,$user_advert_info);
-		}
-		
-		if (!empty($result)) {
-			$result['pg_status_explain'] = $user_status[$result['bs_status']]['explain'];
-		}
-		
-		
-		return $result;
-	}
-	
+	    //获取会员数据
+	    public function getMemberListHtml ($condition = array(),$fields = '*',$list_rows = 500,$order_by = '',$is_show_page_html =  true) {
+	       
+	        $city_data = D('City')->get_data_by_parent_id(0);
+	        
+	        $base_where = array(
+	            'is_del' => 0,
+	            'type' => $this->member_type 
+	        );
+	        
+	        $condition = array_merge($condition,$base_where);
+	        
+	        $result = $this->get_spe_page_data($condition,$fields,$list_rows,$order_by,$is_show_page_html);
+	         
+	        if (!empty($result['list'])) {
+	            $USER_STATUS = C('USER_STATUS');
+	            foreach ($result['list'] as $key=>$val) {
+	                $result['list'][$key]['status_explain'] = $USER_STATUS[$val['status']]['explain'];
+	                $result['list'][$key]['city_explain'] = $city_data[$val['city_id']]['title'];
+	            }
+	        }
+	         
+	        return $result;
+	    }
 	
 	
 }
