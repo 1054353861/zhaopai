@@ -160,8 +160,8 @@ class UserAction extends AdminBaseAction {
 		}
 	
 		parent::global_tpl_view( array(
-				'action_name'=>'酒店用户',
-				'title_name'=>'酒店列表',
+				'action_name'=>'添加用户',
+				'title_name'=>'用户列表',
 				'title_name' => '编辑账号'
 		));
 		$this->display($tpl);
