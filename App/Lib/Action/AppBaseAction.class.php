@@ -302,7 +302,7 @@ class AppBaseAction extends GlobalParameterAction {
 	 * @param Array   $type   上传文件类型  
 	 * @return Array  上传成功返回文件保存信息，失败返回错误信息
 	 */
-	protected function upload_file($file,$size = 3145728,$type=array('jpg', 'gif', 'png', 'jpeg','mp4')) {
+	protected function upload_file($file,$size = 3145728,$type=array('jpg','gif','png','jpeg','mp4')) {
 	    import('@.ORG.Util.UploadFile');				//引入上传类
 
 	    //上传文件目录
