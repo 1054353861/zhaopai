@@ -269,42 +269,4 @@ class ArticleModel extends ApiBaseModel {
 		}
 	}
 
-    //获得他人中心数据
-    public function getOtherInfo($p,$index,$user_id)
-    {
-        $first = $p == '' ? 0 : $p;
-        $offset = $index == '' ? 10 : $index;
-
-        $arr_list = array();
-
-        $list = $this->where(array('user_id'=>$user_id))->limit($first * $offset,$offset)
-            ->field('id,content,article_img,create_time,longitude,latitude')->order('create_time desc')->select();
-
-
-        if($list!='')
-        {
-            parent::public_file_dir($list,array('article_img'));
-
-            foreach($list as $key=>$value)
-            {
-                $arr_list['photo_info'][$key] = $value;
-                $arr_list['photo_info'][$key]['create_time'] = date('Y-m-d H:i:s',$value['create_time']);
-
-                $arr_list['photo_info'][$key]['tag_info'] = parent::get_label_info($value['id']);
-
-                $arr_list['photo_info'][$key]['like_info']['like_list'] = parent::get_contentpraise_info($value['id']);
-
-                parent::public_file_dir($arr_list['photo_info'][$key]['like_info']['like_list'],array('head_img'));
-
-                $arr_list['photo_info'][$key]['like_info']['like_num'] = parent::get_contentpraise_count($value['id']);
-
-                $arr_list['photo_info'][$key]['comment_num'] = parent::get_comment_count($value['id']);
-            }
-        }else{
-            $arr_list['photo_info'] = array();
-        }
-        $arr_list['article_num'] = $this->where(array('user_id'=>$user_id))->count();
-
-        return $arr_list;
-    }
 }

@@ -37,7 +37,7 @@ class MarkeAction extends ApiBaseAction {
 	{
 		$user_id = $this->oUser->id;	//用户ID
 		$shop_id = $this->_post('shop_id');
-        
+
 		$list = $this->db['Shop']->where(array('id'=>$shop_id))->find();
 
 		$image_list = $this->db['ShopPhoto']->where(array('shop_id'=>$shop_id))->field('shop_url')->select();

@@ -63,7 +63,7 @@ class PersonalAction extends ApiBaseAction {
         $other_id = $this->_post('other_user_id');
         $p = $this->_post('p');
         $index = $this->_post('index');
-        $list = $this->db['Article']->getOtherInfo($p,$index,$other_id);
+        $list = $this->db['Article']->getOwnInfo($p,$index,$other_id,false);
         parent::callback(C('STATUS_SUCCESS'),'',$list);
     }
 
