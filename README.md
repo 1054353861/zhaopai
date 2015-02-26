@@ -1387,6 +1387,7 @@ POST /Api/Personal/personal_all_change
 - `interest` 兴趣爱好
 - `name` 收货地址姓名
 - `address` 收获地址
+- `age` 年龄
 - `address_phone` 收获地址电话
 
 
