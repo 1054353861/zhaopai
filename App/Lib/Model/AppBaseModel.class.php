@@ -39,6 +39,9 @@ class AppBaseModel extends Model {
 	 * @param number $limit   条数
 	 * @param string $order_by 排序
 	 * @return Array
+	 * 
+	 * ($condition = array(),$fields = '*',$offset = 0,$limit = 500,$order_by = "") 
+	 * ($condition,$fields ,$offset,$limit,$order_by );
 	 */
 	public function get_spe_data ($condition = array(),$fields = '*',$offset = 0,$limit = 500,$order_by = "") {
 		$result = $this->field($fields)
@@ -110,7 +113,7 @@ class AppBaseModel extends Model {
 	
 	//真实删除
 	public function delete_real ($condition) {
-	    return $this->where($condition)->del();
+	    return $this->where($condition)->delete(); 
 	}
 	 
 	

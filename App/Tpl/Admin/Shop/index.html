@@ -58,7 +58,7 @@
 											<td>{$vo.shop_number}</td>											<td>{$vo.shop_integral}</td>
 											<td class="center">
 											     <a href="javascript:;" class="btn_bak" data-record_prev="1" data-url="{:U('Admin/Shop/edit',array('act'=>update,'id'=>$vo['id']))}">编辑</a>
-												| <a href="{:U('Admin/Shop/edit',array('act'=>delete,'id'=>$vo['id']))}" class="check" >删除</a>											</td>
+												| <a href="javascript:;" class="btn_bak" data-record_prev="1" data-url="{:U('Admin/Shop/image',array('shop_id'=>$vo['id']))}">图片编辑</a>                                                | <a href="{:U('Admin/Shop/edit',array('act'=>delete,'id'=>$vo['id']))}" class="check" >删除</a>											</td>
 										</tr>
 									</volist>
 								</table>
