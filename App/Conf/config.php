@@ -127,6 +127,11 @@ $custom= array (
 			'base_id'=>1,		//system_base 表ID
 			'sms_id'=>1,
 		),
+    
+        'SHOP_STATUS' => array(
+			0 => array('status'=>0,'explain'=>'正常'),
+            1 => array('status'=>1,'explain'=>'下架'),
+		),
 		
 		
 		/* 错误类型 */

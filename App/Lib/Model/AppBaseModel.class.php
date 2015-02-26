@@ -42,6 +42,7 @@ class AppBaseModel extends Model {
 	 * 
 	 * ($condition = array(),$fields = '*',$offset = 0,$limit = 500,$order_by = "") 
 	 * ($condition,$fields ,$offset,$limit,$order_by );
+	 * 
 	 */
 	public function get_spe_data ($condition = array(),$fields = '*',$offset = 0,$limit = 500,$order_by = "") {
 		$result = $this->field($fields)
@@ -61,6 +62,10 @@ class AppBaseModel extends Model {
 	 * @param string $order_by   按照哪个字段排序
 	 * @param string $is_show_page_html  是否显示分页的HTML
 	 * @return array
+	 * 
+	 * ($condition = array(),$fields = '*',$list_rows = 500,$order_by = '',$is_show_page_html =  true)
+	 * ($condition,$fields,$list_rows,$order_by,$is_show_page_html) 
+	 * 
 	 */
 	public function get_spe_page_data ($condition = array(),$fields = '*',$list_rows = 500,$order_by = '',$is_show_page_html =  true) {
 	    

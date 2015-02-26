@@ -14,6 +14,8 @@ class ShopAction extends AdminBaseAction {
 	    'ShopPhoto'=>'ShopPhoto'
 	);
 	
+	//商品状态
+	private $shop_status;
 	/**
 	 * 构造方法
 	 */
@@ -21,12 +23,14 @@ class ShopAction extends AdminBaseAction {
 	
 	   parent::__construct();
 	
-		parent::global_tpl_view(array('module_name'=>$this->module_name));
-		
-		$this->_initData();
+	   $this->_initData();
 	}
 	
 	private function _initData () {
+	    
+	    parent::global_tpl_view(array('module_name'=>$this->module_name));
+	    
+	    $this->shop_status = C('SHOP_STATUS');
 	    
 	}
 	
@@ -36,7 +40,7 @@ class ShopAction extends AdminBaseAction {
         $where = array();
         $where['is_del'] = 0;
         //分页
-        $db_result = $this->db['Shop']->get_spe_page_data($where,'*',500,'id DESC');
+        $db_result = $this->db['Shop']->getShopListHtml($where,'*',500,'id DESC');
         
 	    $result['list'] = $db_result['list'];
         $result['page_html'] = $db_result['page_html'];
@@ -73,6 +77,11 @@ class ShopAction extends AdminBaseAction {
 	        } 
 	        
 	        $result = $Shop->get_one_data(array('id'=>$id));
+	        
+	        parent::data_to_view(array(
+	        	'shop_status' => $this->shop_status,
+	        ));
+	       
 	    } else if ($act == 'delete') {
 	       $Shop->delete_data(array('id'=>$id)) ? $this->success('删除成功') : $this->error('删除失败请稍后再试！');
 	        exit;
