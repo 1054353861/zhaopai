@@ -74,6 +74,7 @@ class LoginAction extends ApiBaseAction {
 						'integral'=>$user_info['integral'],
 					    'interest'=>$user_info['interest'],
 					    'name'=>$user_info['name'],
+                        'user_age'=>$user_info['age'],
 					    'address'=>$user_info['address'],
 					    'address_phone'=>$user_info['address_phone'],
 						'last_login_time'=>date('Y-m-d H:i:s',$user_info['last_login_time']),
