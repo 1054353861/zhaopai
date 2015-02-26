@@ -16,32 +16,24 @@ POST /Api/Login/login
 
 #### Response
 ```json
-
-
 {
   "status": "0",
   "msg": "登录成功",
   "data":
   {
-    "id": "9",
-    "account": "13111111117",
-    "nickname": "锁",
-    "city_id": "1",
-    "title": "上海市",
-    "head_img": "http://zhaopai.jsonlin.cn/App/Uploads/20150215/54e04a166fc60.jpg",
-    "sex": "0",
-    "background_img": "http://zhaopai.jsonlin.cn/App/Uploads/center_bg.png",
+    "account": "13761951734",
+    "nickname": "",
+    "city_id": "0",
+    "head_img": "",
+    "sex": "1",
+    "background_img": "",
     "integral": "0",
-    "interest": "",
-    "name": "",
-    "address": "",
-    "address_phone": "",
-    "last_login_time": "2015-02-26 11:44:36",
-    "login_count": "1",
-    "create_time": "2015-02-15 15:26:14"
+    "last_login_time": "2015-01-17 18:00:07",
+    "login_count": "2",
+    "create_time": "2015-01-17 17:52:11"
   },
-  "num": "16",
-  "token": "Wj9VPQdkDjRWN1YwVTQNMQgwVmQONAJjUmRXbVxuVjMMYVE2B3hcZV0/UCpUNgE6"
+  "num": "10",
+  "token": "D2RWPgVmCDIDZAVkBWRTZ1JuBjQBPVU2W24AOgQ2AmdbNlo9VCsIMQBhUSsCYwE0"
 }
 
 ```
@@ -65,45 +57,37 @@ POST /Api/Login/login
 
 #### Response
 ```json
-
-
 {
-  "status": "0",
-  "msg": "注册成功",
-  "data":
-  {
-    "token": "WzYGbAFpWmIHZFExUzVTbwg4BDJbYQViWmgCNl1nAGcIZFIxA2QMKABgUTRaJwwzAzw=",
-    "user_info":
-    {
-      "id": "18",
-      "account": "13761951734",
-      "nickname": "jason",
-      "password": "e10adc3949ba59abbe56e057f20f883e",
-      "phone": "13761951734",
-      "city_id": "1",
-      "head_img": "",
-      "sex": "1",
-      "background_img": "center_bg.png",
-      "integral": "0",
-      "interest": "",
-      "name": "",
-      "address": "",
-      "address_phone": "",
-      "last_login_time": "1424922457",
-      "last_login_ip": "180.166.126.94",
-      "login_count": "0",
-      "create_time": "1424922457",
-      "update_time": "1424922457",
-      "type": "1",
-      "status": "0",
-      "is_del": "0",
-      "title": "上海市"
-    }
-  },
-  "num": "2"
+   "status": "0",
+   "msg": "注册成功",
+   "data":
+   {
+       "token": "DmNbOVQ8C+YH6gbxALVU/AayDTRcZVc3BzdQZVN+Wz4BbwF+BmQLMA==",
+       "user_info":
+       {
+           "id": "10",
+           "account": "13472798999",
+           "nickname": "你好",
+           "password": "e10adc3949ba59abbe56e057f20f883e",
+           "phone": "13472798999",
+           "city_id": "1",
+           "head_img": "",
+           "sex": "1",
+           "background_img": "",
+           "integral": "0",
+           "last_login_time": "1422850289",
+           "last_login_ip": "0.0.0.0",
+           "login_count": "0",
+           "create_time": "1422850289",
+           "update_time": "1422850289",
+           "type": "1",
+           "status": "0",
+           "is_del": "0",
+           "title": "上海市"
+       }
+   },
+   "num": "2"
 }
-
-
 ```
 
 
@@ -330,8 +314,8 @@ POST /Api/Home/home_data
 - `city` 城市ID 可有可不有，有就搜索该城市下的文章
 - `type` 1-是根据时间 2-根据最近
 - `p` 第几页
-- `lng` 精度
-- `lat` 纬度
+- `longitude` 精度
+- `latitude` 纬度
 - `count` 数量
 
 #### Response
