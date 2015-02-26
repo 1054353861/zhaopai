@@ -9,3 +9,4 @@ data
 .project
 ThinkPHP
 config.inc.php
+App/Uploads/
