@@ -43,7 +43,7 @@ class LabelArticleModel extends ApiBaseModel
 
                 $new_list['info'][$key]['photo_info']['like_info']['like_list'] = parent::get_contentpraise_info($value['id']);
 
-                parent::public_file_dir($list['info'][$key]['photo_info']['like_info']['like_list'], array('head_img'));
+                parent::public_file_dir($new_list['info'][$key]['photo_info']['like_info']['like_list'], array('head_img'));
 
                 $new_list['info'][$key]['photo_info']['comment_num'] = parent::get_comment_count($value['id']);
             }
