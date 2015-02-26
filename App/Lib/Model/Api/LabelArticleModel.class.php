@@ -32,7 +32,10 @@ class LabelArticleModel extends ApiBaseModel
                 $new_list['info'][$key]['user_info'] = parent::get_user_info($value['user_id']);
 
                 parent::public_file_dir($new_list['info'][$key], array('head_img','background_img'));
+<<<<<<< HEAD
                 //parent::public_file_dir($list['info'][$key]['user_info'], array('head_img','background_img'));
+=======
+>>>>>>> debug
 
                 $new_list['info'][$key]['photo_info'] = $value;
 
