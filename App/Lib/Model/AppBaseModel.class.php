@@ -14,29 +14,77 @@ class AppBaseModel extends Model {
 		$this->admin_base_init();
 	}
 	
-	//初始话表前缀
+	//初始表前缀
 	private function admin_base_init () {
 		$this->prefix = C('DB_PREFIX');
 	}
 
-	//删除方法
-	public  function del($condition) {
+	//删除方法，请废弃不要使用
+	public function del($condition) { 
 		return $this->where($condition)->data(array('status'=>-2))->save();
 	}
 	
-	//逻辑删除
-	public function delete_data ($condition) {
-		return $this->where($condition)->data(array('is_del'=>1))->save();
-	}
-	
-	//获取所有数据 
+	//获取所有数据，请废弃不要使用
 	public function get_all_data ($field = '*') {
 		return $this->field($field)->select();
 	}
+
 	
-	//获取指定数据
-	public function get_spe_data ($condition,$field = '*') {
-		return $this->field($field)->where($condition)->select();
+	
+	/**
+	 * 获取指定所有数据 (过于复杂的sql，请单独写一个model,参数类似)
+	 * @param Array $condition 条件
+	 * @param string $fields  字段
+	 * @param number $offset  偏移值
+	 * @param number $limit   条数
+	 * @param string $order_by 排序
+	 * @return Array
+	 */
+	public function get_spe_data ($condition = array(),$fields = '*',$offset = 0,$limit = 500,$order_by = "") {
+		$result = $this->field($fields)
+		->where($condition)
+		->order($order_by)
+		->limit($offset.','.$limit)
+		->select();
+		return $result;
+	}
+	
+	
+	/**
+	 * 获取指定数据，然后分页
+	 * @param Array $condition 条件
+	 * @param string $fields 获取的字段：如:$fields = 'a.*,b.*'
+	 * @param number $list_rows  每页条数
+	 * @param string $order_by   按照哪个字段排序
+	 * @param string $is_show_page_html  是否显示分页的HTML
+	 * @return array
+	 */
+	public function get_spe_page_data ($condition = array(),$fields = '*',$list_rows = 500,$order_by = '',$is_show_page_html =  true) {
+	    
+	    $result = array();
+	     
+	    import('ORG.Util.Page');
+	    
+	    $count =  $this->where($condition)->count();
+
+	    $Page  = new Page($count,$list_rows,$condition);
+	    
+	    if ($is_show_page_html == true) {
+	        $Page->setConfig('header','<span style=";">条记录</span>');//设置样式
+	        $Page->setConfig('prev','上一页');
+	        $Page->setConfig('next','下一页');
+	        $Page->setConfig('first','首页');
+	        $Page->setConfig('last','尾页');
+	        //替换以后样式到
+	        $Page->setConfig('theme','共 %totalRow% %header% %nowPage%/%totalPage% 页  %first%  %upPage%  %linkPage%  %downPage%  %end% ');
+	        
+	        $result['page_html'] = $Page->show();
+	    }
+	
+	    $list = $this->get_spe_data($condition,$fields,$Page->firstRow,$Page->listRows,$order_by);
+	    $result['list'] = $list;
+	     
+	    return $result;
 	}
 	
 	//获取一条数据
@@ -45,9 +93,26 @@ class AppBaseModel extends Model {
 	}
 	
 	//修改一条数据
-	public function save_one_data ($condition) {
-		return $this->where($condition)->save();
+	public function save_one_data ($condition,$data = array()) {
+	    
+	    if (empty($data)) {
+	       $state = $this->where($condition)->save();
+	    } else {
+	       $state = $this->where($condition)->data($data)->save();
+	    }
+		return $state;
 	}
+	
+	//逻辑删除
+	public function delete_data ($condition) {
+	    return $this->where($condition)->data(array('is_del'=>1))->save();
+	}
+	
+	//真实删除
+	public function delete_real ($condition) {
+	    return $this->where($condition)->del();
+	}
+	 
 	
 	
 	/**
@@ -194,7 +259,7 @@ class AppBaseModel extends Model {
 	    //递归
 	    if (is_array($field)) {
 	        for ($i=0;$i<count($field);$i++) {
-	            self::public_file_dir($arr,$field[$i],$dir_type);
+	            self::public_file_dir($arr,$field[$i],$public_file_dir);
 	        }
 	    } else {
 	        foreach ($arr AS $key=>$val) {
@@ -203,6 +268,10 @@ class AppBaseModel extends Model {
 	        }
 	    }
 	}
+	
+	
+	
+	//protected function get
 	
 }
 ?>

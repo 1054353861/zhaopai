@@ -9,7 +9,7 @@ class DemoAction extends AdminBaseAction {
 	
 	//初始化数据库连接
 	protected  $db = array(
-
+        'Shop' => 'Shop'
 	);
 
 	/**
@@ -26,34 +26,64 @@ class DemoAction extends AdminBaseAction {
 	
 	private function _init_data () {
 	    
-	}
-	
-	public function index () {
-	    $data = array();
-	     
-	    parent::global_tpl_view( array(
-	        'action_name'=>'列表',
-	        'title_name'=>'列表',
-	        'add_name'=>'列表'
-	    ));
-	    
-	    parent::data_to_view($data);
-	    $this->display();
 	} 
 	
-	//新闻订单编辑
-	public function edit() {
+    public function index () {
+        $result = array();
+      
+        $where = array();
+        $where['is_del'] = 0;
+        //分页
+        $db_result = $this->db['Shop']->get_spe_page_data($where,'*',500,'id DESC');
+        
+	    $result['list'] = $db_result['list'];
+        $result['page_html'] = $db_result['page_html'];
+        
+	    parent::global_tpl_view( array(
+	        'action_name'=>'商品列表',
+	        'title_name'=>'商品列表',
+	        'add_name'=>'添加商品'
+	    ));
+	     
+	    parent::data_to_view($result);
+	    $this->display();
+	}
+	
+	
+	public function edit () {
+	    $result = array();
 	   
-	    $data = array();
+	    $Shop = $this->db['Shop'];
+	    $act = $this->_get('act');
+	    $id = $this->_get('id');
 	    
-		parent::global_tpl_view( array(
-				'action_name'=>'编辑',
-				'title_name'=>'编辑',
-				'add_name'=>'编辑'
-		));
-		
-		parent::data_to_view($data);
-		$this->display();
+	    if ($act == 'add') {
+	        if ($this->isPost()) {
+	            $Shop->create();
+	            $Shop->add() ? $this->success('添加成功') : $this->error('添加失败请稍后再试！');
+	            exit;
+	        }
+	    } else if ($act == 'update') {
+	        if ($this->isPost()) {
+	            $Shop->create();
+	            $Shop->save_one_data(array('id'=>$id)) ? $this->success('修改成功') : $this->error('修改失败请稍后再试！');
+	            exit;
+	        } 
+	        
+	        $result = $Shop->get_one_data(array('id'=>$id));
+	    } else if ($act == 'delete') {
+	       $Shop->delete_data(array('id'=>$id)) ? $this->success('删除成功') : $this->error('删除失败请稍后再试！');
+	        exit;
+	    } 
+	    
+	    parent::global_tpl_view( array(
+	        'action_name'=>'编辑',
+	        'title_name'=>'编辑',
+	        'add_name'=>'编辑'
+	    ));
+	    
+	    parent::data_to_view($result);
+	    $this->display();
 	}
 	
 	

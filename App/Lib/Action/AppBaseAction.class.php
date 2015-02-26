@@ -339,7 +339,7 @@ class AppBaseAction extends GlobalParameterAction {
 	    //递归
 	    if (is_array($field)) {
 	        for ($i=0;$i<count($field);$i++) {
-	            self::public_file_dir($arr,$field[$i],$dir_type);
+	            self::public_file_dir($arr,$field[$i],$public_file_dir);
 	        }
 	    } else {
 	        foreach ($arr AS $key=>$val) {
