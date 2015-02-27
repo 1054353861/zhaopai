@@ -103,7 +103,7 @@ class ApiBaseModel extends AppBaseModel {
     public function check_integral_num($user_id)
     {
         //获取未被禁用的任务
-        $int_all_info = D('IntegralAll')->where(array('status'=>0))->find();
+        $int_all_info = D('IntegralAll')->where(array('status'=>0))->select();
         $IntegralSameday = D('IntegralSameday');
         //未完成任务数量
         $integail = 0;
@@ -111,7 +111,9 @@ class ApiBaseModel extends AppBaseModel {
         {
             if($value['id']==1)
             {
-                
+                $info = $IntegralSameday->where(array('user_id'=>$user_id,'integral_id'=>1))->find();
+                if($info['status']==0)
+                    $integail++;
             }else{
                 $where = array('status'=>0,'user_id'=>$user_id,'integral_id'=>$value['id'],'sameday'=>strtotime(date('Y-m-d')));
                 $count = $IntegralSameday->where($where)->count();
