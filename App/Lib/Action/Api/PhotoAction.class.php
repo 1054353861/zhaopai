@@ -74,4 +74,14 @@ class PhotoAction extends ApiBaseAction {
         $list = $this->db['ContentPraise']->getLike($article_id,'','');
 		$bool ? parent::callback(C('STATUS_SUCCESS'),'',$list) : parent::callback(C('STATUS_DATA_ERROR'),'',$list);
 	}
+
+    //举报
+    public function photo_report()
+    {
+        $id = $this->oUser->id;
+        $article_id = $this->_post('photo_id');
+        $update = array('is_report'=>1);
+        $bool = $this->db['Article']->where(array('id'=>$article_id))->save($update);
+        $bool ? parent::callback(C('STATUS_SUCCESS'),'','') : parent::callback(C('STATUS_DATA_ERROR'),'','');
+    }
 }

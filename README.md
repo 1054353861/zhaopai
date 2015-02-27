@@ -1833,6 +1833,27 @@ POST /Api/Photo/photo_like
 }
 ```
 
+### 6.照片举报
+
+#### Request
+```
+POST /Api/Photo/photo_report
+```
+
+#### Parameters：
+- `token` 用户登录后拿去的用户标示
+- `photo_id` 举报的照片ID
+
+#### Response
+```json
+{
+   "status": "0",
+   "msg": "",
+   "data": "",
+   "num": "1"
+}
+```
+
 ## 九、搜索
 
 ### 1.搜索-拍友
