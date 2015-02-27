@@ -61,6 +61,9 @@ class LoginAction extends ApiBaseAction {
 					$Users->up_login_info($user_info['id']);
 					//查找会员信息
 
+                    //触发完成登陆事件
+                    parent::end_integral_all_info($user_info['id'],2);
+
 					//$result = $user_info;
 					$result = array(
                         'id'=>$user_info['id'],
@@ -145,7 +148,10 @@ class LoginAction extends ApiBaseAction {
 			$id = $Users->add_info($arr,C('ACCOUNT_TYPE.USER'));		//写入数据库
 
 			if ($id) {
-				
+
+                //触发完成注册事件
+                parent::end_integral_all_info($id,1);
+
 				//生成秘钥
 				$encryption = $id.':'.$arr['cell_phone'].':'.date('Y-m-d');					//生成解密后的数据
 				$identity_encryption = passport_encrypt($encryption,C('UNLOCAKING_KEY'));	//生成加密字符串,给客户端

@@ -51,6 +51,9 @@ class PhotoAction extends ApiBaseAction {
 		$article_id = $this->_post('photo_id');
 		$vote_info = $this->_post('vote_info');	 //1-文明 2-不文明
 		$bool = $this->db['Article']->article_vote($id,$article_id,$vote_info);
+        //触发文章投票事件
+        if($bool)
+            parent::end_integral_all_info($id,6);
 		$bool ? parent::callback(C('STATUS_SUCCESS'),'','') : parent::callback(C('STATUS_DATA_ERROR'),'','');
 	}
 
@@ -62,6 +65,9 @@ class PhotoAction extends ApiBaseAction {
 		$comment_content = $this->_post('comment_content');
 		$bool = $this->db['Comment']->add_comment($id,$article_id,$comment_content);
         $list = $this->db['Comment']->select_info('','',$article_id);
+        //触发完成文章评论事件
+        if($bool)
+            parent::end_integral_all_info($id,5);
 		$bool ? parent::callback(C('STATUS_SUCCESS'),'',$list) : parent::callback(C('STATUS_DATA_ERROR'),'',$list);
 	}
 
@@ -72,6 +78,9 @@ class PhotoAction extends ApiBaseAction {
 		$article_id = $this->_post('photo_id');
 		$bool = $this->db['ContentPraise']->set_like($id,$article_id);
         $list = $this->db['ContentPraise']->getLike($article_id,'','');
+        //触发完成文章赞事件
+        if($bool)
+            parent::end_integral_all_info($id,4);
 		$bool ? parent::callback(C('STATUS_SUCCESS'),'',$list) : parent::callback(C('STATUS_DATA_ERROR'),'',$list);
 	}
 

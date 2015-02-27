@@ -103,7 +103,46 @@ class ApiBaseAction extends AppBaseAction {
 		$Verify->save_verify_status($shp_info['id']);
 	}
 	
-	
+	/*
+	 * author zhucc 任务触发
+	 *  1.完成组册 2.每天登入 3.发表话题 4.文明点赞 5.评论话题 6.参与文明PK 7.邀请好友 8.分享给朋友 9.给建议
+	 */
+
+    protected function end_integral_all_info($user_id,$type)
+    {
+        $info = $this->checkIntegral_info($type);
+        $num = $this->checkIntegral_num($user_id,$type);
+        if($info['status']==0 && $num<=$info['num'])
+        {
+            $this->insert_sameday_info($user_id,$type);
+        }
+    }
+
+    //封装方法
+    private function checkIntegral_info($type)
+    {
+        return D('IntegralAll')->where(array('id'=>$type))->find();
+    }
+
+    //检测是否达到上限
+    private function checkIntegral_num($user_id,$integral_id)
+    {
+        $where = array('user_id'=>$user_id,'integral_id'=>$integral_id,'sameday'=>strtotime(date('Y-m-d')));
+        return D('IntegralSameday')->where($where)->count();
+    }
+
+    //输入数据库
+    private function insert_sameday_info($user_id,$integral_id)
+    {
+        $insert_arr = array(
+            'sameday'=>strtotime(date('Y-m-d')),
+            'user_id'=>$user_id,
+            'integral_id'=>$integral_id,
+            'status'=>0
+        );
+        D('IntegralSameday')->add($insert_arr);
+    }
+
 }
 
 

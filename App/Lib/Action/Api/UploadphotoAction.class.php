@@ -81,6 +81,9 @@ class UploadphotoAction extends ApiBaseAction {
 		}
 		$arr['create_time'] = time();
 		$bool = $this->db['Article']->upload_article($arr,$tags);
+        //触发完成发表文章事件
+        if($bool)
+            parent::end_integral_all_info($arr['user_id'],3);
 		$bool ? parent::callback(C('STATUS_SUCCESS'),'','') : parent::callback(C('STATUS_DATA_ERROR'),'','');
 	}
 
