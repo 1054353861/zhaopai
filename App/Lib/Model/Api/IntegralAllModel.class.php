@@ -6,7 +6,7 @@
 
 class IntegralAllModel extends ApiBaseModel {
 
-    //1是未完成 2是已完成
+    //1是未领取 2是已领取
 	public function getInfo($id)
 	{
 		$info_list = $this->where(array('status'=>0))->select();
@@ -16,7 +16,8 @@ class IntegralAllModel extends ApiBaseModel {
             if($value['id']==1)
             {
                 $info = $IntegralSameday->where(array('user_id'=>$id,'integral_id'=>1))->find();
-                $info!='' && $info['status']==0 ? $value['is_end'] = 1 : $value['is_end'] = 2;
+                if($info!='')
+                    $info['status']==0 ? $value['is_end'] = 1 : $value['is_end'] = 2;
             }else{
                 $where = array('status'=>0,'sameday'=>strtotime(date('Y-m-d')),'user_id'=>$id,'integral_id'=>$value['id']);
                 $or_in = $IntegralSameday->where($where)->count();
