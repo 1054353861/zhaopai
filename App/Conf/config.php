@@ -128,10 +128,17 @@ $custom= array (
 			'sms_id'=>1,
 		),
     
+        //商品状态
         'SHOP_STATUS' => array(
 			0 => array('status'=>0,'explain'=>'正常'),
             1 => array('status'=>1,'explain'=>'下架'),
 		),
+    
+        //积分状态
+        'INTEGRAL_STATUS' => array(
+            0 => array('status'=>0,'explain'=>'启用'),
+            1 => array('status'=>1,'explain'=>'禁用'),
+        ),
 		
 		
 		/* 错误类型 */

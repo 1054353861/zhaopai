@@ -22,6 +22,7 @@ class ShopModel extends ApiBaseModel {
         foreach($list as $key=>$value)
         {
             $new_list[$key] = $value;
+            $new_list[$key]['shop_id'] = $value['id'];
             $new_list[$key]['shop_url'] = parent::get_shopphoto_url($value['id']);
         }
 
