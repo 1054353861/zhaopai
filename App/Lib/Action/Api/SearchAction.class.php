@@ -36,7 +36,7 @@ class SearchAction extends ApiBaseAction {
 
 		parent::public_file_dir($list,array('head_img'));
 
-		parent::callback(C('STATUS_SUCCESS'),'',$list);
+		parent::callback(C('STATUS_SUCCESS'),'获取成功',$list);
 	}
 
 	//搜索-标签-随机
@@ -46,7 +46,7 @@ class SearchAction extends ApiBaseAction {
 		$p = $this->_post('p');
 		$index = $this->_post('index');
 		$list = $this->db['Label']->getLabelInfo($user_name,$p,$index,false);
-		parent::callback(C('STATUS_SUCCESS'),'',$list);
+		parent::callback(C('STATUS_SUCCESS'),'获取成功',$list);
 	}
 
 	//搜索-标签
@@ -57,7 +57,7 @@ class SearchAction extends ApiBaseAction {
 		$index = $this->_post('index');
 		$label_name = $this->_post('label_name');
 		$list = $this->db['Label']->getLabelInfo($label_name,$p,$index,true);
-		parent::callback(C('STATUS_SUCCESS'),'',$list);
+		parent::callback(C('STATUS_SUCCESS'),'获取成功',$list);
 	}
 
 	//搜索-拍友-随机
@@ -65,7 +65,7 @@ class SearchAction extends ApiBaseAction {
 	{
         $id = $this->oUser->id;
         $list = $this->db['Users']->get_random_friends($id);
-		parent::callback(C('STATUS_SUCCESS'),'',$list);
+		parent::callback(C('STATUS_SUCCESS'),'获取成功',$list);
 	}
 
     //搜索－拍友－tag_id
@@ -75,6 +75,6 @@ class SearchAction extends ApiBaseAction {
         $p = $this->_post('p');
         $index = $this->_post('index');
         $list = $this->db['LabelArticle']->get_tag_info($tag_id,$p,$index);
-        parent::callback(C('STATUS_SUCCESS'),'',$list);
+        parent::callback(C('STATUS_SUCCESS'),'获取成功',$list);
     }
 }

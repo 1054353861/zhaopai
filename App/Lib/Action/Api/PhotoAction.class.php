@@ -30,7 +30,7 @@ class PhotoAction extends ApiBaseAction {
 		$id = $this->oUser->id;
 		$article_id = $this->_post('photo_id');
 		$list = $this->db['Article']->article_info($id,$article_id);
-		parent::callback(C('STATUS_SUCCESS'),'',$list);
+		parent::callback(C('STATUS_SUCCESS'),'获取成功',$list);
 	}
 
 	//照片详情讨论
@@ -41,7 +41,7 @@ class PhotoAction extends ApiBaseAction {
 		$p = $this->_post('p');	//第几页
 		$index = $this->_post('index');	//多少条
 		$list = $this->db['Comment']->select_info($p,$index,$article_id);
-	 	parent::callback(C('STATUS_SUCCESS'),'',$list);
+	 	parent::callback(C('STATUS_SUCCESS'),'获取成功',$list);
 	}
 
 	//照片投票
@@ -54,7 +54,7 @@ class PhotoAction extends ApiBaseAction {
         //触发文章投票事件
         if($bool)
             parent::end_integral_all_info($id,6);
-		$bool ? parent::callback(C('STATUS_SUCCESS'),'','') : parent::callback(C('STATUS_DATA_ERROR'),'','');
+		$bool ? parent::callback(C('STATUS_SUCCESS'),'投票成功','') : parent::callback(C('STATUS_DATA_ERROR'),'投票失败','');
 	}
 
 	//照片评论
@@ -68,7 +68,7 @@ class PhotoAction extends ApiBaseAction {
         //触发完成文章评论事件
         if($bool)
             parent::end_integral_all_info($id,5);
-		$bool ? parent::callback(C('STATUS_SUCCESS'),'',$list) : parent::callback(C('STATUS_DATA_ERROR'),'',$list);
+		$bool ? parent::callback(C('STATUS_SUCCESS'),'评论成功',$list) : parent::callback(C('STATUS_DATA_ERROR'),'评论失败',$list);
 	}
 
 	//照片赞
@@ -81,7 +81,7 @@ class PhotoAction extends ApiBaseAction {
         //触发完成文章赞事件
         if($bool)
             parent::end_integral_all_info($id,4);
-		$bool ? parent::callback(C('STATUS_SUCCESS'),'',$list) : parent::callback(C('STATUS_DATA_ERROR'),'',$list);
+		$bool ? parent::callback(C('STATUS_SUCCESS'),'投票成功',$list) : parent::callback(C('STATUS_DATA_ERROR'),'投票失败',$list);
 	}
 
     //举报
@@ -91,6 +91,6 @@ class PhotoAction extends ApiBaseAction {
         $article_id = $this->_post('photo_id');
         $update = array('is_report'=>1);
         $bool = $this->db['Article']->where(array('id'=>$article_id))->save($update);
-        $bool ? parent::callback(C('STATUS_SUCCESS'),'','') : parent::callback(C('STATUS_DATA_ERROR'),'','');
+        $bool ? parent::callback(C('STATUS_SUCCESS'),'举报成功','') : parent::callback(C('STATUS_DATA_ERROR'),'举报失败','');
     }
 }

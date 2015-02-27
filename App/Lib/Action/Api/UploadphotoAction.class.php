@@ -51,7 +51,7 @@ class UploadphotoAction extends ApiBaseAction {
 			}
 		}
 
-		parent::callback(C('STATUS_SUCCESS'),'',$new_list);
+		parent::callback(C('STATUS_SUCCESS'),'获取成功',$new_list);
 	}
 
 	//上传图片-标签搜索
@@ -60,7 +60,7 @@ class UploadphotoAction extends ApiBaseAction {
 		$tag_name = $this->_post('tag_name');
 		$where['label_name'] = array('like',$tag_name.'%');
 		$list = $this->db['Label']->where($where)->select();
-		parent::callback(C('STATUS_SUCCESS'),'',$list);
+		parent::callback(C('STATUS_SUCCESS'),'获取成功',$list);
 	}
 
 	//上传图片
@@ -84,7 +84,7 @@ class UploadphotoAction extends ApiBaseAction {
         //触发完成发表文章事件
         if($bool)
             parent::end_integral_all_info($arr['user_id'],3);
-		$bool ? parent::callback(C('STATUS_SUCCESS'),'','') : parent::callback(C('STATUS_DATA_ERROR'),'','');
+		$bool ? parent::callback(C('STATUS_SUCCESS'),'发表文章成功','') : parent::callback(C('STATUS_DATA_ERROR'),'发表文章失败','');
 	}
 
 	//上传文件
@@ -95,7 +95,7 @@ class UploadphotoAction extends ApiBaseAction {
 		{
 			parent::callback(C('STATUS_SUCCESS'),'',$file_list['info'][0]['savename']);
 		}else{
-			parent::callback(C('STATUS_DATA_ERROR'),'','图片格式不正确');
+			parent::callback(C('STATUS_DATA_ERROR'),'图片格式不正确','');
 		}
 	}
 
@@ -103,7 +103,7 @@ class UploadphotoAction extends ApiBaseAction {
 	public function upload_tags_random()
 	{
 		$list = $this->db['Label']->order('rand()')->limit(10)->select();
-		parent::callback(C('STATUS_SUCCESS'),'',$list);
+		parent::callback(C('STATUS_SUCCESS'),'获取成功',$list);
 	}
 
 	//上传标签
@@ -112,6 +112,6 @@ class UploadphotoAction extends ApiBaseAction {
         $id = $this->oUser->id;
         $name = $this->_post('name');
         $list = $this->db['Label']->get_tagnames($name);
-        parent::callback(C('STATUS_SUCCESS'),'',$list);
+        parent::callback(C('STATUS_SUCCESS'),'获取成功',$list);
     }
 }

@@ -33,7 +33,7 @@ class PersonalAction extends ApiBaseAction {
 		$p = $this->_post('p');
 		$index = $this->_post('index');
 		$list = $this->db['Article']->getOwnInfo($p,$index,$friend_id,true,$id);
-		parent::callback(C('STATUS_SUCCESS'),'',$list);
+		parent::callback(C('STATUS_SUCCESS'),'获取成功',$list);
 	}
 
 	//个人中心-自己
@@ -43,7 +43,7 @@ class PersonalAction extends ApiBaseAction {
 		$p = $this->_post('p');
 		$index = $this->_post('index');
 		$list = $this->db['Article']->getOwnInfo($p,$index,$id,false);
-		parent::callback(C('STATUS_SUCCESS'),'',$list);
+		parent::callback(C('STATUS_SUCCESS'),'获取成功',$list);
 	}
 
 	//个人中心-话题
@@ -53,7 +53,7 @@ class PersonalAction extends ApiBaseAction {
 		$p = $this->_post('p');
 		$index = $this->_post('index');
 		$list = $this->db['Article']->getOwnInfo($p,$index,$id,false);
-		parent::callback(C('STATUS_SUCCESS'),'',$list);
+		parent::callback(C('STATUS_SUCCESS'),'获取成功',$list);
 	}
 
     //个人中心-他人话题
@@ -64,7 +64,7 @@ class PersonalAction extends ApiBaseAction {
         $p = $this->_post('p');
         $index = $this->_post('index');
         $list = $this->db['Article']->getOwnInfo($p,$index,$other_id,false);
-        parent::callback(C('STATUS_SUCCESS'),'',$list);
+        parent::callback(C('STATUS_SUCCESS'),'获取成功',$list);
     }
 
 	//个人中心-积分
@@ -73,7 +73,7 @@ class PersonalAction extends ApiBaseAction {
 		$id = $this->oUser->id;
 		$list['store'] = $this->db['Users']->where(array('id'=>$id))->getField('integral');
 		$list['task_list'] = $this->db['IntegralAll']->getInfo($id);
-		parent::callback(C('STATUS_SUCCESS'),'',$list);
+		parent::callback(C('STATUS_SUCCESS'),'获取成功',$list);
 	}
 
     //个人中心－领取积分
@@ -94,9 +94,9 @@ class PersonalAction extends ApiBaseAction {
 		{
 			$url = array('head_img'=>$file_list['info'][0]['savename']);
 			$bool = $this->db['Users']->where(array('id'=>$id))->save($url);
-			$bool ? parent::callback(C('STATUS_SUCCESS'),'','') : parent::callback(C('STATUS_DATA_ERROR'),'','');
+			$bool ? parent::callback(C('STATUS_SUCCESS'),'头像修改成功','') : parent::callback(C('STATUS_DATA_ERROR'),'头像修改失败','');
 		}else{
-			parent::callback(C('STATUS_DATA_ERROR'),'','');
+			parent::callback(C('STATUS_DATA_ERROR'),'头像上传失败','');
 		}
 
 	}
@@ -124,7 +124,7 @@ class PersonalAction extends ApiBaseAction {
             parent::callback(C('STATUS_DATA_ERROR'),'','图片上传有误');
 
         $bool = $this->db['Users']->where(array('id'=>$id))->save($url);
-        $bool ? parent::callback(C('STATUS_SUCCESS'),'','') : parent::callback(C('STATUS_DATA_ERROR'),'','');
+        $bool ? parent::callback(C('STATUS_SUCCESS'),'修改背景成功','') : parent::callback(C('STATUS_DATA_ERROR'),'修改背景失败','');
     }
 
 	//个人中心-昵称
@@ -133,7 +133,7 @@ class PersonalAction extends ApiBaseAction {
 		$id = $this->oUser->id;
 		$user['nickname'] = $this->_post('nickName');
 		$bool = $this->db['Users']->where(array('id'=>$id))->save($user);
-		$bool ? parent::callback(C('STATUS_SUCCESS'),'','') : parent::callback(C('STATUS_DATA_ERROR'),'','');
+		$bool ? parent::callback(C('STATUS_SUCCESS'),'修改成功','') : parent::callback(C('STATUS_DATA_ERROR'),'修改失败','');
 	}
 
 	//个人中心-性别
@@ -142,7 +142,7 @@ class PersonalAction extends ApiBaseAction {
 		$id = $this->oUser->id;
 		$user['sex'] = $this->_post('user_sex');
 		$bool = $this->db['Users']->where(array('id'=>$id))->save($user);
-		$bool ? parent::callback(C('STATUS_SUCCESS'),'','') : parent::callback(C('STATUS_DATA_ERROR'),'','');
+        $bool ? parent::callback(C('STATUS_SUCCESS'),'修改成功','') : parent::callback(C('STATUS_DATA_ERROR'),'修改失败','');
 	}
 
 	//个人中心-城市
@@ -151,7 +151,7 @@ class PersonalAction extends ApiBaseAction {
 		$id = $this->oUser->id;
 		$city['city_id'] = $this->_post('city_id');
 		$bool = $this->db['Users']->where(array('id'=>$id))->save($city);
-		$bool ? parent::callback(C('STATUS_SUCCESS'),'','') : parent::callback(C('STATUS_DATA_ERROR'),'','');
+        $bool ? parent::callback(C('STATUS_SUCCESS'),'修改成功','') : parent::callback(C('STATUS_DATA_ERROR'),'修改失败','');
 	}
 
 	//个人中心-修改全部信息

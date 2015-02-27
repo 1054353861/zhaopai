@@ -29,7 +29,7 @@ class FriendAction extends ApiBaseAction {
 		$id = $this->oUser->id;
 		$new_friend = $this->_post('friend_id');
 		$bool = $this->db['UserFriends']->add_friends($new_friend,$id);
-		$bool ? parent::callback(C('STATUS_SUCCESS'),'','') : parent::callback(C('STATUS_DATA_ERROR'),'','');
+		$bool ? parent::callback(C('STATUS_SUCCESS'),'申请成功','') : parent::callback(C('STATUS_DATA_ERROR'),'申请失败','');
 	}
 
 	//拍友
@@ -37,7 +37,7 @@ class FriendAction extends ApiBaseAction {
 	{
 		$id = $this->oUser->id;
 		$list = $this->db['UserFriends']->friends_list($id,1);
-		parent::callback(C('STATUS_SUCCESS'),'',$list);
+		parent::callback(C('STATUS_SUCCESS'),'获取成功',$list);
 	}
 
 	//拍友-新的拍友
@@ -45,7 +45,7 @@ class FriendAction extends ApiBaseAction {
 	{
 		$id = $this->oUser->id;
 		$list = $this->db['UserFriends']->friends_list($id,0);
-		parent::callback(C('STATUS_SUCCESS'),'',$list);
+		parent::callback(C('STATUS_SUCCESS'),'获取成功',$list);
 	}
 
 	//拍友-同意申请
@@ -54,7 +54,7 @@ class FriendAction extends ApiBaseAction {
 		$id = $this->oUser->id;
 		$user_ids = $this->_post('friend_id');
 		$bool = $this->db['UserFriends']->agree_friends($user_ids,$id);
-		$bool ? parent::callback(C('STATUS_SUCCESS'),'','') : parent::callback(C('STATUS_DATA_ERROR'),'','');
+		$bool ? parent::callback(C('STATUS_SUCCESS'),'好友申请成功','') : parent::callback(C('STATUS_DATA_ERROR'),'好友申请失败','');
 	}
 
 	//拍友-搜索
@@ -63,6 +63,6 @@ class FriendAction extends ApiBaseAction {
 		$id = $this->oUser->id;
 		$user_name = $this->_post('user_name');
 		$list = $this->db['Users']->selectFriend($user_name,$id);
-		parent::callback(C('STATUS_SUCCESS'),'',$list);
+		parent::callback(C('STATUS_SUCCESS'),'获取成功',$list);
 	}
 }

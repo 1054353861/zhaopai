@@ -31,7 +31,7 @@ class LikesAction extends ApiBaseAction {
 		$p = $this->_post('p');
 		$index = $this->_post('index');
 		$list = $this->db['ContentPraise']->getLike($article_id,$p,$index,$id);
-		parent::callback(C('STATUS_SUCCESS'),'',$list);
+		parent::callback(C('STATUS_SUCCESS'),'获取成功',$list);
 	}
 	
 	//收藏
@@ -40,6 +40,6 @@ class LikesAction extends ApiBaseAction {
 		$id = $this->oUser->id;
 		$article_id = $this->_post('article_id');
 		$bool = $this->db['Collection']->collect_like($id,$article_id);
-		$bool ? parent::callback(C('STATUS_SUCCESS'),'','收藏成功') : parent::callback(C('STATUS_DATA_ERROR'),'','请勿重复收藏');
+		$bool ? parent::callback(C('STATUS_SUCCESS'),'收藏成功','') : parent::callback(C('STATUS_DATA_ERROR'),'请勿重复收藏','');
 	}
 }

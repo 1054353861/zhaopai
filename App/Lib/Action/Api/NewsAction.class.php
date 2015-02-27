@@ -31,7 +31,7 @@ class NewsAction extends ApiBaseAction {
 		$p = $this->_post('p');
 		$index = $this->_post('index');
 		$list = $this->db['Attention']->getNewsList($id,$p,$index);
-		parent::callback(C('STATUS_SUCCESS'),'',$list);
+		parent::callback(C('STATUS_SUCCESS'),'获取成功',$list);
 	}
 
 	//动态收藏
@@ -41,13 +41,13 @@ class NewsAction extends ApiBaseAction {
 		$p = $this->_post('p');
 		$index = $this->_post('index');
 		$list = $this->db['Collection']->getCollList($id,$p,$index);
-		parent::callback(C('STATUS_SUCCESS'),'',$list);
+		parent::callback(C('STATUS_SUCCESS'),'获取成功',$list);
 	}
 
 	//动态推荐
 	public function news_hot()
 	{
 		$list = $this->db['Article']->getRemmend();
-		parent::callback(C('STATUS_SUCCESS'),'',$list);
+		parent::callback(C('STATUS_SUCCESS'),'获取成功',$list);
 	}
 }

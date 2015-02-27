@@ -33,7 +33,7 @@ class HomeAction extends ApiBaseAction {
     		$lat = $this->_post('latitude');	//纬度
     		$count = $this->_post('count');
     		$list = $this->db['Article']->article_index($city,$type,$p,$count,$lng,$lat);
-    		parent::callback(C('STATUS_SUCCESS'),'',$list);
+    		parent::callback(C('STATUS_SUCCESS'),'获取成功',$list);
 	    }
 	    
 	}

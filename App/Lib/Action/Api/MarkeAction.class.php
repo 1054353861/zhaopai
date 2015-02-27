@@ -49,7 +49,7 @@ class MarkeAction extends ApiBaseAction {
 			$list['image_list'][] = $value['shop_url'];
 		}
 
-		parent::callback(C('STATUS_SUCCESS'),'',$list);
+		parent::callback(C('STATUS_SUCCESS'),'获取成功',$list);
 	}
 
 	//商品兑换
@@ -78,9 +78,9 @@ class MarkeAction extends ApiBaseAction {
 				'create_time' => time()
 			);
 			$bool = $this->db['Exchange']->add($arr);
-			$bool ? parent::callback(C('STATUS_SUCCESS'),'','') : parent::callback(C('STATUS_DATA_ERROR'),'',''); 
+			$bool ? parent::callback(C('STATUS_SUCCESS'),'兑换成功','') : parent::callback(C('STATUS_DATA_ERROR'),'兑换失败','');
 		}else{
-			parent::callback(C('STATUS_DATA_ERROR'),'','');
+			parent::callback(C('STATUS_DATA_ERROR'),'积分不足','');
 		}
 	}
 

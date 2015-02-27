@@ -1564,6 +1564,26 @@ POST /Api/Personal/personal_other_news
 }
 ```
 
+### 12.个人中心-领取积分
+
+#### Request
+```
+POST /Api/Personal/personal_score_insert
+```
+
+#### Parameters：
+- `token` 用户登录后拿去的用户标示
+- `score_id` 积分ID 1到9
+
+#### Response
+```json
+{
+   "status": "0",
+   "msg": "领取成功",
+   "data": "",
+   "num": "1"
+}
+```
 
 ## 八、照片详情
 
