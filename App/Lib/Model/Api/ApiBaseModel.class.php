@@ -111,7 +111,9 @@ class ApiBaseModel extends AppBaseModel {
         {
             if($value['id']==1)
             {
-               
+                $info = $IntegralSameday->where(array('user_id'=>$user_id,'integral_id'=>1))->find();
+                if($info['status']==0)
+                    $integail++;
             }else{
                 $where = array('status'=>0,'user_id'=>$user_id,'integral_id'=>$value['id'],'sameday'=>strtotime(date('Y-m-d')));
                 $count = $IntegralSameday->where($where)->count();
