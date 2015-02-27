@@ -5,24 +5,26 @@
  */
 
 class IntegralAllModel extends ApiBaseModel {
-	
+
+    //1是未完成 2是已完成
 	public function getInfo($id)
 	{
-		$info_list = $this->select();
-		$now_info = array();
+		$info_list = $this->where(array('status'=>0))->select();
+        $IntegralSameday = D('IntegralSameday');
 		foreach($info_list as $value)
 		{
-			$value['is_end'] = $this->exsits_end($value['id'],$id);
+            if($value['id']==1)
+            {
+                $info = $IntegralSameday->where(array('user_id'=>$id,'integral_id'=>1))->find();
+                $info!='' && $info['status']==0 ? $value['is_end'] = 1 : $value['is_end'] = 2;
+            }else{
+                $where = array('status'=>0,'sameday'=>strtotime(date('Y-m-d')),'user_id'=>$id,'integral_id'=>$value['id']);
+                $or_in = $IntegralSameday->where($where)->count();
+                $or_in!=0 ? $value['is_end'] = 1 : $value['is_end'] = 2;
+            }
 			$now_info[] = $value;
 		}
 		return $now_info;
-	}
-
-	private function exsits_end($iid,$uid)
-	{
-		$where = array('sameday'=>strtotime(date('Y-m-d')),'user_id'=>$uid,'integral_id'=>$iid);
-		$or_in = D('IntegralSameday')->where($where)->count();
-		return $or_in == 0 ? 1 : 2 ;
 	}
 }
 ?>
