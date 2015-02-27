@@ -78,14 +78,14 @@ class ShopAction extends AdminBaseAction {
 	        
 	        $result = $Shop->get_one_data(array('id'=>$id));
 	        
-	        parent::data_to_view(array(
-	        	'shop_status' => $this->shop_status,
-	        ));
-	       
 	    } else if ($act == 'delete') {
 	       $Shop->delete_data(array('id'=>$id)) ? $this->success('删除成功') : $this->error('删除失败请稍后再试！');
 	        exit;
 	    } 
+	    
+	    parent::data_to_view(array(
+	        'shop_status' => $this->shop_status,
+	    ));
 	    
 	    parent::global_tpl_view( array(
 	        'action_name'=>'编辑',

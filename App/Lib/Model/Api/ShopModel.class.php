@@ -6,13 +6,18 @@
 
 class ShopModel extends ApiBaseModel {
 	
-
+    private $shop_status;
+    
+    public function __construct() {
+        parent::__construct();
+        $this->shop_status = C('SHOP_STATUS');
+    }
 
 	public function getInfoALL()
 	{
         $new_list = array();
 
-		$list = $this->select();
+		$list = $this->where(array('is_del'=>0,'status'=>$this->shop_status[0]['status']))->select();
 
         foreach($list as $key=>$value)
         {

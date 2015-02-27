@@ -92,7 +92,7 @@ class ApiBaseModel extends AppBaseModel {
     public function get_shopphoto_url($id)
     {
         $shop_url = D('ShopPhoto')->where(array('shop_id'=>$id))->limit(1)->field('shop_url')->find();
-        return $shop_url[0]['shop_url'];
+        return $shop_url['shop_url'];
     }
 
     /*
