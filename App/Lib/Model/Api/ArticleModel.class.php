@@ -193,11 +193,7 @@ class ArticleModel extends ApiBaseModel {
 
 		$arr_list['user_info']['artcile_num'] = $this->where(array('user_id'=>$user_id))->count();
 
-		$int_all_count = D('IntegralAll')->count();
-
-		$now_count = D('IntegralSameday')->where(array('sameday'=>array('eq',strtotime(date('Y-m-d')))))->count();
-
-		$arr_list['user_info']['integral_num'] = $int_all_count - $now_count;
+		$arr_list['user_info']['integral_num'] = parent::check_integral_num($user_id);
 
 		if($type==false)
 		{
