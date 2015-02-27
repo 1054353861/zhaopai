@@ -112,7 +112,7 @@ class ApiBaseAction extends AppBaseAction {
     {
         $info = $this->checkIntegral_info($type);
         $num = $this->checkIntegral_num($user_id,$type);
-        if($info['status']==0 && $num<=$info['num'])
+        if($info['status']==0 && $num < $info['num'])
         {
             $this->insert_sameday_info($user_id,$type);
         }
