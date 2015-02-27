@@ -76,6 +76,15 @@ class PersonalAction extends ApiBaseAction {
 		parent::callback(C('STATUS_SUCCESS'),'',$list);
 	}
 
+    //个人中心－领取积分
+    public function personal_score_insert()
+    {
+        $id = $this->oUser->id;
+        $score_id = $this->_post('score_id');
+        $bool = $this->db['IntegralAll']->insert_user_score($id,$score_id);
+        $bool ? parent::callback(C('STATUS_SUCCESS'),'领取成功','') : parent::callback(C('STATUS_DATA_ERROR'),'领取失败','');
+    }
+
 	//个人中心-头像
 	public function personal_edit_head()
 	{
