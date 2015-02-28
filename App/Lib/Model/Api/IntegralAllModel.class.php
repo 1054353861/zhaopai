@@ -60,7 +60,8 @@ class IntegralAllModel extends ApiBaseModel {
         $user_bool = $Users->where(array('id'=>$user_id))->save($new_integral);
         if($user_bool)
         {
-            $IntegralSameday->where($where)->setField('status','1');
+            $update = array('status'=>1);
+            $IntegralSameday->where($where)->save($update);
             return true;
         }else{
             return false;
