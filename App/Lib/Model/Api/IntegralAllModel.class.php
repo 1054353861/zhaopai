@@ -45,6 +45,7 @@ class IntegralAllModel extends ApiBaseModel {
     public function insert_user_score($user_id,$score_id)
     {
         $IntegralSameday = D('IntegralSameday');
+        //如果是领取第一次注册的积分就跳过查询
         if($score_id!=1)
         {
             $where = array('sameday'=>strtotime(date('Y-m-d')),'user_id'=>$user_id,'integral_id'=>$score_id,'status'=>0);
