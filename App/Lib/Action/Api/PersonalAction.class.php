@@ -83,7 +83,7 @@ class PersonalAction extends ApiBaseAction {
         $id = $this->oUser->id;
         $score_id = $this->_post('score_id');
         $bool = $this->db['IntegralAll']->insert_user_score($id,$score_id);
-        $bool==true ? parent::callback(C('STATUS_SUCCESS'),'领取成功','') : parent::callback(C('STATUS_DATA_ERROR'),'领取失败','');
+        $bool ? parent::callback(C('STATUS_SUCCESS'),'领取成功','') : parent::callback(C('STATUS_DATA_ERROR'),'领取失败','');
     }
 
     //任务调用接口
