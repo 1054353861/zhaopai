@@ -11,8 +11,9 @@ class IntegralAllModel extends ApiBaseModel {
 	{
 		$info_list = $this->where(array('status'=>0))->select();
         $IntegralSameday = D('IntegralSameday');
-		foreach($info_list as $value)
+		foreach($info_list as $key=>$value)
 		{
+
             if($value['id']==1)
             {
                 $info = $IntegralSameday->where(array('user_id'=>$id,'integral_id'=>1))->find();
@@ -21,12 +22,12 @@ class IntegralAllModel extends ApiBaseModel {
                     $info['status']==0 ? $value['is_end'] = 1 : $value['is_end'] = 2;
             }else{
                 $where = array('sameday'=>strtotime(date('Y-m-d')),'user_id'=>$id,'integral_id'=>$value['id']);
-                $or_in = $IntegralSameday->where($where)->select();
+                $new_info = $IntegralSameday->where($where)->select();
                 $is_no = 0;
                 $all_count = 0;
-                foreach($or_in as $value)
+                foreach($new_info as $val)
                 {
-                    if($value['status']==0)
+                    if($val['status']==0)
                     {
                         $is_no++;
                     }
@@ -35,7 +36,8 @@ class IntegralAllModel extends ApiBaseModel {
                 $value['end_number'] = $all_count;
                 $is_no!=0 ? $value['is_end'] = 1 : $value['is_end'] = 2;
             }
-			$now_info[] = $value;
+
+			$now_info[$key] = $value;
 		}
 		return $now_info;
 	}
