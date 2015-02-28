@@ -16,20 +16,24 @@ class IntegralAllModel extends ApiBaseModel {
             if($value['id']==1)
             {
                 $info = $IntegralSameday->where(array('user_id'=>$id,'integral_id'=>1))->find();
-                $value['end_number'] = count($info);
+                $value['end_number'] = 1;
                 if($info!='')
                     $info['status']==0 ? $value['is_end'] = 1 : $value['is_end'] = 2;
             }else{
                 $where = array('sameday'=>strtotime(date('Y-m-d')),'user_id'=>$id,'integral_id'=>$value['id']);
                 $or_in = $IntegralSameday->where($where)->select();
-                $value['end_number'] = count($or_in);
-                $is_count = 0;
+                $is_no = 0;
+                $all_count = 0;
                 foreach($or_in as $value)
                 {
                     if($value['status']==0)
-                        $is_count++;
+                    {
+                        $is_no++;
+                    }
+                    $all_count++;
                 }
-                $is_count!=0 ? $value['is_end'] = 1 : $value['is_end'] = 2;
+                $value['end_number'] = $all_count;
+                $is_no!=0 ? $value['is_end'] = 1 : $value['is_end'] = 2;
             }
 			$now_info[] = $value;
 		}
