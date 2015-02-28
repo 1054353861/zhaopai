@@ -29,9 +29,7 @@ class IntegralAllModel extends ApiBaseModel {
                 foreach($new_info as $val)
                 {
                     if($val['status']==0)
-                    {
                         $is_no++;
-                    }
                     $all_count++;
                 }
                 $value['end_number'] = $all_count;
@@ -47,7 +45,7 @@ class IntegralAllModel extends ApiBaseModel {
     public function insert_user_score($user_id,$score_id)
     {
         $IntegralSameday = D('IntegralSameday');
-        $where = array('sameday'=>strtotime(date('Y-m-d')),'user_id'=>$user_id,'integral_id'=>$score_id);
+        $where = array('sameday'=>strtotime(date('Y-m-d')),'user_id'=>$user_id,'integral_id'=>$score_id,'status'=>0);
         $count = $IntegralSameday->where($where)->count();
         $int_integral = $this->where(array('id'=>$score_id))->getField('integral');
         $Users = D('Users');
