@@ -45,8 +45,13 @@ class IntegralAllModel extends ApiBaseModel {
     public function insert_user_score($user_id,$score_id)
     {
         $IntegralSameday = D('IntegralSameday');
-        $where = array('sameday'=>strtotime(date('Y-m-d')),'user_id'=>$user_id,'integral_id'=>$score_id,'status'=>0);
-        $count = $IntegralSameday->where($where)->count();
+        if($score_id!=1)
+        {
+            $where = array('sameday'=>strtotime(date('Y-m-d')),'user_id'=>$user_id,'integral_id'=>$score_id,'status'=>0);
+            $count = $IntegralSameday->where($where)->count();
+        }else{
+            $count = 1;
+        }
         $int_integral = $this->where(array('id'=>$score_id))->getField('integral');
         $Users = D('Users');
         $user_integral = $Users->where(array('id'=>$user_id))->getField('integral');
