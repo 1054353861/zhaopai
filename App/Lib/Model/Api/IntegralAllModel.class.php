@@ -16,18 +16,25 @@ class IntegralAllModel extends ApiBaseModel {
             if($value['id']==1)
             {
                 $info = $IntegralSameday->where(array('user_id'=>$id,'integral_id'=>1))->find();
+                $value['end_number'] = count($info);
                 if($info!='')
                     $info['status']==0 ? $value['is_end'] = 1 : $value['is_end'] = 2;
             }else{
-                $where = array('status'=>0,'sameday'=>strtotime(date('Y-m-d')),'user_id'=>$id,'integral_id'=>$value['id']);
-                $or_in = $IntegralSameday->where($where)->count();
-                $or_in!=0 ? $value['is_end'] = 1 : $value['is_end'] = 2;
+                $where = array('sameday'=>strtotime(date('Y-m-d')),'user_id'=>$id,'integral_id'=>$value['id']);
+                $or_in = $IntegralSameday->where($where)->select();
+                $value['end_number'] = count($or_in);
+                $is_count = 0;
+                foreach($or_in as $value)
+                {
+                    if($value['status']==0)
+                        $is_count++;
+                }
+                $is_count!=0 ? $value['is_end'] = 1 : $value['is_end'] = 2;
             }
 			$now_info[] = $value;
 		}
 		return $now_info;
 	}
-
 
     //完成任务获取积分
     public function insert_user_score($user_id,$score_id)
