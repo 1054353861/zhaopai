@@ -45,10 +45,10 @@ class IntegralAllModel extends ApiBaseModel {
     public function insert_user_score($user_id,$score_id)
     {
         $IntegralSameday = D('IntegralSameday');
+        $where = array('sameday'=>strtotime(date('Y-m-d')),'user_id'=>$user_id,'integral_id'=>$score_id,'status'=>0);
         //如果是领取第一次注册的积分就跳过查询
         if($score_id!=1)
         {
-            $where = array('sameday'=>strtotime(date('Y-m-d')),'user_id'=>$user_id,'integral_id'=>$score_id,'status'=>0);
             $count = $IntegralSameday->where($where)->count();
         }else{
             $count = 1;
@@ -61,7 +61,12 @@ class IntegralAllModel extends ApiBaseModel {
         if($user_bool)
         {
             $update = array('status'=>1);
-            $IntegralSameday->where($where)->save($update);
+            if($score_id!=1)
+            {
+                $IntegralSameday->where($where)->save($update);
+            }else{
+                $IntegralSameday->where(array('user_id'=>$user_id,'integral_id'=>$score_id))->save($update);
+            }
             return true;
         }else{
             return false;
