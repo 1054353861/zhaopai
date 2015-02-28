@@ -21,7 +21,8 @@ class PersonalAction extends ApiBaseAction {
 	protected  $db = array(
 		'IntegralAll' => 'IntegralAll',
 		'Users' => 'Users',
-		'Article' => 'Article'
+		'Article' => 'Article',
+        'UsersFeedback' => 'UsersFeedback'
 	);
 
 	
@@ -83,6 +84,16 @@ class PersonalAction extends ApiBaseAction {
         $score_id = $this->_post('score_id');
         $bool = $this->db['IntegralAll']->insert_user_score($id,$score_id);
         $bool ? parent::callback(C('STATUS_SUCCESS'),'领取成功','') : parent::callback(C('STATUS_DATA_ERROR'),'领取失败','');
+    }
+
+    //任务调用接口
+    //1.完成组册 2.每天登入 3.发表话题 4.文明点赞 5.评论话题 6.参与文明PK 7.邀请好友 8.分享给朋友 9.给建议
+    public function personal_msg()
+    {
+        $id = $this->oUser->id;
+        $type_id = $this->_post('type_id');
+        parent::end_integral_all_info($id,$type_id);
+        parent::callback(C('STATUS_SUCCESS'),'接受成功','');
     }
 
 	//个人中心-头像
@@ -198,4 +209,16 @@ class PersonalAction extends ApiBaseAction {
     		$bool ? parent::callback(C('STATUS_SUCCESS'),'修改成功','') : parent::callback(C('STATUS_DATA_ERROR'),'修改失败','');
 		}
 	}
+
+    //反馈
+    public function personal_feedback()
+    {
+        $info['user_id'] = $this->oUser->id;
+        $info['content'] = $this->_post('content');
+        $info['create_time'] = time();
+        $bool = $this->db['UsersFeedback']->add($info);
+        if($bool)
+            parent::end_integral_all_info($info['user_id'],9);
+        $bool ? parent::callback(C('STATUS_SUCCESS'),'反馈成功','') : parent::callback(C('STATUS_DATA_ERROR'),'反馈失败','');
+    }
 }

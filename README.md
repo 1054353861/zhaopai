@@ -1585,6 +1585,48 @@ POST /Api/Personal/personal_score_insert
 }
 ```
 
+### 13.个人中心-任务端专用接口
+
+#### Request
+```
+POST /Api/Personal/personal_msg
+```
+
+#### Parameters：
+- `token` 用户登录后拿去的用户标示
+- `type_id` 任务ID ID编号 7.邀请好友 8.分享给朋友
+
+#### Response
+```json
+{
+   "status": "0",
+   "msg": "接受成功",
+   "data": "",
+   "num": "1"
+}
+```
+
+### 14.个人中心-反馈建议
+
+#### Request
+```
+POST /Api/Personal/personal_feedback
+```
+
+#### Parameters：
+- `token` 用户登录后拿去的用户标示
+- `content` 反馈建议
+
+#### Response
+```json
+{
+   "status": "0",
+   "msg": "反馈成功",
+   "data": "",
+   "num": "1"
+}
+```
+
 ## 八、照片详情
 
 ### 1.照片详情
