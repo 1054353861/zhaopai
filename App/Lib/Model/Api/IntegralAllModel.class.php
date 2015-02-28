@@ -17,6 +17,7 @@ class IntegralAllModel extends ApiBaseModel {
             if($value['id']==1)
             {
                 $info = $IntegralSameday->where(array('user_id'=>$id,'integral_id'=>1))->find();
+                //直接写死
                 $value['end_number'] = 1;
                 if($info!='')
                     $info['status']==0 ? $value['is_end'] = 1 : $value['is_end'] = 2;

@@ -1262,28 +1262,91 @@ POST /Api/Personal/personal_score
 ```json
 {
    "status": "0",
-   "msg": "",
+   "msg": "获取成功",
    "data":
    {
-       "store": "1395",
+       "store": "30",
        "task_list":
        [
            {
                "id": "1",
-               "title": "掉节操",
-               "integral": "100",
-               "is_end": "1"
+               "title": "完成注册",
+               "num": "1",
+               "integral": "50",
+               "status": "0",
+               "end_number": "1",
+               "is_end": "2"
            },
            {
                "id": "2",
-               "title": "掉贞操",
-               "integral": "1000",
+               "title": "每天登入领积分!",
+               "num": "1",
+               "integral": "30",
+               "status": "0",
+               "end_number": "1",
                "is_end": "1"
            },
            {
                "id": "3",
-               "title": "约炮",
-               "integral": "10000",
+               "title": "发表一个话题吧!",
+               "num": "10",
+               "integral": "50",
+               "status": "0",
+               "end_number": "0",
+               "is_end": "2"
+           },
+           {
+               "id": "4",
+               "title": "给文明行为点个赞噢!",
+               "num": "10",
+               "integral": "20",
+               "status": "0",
+               "end_number": "0",
+               "is_end": "2"
+           },
+           {
+               "id": "5",
+               "title": "对话题进行评论",
+               "num": "10",
+               "integral": "20",
+               "status": "0",
+               "end_number": "0",
+               "is_end": "2"
+           },
+           {
+               "id": "6",
+               "title": "参与文明大PK",
+               "num": "10",
+               "integral": "10",
+               "status": "0",
+               "end_number": "0",
+               "is_end": "2"
+           },
+           {
+               "id": "7",
+               "title": "邀请好友一起来!",
+               "num": "1",
+               "integral": "30",
+               "status": "0",
+               "end_number": "0",
+               "is_end": "2"
+           },
+           {
+               "id": "8",
+               "title": "分享给朋友",
+               "num": "1",
+               "integral": "30",
+               "status": "0",
+               "end_number": "0",
+               "is_end": "2"
+           },
+           {
+               "id": "9",
+               "title": "给我们宝贵建议",
+               "num": "1",
+               "integral": "30",
+               "status": "0",
+               "end_number": "1",
                "is_end": "1"
            }
        ]
