@@ -65,7 +65,7 @@ class IntegralAllModel extends ApiBaseModel {
             {
                 $IntegralSameday->where($where)->save($update);
             }else{
-                $IntegralSameday->where(array('user_id'=>$user_id,'integral_id'=>$score_id))->save($update);
+                $IntegralSameday->where(array('user_id'=>$user_id,'integral_id'=>1))->save($update);
             }
             return true;
         }else{
