@@ -68,8 +68,6 @@ class ArticleModel extends ApiBaseModel {
 			$where['city_id'] = $city;
 		$p = $index =='' ? 0 : $index;
 		$page_count = $page_count == '' ? 10 : $page_count;
-
-
 		$list = array();
 		
 		switch($type)
@@ -97,7 +95,7 @@ class ArticleModel extends ApiBaseModel {
 				    array('lt',$square_arr['right-bottom']['lng']),
 				    'AND'
 				);
-				
+
 				$list_info = $this->where($l_where)->limit($p * $page_count,$page_count)
                     ->order('longitude desc')->order('latitude desc')->select();
 				
