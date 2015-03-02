@@ -96,7 +96,8 @@ class ArticleModel extends ApiBaseModel {
 				    'AND'
 				);
 
-				$list_info = $this->where($l_where)->limit($p * $page_count,$page_count)->select();
+				$list_info = $this->where($l_where)->limit($p * $page_count,$page_count)
+                    ->order('longitude asc')->select();
 
 				$list['all_count'] = count($list_info);
 
