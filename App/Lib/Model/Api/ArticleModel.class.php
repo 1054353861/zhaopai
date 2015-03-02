@@ -117,7 +117,7 @@ class ArticleModel extends ApiBaseModel {
             $new_list_info = array();
             for($i= $p * $page_count;$i< $p * $page_count + $page_count;$i++)
             {
-                if($i<=$list['all_count'])
+                if($i < $list['all_count'])
                 {
                     $new_list_info[] = $list_info[$i];
                 }
