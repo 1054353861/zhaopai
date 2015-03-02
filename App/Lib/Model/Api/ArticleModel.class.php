@@ -99,7 +99,7 @@ class ArticleModel extends ApiBaseModel {
 				$list_info = $this->where($l_where)->limit($p * $page_count,$page_count)
                     ->order('longitude asc')->order('latitude asc')->select();
 
-				$list['all_count'] = count($list_info);
+				$list['all_count'] = $this->where($l_where)->count();
 
 			break;
 		}
@@ -107,7 +107,7 @@ class ArticleModel extends ApiBaseModel {
         if (!empty($list_info)) {
             //计算距离
             foreach ($list_info AS $key=>$val) {
-                $list_info[$key]['distance'] = round(GetDistance($lat,$lng,$val['latitude'], $val['longitude']),2);
+                $list_info[$key]['distance'] = round(GetDistance($lat,$lng,$val['latitude'], $val['longitude']),2) * 1000;
             }
         }
 
