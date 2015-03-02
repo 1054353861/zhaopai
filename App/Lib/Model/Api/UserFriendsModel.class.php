@@ -33,14 +33,7 @@ class UserFriendsModel extends ApiBaseModel {
 
 	public function add_friends($new_friend,$id)
 	{
-        //判断自己有没有对方这个好友
-        $is_friend = $this->where(array('user_id'=>$id,'friend_id'=>$new_friend))->count();
-        if($is_friend!=0)
-        {
-            return false;
-        }
-
-        //判断有没有已经申请加对方好友
+        //判断有没有已经申请加对方好友或者已经申请对方好友
 		$is_add = $this->where(array('user_id'=>$new_friend,'friend_id'=>$id))->count();
 		if($is_add==0)
 		{
