@@ -96,8 +96,7 @@ class ArticleModel extends ApiBaseModel {
 				    'AND'
 				);
 
-				$list_info = $this->where($l_where)->limit($p * $page_count,$page_count)
-                    ->order('longitude desc')->order('latitude desc')->select();
+				$list_info = $this->where($l_where)->limit($p * $page_count,$page_count)->select();
 				
 				if (!empty($list_info)) {
 				    //计算距离
@@ -124,9 +123,6 @@ class ArticleModel extends ApiBaseModel {
 				parent::public_file_dir($list['info'][$key],array('head_img'));
 
 				$list['info'][$key]['photo_info'] = $value;
-
-                if($lng!='' && $lat!='')
-                $list['info'][$key]['photo_info']['distance'] = getdistances($lng,$lat,$value['longitude'],$value['latitude']);
 
 				parent::public_file_dir($list['info'][$key],array('article_img'));
 
