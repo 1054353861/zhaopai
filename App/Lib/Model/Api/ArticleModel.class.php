@@ -117,7 +117,10 @@ class ArticleModel extends ApiBaseModel {
             $new_list_info = array();
             for($i= $p * $page_count;$i< $p * $page_count + $page_count;$i++)
             {
-                $new_list_info[] = $list_info[$i];
+                if($i<=$list['all_count'])
+                {
+                    $new_list_info[] = $list_info[$i];
+                }
             }
             //数组覆盖数组
             $list_info = $new_list_info;
@@ -152,7 +155,7 @@ class ArticleModel extends ApiBaseModel {
 			return $list;
 
 		}else{
-            return array();
+            return '';
         }
 	}
 
