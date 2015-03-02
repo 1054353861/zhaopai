@@ -44,4 +44,16 @@ class UserFriendsModel extends ApiBaseModel {
 			return false;
 		}
 	}
+
+    public function delete_friends($friend_id,$id)
+    {
+        $bool = $this->where(array('user_id'=>$id,'friend_id'=>$friend_id))->delete();
+        if($bool)
+        {
+            $this->where(array('user_id'=>$friend_id,'friend_id'=>$id))->delete();
+            return true;
+        }else{
+            return false;
+        }
+    }
 }

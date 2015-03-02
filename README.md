@@ -306,6 +306,29 @@ POST /Api/Friend/friend_search
 }
 ```
 
+
+### 6.拍友删除
+
+#### Request
+```
+POST /Api/Friend/friend_delete
+```
+
+#### Parameters：
+- `token` 用户登录后拿去的用户标示
+- `friend_id` 好友id
+
+#### Response
+```json
+{
+   "status": "0",
+   "msg": "删除好友成功",
+   "data": "",
+   "num": "1"
+}
+```
+
+
 ## 三、首页接口
 
 ### 1.首页

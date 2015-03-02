@@ -52,8 +52,8 @@ class FriendAction extends ApiBaseAction {
 	public function friend_agree()
 	{
 		$id = $this->oUser->id;
-		$user_ids = $this->_post('friend_id');
-		$bool = $this->db['UserFriends']->agree_friends($user_ids,$id);
+		$friend_id = $this->_post('friend_id');
+		$bool = $this->db['UserFriends']->agree_friends($friend_id,$id);
 		$bool ? parent::callback(C('STATUS_SUCCESS'),'好友申请成功','') : parent::callback(C('STATUS_DATA_ERROR'),'好友申请失败','');
 	}
 
@@ -65,4 +65,13 @@ class FriendAction extends ApiBaseAction {
 		$list = $this->db['Users']->selectFriend($user_name,$id);
 		parent::callback(C('STATUS_SUCCESS'),'获取成功',$list);
 	}
+
+    //拍友－删除好友
+    public function friend_delete()
+    {
+        $id = $this->oUser->id;
+        $friend_id = $this->_post('friend_id');
+        $bool = $this->db['UserFriends']->delete_friends($friend_id,$id);
+        $bool ? parent::callback(C('STATUS_SUCCESS'),'好友删除成功','') : parent::callback(C('STATUS_DATA_ERROR'),'好友删除失败','');
+    }
 }
