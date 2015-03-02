@@ -115,7 +115,7 @@ class ArticleModel extends ApiBaseModel {
         {
             $list_info = list_sort_by($list_info,'distance');
             $new_list_info = array();
-            for($i= $p * $page_count;$i< $page_count;$i++)
+            for($i= $p * $page_count;$i< $p * $page_count + $page_count;$i++)
             {
                 $new_list_info[] = $list_info[$i];
             }
