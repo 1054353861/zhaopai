@@ -152,7 +152,7 @@ class ArticleModel extends ApiBaseModel {
 			return $list;
 
 		}else{
-            return '';
+            return array();
         }
 	}
 
