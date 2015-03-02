@@ -123,8 +123,6 @@ class ArticleModel extends ApiBaseModel {
             $list_info = $new_list_info;
         }
 
-        return $list_info;
-
 		if($list_info!='')
 		{
 			foreach($list_info as $key=>$value)
