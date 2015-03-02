@@ -54,7 +54,7 @@ class PhotoAction extends ApiBaseAction {
         //触发文章投票事件
         if($bool)
             parent::end_integral_all_info($id,6);
-		$bool ? parent::callback(C('STATUS_SUCCESS'),'投票成功','') : parent::callback(C('STATUS_DATA_ERROR'),'投票失败','');
+		$bool ? parent::callback(C('STATUS_SUCCESS'),'投票成功','') : parent::callback(C('STATUS_DATA_ERROR'),'请勿重复投票','');
 	}
 
 	//照片评论
