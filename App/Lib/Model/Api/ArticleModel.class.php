@@ -96,10 +96,9 @@ class ArticleModel extends ApiBaseModel {
 				    'AND'
 				);
 
-				$list_info = $this->where($l_where)->limit($p * $page_count,$page_count)
-                    ->order('longitude asc')->order('latitude asc')->select();
+				$list_info = $this->where($l_where)->order('longitude asc')->order('latitude asc')->limit(200)->select();
 
-				$list['all_count'] = $this->where($l_where)->count();
+				$list['all_count'] = count($list_info);
 
 			break;
 		}
@@ -111,9 +110,18 @@ class ArticleModel extends ApiBaseModel {
             }
         }
 
+        //固定拉200条数据排序之后再取
         if($type==2)
+        {
             $list_info = list_sort_by($list_info,'distance');
-
+            $new_list_info = array();
+            for($i= $p * $page_count;$i< $page_count;$i++)
+            {
+                $new_list_info[] = $list_info[$i];
+            }
+            //数组覆盖数组
+            $list_info = $new_list_info;
+        }
 
 		if($list_info!='')
 		{
