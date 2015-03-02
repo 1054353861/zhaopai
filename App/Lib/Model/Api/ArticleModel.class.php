@@ -187,9 +187,9 @@ class ArticleModel extends ApiBaseModel {
 
 		parent::public_file_dir($arr_list,array('head_img','background_img'));
 
-		$arr_list['user_info']['save_num'] = D('Collection')->where(array('user_id'=>$user_id))->count();
+		$arr_list['user_info']['save_num'] = parent::get_collection_count($user_id);
 
-		$arr_list['user_info']['friend_num_yes'] = D('UserFriends')->where(array('user_id'=>$user_id,'friend_statis'=>1))->count();
+		$arr_list['user_info']['friend_num_yes'] = parent::get_is_friends($user_id,1);
 
 		$arr_list['user_info']['artcile_num'] = $this->where(array('user_id'=>$user_id))->count();
 
@@ -197,13 +197,12 @@ class ArticleModel extends ApiBaseModel {
 
 		if($type==false)
 		{
-			$arr_list['user_info']['friend_num_no'] = D('UserFriends')->where(array('user_id'=>$user_id,'friend_statis'=>0))->count();
+			$arr_list['user_info']['friend_num_no'] = parent::get_is_friends($user_id,0);
 		}
 
 		if($type==true)
 		{
-			$count = D('UserFriends')->where(array('user_id'=>$user_id,'friend_id'=>$other_id,'friend_statis'=>1))->count();
-			if($count==0)
+			if(parent::is_no_friends($user_id,$other_id)==0)
 			{
 				$arr_list['user_info']['is_friend'] = 2;
 			}else{

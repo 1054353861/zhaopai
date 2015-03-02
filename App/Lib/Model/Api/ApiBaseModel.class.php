@@ -50,42 +50,37 @@ class ApiBaseModel extends AppBaseModel {
     //封装调用用户信息方法
     public function get_user_info($user_id)
     {
-        $list = D('Users')->where(array('u.id'=>$user_id))
+        return D('Users')->where(array('u.id'=>$user_id))
             ->table('app_users as u')->join('app_city as c on c.id = u.city_id')
             ->field('u.*,c.title')->find();
-        return $list;
     }
 
     //得到标签信息
     public function get_label_info($article_id)
     {
-       $list = D('LabelArticle')->where(array('a.article_id'=>$article_id))
+       return D('LabelArticle')->where(array('a.article_id'=>$article_id))
            ->table('app_label_article as a')->join('app_label as l on l.id = a.label_id')
            ->field('l.id,l.label_name')->select();
-       return $list;
     }
 
     //得到赞大用户信息最多7条
     public function get_contentpraise_info($article_id)
     {
-        $list = D('ContentPraise')->where(array('c.article_id'=>$article_id))
+        return D('ContentPraise')->where(array('c.article_id'=>$article_id))
             ->table('app_content_praise as c')->join('app_users as u on u.id = c.user_praise_id')
             ->field('u.id,u.head_img')->order('c.create_time desc')->limit(7)->select();
-        return $list;
     }
 
     //得到赞大数量
     public function get_contentpraise_count($article_id)
     {
-        $count = D('ContentPraise')->where(array('article_id'=>$article_id))->count();
-        return $count;
+        return D('ContentPraise')->where(array('article_id'=>$article_id))->count();
     }
 
     //得到评论数量
     public function get_comment_count($article_id)
     {
-        $count = D('Comment')->where(array('article_id'=>array('eq',$article_id)))->count();
-        return $count;
+        return D('Comment')->where(array('article_id'=>array('eq',$article_id)))->count();
     }
 
     //得到商品图片路径取其中一个
@@ -93,6 +88,24 @@ class ApiBaseModel extends AppBaseModel {
     {
         $shop_url = D('ShopPhoto')->where(array('shop_id'=>$id))->limit(1)->field('shop_url')->find();
         return $shop_url['shop_url'];
+    }
+
+    //得到收藏数量
+    public function get_collection_count($user_id)
+    {
+        return D('Collection')->where(array('user_id'=>$user_id))->count();
+    }
+
+    //获得是不是朋友的数量
+    public function get_is_friends($user_id,$type)
+    {
+        return D('UserFriends')->where(array('user_id'=>$user_id,'friend_statis'=>$type))->count();
+    }
+
+    //判断是不是朋友
+    public function is_no_friends($user_id,$other_id)
+    {
+        return D('UserFriends')->where(array('user_id'=>$user_id,'friend_id'=>$other_id,'friend_statis'=>1))->count();
     }
 
     /*
