@@ -114,14 +114,16 @@ class ArticleModel extends ApiBaseModel {
         if($type==2)
         {
             $list_info = list_sort_by($list_info,'distance');
-            $new_list_info = array();
-            for($i= $p * $page_count;$i< $page_count;$i++)
-            {
-                $new_list_info[] = $list_info[$i];
-            }
+            //$new_list_info = array();
+            //for($i= $p * $page_count;$i< $page_count;$i++)
+            //{
+           //     $new_list_info[] = $list_info[$i];
+            //}
             //数组覆盖数组
-            $list_info = $new_list_info;
+            //$list_info = $new_list_info;
         }
+
+        return $list_info;
 
 		if($list_info!='')
 		{
