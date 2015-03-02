@@ -328,34 +328,182 @@ POST /Api/Home/home_data
 ```json
 {
    "status": "0",
-   "msg": "",
+   "msg": "获取成功",
    "data":
    {
-       "all_count": "102",
+       "all_count": "10",
        "info":
        [
            {
                "user_info":
                {
-                   "id": "3",
-                   "nickname": "朱大爷",
-                   "head_img": "http://localhost/App/Uploads/20150204/54d1b2b28e39b.jpg",
+                   "id": "26",
+                   "account": "13472798110",
+                   "nickname": "沧桑啊～",
+                   "password": "e10adc3949ba59abbe56e057f20f883e",
+                   "phone": "13472798110",
+                   "city_id": "1",
+                   "head_img": "http://zhaopai.jsonlin.cn/App/Uploads/20150302/54f405c08fdad.jpg",
+                   "age": "0",
+                   "sex": "0",
+                   "background_img": "center_bg.png",
+                   "integral": "130",
+                   "interest": "",
+                   "name": "",
+                   "address": "",
+                   "address_phone": "",
+                   "last_login_time": "1425281958",
+                   "last_login_ip": "222.69.135.221",
+                   "login_count": "11",
+                   "create_time": "1425278401",
+                   "update_time": "1425278401",
+                   "type": "1",
+                   "status": "0",
+                   "is_del": "0",
+                   "title": "上海市"
+               },
+               "photo_info":
+               {
+                   "id": "42",
+                   "user_id": "26",
+                   "content": "测试",
+                   "city_id": "1",
+                   "article_img": "http://zhaopai.jsonlin.cn/App/Uploads/20150302/54f4066ecc88f.jpg",
+                   "create_time": "1425278574",
+                   "support": "0",
+                   "nonsupport": "0",
+                   "recommend": "0",
+                   "longitude": "121.20127700000000000",
+                   "latitude": "31.20056500000000000",
+                   "is_report": "0",
+                   "distance": "0",
+                   "photo_time": "2015-03-02 14:42:54",
+                   "tag_info":
+                   [
+                       {
+                           "id": "2",
+                           "label_name": "文艺"
+                       },
+                       {
+                           "id": "1",
+                           "label_name": "文明"
+                       }
+                   ],
+                   "like_info":
+                   {
+                       "like_num": "0",
+                       "like_list": ""
+                   },
+                   "comment_num": "0"
+               }
+           },
+           {
+               "user_info":
+               {
+                   "id": "1",
+                   "account": "13111111111",
+                   "nickname": "吴智勇",
+                   "password": "e10adc3949ba59abbe56e057f20f883e",
+                   "phone": "13111111111",
+                   "city_id": "1",
+                   "head_img": "http://zhaopai.jsonlin.cn/App/Uploads/20150215/54dffe04ef775.jpg",
+                   "age": "26",
+                   "sex": "1",
+                   "background_img": "20150226/54eed3fb29f14.jpg",
+                   "integral": "830",
+                   "interest": "22",
+                   "name": "吴志勇2",
+                   "address": "浦东新区",
+                   "address_phone": "1231231",
+                   "last_login_time": "1425282048",
+                   "last_login_ip": "112.65.191.228",
+                   "login_count": "293",
+                   "create_time": "1423963622",
+                   "update_time": "1423963622",
+                   "type": "1",
+                   "status": "0",
+                   "is_del": "0",
+                   "title": "上海市"
+               },
+               "photo_info":
+               {
+                   "id": "39",
+                   "user_id": "1",
+                   "content": "额",
+                   "city_id": "1",
+                   "article_img": "http://zhaopai.jsonlin.cn/App/Uploads/20150302/54f3f398c31a8.mp4",
+                   "create_time": "1425273755",
+                   "support": "1",
+                   "nonsupport": "0",
+                   "recommend": "0",
+                   "longitude": "121.20116700000000000",
+                   "latitude": "31.20059600000000000",
+                   "is_report": "0",
+                   "distance": "0.01",
+                   "photo_time": "2015-03-02 13:22:35",
+                   "tag_info":
+                   [
+                       {
+                           "id": "8",
+                           "label_name": "脏乱差"
+                       },
+                       {
+                           "id": "6",
+                           "label_name": "变态"
+                       }
+                   ],
+                   "like_info":
+                   {
+                       "like_num": "0",
+                       "like_list": ""
+                   },
+                   "comment_num": "2"
+               }
+           },
+           {
+               "user_info":
+               {
+                   "id": "4",
+                   "account": "13766666666",
+                   "nickname": "Kidd",
+                   "password": "7fa8282ad93047a4d6fe6111c93b308a",
+                   "phone": "13766666666",
+                   "city_id": "2",
+                   "head_img": "http://zhaopai.jsonlin.cn/App/Uploads/20150215/54e045e4e98b3.jpg",
+                   "age": "0",
+                   "sex": "0",
+                   "background_img": "20150215/54e0720a84313.jpg",
+                   "integral": "80",
+                   "interest": "",
+                   "name": "",
+                   "address": "",
+                   "address_phone": "",
+                   "last_login_time": "1425275197",
+                   "last_login_ip": "223.104.5.151",
+                   "login_count": "24",
+                   "create_time": "1423984100",
+                   "update_time": "1423984100",
+                   "type": "1",
+                   "status": "0",
+                   "is_del": "0",
                    "title": "北京市"
                },
                "photo_info":
                {
-                   "id": "102",
-                   "user_id": "3",
-                   "content": "哈哈哈哈哈",
+                   "id": "26",
+                   "user_id": "4",
+                   "content": "海景海景",
                    "city_id": "1",
-                   "article_img": "http://localhost/App/Uploads/20150205/54d312e93e00c.jpg",
-                   "create_time": "1423119082",
-                   "support": "0",
-                   "nonsupport": "0",
+                   "article_img": "http://zhaopai.jsonlin.cn/App/Uploads/20150227/54eff69784f74.jpg",
+                   "create_time": "1425012375",
+                   "support": "1",
+                   "nonsupport": "1",
                    "recommend": "0",
-                   "longitude": "121.42825800000000000",
-                   "latitude": "31.26601900000000000",
-                   "photo_time": "2015-02-05 14:51:22",
+                   "longitude": "121.37600000000000000",
+                   "latitude": "31.26037000000000000",
+                   "is_report": "0",
+                   "distance": "17.91",
+                   "photo_time": "2015-02-27 12:46:15",
                    "tag_info": "",
                    "like_info":
                    {
@@ -369,55 +517,168 @@ POST /Api/Home/home_data
                "user_info":
                {
                    "id": "3",
-                   "nickname": "朱大爷",
-                   "head_img": "http://localhost/App/Uploads/20150204/54d1b2b28e39b.jpg",
+                   "account": "18616743312",
+                   "nickname": "wish",
+                   "password": "e10adc3949ba59abbe56e057f20f883e",
+                   "phone": "18616743312",
+                   "city_id": "2",
+                   "head_img": "http://zhaopai.jsonlin.cn/App/Uploads/20150302/54f3c8a08ce66.jpg",
+                   "age": "0",
+                   "sex": "0",
+                   "background_img": "20150302/54f3c8c4b3d7b.jpg",
+                   "integral": "580",
+                   "interest": "lol",
+                   "name": "wish",
+                   "address": "金沙江西路",
+                   "address_phone": "18616743312",
+                   "last_login_time": "1425283203",
+                   "last_login_ip": "116.226.30.205",
+                   "login_count": "113",
+                   "create_time": "1423965176",
+                   "update_time": "1423965176",
+                   "type": "1",
+                   "status": "0",
+                   "is_del": "0",
                    "title": "北京市"
                },
                "photo_info":
                {
-                   "id": "101",
+                   "id": "22",
                    "user_id": "3",
-                   "content": "",
+                   "content": "哈哈哈，上班第一天╮(╯▽╰)╭",
                    "city_id": "1",
-                   "article_img": "http://localhost/App/Uploads/20150205/54d30e0a07680.jpg",
-                   "create_time": "1423117835",
-                   "support": "0",
+                   "article_img": "http://zhaopai.jsonlin.cn/App/Uploads/20150225/54ed5d83bd9f1.jpg",
+                   "create_time": "1424842115",
+                   "support": "1",
                    "nonsupport": "0",
                    "recommend": "0",
-                   "longitude": "121.42825800000000000",
-                   "latitude": "31.26601900000000000",
-                   "photo_time": "2015-02-05 14:30:35",
+                   "longitude": "121.42804400000000000",
+                   "latitude": "31.26597000000000000",
+                   "is_report": "0",
+                   "distance": "22.78",
+                   "photo_time": "2015-02-25 13:28:35",
                    "tag_info": "",
                    "like_info":
                    {
-                       "like_num": "0",
-                       "like_list": ""
+                       "like_num": "1",
+                       "like_list":
+                       [
+                           {
+                               "id": "3",
+                               "head_img": "http://zhaopai.jsonlin.cn/App/Uploads/20150302/54f3c8a08ce66.jpg"
+                           }
+                       ]
                    },
-                   "comment_num": "0"
+                   "comment_num": "1"
                }
            },
            {
                "user_info":
                {
-                   "id": "11",
-                   "nickname": "Kidddd",
-                   "head_img": "http://localhost/App/Uploads/20150204/54d1bfd75abde.jpg",
-                   "title": ""
+                   "id": "1",
+                   "account": "13111111111",
+                   "nickname": "吴智勇",
+                   "password": "e10adc3949ba59abbe56e057f20f883e",
+                   "phone": "13111111111",
+                   "city_id": "1",
+                   "head_img": "http://zhaopai.jsonlin.cn/App/Uploads/20150215/54dffe04ef775.jpg",
+                   "age": "26",
+                   "sex": "1",
+                   "background_img": "20150226/54eed3fb29f14.jpg",
+                   "integral": "830",
+                   "interest": "22",
+                   "name": "吴志勇2",
+                   "address": "浦东新区",
+                   "address_phone": "1231231",
+                   "last_login_time": "1425282048",
+                   "last_login_ip": "112.65.191.228",
+                   "login_count": "293",
+                   "create_time": "1423963622",
+                   "update_time": "1423963622",
+                   "type": "1",
+                   "status": "0",
+                   "is_del": "0",
+                   "title": "上海市"
                },
                "photo_info":
                {
-                   "id": "100",
-                   "user_id": "11",
-                   "content": "ios测试",
+                   "id": "21",
+                   "user_id": "1",
+                   "content": "猜下吧",
                    "city_id": "1",
-                   "article_img": "http://localhost/App/Uploads/20150205/54d2e3e8c9c6c.jpg",
-                   "create_time": "1423107048",
-                   "support": "0",
+                   "article_img": "http://zhaopai.jsonlin.cn/App/Uploads/20150216/54e1dfcaeb64f.jpg",
+                   "create_time": "1424089034",
+                   "support": "1",
+                   "nonsupport": "1",
+                   "recommend": "0",
+                   "longitude": "121.44910000000000000",
+                   "latitude": "31.19175000000000000",
+                   "is_report": "0",
+                   "distance": "23.62",
+                   "photo_time": "2015-02-16 20:17:14",
+                   "tag_info": "",
+                   "like_info":
+                   {
+                       "like_num": "2",
+                       "like_list":
+                       [
+                           {
+                               "id": "3",
+                               "head_img": "http://zhaopai.jsonlin.cn/App/Uploads/20150302/54f3c8a08ce66.jpg"
+                           },
+                           {
+                               "id": "1",
+                               "head_img": "http://zhaopai.jsonlin.cn/App/Uploads/20150215/54dffe04ef775.jpg"
+                           }
+                       ]
+                   },
+                   "comment_num": "12"
+               }
+           },
+           {
+               "user_info":
+               {
+                   "id": "1",
+                   "account": "13111111111",
+                   "nickname": "吴智勇",
+                   "password": "e10adc3949ba59abbe56e057f20f883e",
+                   "phone": "13111111111",
+                   "city_id": "1",
+                   "head_img": "http://zhaopai.jsonlin.cn/App/Uploads/20150215/54dffe04ef775.jpg",
+                   "age": "26",
+                   "sex": "1",
+                   "background_img": "20150226/54eed3fb29f14.jpg",
+                   "integral": "830",
+                   "interest": "22",
+                   "name": "吴志勇2",
+                   "address": "浦东新区",
+                   "address_phone": "1231231",
+                   "last_login_time": "1425282048",
+                   "last_login_ip": "112.65.191.228",
+                   "login_count": "293",
+                   "create_time": "1423963622",
+                   "update_time": "1423963622",
+                   "type": "1",
+                   "status": "0",
+                   "is_del": "0",
+                   "title": "上海市"
+               },
+               "photo_info":
+               {
+                   "id": "19",
+                   "user_id": "1",
+                   "content": "晚饭",
+                   "city_id": "1",
+                   "article_img": "http://zhaopai.jsonlin.cn/App/Uploads/20150216/54e1df398788c.jpg",
+                   "create_time": "1424088889",
+                   "support": "1",
                    "nonsupport": "0",
                    "recommend": "0",
-                   "longitude": "1.00000000000000000",
-                   "latitude": "1.00000000000000000",
-                   "photo_time": "2015-02-05 11:30:48",
+                   "longitude": "121.44940000000000000",
+                   "latitude": "31.19174000000000000",
+                   "is_report": "0",
+                   "distance": "23.65",
+                   "photo_time": "2015-02-16 20:14:49",
                    "tag_info": "",
                    "like_info":
                    {
@@ -430,63 +691,241 @@ POST /Api/Home/home_data
            {
                "user_info":
                {
-                   "id": "3",
-                   "nickname": "朱大爷",
-                   "head_img": "http://localhost/App/Uploads/20150204/54d1b2b28e39b.jpg",
+                   "id": "1",
+                   "account": "13111111111",
+                   "nickname": "吴智勇",
+                   "password": "e10adc3949ba59abbe56e057f20f883e",
+                   "phone": "13111111111",
+                   "city_id": "1",
+                   "head_img": "http://zhaopai.jsonlin.cn/App/Uploads/20150215/54dffe04ef775.jpg",
+                   "age": "26",
+                   "sex": "1",
+                   "background_img": "20150226/54eed3fb29f14.jpg",
+                   "integral": "830",
+                   "interest": "22",
+                   "name": "吴志勇2",
+                   "address": "浦东新区",
+                   "address_phone": "1231231",
+                   "last_login_time": "1425282048",
+                   "last_login_ip": "112.65.191.228",
+                   "login_count": "293",
+                   "create_time": "1423963622",
+                   "update_time": "1423963622",
+                   "type": "1",
+                   "status": "0",
+                   "is_del": "0",
+                   "title": "上海市"
+               },
+               "photo_info":
+               {
+                   "id": "20",
+                   "user_id": "1",
+                   "content": "晚饭",
+                   "city_id": "1",
+                   "article_img": "http://zhaopai.jsonlin.cn/App/Uploads/20150216/54e1df3a15a80.jpg",
+                   "create_time": "1424088890",
+                   "support": "0",
+                   "nonsupport": "1",
+                   "recommend": "0",
+                   "longitude": "121.44940000000000000",
+                   "latitude": "31.19174000000000000",
+                   "is_report": "0",
+                   "distance": "23.65",
+                   "photo_time": "2015-02-16 20:14:50",
+                   "tag_info": "",
+                   "like_info":
+                   {
+                       "like_num": "2",
+                       "like_list":
+                       [
+                           {
+                               "id": "3",
+                               "head_img": "http://zhaopai.jsonlin.cn/App/Uploads/20150302/54f3c8a08ce66.jpg"
+                           },
+                           {
+                               "id": "1",
+                               "head_img": "http://zhaopai.jsonlin.cn/App/Uploads/20150215/54dffe04ef775.jpg"
+                           }
+                       ]
+                   },
+                   "comment_num": "1"
+               }
+           },
+           {
+               "user_info":
+               {
+                   "id": "1",
+                   "account": "13111111111",
+                   "nickname": "吴智勇",
+                   "password": "e10adc3949ba59abbe56e057f20f883e",
+                   "phone": "13111111111",
+                   "city_id": "1",
+                   "head_img": "http://zhaopai.jsonlin.cn/App/Uploads/20150215/54dffe04ef775.jpg",
+                   "age": "26",
+                   "sex": "1",
+                   "background_img": "20150226/54eed3fb29f14.jpg",
+                   "integral": "830",
+                   "interest": "22",
+                   "name": "吴志勇2",
+                   "address": "浦东新区",
+                   "address_phone": "1231231",
+                   "last_login_time": "1425282048",
+                   "last_login_ip": "112.65.191.228",
+                   "login_count": "293",
+                   "create_time": "1423963622",
+                   "update_time": "1423963622",
+                   "type": "1",
+                   "status": "0",
+                   "is_del": "0",
+                   "title": "上海市"
+               },
+               "photo_info":
+               {
+                   "id": "13",
+                   "user_id": "1",
+                   "content": "123",
+                   "city_id": "1",
+                   "article_img": "http://zhaopai.jsonlin.cn/App/Uploads/20150215/54e0b1171392a.jpg",
+                   "create_time": "1424011543",
+                   "support": "0",
+                   "nonsupport": "1",
+                   "recommend": "0",
+                   "longitude": "121.45180000000000000",
+                   "latitude": "31.18942000000000000",
+                   "is_report": "0",
+                   "distance": "23.89",
+                   "photo_time": "2015-02-15 22:45:43",
+                   "tag_info": "",
+                   "like_info":
+                   {
+                       "like_num": "1",
+                       "like_list":
+                       [
+                           {
+                               "id": "1",
+                               "head_img": "http://zhaopai.jsonlin.cn/App/Uploads/20150215/54dffe04ef775.jpg"
+                           }
+                       ]
+                   },
+                   "comment_num": "1"
+               }
+           },
+           {
+               "user_info":
+               {
+                   "id": "1",
+                   "account": "13111111111",
+                   "nickname": "吴智勇",
+                   "password": "e10adc3949ba59abbe56e057f20f883e",
+                   "phone": "13111111111",
+                   "city_id": "1",
+                   "head_img": "http://zhaopai.jsonlin.cn/App/Uploads/20150215/54dffe04ef775.jpg",
+                   "age": "26",
+                   "sex": "1",
+                   "background_img": "20150226/54eed3fb29f14.jpg",
+                   "integral": "830",
+                   "interest": "22",
+                   "name": "吴志勇2",
+                   "address": "浦东新区",
+                   "address_phone": "1231231",
+                   "last_login_time": "1425282048",
+                   "last_login_ip": "112.65.191.228",
+                   "login_count": "293",
+                   "create_time": "1423963622",
+                   "update_time": "1423963622",
+                   "type": "1",
+                   "status": "0",
+                   "is_del": "0",
+                   "title": "上海市"
+               },
+               "photo_info":
+               {
+                   "id": "12",
+                   "user_id": "1",
+                   "content": "看下吧",
+                   "city_id": "1",
+                   "article_img": "http://zhaopai.jsonlin.cn/App/Uploads/20150215/54e0b0c1264fe.jpg",
+                   "create_time": "1424011457",
+                   "support": "1",
+                   "nonsupport": "0",
+                   "recommend": "0",
+                   "longitude": "121.45180000000000000",
+                   "latitude": "31.18940000000000000",
+                   "is_report": "0",
+                   "distance": "23.89",
+                   "photo_time": "2015-02-15 22:44:17",
+                   "tag_info": "",
+                   "like_info":
+                   {
+                       "like_num": "1",
+                       "like_list":
+                       [
+                           {
+                               "id": "1",
+                               "head_img": "http://zhaopai.jsonlin.cn/App/Uploads/20150215/54dffe04ef775.jpg"
+                           }
+                       ]
+                   },
+                   "comment_num": "1"
+               }
+           },
+           {
+               "user_info":
+               {
+                   "id": "4",
+                   "account": "13766666666",
+                   "nickname": "Kidd",
+                   "password": "7fa8282ad93047a4d6fe6111c93b308a",
+                   "phone": "13766666666",
+                   "city_id": "2",
+                   "head_img": "http://zhaopai.jsonlin.cn/App/Uploads/20150215/54e045e4e98b3.jpg",
+                   "age": "0",
+                   "sex": "0",
+                   "background_img": "20150215/54e0720a84313.jpg",
+                   "integral": "80",
+                   "interest": "",
+                   "name": "",
+                   "address": "",
+                   "address_phone": "",
+                   "last_login_time": "1425275197",
+                   "last_login_ip": "223.104.5.151",
+                   "login_count": "24",
+                   "create_time": "1423984100",
+                   "update_time": "1423984100",
+                   "type": "1",
+                   "status": "0",
+                   "is_del": "0",
                    "title": "北京市"
                },
                "photo_info":
                {
-                   "id": "99",
-                   "user_id": "3",
-                   "content": "ios测试",
+                   "id": "40",
+                   "user_id": "4",
+                   "content": "duang",
                    "city_id": "1",
-                   "article_img": "http://localhost/App/Uploads/20150204/54d1d1ff370ca.jpg",
-                   "create_time": "1423036927",
-                   "support": "0",
+                   "article_img": "http://zhaopai.jsonlin.cn/App/Uploads/20150302/54f3fc4eaed39.jpg",
+                   "create_time": "1425275982",
+                   "support": "1",
                    "nonsupport": "0",
                    "recommend": "0",
-                   "longitude": "1.00000000000000000",
-                   "latitude": "1.00000000000000000",
-                   "photo_time": "2015-02-04 16:02:07",
-                   "tag_info": "",
+                   "longitude": "121.49030000000000000",
+                   "latitude": "31.25384000000000000",
+                   "is_report": "0",
+                   "distance": "28.14",
+                   "photo_time": "2015-03-02 13:59:42",
+                   "tag_info":
+                   [
+                       {
+                           "id": "67",
+                           "label_name": "duang"
+                       }
+                   ],
                    "like_info":
                    {
                        "like_num": "0",
                        "like_list": ""
                    },
-                   "comment_num": "0"
-               }
-           },
-           {
-               "user_info":
-               {
-                   "id": "11",
-                   "nickname": "Kidddd",
-                   "head_img": "http://localhost/App/Uploads/20150204/54d1bfd75abde.jpg",
-                   "title": ""
-               },
-               "photo_info":
-               {
-                   "id": "98",
-                   "user_id": "11",
-                   "content": "ios测试",
-                   "city_id": "1",
-                   "article_img": "http://localhost/App/Uploads/20150204/54d1c683e1da7.jpg",
-                   "create_time": "1423033987",
-                   "support": "0",
-                   "nonsupport": "0",
-                   "recommend": "0",
-                   "longitude": "1.00000000000000000",
-                   "latitude": "1.00000000000000000",
-                   "photo_time": "2015-02-04 15:13:07",
-                   "tag_info": "",
-                   "like_info":
-                   {
-                       "like_num": "0",
-                       "like_list": ""
-                   },
-                   "comment_num": "0"
+                   "comment_num": "1"
                }
            }
        ]
