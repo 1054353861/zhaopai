@@ -110,9 +110,11 @@ class ArticleModel extends ApiBaseModel {
                 $list_info[$key]['distance'] = round(GetDistance($lat,$lng,$val['latitude'], $val['longitude']),2);
             }
         }
-        $list_info = list_sort_by($list_info,'distance');
 
-        
+        if($type==2)
+            $list_info = list_sort_by($list_info,'distance');
+
+
 		if($list_info!='')
 		{
 			foreach($list_info as $key=>$value)
