@@ -98,8 +98,6 @@ class ArticleModel extends ApiBaseModel {
 
 				$list_info = $this->where($l_where)->limit($p * $page_count,$page_count)->select();
 
-                return $this->getLastSql();
-				//$list['all_count'] = $this->where($l_where)->count();
 				$list['all_count'] = count($list_info);
 
 			break;
