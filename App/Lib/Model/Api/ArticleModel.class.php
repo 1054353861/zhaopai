@@ -96,7 +96,8 @@ class ArticleModel extends ApiBaseModel {
 				    'AND'
 				);
 
-				$list_info = $this->where($l_where)->order('longitude asc')->order('latitude asc')->limit(200)->select();
+				$list_info = $this->where($l_where)->order('longitude asc')->order('latitude asc')
+                    ->order('create_time desc')->limit(200)->select();
 
 				$list['all_count'] = count($list_info);
 
@@ -123,7 +124,7 @@ class ArticleModel extends ApiBaseModel {
                 }
             }
             //数组覆盖数组
-            $list_info = $new_list_info;
+            $list_info = &$new_list_info;
         }
 
 		if($list_info!='')
