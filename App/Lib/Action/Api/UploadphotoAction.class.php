@@ -72,6 +72,8 @@ class UploadphotoAction extends ApiBaseAction {
 		$arr['latitude'] = $this->_post('latitude');
 		$arr['city_id'] = $this->_post('city_id');
 		$tags = explode(':',$this->_post('tags'));
+
+        //上传图片
 		if($_FILES['img']!='')
 		{
 			$file_list = parent::upload_file($_FILES['img']);
@@ -79,6 +81,24 @@ class UploadphotoAction extends ApiBaseAction {
 		}else{
 			$this->_post('article_img')!='' ? $arr['article_img'] = $this->_post('article_img') : parent::callback(C('STATUS_DATA_ERROR'),'','请上传照片');
 		}
+
+        //上传视频
+        if($_FILES['video']!='')
+        {
+            $video_list = parent::upload_file($_FILES['video']);
+            if($video_list['status']==true)
+            {
+                $arr['article_video'] = $video_list['info'][0]['savename'];
+            }else{
+                //删除图片
+                @unlink(C('PUBLIC_VISIT.app_dir').$arr['article_img']);
+                parent::callback(C('STATUS_DATA_ERROR'),'','视频参数有误');
+            }
+        }else{
+            if($this->_post('article_video')!='')
+                $arr['article_video'] = $this->_post('article_video');
+        }
+
 		$arr['create_time'] = time();
 		$bool = $this->db['Article']->upload_article($arr,$tags);
         //触发完成发表文章事件
@@ -90,14 +110,38 @@ class UploadphotoAction extends ApiBaseAction {
 	//上传文件
 	public function upload_afile()
 	{
-		$file_list = parent::upload_file($_FILES['img']);
-		if($file_list['status']==true)
-		{
-			parent::callback(C('STATUS_SUCCESS'),'',$file_list['info'][0]['savename']);
-		}else{
-			parent::callback(C('STATUS_DATA_ERROR'),'图片格式不正确','');
-		}
+        if($_FILES['img']!='')
+        {
+            $file_list = parent::upload_file($_FILES['img']);
+            if($file_list['status']==true)
+            {
+                parent::callback(C('STATUS_SUCCESS'),'',$file_list['info'][0]['savename']);
+            }else{
+                parent::callback(C('STATUS_DATA_ERROR'),'图片格式不正确','');
+            }
+        }else{
+            parent::callback(C('STATUS_DATA_ERROR'),'请检查上传参数','');
+        }
 	}
+
+    //上传视频
+    public function upload_video_file()
+    {
+        if($_FILES['video']!='' && $this->_post('old_article_img')!='')
+        {
+            $video_list = parent::upload_file($_FILES['video']);
+            if($video_list['status']==true)
+            {
+                parent::callback(C('STATUS_SUCCESS'),'',$file_list['info'][0]['savename']);
+            }else{
+                //删除图片
+                @unlink(C('PUBLIC_VISIT.app_dir').$this->_post('old_article_img'));
+                parent::callback(C('STATUS_DATA_ERROR'),'','视频参数有误');
+            }
+        }else{
+            parent::callback(C('STATUS_DATA_ERROR'),'请检查上传参数','');
+        }
+    }
 
 	//上传图片-标签-随机
 	public function upload_tags_random()

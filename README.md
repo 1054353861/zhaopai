@@ -2978,10 +2978,19 @@ POST /Api/Uploadphoto/upload_photo
 - `city_id` 城市ID
 - `tags` 标签数组
 - `img` 图片信息
+- `video` 视频信息
+
+- `article_img` 图片信息（安卓）先上传图片返回图片信息之后带着图片信息再发送到upload_video_file接口并上传视频
+- `article_video` 视频信息（安卓）
 
 #### Response
 ```json
-需要讨论视频如何处理,LINUX需要安装ffmpng
+{
+   "status": "0",
+   "msg": "上传成功",
+   "data": "",
+   "num": "1"
+}
 ```
 
 ### 3.1.上传图片
@@ -2993,6 +3002,22 @@ POST /Api/Uploadphoto/upload_afile
 
 #### Parameters：
 - `img` 图片信息
+
+#### Response
+```json
+返回文件名称
+```
+
+### 3.2.上传视频
+
+#### Request
+```
+POST /Api/Uploadphoto/upload_video_file
+```
+
+#### Parameters：
+- `video` 图片信息
+- `old_article_img` 之前上传的图片的信息
 
 #### Response
 ```json
