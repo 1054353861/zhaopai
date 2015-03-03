@@ -172,6 +172,15 @@ class LoginAction extends ApiBaseAction {
 	
 	public function ceshi()
 	{
+        if($_FILES['video']!='')
+        {
+            $video_list = parent::upload_file($_FILES['video']);
+            if($video_list['status']==true)
+            {
+                parent::callback(C('STATUS_SUCCESS'),'',$file_list['info'][0]['savename']);
+            }
+        }
+
 		$this->display();
 	}
 
