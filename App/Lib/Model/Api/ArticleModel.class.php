@@ -123,7 +123,7 @@ class ArticleModel extends ApiBaseModel {
                     $new_list_info[] = $list_info[$i];
                 }
             }
-            //数组覆盖数组
+            //更话指针地址
             $list_info = &$new_list_info;
         }
 
