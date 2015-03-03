@@ -2980,7 +2980,7 @@ POST /Api/Uploadphoto/upload_photo
 - `img` 图片信息
 - `video` 视频信息
 
-- `article_img` 图片信息（安卓）先上传图片返回图片信息之后带着图片信息再发送到upload_video_file接口并上传视频
+- `article_img` 图片信息（安卓)
 - `article_video` 视频信息（安卓）
 
 #### Response
@@ -3002,26 +3002,31 @@ POST /Api/Uploadphoto/upload_afile
 
 #### Parameters：
 - `img` 图片信息
+- `video` 视频信息 传img就是图片 传video就是视频 麻烦先传img 后传视频
 
 #### Response
 ```json
 返回文件名称
 ```
 
-### 3.2.上传视频
+### 3.2.如果上传视频失败就掉用这个接口
 
 #### Request
 ```
-POST /Api/Uploadphoto/upload_video_file
+POST /Api/Uploadphoto/delete_img_file
 ```
 
 #### Parameters：
-- `video` 图片信息
 - `old_article_img` 之前上传的图片的信息
 
 #### Response
 ```json
-返回文件名称
+{
+   "status": "0",
+   "msg": "删除成功",
+   "data": "",
+   "num": "1"
+}
 ```
 
 ### 4.上传图片-标签-随机

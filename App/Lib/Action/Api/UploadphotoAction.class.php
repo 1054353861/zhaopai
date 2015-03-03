@@ -119,28 +119,27 @@ class UploadphotoAction extends ApiBaseAction {
             }else{
                 parent::callback(C('STATUS_DATA_ERROR'),'图片格式不正确','');
             }
-        }else{
-            parent::callback(C('STATUS_DATA_ERROR'),'请检查上传参数','');
         }
-	}
 
-    //上传视频
-    public function upload_video_file()
-    {
-        if($_FILES['video']!='' && $this->_post('old_article_img')!='')
+        if($_FILES['video']!='')
         {
             $video_list = parent::upload_file($_FILES['video']);
             if($video_list['status']==true)
             {
                 parent::callback(C('STATUS_SUCCESS'),'',$file_list['info'][0]['savename']);
             }else{
-                //删除图片
-                @unlink(C('PUBLIC_VISIT.app_dir').$this->_post('old_article_img'));
-                parent::callback(C('STATUS_DATA_ERROR'),'','视频参数有误');
+                parent::callback(C('STATUS_DATA_ERROR'),'视频参数有误','');
             }
-        }else{
-            parent::callback(C('STATUS_DATA_ERROR'),'请检查上传参数','');
         }
+
+	}
+
+    //删除图片
+    public function delete_img_file()
+    {
+        $img_url = $this->_post('old_article_img');
+        @unlink(C('PUBLIC_VISIT.app_dir').$img_url);
+        parent::callback(C('STATUS_SUCCESS'),'删除成功','');
     }
 
 	//上传图片-标签-随机
