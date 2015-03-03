@@ -126,7 +126,7 @@ class UploadphotoAction extends ApiBaseAction {
             $video_list = parent::upload_file($_FILES['video']);
             if($video_list['status']==true)
             {
-                parent::callback(C('STATUS_SUCCESS'),'',$file_list['info'][0]['savename']);
+                parent::callback(C('STATUS_SUCCESS'),'',$video_list['info'][0]['savename']);
             }else{
                 parent::callback(C('STATUS_DATA_ERROR'),'视频参数有误','');
             }
