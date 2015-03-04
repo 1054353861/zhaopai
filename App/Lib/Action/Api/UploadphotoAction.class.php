@@ -82,23 +82,6 @@ class UploadphotoAction extends ApiBaseAction {
 			$this->_post('article_img')!='' ? $arr['article_img'] = $this->_post('article_img') : parent::callback(C('STATUS_DATA_ERROR'),'','请上传照片');
 		}
 
-        //上传视频
-        if($_FILES['video']!='')
-        {
-            $video_list = parent::upload_file($_FILES['video']);
-            if($video_list['status']==true)
-            {
-                $arr['article_video'] = $video_list['info'][0]['savename'];
-            }else{
-                //删除图片
-                @unlink(C('PUBLIC_VISIT.app_dir').$arr['article_img']);
-                parent::callback(C('STATUS_DATA_ERROR'),'','视频参数有误');
-            }
-        }else{
-            if($this->_post('article_video')!='')
-                $arr['article_video'] = $this->_post('article_video');
-        }
-
 		$arr['create_time'] = time();
 		$bool = $this->db['Article']->upload_article($arr,$tags);
         //触发完成发表文章事件
@@ -121,26 +104,7 @@ class UploadphotoAction extends ApiBaseAction {
             }
         }
 
-        if($_FILES['video']!='')
-        {
-            $video_list = parent::upload_file($_FILES['video']);
-            if($video_list['status']==true)
-            {
-                parent::callback(C('STATUS_SUCCESS'),'',$video_list['info'][0]['savename']);
-            }else{
-                parent::callback(C('STATUS_DATA_ERROR'),'视频参数有误','');
-            }
-        }
-
 	}
-
-    //删除图片
-    public function delete_img_file()
-    {
-        $img_url = $this->_post('old_article_img');
-        @unlink(C('PUBLIC_VISIT.app_dir').$img_url);
-        parent::callback(C('STATUS_SUCCESS'),'删除成功','');
-    }
 
 	//上传图片-标签-随机
 	public function upload_tags_random()

@@ -2978,10 +2978,8 @@ POST /Api/Uploadphoto/upload_photo
 - `city_id` 城市ID
 - `tags` 标签数组
 - `img` 图片信息
-- `video` 视频信息
 
 - `article_img` 图片信息（安卓)
-- `article_video` 视频信息（安卓）
 
 #### Response
 ```json
@@ -3002,7 +3000,6 @@ POST /Api/Uploadphoto/upload_afile
 
 #### Parameters：
 - `img` 图片信息
-- `video` 视频信息 传img就是图片 传video就是视频 麻烦先传img 后传视频
 
 #### Response
 ```json
