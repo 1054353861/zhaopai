@@ -957,6 +957,13 @@ POST /Api/Home/home_data
 }
 ```
 
+### 2.广告页
+
+#### Request
+```
+http://zhaopai.jsonlin.cn/Api/Home/home_advertment
+```
+
 
 ## 四、赞的列表
 
