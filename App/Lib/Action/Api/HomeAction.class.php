@@ -10,7 +10,7 @@ class HomeAction extends ApiBaseAction {
 	//每个类都要重写此变量
 	protected  $is_check_rbac = false;		//当前控制是否开启身份验证
 	
-	protected  $not_check_fn = array('home_data');	//无需登录和验证rbac的方法名
+	protected  $not_check_fn = array('home_data','home_advertment');	//无需登录和验证rbac的方法名
 
 	public function __construct()
 	{
