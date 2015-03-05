@@ -38,5 +38,9 @@ class HomeAction extends ApiBaseAction {
 	    
 	}
 
-	
+	//广告主页
+    public function home_advertment()
+    {
+        $this->display();
+    }
 }
