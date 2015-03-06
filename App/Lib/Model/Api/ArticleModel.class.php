@@ -272,4 +272,14 @@ class ArticleModel extends ApiBaseModel {
 		}
 	}
 
+
+    //获取文章到详情
+    public function get_advert_info($advert_id)
+    {
+        $info = $this->where(array('id'=>$advert_id))->find();
+        $info['person_number'] = $info['support'] + $info['nonsupport'];
+        $info['support'] = $info['support'] / $info['person_number'] * 100;
+        $info['nonsupport'] = $info['nonsupport'] / $info['person_number']* 100;
+        return $info;
+    }
 }
