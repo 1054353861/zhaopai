@@ -961,8 +961,11 @@ POST /Api/Home/home_data
 
 #### Request
 ```
-http://zhaopai.jsonlin.cn/Api/Home/home_advertment
+zhaopai.jsonlin.cn/Api/Home/home_advertment/advert_id/1
 ```
+#### Parameters：
+- `advert_id` 文章ID
+
 
 
 ## 四、赞的列表
