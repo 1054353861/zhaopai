@@ -278,8 +278,8 @@ class ArticleModel extends ApiBaseModel {
     {
         $info = $this->where(array('id'=>$advert_id))->find();
         $info['person_number'] = $info['support'] + $info['nonsupport'];
-        $info['support'] = round($info['support'] / $info['person_number']) * 100;
-        $info['nonsupport'] = round($info['nonsupport'] / $info['person_number']) * 100;
+        $info['support'] = round($info['support'] / $info['person_number'] * 100);
+        $info['nonsupport'] = round($info['nonsupport'] / $info['person_number'] * 100);
         return $info;
     }
 }
