@@ -41,7 +41,7 @@ class HomeAction extends ApiBaseAction {
 	//广告主页
     public function home_advertment()
     {
-        $advert_id = $this->_post('advert_id');
+        $advert_id = $this->_get('advert_id');
         if(!is_numeric($advert_id))
             return false;
         $list = $this->db['Article']->get_advert_info($advert_id);
