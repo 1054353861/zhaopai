@@ -800,11 +800,8 @@ function pass_encryption ($str){
     function GrabImage($url,$filename="") {
         if($url=="") return false;
 
-        if($filename=="") {
-//            $ext=strrchr($url,".");
-//            if($ext!=".gif" && $ext!=".jpg" && $ext!=".png") return false;
+        if($filename=="")
             $filename=date("Ymd").mt_rand(1,9999).'.jpg';
-        }
 
         $filepath =  C('UPLOAD_DIR.app_dir').date('Ymd').'/';
 
@@ -817,6 +814,6 @@ function pass_encryption ($str){
         fwrite($fp2,$img);
         fclose($fp2);
 
-        return date('Ymd').$filename;
+        return date('Ymd').'/'.$filename;
     }
 ?>
