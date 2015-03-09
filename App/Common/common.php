@@ -800,8 +800,9 @@ function pass_encryption ($str){
     function get_image_download($url)
     {
         //上传文件目
+        $exten = pathinfo($url);
         $data = file_get_contents($url);    // 读文件内容
-        $filetime = time().rand(1,300).'.'.pathinfo($url)['extension'];                 //得到时间戳
+        $filetime = time().rand(1,300).'.'.$exten['extension'];                 //得到时间戳
         $filepath =  C('UPLOAD_DIR.domain_dir').C('UPLOAD_DIR.app_dir').date('Ymd').'/';
         if(!is_dir($filepath))
         {
