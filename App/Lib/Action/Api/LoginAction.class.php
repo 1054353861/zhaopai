@@ -64,29 +64,8 @@ class LoginAction extends ApiBaseAction {
                     //触发完成登陆事件
                     parent::end_integral_all_info($user_info['id'],2);
 
-					//$result = $user_info;
-					$result = array(
-                        'id'=>$user_info['id'],
-						'account'=>$user_info['account'],
-						'nickname'=>$user_info['nickname'],
-                        'city_id' => $user_info['city_id'],
-						'title'=>D('City')->where(array('id'=>$user_info['city_id']))->getField('title'),
-						'head_img'=>C('PUBLIC_VISIT.domain_dir').C('PUBLIC_VISIT.app_dir').$user_info['head_img'],
-						'sex'=>$user_info['sex'],
-						'background_img'=>C('PUBLIC_VISIT.domain_dir').C('PUBLIC_VISIT.app_dir').$user_info['background_img'],
-						'integral'=>$user_info['integral'],
-					    'interest'=>$user_info['interest'],
-					    'name'=>$user_info['name'],
-                        'user_age'=>$user_info['age'],
-					    'address'=>$user_info['address'],
-					    'address_phone'=>$user_info['address_phone'],
-						'last_login_time'=>date('Y-m-d H:i:s',$user_info['last_login_time']),
-						'login_count'=>$user_info['login_count'],
-						'create_time'=>date('Y-m-d H:i:s',$user_info['create_time']),
-					);
-
 					//返回给客户端数据
-					parent::callback(C('STATUS_SUCCESS'),'登录成功',$result,array('token'=>$identity_encryption));
+					parent::callback(C('STATUS_SUCCESS'),'登录成功',parent::cancel_info($user_info['id']),array('token'=>$identity_encryption));
 				}	
 			}
 		}
