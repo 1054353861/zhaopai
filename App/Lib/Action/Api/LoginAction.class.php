@@ -197,9 +197,9 @@ class LoginAction extends ApiBaseAction {
 	//第三方登陆接口
     public function regeister_login_order()
     {
-        $order_id = $this->_post('order_id');
+        $new_arr['order_id'] = $this->_post('order_id');
         $users = $this->db['Users'];
-        $value = $users->where(array('order_id'=>array('eq',$order_id)))->find();
+        $value = $users->where(array('order_id'=>array('eq',$new_arr['order_id'])))->find();
         if($value['id']!='')
         {
             //更新用户登录信息
@@ -210,7 +210,6 @@ class LoginAction extends ApiBaseAction {
             $new_arr['head_img'] = GrabImage($this->_post('image'));
             $new_arr['background_img'] = C('UPLOAD_DIR.default_background_img');
             $new_arr['account'] = $new_arr['nickname'] = $this->_post('nickname');
-            $new_arr['order_id'] = $this->_post('order_id');
             $new_arr['user_sex'] = $this->_post('sex');
             $new_arr['background_img'] = C('UPLOAD_DIR.default_background_img');
             $bool = $users->add($new_arr);
