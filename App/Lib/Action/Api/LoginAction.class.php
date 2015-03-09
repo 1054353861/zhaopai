@@ -172,7 +172,7 @@ class LoginAction extends ApiBaseAction {
 	
 	public function ceshi()
 	{
-        $url = $this->_get('url');
+        $url = $this->_post('url');
         if($url!='')
         {
             $val = GrabImage($url);
