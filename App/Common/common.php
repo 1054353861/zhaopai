@@ -811,4 +811,27 @@ function pass_encryption ($str){
         file_put_contents($filepath.$filetime,$data);
         return date('Ymd').'/'.$filetime;
     }
+
+    function GrabImage($url,$filename="") {
+        if($url=="") return false;
+
+        if($filename=="") {
+            $ext=strrchr($url,".");
+            if($ext!=".gif" && $ext!=".jpg" && $ext!=".png") return false;
+            $filename=date("YmdHis").$ext;
+        }
+
+        $filepath =  C('UPLOAD_DIR.domain_dir').C('UPLOAD_DIR.app_dir').date('Ymd').'/';
+
+        ob_start();
+        readfile($url);
+        $img = ob_get_contents();
+        ob_end_clean();
+
+        $fp2=@fopen($filepath.$filename, "a");
+        fwrite($fp2,$img);
+        fclose($fp2);
+
+        return $filename;
+    }
 ?>
