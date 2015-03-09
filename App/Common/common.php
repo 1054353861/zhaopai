@@ -798,7 +798,8 @@ function pass_encryption ($str){
 
     //下载数据
     function GrabImage($url,$filename="") {
-        if($url=="") return false;
+        if($url=="")
+            return '';
 
         if($filename=="")
             $filename=date("Ymd").mt_rand(1,9999).'.jpg';
