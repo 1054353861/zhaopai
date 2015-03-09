@@ -141,6 +141,49 @@ POST /Api/SendMsg/user_account_register
 }
 ```
 
+### 4.用户登录
+
+#### Request
+```
+POST /Api/Login/regeister_login_order
+```
+
+#### Parameters：
+- `order_id` 第三方ID
+- `image` 图片路径
+- `nickname` 昵称
+- `sex` 性别
+
+#### Response
+```json
+{
+   "status": "0",
+   "msg": "登录成功",
+   "data":
+   {
+       "id": "1",
+       "account": "13111111111",
+       "nickname": "吴智勇",
+       "city_id": "1",
+       "title": "上海市",
+       "head_img": "http://zhaopai.jsonlin.cn/App/Uploads/20150215/54dffe04ef775.jpg",
+       "sex": "0",
+       "background_img": "http://zhaopai.jsonlin.cn/App/Uploads/20150226/54eed3fb29f14.jpg",
+       "integral": "0",
+       "interest": "22",
+       "name": "吴志勇2",
+       "user_age": "26",
+       "address": "浦东新区",
+       "address_phone": "1231231",
+       "last_login_time": "2015-02-26 17:02:50",
+       "login_count": "224",
+       "create_time": "2015-02-15 09:27:02"
+   },
+   "num": "17",
+   "token": "DmMAaFQ3DTdRMAJkVDVQbAkxBDZYYgNiBTVbYVJgUTRbNgJlA3wIMVw+AnhUNgU+"
+}
+```
+
 
 ## 二、好友接口
 
