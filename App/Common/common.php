@@ -797,41 +797,26 @@ function pass_encryption ($str){
     }
 
     //下载数据
-    function get_image_download($url)
-    {
-        //上传文件目
-        $exten = pathinfo($url);
-        $data = file_get_contents($url);    // 读文件内容
-        $filetime = time().rand(1,300).'.'.$exten['extension'];                 //得到时间戳
-        $filepath =  C('UPLOAD_DIR.domain_dir').C('UPLOAD_DIR.app_dir').date('Ymd').'/';
-        if(!is_dir($filepath))
-        {
-            @mkdir($filepath);
-        }
-        file_put_contents($filepath.$filetime,$data);
-        return date('Ymd').'/'.$filetime;
-    }
-
     function GrabImage($url,$filename="") {
         if($url=="") return false;
 
         if($filename=="") {
 //            $ext=strrchr($url,".");
 //            if($ext!=".gif" && $ext!=".jpg" && $ext!=".png") return false;
-            $filename=date("Ymd").'.jpg';
+            $filename=date("Ymd").mt_rand(1,9999).'.jpg';
         }
 
-        $filepath =  C('UPLOAD_DIR.domain_dir').C('UPLOAD_DIR.app_dir').date('Ymd').'/';
+        $filepath =  C('UPLOAD_DIR.app_dir').date('Ymd').'/';
 
         ob_start();
         readfile($url);
         $img = ob_get_contents();
         ob_end_clean();
 
-        $fp2=@fopen($filename, "a");
+        $fp2=@fopen($filepath.$filename, "a");
         fwrite($fp2,$img);
         fclose($fp2);
 
-        return $filename;
+        return date('Ymd').$filename;
     }
 ?>
