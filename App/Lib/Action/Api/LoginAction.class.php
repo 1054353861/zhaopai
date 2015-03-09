@@ -174,7 +174,10 @@ class LoginAction extends ApiBaseAction {
 	{
         $url = $this->_get('url');
         if($url!='')
-            get_image_download($url);
+        {
+            $val = get_image_download($url);
+            var_dump($val);
+        }
 		$this->display();
 	}
 
