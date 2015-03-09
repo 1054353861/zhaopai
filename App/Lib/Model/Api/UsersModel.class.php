@@ -157,17 +157,6 @@ class UsersModel extends ApiBaseModel {
 
         return $new_list;
     }
-
-    //第三方登入
-    public function users_order_insert($array)
-    {
-        $new_arr['head_img'] = GrabImage($array['image']);
-        $new_arr['background_img'] = C('UPLOAD_DIR.default_background_img');
-        $new_arr['account'] = $new_arr['nickname'] = $array['nickname'];
-        $new_arr['the_third_status'] = $array['the_third_status'];
-        $new_arr['order_id'] = $array['order_id'];
-        $this->
-    }
 }
 
 ?>

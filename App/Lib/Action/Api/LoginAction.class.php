@@ -210,6 +210,7 @@ class LoginAction extends ApiBaseAction {
             $new_arr['account'] = $new_arr['nickname'] = $this->_post('nickname');
             $new_arr['the_third_status'] = $this->_post('the_third_status');
             $new_arr['order_id'] = $this->_post('order_id');
+            $new_arr['user_sex'] = $this->_post('sex');
             $bool＝$Users->add($new_arr);
             if($bool)
             {
