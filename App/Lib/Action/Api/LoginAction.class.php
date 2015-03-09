@@ -198,12 +198,12 @@ class LoginAction extends ApiBaseAction {
     public function regeister_login_order()
     {
         $order_id = $this->_post('order_id');
-        $Users = $this->db['Users'];
-        $value = $Users->where(array('order_id'=>array('eq',$order_id)))->find();
+        $users = $this->db['Users'];
+        $value = $users->where(array('order_id'=>array('eq',$order_id)))->find();
         if($value['id']!='')
         {
             //更新用户登录信息
-            $Users->up_login_info($value['id']);
+            $users->up_login_info($value['id']);
             $encryption = $value['id'].':'.$value['account'].':'.date('Y-m-d');
             parent::callback(C('STATUS_SUCCESS'),'登录成功',parent::cancel_info($value['id']),array('token'=>passport_encrypt($encryption,C('UNLOCAKING_KEY'))));
         }else{
@@ -213,11 +213,11 @@ class LoginAction extends ApiBaseAction {
             $new_arr['order_id'] = $this->_post('order_id');
             $new_arr['user_sex'] = $this->_post('sex');
             $new_arr['background_img'] = C('UPLOAD_DIR.default_background_img');
-            $bool＝$Users->add($new_arr);
+            $bool ＝ $users->add($new_arr);
             if($bool)
             {
                 //更新用户登录信息
-                $Users->up_login_info($bool);
+                $users->up_login_info($bool);
                 $encryption = $bool.':'.$new_arr['account'].':'.date('Y-m-d');
                 parent::callback(C('STATUS_SUCCESS'),'登录成功',parent::cancel_info($bool),array('token'=>passport_encrypt($encryption,C('UNLOCAKING_KEY'))));
             }else{
