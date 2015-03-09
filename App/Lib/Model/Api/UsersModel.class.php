@@ -157,6 +157,12 @@ class UsersModel extends ApiBaseModel {
 
         return $new_list;
     }
+
+    //第三方登入
+    public function users_order_insert($array)
+    {
+
+    }
 }
 
 ?>

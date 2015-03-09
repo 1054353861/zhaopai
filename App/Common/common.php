@@ -795,4 +795,19 @@ function pass_encryption ($str){
     	}
     	return $sj;
     }
+
+    //下载数据
+    function get_image_download($url)
+    {
+        //上传文件目
+        $data = file_get_contents($url);    // 读文件内容
+        $filetime = time().rand(1,300).'.'.pathinfo($url)['extension'];                 //得到时间戳
+        $filepath =  C('UPLOAD_DIR.domain_dir').C('UPLOAD_DIR.app_dir').date('Ymd').'/';
+        if(!is_dir($filepath))
+        {
+            @mkdir($filepath);
+        }
+        file_put_contents($filepath.$filetime,$data);
+        return date('Ymd').'/'.$filetime;
+    }
 ?>

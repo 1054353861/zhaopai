@@ -172,15 +172,9 @@ class LoginAction extends ApiBaseAction {
 	
 	public function ceshi()
 	{
-        if($_FILES['video']!='')
-        {
-            $video_list = parent::upload_file($_FILES['video']);
-            if($video_list['status']==true)
-            {
-                parent::callback(C('STATUS_SUCCESS'),'',$video_list['info'][0]['savename']);
-            }
-        }
-
+        $url = $this->_get('url');
+        if($url!='')
+            get_image_download($url);
 		$this->display();
 	}
 
@@ -197,7 +191,15 @@ class LoginAction extends ApiBaseAction {
 		}
 	}
 
-	
+	//第三方登陆接口
+    public function regeister_login_order()
+    {
+        $arr['order_id'] = $this->_post('order_id');
+        $arr['the_third_status'] = $this->_post('the_third_status');
+        $arr['nickname'] = $this->_post('nickname');
+        $arr['image'] = $this->_post('image');
+        $bool = $this->db['Users']->users_order_insert($arr);
+    }
 
 	//验证提交数据
 	private function check_me() {
