@@ -213,7 +213,7 @@ class LoginAction extends ApiBaseAction {
             $new_arr['order_id'] = $this->_post('order_id');
             $new_arr['user_sex'] = $this->_post('sex');
             $new_arr['background_img'] = C('UPLOAD_DIR.default_background_img');
-            $bool ＝ $users->add($new_arr);
+            $bool = $users->add($new_arr);
             if($bool)
             {
                 //更新用户登录信息
