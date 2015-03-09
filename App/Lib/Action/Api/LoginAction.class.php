@@ -202,6 +202,8 @@ class LoginAction extends ApiBaseAction {
         $value = $Users->where(array('order_id'=>array('eq',$order_id)))->find();
         if($value['id']!='')
         {
+            //更新用户登录信息
+            $Users->up_login_info($value['id']);
             $encryption = $value['id'].':'.$value['account'].':'.date('Y-m-d');
             parent::callback(C('STATUS_SUCCESS'),'登录成功',parent::cancel_info($value['id']),array('token'=>passport_encrypt($encryption,C('UNLOCAKING_KEY'))));
         }else{
@@ -214,6 +216,8 @@ class LoginAction extends ApiBaseAction {
             $bool＝$Users->add($new_arr);
             if($bool)
             {
+                //更新用户登录信息
+                $Users->up_login_info($bool);
                 $encryption = $bool.':'.$new_arr['account'].':'.date('Y-m-d');
                 parent::callback(C('STATUS_SUCCESS'),'登录成功',parent::cancel_info($bool),array('token'=>passport_encrypt($encryption,C('UNLOCAKING_KEY'))));
             }else{
