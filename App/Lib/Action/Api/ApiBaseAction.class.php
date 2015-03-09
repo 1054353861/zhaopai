@@ -143,6 +143,32 @@ class ApiBaseAction extends AppBaseAction {
         D('IntegralSameday')->add($insert_arr);
     }
 
+    public function cancel_info($id)
+    {
+        $user_info = D('Users')->where(array('id'=>array('eq',$id)))->find();
+
+        $result = array(
+            'id'=>$user_info['id'],
+            'account'=>$user_info['account'],
+            'nickname'=>$user_info['nickname'],
+            'city_id' => $user_info['city_id'],
+            'title'=>D('City')->where(array('id'=>$user_info['city_id']))->getField('title'),
+            'head_img'=>C('PUBLIC_VISIT.domain_dir').C('PUBLIC_VISIT.app_dir').$user_info['head_img'],
+            'sex'=>$user_info['sex'],
+            'background_img'=>C('PUBLIC_VISIT.domain_dir').C('PUBLIC_VISIT.app_dir').$user_info['background_img'],
+            'integral'=>$user_info['integral'],
+            'interest'=>$user_info['interest'],
+            'name'=>$user_info['name'],
+            'user_age'=>$user_info['age'],
+            'address'=>$user_info['address'],
+            'address_phone'=>$user_info['address_phone'],
+            'last_login_time'=>date('Y-m-d H:i:s',$user_info['last_login_time']),
+            'login_count'=>$user_info['login_count'],
+            'create_time'=>date('Y-m-d H:i:s',$user_info['create_time']),
+        );
+
+        return $result;
+    }
 }
 
 

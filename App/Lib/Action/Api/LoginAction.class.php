@@ -197,11 +197,28 @@ class LoginAction extends ApiBaseAction {
 	//第三方登陆接口
     public function regeister_login_order()
     {
-        $arr['order_id'] = $this->_post('order_id');
-        $arr['the_third_status'] = $this->_post('the_third_status');
-        $arr['nickname'] = $this->_post('nickname');
-        $arr['image'] = $this->_post('image');
-        $bool = $this->db['Users']->users_order_insert($arr);
+        $order_id = $this->_post('order_id');
+        $Users = $this->db['Users'];
+        $value = $Users->where(array('order_id'=>array('eq',$order_id)))->find();
+        if($value['id']!='')
+        {
+            $encryption = $value['id'].':'.$value['account'].':'.date('Y-m-d');
+            parent::callback(C('STATUS_SUCCESS'),'登录成功',parent::cancel_info($value['id']),array('token'=>passport_encrypt($encryption,C('UNLOCAKING_KEY'))));
+        }else{
+            $new_arr['head_img'] = GrabImage($this->_post('image'));
+            $new_arr['background_img'] = C('UPLOAD_DIR.default_background_img');
+            $new_arr['account'] = $new_arr['nickname'] = $this->_post('nickname');
+            $new_arr['the_third_status'] = $this->_post('the_third_status');
+            $new_arr['order_id'] = $this->_post('order_id');
+            $bool＝$Users->add($new_arr);
+            if($bool)
+            {
+                $encryption = $bool.':'.$new_arr['account'].':'.date('Y-m-d');
+                parent::callback(C('STATUS_SUCCESS'),'登录成功',parent::cancel_info($bool),array('token'=>passport_encrypt($encryption,C('UNLOCAKING_KEY'))));
+            }else{
+                parent::callback(C('STATUS_DATA_ERROR'),'登陆失败','');
+            }
+        }
     }
 
 	//验证提交数据
