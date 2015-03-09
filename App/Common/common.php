@@ -816,8 +816,8 @@ function pass_encryption ($str){
         if($url=="") return false;
 
         if($filename=="") {
-            $ext=strrchr($url,".");
-            if($ext!=".gif" && $ext!=".jpg" && $ext!=".png") return false;
+//            $ext=strrchr($url,".");
+//            if($ext!=".gif" && $ext!=".jpg" && $ext!=".png") return false;
             $filename=date("Ymd").$ext;
         }
 
