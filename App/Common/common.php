@@ -818,7 +818,7 @@ function pass_encryption ($str){
         if($filename=="") {
             $ext=strrchr($url,".");
             if($ext!=".gif" && $ext!=".jpg" && $ext!=".png") return false;
-            $filename=date("YmdHis").$ext;
+            $filename=date("Ymd").$ext;
         }
 
         $filepath =  C('UPLOAD_DIR.domain_dir').C('UPLOAD_DIR.app_dir').date('Ymd').'/';
@@ -828,7 +828,7 @@ function pass_encryption ($str){
         $img = ob_get_contents();
         ob_end_clean();
 
-        $fp2=@fopen($filepath.$filename, "a");
+        $fp2=@fopen($filename, "a");
         fwrite($fp2,$img);
         fclose($fp2);
 
