@@ -48,15 +48,15 @@ class IntegralAllModel extends ApiBaseModel {
         $where = array('sameday'=>strtotime(date('Y-m-d')),'user_id'=>$user_id,'integral_id'=>$score_id,'status'=>0);
         $int_integral = $this->where(array('id'=>$score_id))->getField('integral');
         $Users = D('Users');
+        //如果是领取第一次注册的积分就跳过查询
+        if($score_id!=1)
+        {
+            $count = $IntegralSameday->where($where)->count();
+        }else{
+            $count = 1;
+        }
         if($score_id!=10)
         {
-            //如果是领取第一次注册的积分就跳过查询
-            if($score_id!=1)
-            {
-                $count = $IntegralSameday->where($where)->count();
-            }else{
-                $count = 1;
-            }
             $user_integral = $Users->where(array('id'=>$user_id))->getField('integral');
             $new_integral['integral'] = $count * $int_integral + $user_integral;
         }else{

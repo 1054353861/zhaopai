@@ -1780,21 +1780,22 @@ POST /Api/Personal/personal_score
    "msg": "获取成功",
    "data":
    {
-       "store": "30",
+       "store": "1150",
+       "fund": "0",
        "task_list":
        [
            {
-               "id": "1",
-               "title": "完成注册",
+               "id": "10",
+               "title": "凯铎基金每日领",
                "num": "1",
-               "integral": "50",
+               "integral": "100",
                "status": "0",
                "end_number": "1",
-               "is_end": "2"
+               "is_end": "1"
            },
            {
-               "id": "2",
-               "title": "每天登入领积分!",
+               "id": "9",
+               "title": "给我们宝贵建议",
                "num": "1",
                "integral": "30",
                "status": "0",
@@ -1802,37 +1803,10 @@ POST /Api/Personal/personal_score
                "is_end": "1"
            },
            {
-               "id": "3",
-               "title": "发表一个话题吧!",
-               "num": "10",
-               "integral": "50",
-               "status": "0",
-               "end_number": "0",
-               "is_end": "2"
-           },
-           {
-               "id": "4",
-               "title": "给文明行为点个赞噢!",
-               "num": "10",
-               "integral": "20",
-               "status": "0",
-               "end_number": "0",
-               "is_end": "2"
-           },
-           {
-               "id": "5",
-               "title": "对话题进行评论",
-               "num": "10",
-               "integral": "20",
-               "status": "0",
-               "end_number": "0",
-               "is_end": "2"
-           },
-           {
-               "id": "6",
-               "title": "参与文明大PK",
-               "num": "10",
-               "integral": "10",
+               "id": "8",
+               "title": "分享给朋友",
+               "num": "1",
+               "integral": "30",
                "status": "0",
                "end_number": "0",
                "is_end": "2"
@@ -1847,26 +1821,62 @@ POST /Api/Personal/personal_score
                "is_end": "2"
            },
            {
-               "id": "8",
-               "title": "分享给朋友",
-               "num": "1",
-               "integral": "30",
+               "id": "6",
+               "title": "参与文明大PK",
+               "num": "10",
+               "integral": "10",
                "status": "0",
                "end_number": "0",
                "is_end": "2"
            },
            {
-               "id": "9",
-               "title": "给我们宝贵建议",
+               "id": "5",
+               "title": "对话题进行评论",
+               "num": "10",
+               "integral": "20",
+               "status": "0",
+               "end_number": "0",
+               "is_end": "2"
+           },
+           {
+               "id": "4",
+               "title": "给文明行为点个赞噢!",
+               "num": "10",
+               "integral": "20",
+               "status": "0",
+               "end_number": "0",
+               "is_end": "2"
+           },
+           {
+               "id": "3",
+               "title": "发表一个话题吧!",
+               "num": "10",
+               "integral": "50",
+               "status": "0",
+               "end_number": "0",
+               "is_end": "2"
+           },
+           {
+               "id": "2",
+               "title": "每天登入领积分!",
                "num": "1",
                "integral": "30",
                "status": "0",
                "end_number": "1",
                "is_end": "1"
+           },
+           {
+               "id": "1",
+               "title": "完成注册",
+               "num": "1",
+               "integral": "50",
+               "status": "0",
+               "end_number": "1",
+               "is_end": "2"
            }
        ]
    },
-   "num": "2"
+   "num": "3"
 }
 ```
 
