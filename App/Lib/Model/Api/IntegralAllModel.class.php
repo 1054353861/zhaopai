@@ -65,7 +65,6 @@ class IntegralAllModel extends ApiBaseModel {
             $new_integral['fund'] = $count * $int_integral + $user_integral;
         }
         $user_bool = $Users->where(array('id'=>$user_id))->save($new_integral);
-        return $Users->getlastsql();
         if($user_bool)
         {
             $update = array('status'=>1);
