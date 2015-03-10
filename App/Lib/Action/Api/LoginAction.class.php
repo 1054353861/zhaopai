@@ -64,6 +64,8 @@ class LoginAction extends ApiBaseAction {
                     //触发完成登陆事件
                     parent::end_integral_all_info($user_info['id'],2);
 
+                    parent::end_integral_all_info($user_info['id'],10);
+
 					//返回给客户端数据
 					parent::callback(C('STATUS_SUCCESS'),'登录成功',parent::cancel_info($user_info['id']),array('token'=>$identity_encryption));
 				}	
@@ -184,6 +186,7 @@ class LoginAction extends ApiBaseAction {
             //更新用户登录信息
             $users->up_login_info($value['id']);
             $encryption = $value['id'].':'.$value['account'].':'.date('Y-m-d');
+            parent::end_integral_all_info($value['id'],10);
             parent::callback(C('STATUS_SUCCESS'),'登录成功',parent::cancel_info($value['id']),array('token'=>passport_encrypt($encryption,C('UNLOCAKING_KEY'))));
         }else{
             $new_arr['head_img'] = GrabImage($this->_post('image'));
@@ -197,6 +200,7 @@ class LoginAction extends ApiBaseAction {
                 //更新用户登录信息
                 $users->up_login_info($bool);
                 $encryption = $bool.':'.$new_arr['account'].':'.date('Y-m-d');
+                parent::end_integral_all_info($bool,10);
                 parent::callback(C('STATUS_SUCCESS'),'登录成功',parent::cancel_info($bool),array('token'=>passport_encrypt($encryption,C('UNLOCAKING_KEY'))));
             }else{
                 parent::callback(C('STATUS_DATA_ERROR'),'登陆失败','');
@@ -214,34 +218,6 @@ class LoginAction extends ApiBaseAction {
 		}
 		if (Validate::checkNull($this->request['password'])) parent::callback(C('STATUS_OTHER'),'密码为空');		
 	}
-
-
-	//登入
-	public function login_bak()
-	{
-		$cell_phone = $this->_post('cell_phone');
-		$password = $this->_post('password');
-		if($cell_phone!='' && $password!='')
-		{
-			$user_val = $this->db['Users']->where(array('phone'=>$cell_phone))->find();
-			if($user_val!='')
-			{
-				if($user_val['password']==pass_encryption($password))
-				{
-					//生成秘钥
-					$encryption = $user_val['id'].':'.$user_val['account'].':'.date('Y-m-d');
-					//返回数据
-					parent::callback(C('STATUS_SUCCESS'),'登录成功',$user_val,array('token'=>passport_encrypt($encryption,C('UNLOCAKING_KEY'))));
-				}else{
-					parent::callback(C('STATUS_DATA_ERROR'),'密码错误');
-				}
-			}else{
-				parent::callback(C('STATUS_NOT_DATA'),'手机号不存在');
-			}
-		}
-	}
-
-
 }
 
 ?>

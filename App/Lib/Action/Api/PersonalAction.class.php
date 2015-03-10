@@ -72,7 +72,9 @@ class PersonalAction extends ApiBaseAction {
 	public function personal_score()
 	{
 		$id = $this->oUser->id;
-		$list['store'] = $this->db['Users']->where(array('id'=>$id))->getField('integral');
+		$new_info = $this->db['Users']->where(array('id'=>$id))->field('integral,fund')->find();
+        $list['store'] = $new_info['integral'];
+        $list['fund'] = $new_info['fund'];
 		$list['task_list'] = $this->db['IntegralAll']->getInfo($id);
 		parent::callback(C('STATUS_SUCCESS'),'获取成功',$list);
 	}

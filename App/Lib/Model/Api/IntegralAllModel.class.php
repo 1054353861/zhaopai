@@ -9,7 +9,7 @@ class IntegralAllModel extends ApiBaseModel {
     //1是未领取 2是已领取
 	public function getInfo($id)
 	{
-		$info_list = $this->where(array('status'=>0))->select();
+		$info_list = $this->where(array('status'=>0))->order('id desc')->select();
         $IntegralSameday = D('IntegralSameday');
 		foreach($info_list as $key=>$value)
 		{
@@ -46,17 +46,24 @@ class IntegralAllModel extends ApiBaseModel {
     {
         $IntegralSameday = D('IntegralSameday');
         $where = array('sameday'=>strtotime(date('Y-m-d')),'user_id'=>$user_id,'integral_id'=>$score_id,'status'=>0);
-        //如果是领取第一次注册的积分就跳过查询
-        if($score_id!=1)
-        {
-            $count = $IntegralSameday->where($where)->count();
-        }else{
-            $count = 1;
-        }
         $int_integral = $this->where(array('id'=>$score_id))->getField('integral');
         $Users = D('Users');
-        $user_integral = $Users->where(array('id'=>$user_id))->getField('integral');
-        $new_integral['integral'] = $count * $int_integral + $user_integral;
+        if($score_id!=10)
+        {
+            //如果是领取第一次注册的积分就跳过查询
+            if($score_id!=1)
+            {
+                $count = $IntegralSameday->where($where)->count();
+            }else{
+                $count = 1;
+            }
+            $user_integral = $Users->where(array('id'=>$user_id))->getField('integral');
+            $new_integral['integral'] = $count * $int_integral + $user_integral;
+        }else{
+            //领取基金
+            $user_integral = $Users->where(array('id'=>$user_id))->getField('fund');
+            $new_integral['fund'] = $count * $int_integral + $user_integral;
+        }
         $user_bool = $Users->where(array('id'=>$user_id))->save($new_integral);
         if($user_bool)
         {
