@@ -128,7 +128,7 @@ POST /Api/Login/check_register_phone_msg
 
 #### Parameters：
 - `telephone` 账号(手机号)
-  `verify` 收到的手机验证码
+- `verify` 收到的手机验证码
 
 
 #### Response
