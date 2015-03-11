@@ -90,8 +90,8 @@ class SendMsgAction extends ApiBaseAction {
 		}
 		
 		
-		$this->assign('name','telephone');
-		$this->display('Login:sendSHP');
+		//$this->assign('name','telephone');
+		//$this->display('Login:sendSHP');
 	}
 	
 	
