@@ -76,7 +76,7 @@ class SendMsgAction extends ApiBaseAction {
 	
 	//注册普通用户
 	public function user_account_register () {
-		//手机号码
+		//手机号码 13816958237
 		if ($this->isPost()) {
 				
 			$iphone_is_have = $this->db['Users']->account_is_have($this->telephone);
@@ -90,60 +90,12 @@ class SendMsgAction extends ApiBaseAction {
 		}
 		
 		
-		//$this->assign('name','telephone');
-		//$this->display('Login:sendSHP');
+		$this->assign('name','telephone');
+		$this->display('Login:sendSHP');
 	}
 	
 	
-	/**
-	 * 媒体主注册短信 
-	 * post 请求  telephone = 电话号码
-	 */
-	public function media_register_send () {
 
-		//手机号码
-		if ($this->isPost()) {
-			
-			$iphone_is_have = $this->db['UserMedia']->iphone_is_have($this->telephone);
-			if ($iphone_is_have == true) {
-				parent::callback(C('STATUS_OTHER'),'对不起此手机已注册');
-			}
-			
-			$this->msg = $this->verify.'，为您的账号注册验证码，请在'.$this->expired_time.'分钟内完成注册，如非本人注册，请忽略；'.$this->date.'。';
-			$this->_add_data(1);
-			exit;
-		}
-		
-		//$this->assign('name','telephone');
-		//$this->display('Login:sendSHP');
-	}
-	
-	
-	/**
-	 * 广告主注册短信
-	 * post 请求  telephone = 电话号码
-	 */
-	public function advert_register_send () {
-	
-		//手机号码
-		if ($this->isPost()) {
-			
-			$iphone_is_have = $this->db['UserAdvertisement']->iphone_is_have($this->telephone);
-			if ($iphone_is_have == true) {
-				parent::callback(C('STATUS_OTHER'),'对不起此手机已注册');
-			}
-			
-			$this->msg = $this->verify.'，为您的账号注册验证码，请在'.$this->expired_time.'分钟内完成注册，如非本人注册，请忽略；'.$this->date.'。';
-			$this->_add_data(2);
-			exit;
-		}
-	
-		//$this->assign('name','telephone');
-		//$this->display('Login:sendSHP');
-	}
-	
-	
-	
 	
 	
 	

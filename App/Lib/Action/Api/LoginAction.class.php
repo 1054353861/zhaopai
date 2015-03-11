@@ -218,6 +218,20 @@ class LoginAction extends ApiBaseAction {
 		}
 		if (Validate::checkNull($this->request['password'])) parent::callback(C('STATUS_OTHER'),'密码为空');		
 	}
+	
+	
+    //验证注册短信是否正确
+	public function check_register_phone_msg() {
+	    if ($this->isPost()) {
+	        $telephone= $this->_post('telephone');
+	        
+	        //执行验证
+	        parent::check_verify($telephone,1);
+	        
+	        parent::callback(C('STATUS_SUCCESS'),'验证成功');
+	    }
+	    
+	}
 }
 
 ?>
