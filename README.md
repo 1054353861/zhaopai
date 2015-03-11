@@ -186,6 +186,27 @@ POST /Api/Login/regeister_login_order
 }
 ```
 
+### 5.用户修改密码
+
+#### Request
+```
+POST /Api/Login/set_new_password
+```
+
+#### Parameters：
+- `token` 用户ID
+- `password` 密码
+- `new_password` 第二次密码
+
+#### Response
+```json
+{
+   "status": "0",
+   "msg": "修改成功",
+   "data": ""
+   "num": "1"
+}
+```
 
 ## 二、好友接口
 

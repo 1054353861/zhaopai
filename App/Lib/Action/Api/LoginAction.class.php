@@ -219,7 +219,6 @@ class LoginAction extends ApiBaseAction {
 		if (Validate::checkNull($this->request['password'])) parent::callback(C('STATUS_OTHER'),'密码为空');		
 	}
 	
-	
     //验证注册短信是否正确
 	public function check_register_phone_msg() {
 	    if ($this->isPost()) {
@@ -232,6 +231,22 @@ class LoginAction extends ApiBaseAction {
 	    }
 	    
 	}
+
+    //新增修改密码接口
+    public function set_new_password()
+    {
+        $id = $this->oUser->id;
+        $password = $this->_post('password');
+        $new_password = $this->_post('new_password');
+        if($password!=$new_password)
+        {
+            parent::callback(C('STATUS_DATA_ERROR'),'两次密码不一致','');
+        }else{
+            $new_pass_info = array('password'=>pass_encryption($new_password));
+            $bool = $this->db['Users']->where(array('id'=>array('eq',$id)))->save($new_pass_info);
+            $bool ? parent::callback(C('STATUS_SUCCESS'),'修改成功','') : parent::callback(C('STATUS_SUCCESS'),'修改失败','');
+        }
+    }
 }
 
 ?>
