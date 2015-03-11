@@ -97,29 +97,7 @@ POST /Api/Login/login
 ```
 
 
-### 3.注册短信接口
-
-#### Request
-```
-POST /Api/Login/regeister_cell_veritify
-```
-
-#### Parameters：
-- `cell_phone` 账号(手机号)
-
-#### Response
-```json
-{
-   "status": "2002",
-   "msg": "手机号已被注册",
-   "data":
-   [
-   ],
-   "num": "0"
-}
-```
-
-### 4.注册手机号接口
+### 3.手机号发送接口
 
 #### Request
 ```
@@ -141,7 +119,7 @@ POST /Api/SendMsg/user_account_register
 }
 ```
 
-### 5.验证注册手机号端口
+### 4.验证手机号验证码端口
 
 #### Request
 ```
@@ -165,7 +143,7 @@ POST /Api/Login/check_register_phone_msg
 }
 ```
 
-### 6.用户登录
+### 5.用户登录
 
 #### Request
 ```
