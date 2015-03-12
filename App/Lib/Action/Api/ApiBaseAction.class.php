@@ -143,6 +143,28 @@ class ApiBaseAction extends AppBaseAction {
         D('IntegralSameday')->add($insert_arr);
     }
 
+    //检测头像
+    private function check_head_imgers($head_img)
+    {
+        if(substr($head_img,0,4)=='http')
+        {
+            return $head_img;
+        }else{
+            return C('PUBLIC_VISIT.domain_dir').C('PUBLIC_VISIT.app_dir').$head_img;
+        }
+    }
+
+    //检测背景
+    private function check_background_img($background_img)
+    {
+        if($background_img==C('UPLOAD_DIR.default_background_img'))
+        {
+            return C('PUBLIC_VISIT.domain_dir').C('PUBLIC_VISIT.app_image').C('UPLOAD_DIR.default_background_img');
+        }else{
+            return C('PUBLIC_VISIT.domain_dir').C('PUBLIC_VISIT.app_dir').$background_img;
+        }
+    }
+
     public function cancel_info($id)
     {
         $user_info = D('Users')->where(array('id'=>array('eq',$id)))->find();
@@ -153,9 +175,9 @@ class ApiBaseAction extends AppBaseAction {
             'nickname'=>$user_info['nickname'],
             'city_id' => $user_info['city_id'],
             'title'=> $this->getCity($user_info['city_id']),
-            'head_img'=>C('PUBLIC_VISIT.domain_dir').C('PUBLIC_VISIT.app_dir').$user_info['head_img'],
+            'head_img'=>$this->check_head_imgers($user_info['head_img']),
             'sex'=>$user_info['sex'],
-            'background_img'=>C('PUBLIC_VISIT.domain_dir').C('PUBLIC_VISIT.app_dir').$user_info['background_img'],
+            'background_img'=>$this->check_background_img($user_info['background_img']),
             'integral'=>$user_info['integral'],
             'interest'=>$user_info['interest'],
             'name'=>$user_info['name'],
