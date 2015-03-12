@@ -134,7 +134,7 @@ class ArticleModel extends ApiBaseModel {
 
                 $list['info'][$key]['user_info'] = parent::get_user_info($value['user_id']);
 
-				parent::public_file_dir($list['info'][$key],array('head_img'));
+				parent::public_file_dir($list['info'][$key],array('head_img','background_img'));
 
 				$list['info'][$key]['photo_info'] = $value;
 
