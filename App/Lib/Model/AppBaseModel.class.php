@@ -265,6 +265,9 @@ class AppBaseModel extends Model {
 	    if(substr($arr,0,4)=='http')
             return $arr;
 
+        if($arr==C('UPLOAD_DIR.default_background_img'))
+            return C('PUBLIC_VISIT.domain_dir').C('PUBLIC_VISIT.app_image').C('UPLOAD_DIR.default_background_img');
+
 	    $public_file_dir =  C('PUBLIC_VISIT.domain_dir').C('PUBLIC_VISIT.app_dir');
 	    //递归
 	    if (is_array($field)) {

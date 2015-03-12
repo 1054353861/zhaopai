@@ -100,6 +100,7 @@ $custom= array (
 		'PUBLIC_VISIT' => array(
  		     'domain_dir' =>'http://'.$_SERVER['SERVER_NAME'].'/',
 			 'app_dir' =>	'App/Uploads/',
+             'app_image' => '/App/Public/Global/images/'
 		),
 		
 		//短信平台账号
