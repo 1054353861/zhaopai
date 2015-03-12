@@ -189,7 +189,7 @@ class LoginAction extends ApiBaseAction {
             parent::end_integral_all_info($value['id'],10);
             parent::callback(C('STATUS_SUCCESS'),'登录成功',parent::cancel_info($value['id']),array('token'=>passport_encrypt($encryption,C('UNLOCAKING_KEY'))));
         }else{
-            $new_arr['head_img'] = GrabImage($this->_post('image'));
+            $new_arr['head_img'] = $this->_post('image');
             $new_arr['background_img'] = C('UPLOAD_DIR.default_background_img');
             $new_arr['account'] = $new_arr['nickname'] = $this->_post('nickname');
             $new_arr['user_sex'] = $this->_post('sex');

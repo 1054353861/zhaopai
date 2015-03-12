@@ -262,7 +262,9 @@ class AppBaseModel extends Model {
 	 * @param String Or Array	 //组合的字段key  如：pic 或  array('pic','head')
 	 */
 	protected function public_file_dir (Array &$arr,$field) {
-	     
+	    if(substr($arr,0,4)=='http')
+            return $arr;
+
 	    $public_file_dir =  C('PUBLIC_VISIT.domain_dir').C('PUBLIC_VISIT.app_dir');
 	    //递归
 	    if (is_array($field)) {
