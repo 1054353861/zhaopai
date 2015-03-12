@@ -153,12 +153,8 @@ class LoginAction extends ApiBaseAction {
 	
 	public function ceshi()
 	{
-        $url = $this->_post('url');
-        if($url!='')
-        {
-            $val = GrabImage($url);
-            var_dump($val);
-        }
+        echo $str = 'http://wx.qlogo.cn/mmopen/PiajxSqBRaEIydAzQkib1SYgLcyaibl2HkibV34wC2GyZO6S4p7C7NXShCw8A2M4IHjOXAQxMlIYcm0iaXuTR0hCgyyOPQJicar7IHRNrt3NfoB0k/0';
+        echo substr($str,0,4)
 		$this->display();
 	}
 

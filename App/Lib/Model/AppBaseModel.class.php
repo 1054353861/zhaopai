@@ -274,7 +274,7 @@ class AppBaseModel extends Model {
                 if(substr($arr[$key][$field],0,4)=='http')
                 {
                     $arr[$key][$field] = $val[$field];
-                }elseif($arr[$key][$field]==C('UPLOAD_DIR.default_background_img')){
+                }else if($arr[$key][$field]==C('UPLOAD_DIR.default_background_img')){
                     $arr[$key][$field] = C('PUBLIC_VISIT.domain_dir').C('PUBLIC_VISIT.app_image').C('UPLOAD_DIR.default_background_img');
                 }else{
                     $arr[$key][$field] = $public_file_dir.$val[$field];
