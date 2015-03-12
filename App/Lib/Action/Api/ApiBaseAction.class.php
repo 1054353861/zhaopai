@@ -152,7 +152,7 @@ class ApiBaseAction extends AppBaseAction {
             'account'=>$user_info['account'],
             'nickname'=>$user_info['nickname'],
             'city_id' => $user_info['city_id'],
-            'title'=>D('City')->where(array('id'=>$user_info['city_id']))->getField('title'),
+            'title'=> $this->getCity($user_info['city_id']),
             'head_img'=>C('PUBLIC_VISIT.domain_dir').C('PUBLIC_VISIT.app_dir').$user_info['head_img'],
             'sex'=>$user_info['sex'],
             'background_img'=>C('PUBLIC_VISIT.domain_dir').C('PUBLIC_VISIT.app_dir').$user_info['background_img'],
@@ -168,6 +168,18 @@ class ApiBaseAction extends AppBaseAction {
         );
 
         return $result;
+    }
+
+    //返回城市
+    private function getCity($id)
+    {
+        $city = D('City')->where(array('id'=>$id))->getField('title');
+        if($city!='')
+        {
+            return $city;
+        }else{
+            return '全国';
+        }
     }
 }
 
