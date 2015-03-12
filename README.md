@@ -194,7 +194,7 @@ POST /Api/Login/set_new_password
 ```
 
 #### Parameters：
-- `token` 用户ID
+- `cellphone` 用户手机号
 - `password` 密码
 - `new_password` 第二次密码
 
