@@ -13,7 +13,6 @@ class IntegralAllModel extends ApiBaseModel {
         $IntegralSameday = D('IntegralSameday');
 		foreach($info_list as $key=>$value)
 		{
-
             if($value['id']==1)
             {
                 $info = $IntegralSameday->where(array('user_id'=>$id,'integral_id'=>1))->find();
