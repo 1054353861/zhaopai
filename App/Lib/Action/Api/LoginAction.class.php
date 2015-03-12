@@ -54,7 +54,7 @@ class LoginAction extends ApiBaseAction {
 				} else {
 					
 					//生成秘钥
-					$encryption = $user_info['id'].':'.$user_info['account'].':'.date('Y-m-d');					//生成解密后的数据
+					$encryption = $user_info['id'].':'.$user_info['account'].':'.date('Y-m-d');	//生成解密后的数据
 					$identity_encryption = passport_encrypt($encryption,C('UNLOCAKING_KEY'));	//生成加密字符串,给客户端
 					
 					//更新用户登录信息

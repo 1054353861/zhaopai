@@ -20,7 +20,11 @@ class IntegralAllModel extends ApiBaseModel {
                 //直接写死
                 $value['end_number'] = 1;
                 if($info!='')
+                {
                     $info['status']==0 ? $value['is_end'] = 1 : $value['is_end'] = 2;
+                }else{
+                    $value['is_end'] = 2;
+                }
             }else{
                 $where = array('sameday'=>strtotime(date('Y-m-d')),'user_id'=>$id,'integral_id'=>$value['id']);
                 $new_info = $IntegralSameday->where($where)->select();
