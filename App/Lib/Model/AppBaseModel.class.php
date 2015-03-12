@@ -262,12 +262,6 @@ class AppBaseModel extends Model {
 	 * @param String Or Array	 //组合的字段key  如：pic 或  array('pic','head')
 	 */
 	protected function public_file_dir (Array &$arr,$field) {
-	    if(substr($arr,0,4)=='http')
-            return $arr;
-
-        if($arr==C('UPLOAD_DIR.default_background_img'))
-            return C('PUBLIC_VISIT.domain_dir').C('PUBLIC_VISIT.app_image').C('UPLOAD_DIR.default_background_img');
-
 	    $public_file_dir =  C('PUBLIC_VISIT.domain_dir').C('PUBLIC_VISIT.app_dir');
 	    //递归
 	    if (is_array($field)) {
@@ -277,7 +271,14 @@ class AppBaseModel extends Model {
 	    } else {
 	        foreach ($arr AS $key=>$val) {
 	            if (empty($arr[$key][$field])) continue;
-	            $arr[$key][$field] = $public_file_dir.$val[$field];
+                if(substr($arr[$key][$field],0,4)=='http')
+                {
+                    $arr[$key][$field] = $val[$field];
+                }elseif($arr[$key][$field]==C('UPLOAD_DIR.default_background_img')){
+                    $arr[$key][$field] = C('PUBLIC_VISIT.domain_dir').C('PUBLIC_VISIT.app_image').C('UPLOAD_DIR.default_background_img');
+                }else{
+                    $arr[$key][$field] = $public_file_dir.$val[$field];
+                }
 	        }
 	    }
 	}
