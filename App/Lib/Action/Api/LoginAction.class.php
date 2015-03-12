@@ -193,7 +193,6 @@ class LoginAction extends ApiBaseAction {
             $new_arr['background_img'] = C('UPLOAD_DIR.default_background_img');
             $new_arr['account'] = $new_arr['nickname'] = $this->_post('nickname');
             $new_arr['user_sex'] = $this->_post('sex');
-            $new_arr['background_img'] = C('UPLOAD_DIR.default_background_img');
             $bool = $users->add($new_arr);
             if($bool)
             {
