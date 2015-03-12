@@ -277,7 +277,7 @@ class AppBaseModel extends Model {
                 }else if($arr[$key][$field]==C('UPLOAD_DIR.default_background_img')){
                     $arr[$key][$field] = C('PUBLIC_VISIT.domain_dir').C('PUBLIC_VISIT.app_image').C('UPLOAD_DIR.default_background_img');
                 }else{
-                    $arr[$key][$field] = $val[$field];
+                    $arr[$key][$field] = $public_file_dir.$val[$field];
                 }
 	        }
 	    }
