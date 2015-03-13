@@ -210,7 +210,7 @@ POST /Api/Login/set_new_password
 
 
 
-### 7.手机号发送接口
+### 7.找回密码短信发送发送接口
 
 #### Request
 ```
