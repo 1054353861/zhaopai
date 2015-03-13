@@ -226,6 +226,20 @@ class LoginAction extends ApiBaseAction {
 	    }
 	    
 	}
+	
+	
+	//验证找回密码短信接口
+	public function check_restore_the_password() {
+	    if ($this->isPost()) {
+	        $telephone= $this->_post('telephone');
+	         
+	        //执行验证
+	        parent::check_verify($telephone,2);
+	         
+	        parent::callback(C('STATUS_SUCCESS'),'验证成功');
+	    }
+	     
+	}
 
     //新增修改密码接口
     public function set_new_password()

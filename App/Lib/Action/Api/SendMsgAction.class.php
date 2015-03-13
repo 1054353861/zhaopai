@@ -74,7 +74,7 @@ class SendMsgAction extends ApiBaseAction {
 	}
 	
 	
-	//注册普通用户
+	//注册用户短信发送接口
 	public function user_account_register () {
 		//手机号码 13816958237
 		if ($this->isPost()) {
@@ -84,7 +84,8 @@ class SendMsgAction extends ApiBaseAction {
 				parent::callback(C('STATUS_OTHER'),'对不起此手机已注册');
 			}
 				
-			$this->msg = $this->verify.'，为您的账号注册验证码，请在'.$this->expired_time.'分钟内完成注册，如非本人注册，请忽略；'.$this->date.'。';
+			//$this->msg = $this->verify.'，为您的账号注册验证码，请在'.$this->expired_time.'分钟内完成注册，如非本人注册，请忽略；'.$this->date.'。';
+			$this->msg = '您的注册验证码为'.$this->verify.',请在'.$this->expired_time.'分钟内完成注册,如非本人操作请忽略;'.$this->date.'。';
 			$this->_add_data(1);
 			exit;
 		}
@@ -94,6 +95,27 @@ class SendMsgAction extends ApiBaseAction {
 		//$this->display('Login:sendSHP');
 	}
 	
+	
+	//找回密码短信发送发送接口
+	public function restore_the_password () {
+	    if ($this->isPost()) {
+	
+	        $iphone_is_have = $this->db['Users']->account_is_have($this->telephone);
+	        if ($iphone_is_have == false) {
+	            parent::callback(C('STATUS_OTHER'),'对不起此手机号码未注册！');
+	        }
+	
+	       // $this->msg = $this->verify.'，为您的账号注册验证码，请在'.$this->expired_time.'分钟内完成注册，如非本人注册，请忽略；'.$this->date.'。';
+	        $this->msg = '您的找回密码，验证码为'.$this->verify.',请在'.$this->expired_time.'分钟内完成验证,如非本人操作请忽略;'.$this->date.'。';
+	         
+	        $this->_add_data(2);
+	        exit;
+	    }
+	
+	
+	    //$this->assign('name','telephone');
+	    //$this->display('Login:sendSHP');
+	}
 	
 
 	

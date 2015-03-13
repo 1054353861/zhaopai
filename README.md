@@ -186,7 +186,7 @@ POST /Api/Login/regeister_login_order
 }
 ```
 
-### 5.用户修改密码
+### 6.用户修改密码
 
 #### Request
 ```
@@ -205,6 +205,54 @@ POST /Api/Login/set_new_password
    "msg": "修改成功",
    "data": ""
    "num": "1"
+}
+```
+
+
+
+### 7.手机号发送接口
+
+#### Request
+```
+POST /Api/SendMsg/restore_the_password
+```
+
+#### Parameters：
+- `telephone` 账号(手机号)
+
+#### Response
+```json
+{
+  "status": "0",
+  "msg": "发送成功",
+  "data":
+  [
+  ],
+  "num": "0"
+}
+```
+
+### 8.验证找回密码短信接口
+
+#### Request
+```
+POST /Api/Login/check_restore_the_password
+```
+
+#### Parameters：
+- `telephone` 账号(手机号)
+- `verify` 收到的手机验证码
+
+
+#### Response
+```json
+{
+  "status": "0",
+  "msg": "验证成功",
+  "data":
+  [
+  ],
+  "num": "0"
 }
 ```
 
