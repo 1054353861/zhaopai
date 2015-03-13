@@ -210,7 +210,7 @@ POST /Api/Login/set_new_password
 
 
 
-### 7.找回密码短信发送发送接口
+### 7.找回密码短信发送接口
 
 #### Request
 ```
@@ -255,6 +255,20 @@ POST /Api/Login/check_restore_the_password
   "num": "0"
 }
 ```
+
+### 9.通过 token 获取用户登录信息
+
+#### Request
+```
+POST /Api/User/get_user_login_info_for_token
+```
+
+#### Parameters：
+- `token` 通过登录接口获取
+
+#### Response
+与 /Api/Login/login 接口返回相同
+
 
 ## 二、好友接口
 

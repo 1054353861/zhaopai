@@ -256,6 +256,8 @@ class LoginAction extends ApiBaseAction {
             $bool ? parent::callback(C('STATUS_SUCCESS'),'修改成功','') : parent::callback(C('STATUS_SUCCESS'),'修改失败','');
         }
     }
+    
+    
 }
 
 ?>
