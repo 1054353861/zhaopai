@@ -344,7 +344,15 @@ class AppBaseAction extends GlobalParameterAction {
 	    } else {
 	        foreach ($arr AS $key=>$val) {
 	            if (empty($arr[$key][$field])) continue;
-	            $arr[$key][$field] = $public_file_dir.$val[$field];
+                if (substr($val[$field],0,4)=='http')
+                {
+                    $arr[$key][$field] = $val[$field];
+                }elseif($val[$field]==C('UPLOAD_DIR.default_background_img'))
+                {
+                    $arr[$key][$field] = C('PUBLIC_VISIT.domain_dir').C('PUBLIC_VISIT.app_image').C('UPLOAD_DIR.default_background_img');
+                }else {
+                    $arr[$key][$field] = $public_file_dir . $val[$field];
+                }
 	        }
 	    }
 	}
