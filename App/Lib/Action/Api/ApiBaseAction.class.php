@@ -31,7 +31,8 @@ class ApiBaseAction extends AppBaseAction {
 		
 		//下面开始写$thi->
 		
-		//$this->oUser = (object) $session_userinfo;
+		//$this->oUser = (object) $sess
+        ion_userinfo;
 		
 	}
 	

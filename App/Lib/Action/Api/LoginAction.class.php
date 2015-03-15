@@ -150,13 +150,6 @@ class LoginAction extends ApiBaseAction {
 
 		}
 	}
-	
-	public function ceshi()
-	{
-        echo $str = 'http://wx.qlogo.cn/mmopen/PiajxSqBRaEIydAzQkib1SYgLcyaibl2HkibV34wC2GyZO6S4p7C7NXShCw8A2M4IHjOXAQxMlIYcm0iaXuTR0hCgyyOPQJicar7IHRNrt3NfoB0k/0';
-        echo substr($str,0,4);
-		$this->display();
-	}
 
 	//注册手机号验证
 	public function regeister_cell_veritify()
@@ -256,7 +249,6 @@ class LoginAction extends ApiBaseAction {
             $bool ? parent::callback(C('STATUS_SUCCESS'),'修改成功','') : parent::callback(C('STATUS_SUCCESS'),'修改失败','');
         }
     }
-    
     
 }
 

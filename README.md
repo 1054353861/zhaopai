@@ -270,6 +270,19 @@ POST /Api/User/get_user_login_info_for_token
 与 /Api/Login/login 接口返回相同
 
 
+### 10.通过 token 获取用户登录信息
+
+#### Request
+```
+POST /Api/User/get_user_login_info_for_token
+```
+
+#### Parameters：
+- `token` 通过登录接口获取
+
+#### Response
+与 /Api/Login/login 接口返回相同
+
 ## 二、好友接口
 
 ### 1.申请好友

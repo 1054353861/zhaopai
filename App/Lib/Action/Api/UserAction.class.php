@@ -26,6 +26,11 @@ class UserAction extends ApiBaseAction {
 	
     public function get_user_login_info_for_token () {
         $identity_encryption = $this->request['token'];
+
+        parent::end_integral_all_info($this->oUser->id,2);
+
+        parent::end_integral_all_info($this->oUser->id,10);
+
         parent::callback(C('STATUS_SUCCESS'),'获取用户成功',parent::cancel_info($this->oUser->id),array('token'=>$identity_encryption));
     }
 	
