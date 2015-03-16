@@ -238,7 +238,7 @@ class PersonalAction extends ApiBaseAction {
     public function personal_completion_third()
     {
         $where['id'] = $this->oUser->id;
-        $arr['cell_phone'] = $this->_post('cellphone');
+        $arr['account'] = $arr['phone'] = $this->_post('cellphone');
         $arr['password'] = pass_encryption($this->_post('password'));
         $password_confirm = pass_encryption($this->_post('password_confirm'));
         $arr['city'] = $this->_post('user_city');
