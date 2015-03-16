@@ -231,6 +231,6 @@ class PersonalAction extends ApiBaseAction {
         $value = $this->db['Users']->where($where)->field('weibo_order_id,weixin_order_id')->find();
         $info['weibo_status'] = $value['weibo_order_id']==0 ? 1 : 2;
         $info['weixin_status'] = $value['weixin_order_id']==0 ? 1 : 2;
-        parent::callback(C('STATUS_SUCCESS'),'获取成功',$info)
+        parent::callback(C('STATUS_SUCCESS'),'获取成功',$info);
     }
 }
