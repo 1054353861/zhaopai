@@ -2314,7 +2314,7 @@ POST /Api/Personal/personal_feedback
 }
 ```
 
-### 15.个人中心-反馈建议
+### 15.个人中心-查看绑定状态 1-未绑定 2-已绑定
 
 #### Request
 ```
@@ -2325,12 +2325,15 @@ POST /Api/Personal/personal_bundling
 - `token` 用户登录后拿去的用户标示
 
 #### Response
-```json
 {
    "status": "0",
-   "msg": "反馈成功",
-   "data": "",
-   "num": "1"
+   "msg": "获取成功",
+   "data":
+   {
+       "weibo_status": "1",
+       "weixin_status": "1"
+   },
+   "num": "2"
 }
 ```
 
