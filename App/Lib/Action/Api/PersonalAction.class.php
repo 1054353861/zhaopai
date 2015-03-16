@@ -233,4 +233,50 @@ class PersonalAction extends ApiBaseAction {
         $info['weixin_status'] = $value['weixin_order_id']==0 ? 1 : 2;
         parent::callback(C('STATUS_SUCCESS'),'获取成功',$info);
     }
+
+    //补全第三方账号信息
+    public function personal_completion_third()
+    {
+        $where['id'] = $this->oUser->id;
+        $arr['cell_phone'] = $this->_post('cellphone');
+        $arr['password'] = pass_encryption($this->_post('password'));
+        $password_confirm = pass_encryption($this->_post('password_confirm'));
+        $arr['city'] = $this->_post('user_city');
+        $arr['sex'] = $this->_post('user_sex');
+        $arr['update_time'] = time();
+
+        if($arr['password'] != $password_confirm)
+            parent::callback(C('STATUS_OTHER'),'','二次密码输入不一致');
+
+        if($this->_post('nickname')!='')
+            $arr['nickname'] = $this->_post('nickname');
+
+        $Users = $this->db['Users'];						//用户表模型
+
+        //手机号唯一
+        $is_have = $Users->phone_is_have($arr['cell_phone']);		//查看账号是否存在
+
+        if ($is_have!='')
+            parent::callback(C('STATUS_OTHER'),'','此手机号已存在');
+
+        $is_nickname = $Users->nickname_is_have($arr['nickname']);
+
+        if ($is_nickname!='')
+            parent::callback(C('STATUS_OTHER'),'','昵称已经存在');
+
+        //添加注册用户
+        //上传头像
+        if($this->_post('head_img')!='')
+            $arr['head_img'] = $this->_post('head_img');
+
+        if($_FILES['user_avater']!='')
+        {
+            $file_list = parent::upload_file($_FILES['user_avater']);
+            if($file_list['status']==true)
+                $arr['head_img'] = $file_list['info'][0]['savename'];
+        }
+
+        $bool = $Users->where($where)->save($arr);
+        $bool ? parent::callback(C('STATUS_SUCCESS'),'补全成功','') : parent::callback(C('STATUS_DATA_ERROR'),'补全失败','');
+    }
 }
