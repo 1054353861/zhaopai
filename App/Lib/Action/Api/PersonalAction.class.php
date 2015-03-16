@@ -279,4 +279,36 @@ class PersonalAction extends ApiBaseAction {
         $bool = $Users->where($where)->save($arr);
         $bool ? parent::callback(C('STATUS_SUCCESS'),'补全成功','') : parent::callback(C('STATUS_DATA_ERROR'),'补全失败','');
     }
+
+    //绑定第三方
+    public function personal_third_bundling()
+    {
+        $where['id'] = $this->oUser->id;
+        $order_id = $this->_post('order_id');
+        $type = $this->_post('type');
+        //1-微博 2－微信
+        switch($type)
+        {
+            case 1:
+                $new_arr['weibo_order_id'] = $order_id;
+                break;
+            case 2:
+                $new_arr['weixin_order_id'] = $order_id;
+                break;
+            default:
+                parent::callback(C('STATUS_DATA_ERROR'),'参数错误','');
+                break;
+        }
+
+        $users = $this->db['Users'];
+
+        $is_true = $users->where($new_arr)->field('id')->find();
+        if($is_true['id']!='')
+            $type==1 ? parent::callback(C('STATUS_DATA_ERROR'),'该微博ID已被绑定','') : parent::callback(C('STATUS_DATA_ERROR'),'该微信ID已被绑定','');
+
+
+        $bool = $users->where($where)->save($new_arr);
+
+        $bool ? parent::callback(C('STATUS_SUCCESS'),'绑定成功','') : parent::callback(C('STATUS_DATA_ERROR'),'绑定失败','');
+    }
 }

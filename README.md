@@ -2337,6 +2337,54 @@ POST /Api/Personal/personal_bundling
 }
 ```
 
+### 16.个人中心-补全第三方登陆之后的信息
+
+#### Request
+```
+POST /Api/Personal/personal_completion_third
+```
+
+#### Parameters：
+- `token` 用户登录后拿去的用户标示
+- `cellphone` 手机号
+- `password` 密码
+- `password_confirm` 第二次密码
+- `user_city` 用户城市ID
+- `user_sex` 用户性别
+- `nickname` 昵称可以有可以没
+- `head_img` 给黑长直用的接口，可以传可以不传
+- `user_avater` IOS可用的接口，可以传可以不传
+
+#### Response
+{
+   "status": "0",
+   "msg": "补全成功",
+   "data": "",
+   "num": "1"
+}
+```
+
+### 17.个人中心-补全登入之后的第三方ID
+
+#### Request
+```
+POST /Api/Personal/personal_third_bundling
+```
+
+#### Parameters：
+- `token` 用户登录后拿去的用户标示
+- `order_id` 微信或者微博的ID
+- `type` 1－为微博 2-微信
+
+#### Response
+{
+   "status": "0",
+   "msg": "补全成功",
+   "data": "",
+   "num": "1"
+}
+```
+
 ## 八、照片详情
 
 ### 1.照片详情
