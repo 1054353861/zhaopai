@@ -223,4 +223,14 @@ class PersonalAction extends ApiBaseAction {
             parent::end_integral_all_info($info['user_id'],9);
         $bool ? parent::callback(C('STATUS_SUCCESS'),'反馈成功','') : parent::callback(C('STATUS_DATA_ERROR'),'反馈失败','');
     }
+
+    //查看绑定状态 1-未绑定 2－已绑定
+    public function personal_bundling()
+    {
+        $where['id'] = $this->oUser->id;
+        $value = $this->db['Users']->where($where)->field('weibo_order_id,weixin_order_id')->find();
+        $info['weibo_status'] = $value['weibo_order_id']==0 ? 1 : 2;
+        $info['weixin_status'] = $value['weixin_order_id']==0 ? 1 : 2;
+        parent::callback(C('STATUS_SUCCESS'),'获取成功',$info)
+    }
 }

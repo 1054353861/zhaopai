@@ -152,6 +152,7 @@ POST /Api/Login/regeister_login_order
 
 #### Parameters：
 - `order_id` 第三方ID
+- `type` 1－微博 2-微信
 - `image` 图片路径
 - `nickname` 昵称
 - `sex` 性别
@@ -2302,6 +2303,26 @@ POST /Api/Personal/personal_feedback
 #### Parameters：
 - `token` 用户登录后拿去的用户标示
 - `content` 反馈建议
+
+#### Response
+```json
+{
+   "status": "0",
+   "msg": "反馈成功",
+   "data": "",
+   "num": "1"
+}
+```
+
+### 15.个人中心-反馈建议
+
+#### Request
+```
+POST /Api/Personal/personal_bundling
+```
+
+#### Parameters：
+- `token` 用户登录后拿去的用户标示
 
 #### Response
 ```json

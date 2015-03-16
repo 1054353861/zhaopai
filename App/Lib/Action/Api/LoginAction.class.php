@@ -167,9 +167,23 @@ class LoginAction extends ApiBaseAction {
 	//第三方登陆接口
     public function regeister_login_order()
     {
-        $new_arr['order_id'] = $this->_post('order_id');
+        $order_id = $this->_post('order_id');
+        $type = $this->_post('type');
         $users = $this->db['Users'];
-        $value = $users->where(array('order_id'=>array('eq',$new_arr['order_id'])))->find();
+        //1-微博 2－微信
+        switch($type)
+        {
+            case 1:
+                $new_arr['weibo_order_id'] = $where['weibo_order_id'] = $order_id;
+                break;
+            case 2:
+                $new_arr['weixin_order_id'] =  $where['weixin_order_id'] = $order_id;
+                break;
+            default:
+                parent::callback(C('STATUS_DATA_ERROR'),'参数错误','');
+                break;
+        }
+        $value = $users->where($where)->find();
         if($value['id']!='')
         {
             //更新用户登录信息
@@ -182,6 +196,7 @@ class LoginAction extends ApiBaseAction {
             $new_arr['background_img'] = C('UPLOAD_DIR.default_background_img');
             $new_arr['account'] = $new_arr['nickname'] = $this->_post('nickname');
             $new_arr['user_sex'] = $this->_post('sex');
+            $new_arr['create_time'] = $new_arr['update_time'] = time();
             $bool = $users->add($new_arr);
             if($bool)
             {
