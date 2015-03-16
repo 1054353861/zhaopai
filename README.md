@@ -2379,7 +2379,7 @@ POST /Api/Personal/personal_third_bundling
 #### Response
 {
    "status": "0",
-   "msg": "补全成功",
+   "msg": "绑定成功",
    "data": "",
    "num": "1"
 }
