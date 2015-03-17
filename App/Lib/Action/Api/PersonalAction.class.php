@@ -228,9 +228,10 @@ class PersonalAction extends ApiBaseAction {
     public function personal_bundling()
     {
         $where['id'] = $this->oUser->id;
-        $value = $this->db['Users']->where($where)->field('weibo_order_id,weixin_order_id')->find();
+        $value = $this->db['Users']->where($where)->field('weibo_order_id,weixin_order_id,phone')->find();
         $info['weibo_status'] = $value['weibo_order_id']==0 ? 1 : 2;
         $info['weixin_status'] = $value['weixin_order_id']==0 ? 1 : 2;
+        $info['phone_status'] = $value['phone']=='' ? 1 : 2;
         parent::callback(C('STATUS_SUCCESS'),'获取成功',$info);
     }
 
