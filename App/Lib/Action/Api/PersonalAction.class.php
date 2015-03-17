@@ -232,7 +232,7 @@ class PersonalAction extends ApiBaseAction {
         $info['weibo_status'] = $value['weibo_order_id']==0 ? 1 : 2;
         $info['weixin_status'] = $value['weixin_order_id']==0 ? 1 : 2;
         $info['phone_status'] = $value['phone']=='' ? 1 : 2;
-        parent::callback(C('STATUS_SUCCESS'),'获取成功',$info);
+        parent::callback(C('STATUS_SUCCESS'),'获取成功',$value);
     }
 
     //补全第三方账号信息
