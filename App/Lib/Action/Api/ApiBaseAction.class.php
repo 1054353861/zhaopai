@@ -64,18 +64,18 @@ class ApiBaseAction extends AppBaseAction {
 		$date = $user_info[2];			//账号时间
 
 		//安全过滤
-		if (count($user_info) < 3) $this->callback(C('STATUS_OTHER'),'身份验证失败');			
+		if ($uid=='') $this->callback(C('STATUS_OTHER'),'身份验证失败');
 		if (countDays($date,date('Y-m-d'),1) >= 30 ) $this->callback(C('STATUS_NOT_LOGIN'),'登录已过期，请重新登录');		//钥匙过期时间为30天
 
 		//去数据库获取用户数据
 		//$user_data = $this->db['d']->field('id,account,nickname')->where(array('id'=>$uid,'status'=>0,'is_del'=>0))->find();
-		$user_data = D('Users')->get_available_pt_user_info($account);
+		//$user_data = D('Users')->get_available_pt_user_info($account);
 		
-		if ($user_data ==  false) {
-			parent::callback(C('STATUS_NOT_DATA'),'此用户不存在，或被禁用');
-		} else {
-			$this->oUser = (object) $user_data;	
-		}
+		//if ($user_data ==  false) {
+		//	parent::callback(C('STATUS_NOT_DATA'),'此用户不存在，或被禁用');
+		//} else {
+		$this->oUser = (object) $user_data;
+		//}
 
 	}
 	
