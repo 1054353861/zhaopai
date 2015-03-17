@@ -38,7 +38,7 @@ class ArticleModel extends ApiBaseModel {
 	}
 
 	//照片详情
-	public function article_info($user_id,$article_id)
+	public function article_info($article_id)
 	{
 		$big_arr = array();
 
@@ -210,12 +210,17 @@ class ArticleModel extends ApiBaseModel {
 
 		if($type==true)
 		{
-			if(parent::is_no_friends($user_id,$other_id)==0)
-			{
-				$arr_list['user_info']['is_friend'] = 2;
-			}else{
-				$arr_list['user_info']['is_friend'] = 1;
-			}
+            if($other_id==NULL)
+            {
+                if(parent::is_no_friends($user_id,$other_id)==0)
+                {
+                    $arr_list['user_info']['is_friend'] = 2;
+                }else{
+                    $arr_list['user_info']['is_friend'] = 1;
+                }
+            }else{
+                $arr_list['user_info']['is_friend'] = 2;
+            }
 		}
 
 		$list = $this->where(array('user_id'=>$user_id))->limit($first * $offset,$offset)

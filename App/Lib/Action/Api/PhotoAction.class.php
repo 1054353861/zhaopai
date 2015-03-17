@@ -10,7 +10,7 @@ class PhotoAction extends ApiBaseAction {
 	//每个类都要重写此变量
 	protected  $is_check_rbac = true;		//当前控制是否开启身份验证
 	
-	protected  $not_check_fn = array();	//无需登录和验证rbac的方法名
+	protected  $not_check_fn = array('photo_verify','photo_verify_content');	//无需登录和验证rbac的方法名
 
 	public function __construct()
 	{
@@ -27,16 +27,14 @@ class PhotoAction extends ApiBaseAction {
 	//照片详情
 	public function photo_verify()
 	{
-		$id = $this->oUser->id;
 		$article_id = $this->_post('photo_id');
-		$list = $this->db['Article']->article_info($id,$article_id);
+		$list = $this->db['Article']->article_info($article_id);
 		parent::callback(C('STATUS_SUCCESS'),'获取成功',$list);
 	}
 
 	//照片详情讨论
 	public function photo_verify_content()
 	{
-		$id = $this->oUser->id;
 		$article_id = $this->_post('photo_id');
 		$p = $this->_post('p');	//第几页
 		$index = $this->_post('index');	//多少条
