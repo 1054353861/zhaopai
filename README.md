@@ -2360,7 +2360,9 @@ POST /Api/Personal/personal_completion_third
 {
    "status": "0",
    "msg": "补全成功",
-   "data": "",
+   "data": {
+               "token": "DmFSNQFpCTFRMlU3UDVXawM/UmQKNgRiW2IFMlBqUTZcMFEyVTIOKgBgVjJRLAY6AT8="
+           },
    "num": "1"
 }
 ```
