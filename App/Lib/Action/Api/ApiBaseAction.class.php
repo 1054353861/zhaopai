@@ -71,7 +71,7 @@ class ApiBaseAction extends AppBaseAction {
 		//$user_data = $this->db['d']->field('id,account,nickname')->where(array('id'=>$uid,'status'=>0,'is_del'=>0))->find();
 		$user_data = D('Users')->get_available_pt_user_info($account);
 		
-		if ($user_data ==  false || $account != $user_data['account']) {
+		if ($user_data ==  false) {
 			parent::callback(C('STATUS_NOT_DATA'),'此用户不存在，或被禁用');
 		} else {
 			$this->oUser = (object) $user_data;	
