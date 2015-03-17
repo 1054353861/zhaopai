@@ -229,9 +229,9 @@ class PersonalAction extends ApiBaseAction {
     {
         $where['id'] = $this->oUser->id;
         $value = $this->db['Users']->where($where)->field('weibo_order_id,weixin_order_id,phone')->find();
-        $info['weibo_status'] = $value['weibo_order_id'] == 0 ? 1 : 2;
-        $info['weixin_status'] = $value['weixin_order_id'] == 0 ? 1 : 2;
-        $info['phone_status'] = $value['phone'] == '' ? 1 : 2;
+        $info['weibo_status'] = $value['weibo_order_id'] != 0 ? 2 : 1;
+        $info['weixin_status'] = $value['weixin_order_id'] != 0 ? 2 : 1;
+        $info['phone_status'] = $value['phone'] != '' ? 2 : 1;
         parent::callback(C('STATUS_SUCCESS'),'获取成功',$info);
     }
 
