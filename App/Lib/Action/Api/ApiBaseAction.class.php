@@ -65,7 +65,7 @@ class ApiBaseAction extends AppBaseAction {
 
 		//安全过滤
 		if ($uid=='') $this->callback(C('STATUS_OTHER'),'身份验证失败');
-		if (countDays($date,date('Y-m-d'),1) >= 30 ) $this->callback(C('STATUS_NOT_LOGIN'),'登录已过期，请重新登录');		//钥匙过期时间为30天
+		//if (countDays($date,date('Y-m-d'),1) >= 30 ) $this->callback(C('STATUS_NOT_LOGIN'),'登录已过期，请重新登录');		//钥匙过期时间为30天
 
 		//去数据库获取用户数据
 		//$user_data = $this->db['d']->field('id,account,nickname')->where(array('id'=>$uid,'status'=>0,'is_del'=>0))->find();
