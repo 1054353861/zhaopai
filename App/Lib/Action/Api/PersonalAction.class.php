@@ -240,18 +240,32 @@ class PersonalAction extends ApiBaseAction {
         $where['id'] = $this->oUser->id;
         $arr['account'] = $arr['phone'] = $this->_post('cellphone');
         $arr['password'] = pass_encryption($this->_post('password'));
-        $password_confirm = pass_encryption($this->_post('password_confirm'));
-        $arr['city'] = $this->_post('user_city');
-        $arr['sex'] = $this->_post('user_sex');
+
+        if($this->_post('user_city')!='')
+            $arr['city'] = $this->_post('user_city');
+
+        if($this->_post('user_sex')!='')
+            $arr['sex'] = $this->_post('user_sex');
+
+
         $arr['update_time'] = time();
 
-        if($arr['password'] != $password_confirm)
-            parent::callback(C('STATUS_OTHER'),'','二次密码输入不一致');
 
-        if($this->_post('nickname')!='')
-            $arr['nickname'] = $this->_post('nickname');
 
         $Users = $this->db['Users'];						//用户表模型
+
+        if($this->_post('nickname')!='')
+        {
+
+            $is_nickname = $Users->nickname_is_have($this->_post('nickname'));
+
+            if ($is_nickname!='')
+                parent::callback(C('STATUS_OTHER'),'','昵称已经存在');
+
+
+            $arr['nickname'] = $this->_post('nickname');
+        }
+
 
         //手机号唯一
         $is_have = $Users->phone_is_have($arr['cell_phone']);		//查看账号是否存在
@@ -259,10 +273,6 @@ class PersonalAction extends ApiBaseAction {
         if ($is_have!='')
             parent::callback(C('STATUS_OTHER'),'','此手机号已存在');
 
-        $is_nickname = $Users->nickname_is_have($arr['nickname']);
-
-        if ($is_nickname!='')
-            parent::callback(C('STATUS_OTHER'),'','昵称已经存在');
 
         //添加注册用户
         //上传头像
