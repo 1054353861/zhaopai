@@ -288,7 +288,12 @@ class PersonalAction extends ApiBaseAction {
         }
 
         $bool = $Users->where($where)->save($arr);
-        $bool ? parent::callback(C('STATUS_SUCCESS'),'补全成功','') : parent::callback(C('STATUS_DATA_ERROR'),'补全失败','');
+
+        //生成秘钥
+        $encryption = $where['id'].':'.$arr['account'].':'.date('Y-m-d');	//生成解密后的数据
+        $identity_encryption = array('token'=>passport_encrypt($encryption,C('UNLOCAKING_KEY')));	//生成加密字符串,给客户端
+
+        $bool ? parent::callback(C('STATUS_SUCCESS'),'补全成功',$identity_encryption) : parent::callback(C('STATUS_DATA_ERROR'),'补全失败','');
     }
 
     //绑定第三方
