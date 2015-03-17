@@ -2331,7 +2331,8 @@ POST /Api/Personal/personal_bundling
    "data":
    {
        "weibo_status": "1",
-       "weixin_status": "1"
+       "weixin_status": "1",
+       "phone_status": "1"
    },
    "num": "2"
 }
