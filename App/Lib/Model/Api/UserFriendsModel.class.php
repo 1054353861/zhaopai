@@ -12,7 +12,6 @@ class UserFriendsModel extends ApiBaseModel {
 
         $new_add = array('user_id'=>$friend_id,'friend_id'=>$id,'friend_statis'=>1);
 
-
         $id = $this->where($new_add)->getField('id');
         if($id!='')
         {
