@@ -194,7 +194,7 @@ class ApiBaseAction extends AppBaseAction {
     }
 
     //返回城市
-    private function getCity($id)
+    public function getCity($id)
     {
         $city = D('City')->where(array('id'=>$id))->getField('title');
         if($city!='')
@@ -202,6 +202,22 @@ class ApiBaseAction extends AppBaseAction {
             return $city;
         }else{
             return '全国';
+        }
+    }
+
+    //查询城市ID
+    public function getCityTitle_id($str)
+    {
+        if($str=='')
+            return 0;
+
+        $id = D('City')->where(array('title'=>array('like',$str.'%')))->getField('id');
+
+        if($id!='')
+        {
+            return $id;
+        }else{
+            return 0;
         }
     }
 }

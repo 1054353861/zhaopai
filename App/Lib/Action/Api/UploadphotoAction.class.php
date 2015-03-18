@@ -70,7 +70,7 @@ class UploadphotoAction extends ApiBaseAction {
 		$arr['content'] = $this->_post('content');
 		$arr['longitude'] = $this->_post('longitude');
 		$arr['latitude'] = $this->_post('latitude');
-		$arr['city_id'] = $this->_post('city_id');
+		$arr['city_id'] = parent::getCityTitle_id($this->_post('city_id'));
 		$tags = explode(':',$this->_post('tags'));
 
         //上传图片
