@@ -151,6 +151,12 @@ $custom= array (
             1 => array('status'=>1,'explain'=>'男'),
             2 => array('status'=>2,'explain'=>'女'),
         ),
+    
+        //用户性别
+        'LABEL_STATUS' => array(
+            0 => array('status'=>0,'explain'=>'正常'),
+            1 => array('status'=>1,'explain'=>'热门'),
+        ),
 		
 		
 		/* 错误类型 */
