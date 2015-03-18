@@ -482,7 +482,7 @@ POST /Api/Home/home_data
 
 #### Parameters：
 - `token` 用户登录后拿去的用户标示
-- `city` 城市ID 可有可不有，有就搜索该城市下的文章
+- `city_id` 城市ID 可有可不有，有就搜索该城市下的文章
 - `type` 1-是根据时间 2-根据最近
 - `p` 第几页
 - `longitude` 精度
