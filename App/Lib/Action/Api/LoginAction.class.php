@@ -203,6 +203,7 @@ class LoginAction extends ApiBaseAction {
                 //更新用户登录信息
                 $users->up_login_info($bool);
                 $encryption = $bool.':'.$new_arr['account'].':'.date('Y-m-d');
+                parent::end_integral_all_info($bool,2);
                 parent::end_integral_all_info($bool,10);
                 parent::callback(C('STATUS_SUCCESS'),'登录成功',parent::cancel_info($bool),array('token'=>passport_encrypt($encryption,C('UNLOCAKING_KEY'))));
             }else{
