@@ -50,9 +50,14 @@ class ApiBaseModel extends AppBaseModel {
     //封装调用用户信息方法
     public function get_user_info($user_id)
     {
-        return D('Users')->where(array('u.id'=>$user_id))
+        $list = D('Users')->where(array('u.id'=>$user_id))
             ->table('app_users as u')->join('app_city as c on c.id = u.city_id')
             ->field('u.*,c.title')->find();
+        if($list['title']=='')
+        {
+            $list['title']=='全国';
+        }
+        return $list;
     }
 
     //得到标签信息
