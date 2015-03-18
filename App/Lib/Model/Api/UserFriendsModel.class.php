@@ -3,14 +3,14 @@
 //用户数据模型
 class UserFriendsModel extends ApiBaseModel {
 
-	public function agree_friends($user_ids,$id)
+	public function agree_friends($friend_id,$id)
 	{
         $where['user_id'] = $id;
-        $where['friend_id'] = $user_ids;
+        $where['friend_id'] = $friend_id;
         $update = array('friend_statis'=>1);
         $this->where($where)->save($update);
 
-        $new_add = array('user_id'=>$user_ids,'friend_id'=>$id,'friend_statis'=>1);
+        $new_add = array('user_id'=>$friend_id,'friend_id'=>$id,'friend_statis'=>1);
         $bool = $this->add($new_add);
 		return $bool ? true : false;
 	}
