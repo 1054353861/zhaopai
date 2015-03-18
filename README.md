@@ -1862,7 +1862,7 @@ POST /Api/Personal/personal_news
 ```
 
 
-### 4.个人中心-积分
+### 4.个人中心-积分  1-未领取 2-已领取 3-无法领取
 
 #### Request
 ```
