@@ -55,7 +55,7 @@ class ApiBaseModel extends AppBaseModel {
             ->field('u.*,c.title')->find();
         if($list['title']=='')
         {
-            $list['title']=='全国';
+            $list['title'] = '全国';
         }
         return $list;
     }
