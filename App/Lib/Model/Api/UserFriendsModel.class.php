@@ -11,8 +11,15 @@ class UserFriendsModel extends ApiBaseModel {
         $this->where($where)->save($update);
 
         $new_add = array('user_id'=>$friend_id,'friend_id'=>$id,'friend_statis'=>1);
-        $bool = $this->add($new_add);
-		return $bool ? true : false;
+
+        $id = $this->where($new_add)->getField('id');
+        if($id!='')
+        {
+            return true;
+        }else{
+            $bool = $this->add($new_add);
+            return $bool ? true : false;
+        }
 	}
 
 
