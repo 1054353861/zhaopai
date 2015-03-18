@@ -65,7 +65,7 @@ class ArticleModel extends ApiBaseModel {
 	public function article_index($city,$type,$index,$page_count,$lng,$lat)
 	{
 		if($city!='')
-			$where['city_id'] = $city;
+            $where['city_id'] = $l_where['city_id'] = $city;
 		$p = $index =='' ? 0 : $index;
 		$page_count = $page_count == '' ? 10 : $page_count;
 		$list = array();
