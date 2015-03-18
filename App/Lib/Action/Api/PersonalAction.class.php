@@ -296,7 +296,7 @@ class PersonalAction extends ApiBaseAction {
         if($bool)
         {
             parent::end_integral_all_info($bool,1);
-            parent::callback(C('STATUS_SUCCESS'),'补全成功',$identity_encryption)
+            parent::callback(C('STATUS_SUCCESS'),'补全成功',$identity_encryption);
         }else{
             parent::callback(C('STATUS_DATA_ERROR'), '补全失败', '');
         }
