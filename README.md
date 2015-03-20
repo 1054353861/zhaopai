@@ -3209,6 +3209,7 @@ POST /Api/Uploadphoto/upload_photo
 #### Parameters：
 - `token` 用户登录后拿去的用户标示
 - `content` 标题内容
+- `address` 地址
 - `longitude` 经度
 - `latitude` 纬度
 - `city_id` 城市ID

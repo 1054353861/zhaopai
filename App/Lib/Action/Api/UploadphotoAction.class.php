@@ -68,6 +68,7 @@ class UploadphotoAction extends ApiBaseAction {
 	{
 		$arr['user_id'] = $this->oUser->id;
 		$arr['content'] = $this->_post('content');
+        $arr['address'] = $this->_post('address');
 		$arr['longitude'] = $this->_post('longitude');
 		$arr['latitude'] = $this->_post('latitude');
 		$arr['city_id'] = $this->_post('city_id');
