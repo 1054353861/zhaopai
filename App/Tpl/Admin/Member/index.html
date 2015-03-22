@@ -53,7 +53,7 @@
 											<td>{$vo.city_explain}</td>                                            <td>{$vo.status_explain}</td>
 											<td class="center">
 											     <a href="javascript:;" class="btn_bak" data-record_prev="1" data-url="{:U('Admin/Member/edit',array('act'=>update,'id'=>$vo['id']))}">详情</a>
-                                                | <a href="javascript:;" class="btn_bak" data-record_prev="1" data-url="{:U('Admin/Push/seed_to_user',array('user_id'=>$vo['id']))}">推送</a>                                                | <a href="{:U('Admin/Member/edit',array('act'=>delete,'id'=>$vo['id']))}" class="check" >删除</a>											</td>
+                                                | <a href="javascript:;" class="btn_bak" data-record_prev="1" data-url="{:U('Admin/Push/seed_to_user',array('user_id'=>$vo['id']))}">个推</a>                                                | <a href="{:U('Admin/Member/edit',array('act'=>delete,'id'=>$vo['id']))}" class="check" >删除</a>											</td>
 										</tr>
 									</volist>
 								</table>
