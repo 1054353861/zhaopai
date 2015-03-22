@@ -3378,3 +3378,61 @@ POST /Api/City/index
       "num": "3"
     }
 ```
+
+## 十三、推送
+
+### 1.获取推送历史记录
+
+#### Request
+```
+POST /Api/Push/get_push_log_for_user
+```
+
+#### Parameters：
+- `token` 用户登录后拿去的用户标示
+
+#### Response
+```json
+{
+  "status": "0",
+  "msg": "获取成功",
+  "data": [
+    {
+      "id": "2",
+      "content": "12312323",
+      "time": "2015-03-22 13:12:19",
+      "type": "0",
+      "to_user_id": "0"
+    },
+    {
+      "id": "1",
+      "content": "qweqeqw",
+      "time": "2015-03-22 10:36:34",
+      "type": "0",
+      "to_user_id": "0"
+    },
+    {
+      "id": "7",
+      "content": "sdfsdfs",
+      "time": "2015-03-22 13:37:11",
+      "type": "1",
+      "to_user_id": "7"
+    },
+    {
+      "id": "6",
+      "content": "sdfsdf",
+      "time": "2015-03-22 13:37:07",
+      "type": "1",
+      "to_user_id": "7"
+    },
+    {
+      "id": "5",
+      "content": "qeqeqe",
+      "time": "2015-03-22 13:35:39",
+      "type": "1",
+      "to_user_id": "7"
+    }
+  ],
+  "num": "5"
+}
+```
