@@ -15,9 +15,11 @@ class LabelArticleModel extends ApiBaseModel
         $first = $p !='' ? 0 : $p;
         $offset = $index != '' ? 10 : $index;
 
-        $list = $this->table('app_label_article as a')->where(array('a.label_id'=>$tag_id))
-            ->join('app_article as c on c.id = a.article_id')->limit($first * $offset,$offset)
-            ->order('c.create_time desc')->select();
+        $list = $this->table('app_label_article as a')
+            ->where(array('a.label_id'=>$tag_id,'c.status'=>0))
+            ->join('app_article as c on c.id = a.article_id')
+            ->order('c.create_time desc')
+            ->limit($first * $offset,$offset)->select();
 
         parent::public_file_dir($list,array('article_img'));
 

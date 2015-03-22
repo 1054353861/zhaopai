@@ -185,16 +185,7 @@ class PersonalAction extends ApiBaseAction {
                    }
                }
             }
-            
-//     		$arr['sex'] = $this->_post('user_sex');
-//     		$arr['city_id'] = $this->_post('city_id');
-//     		$arr['nickname'] = $this->_post('nickname');
-    		
-//     		$arr['interest'] = $this->_post('interest');  //兴趣
-//     		$arr['name'] = $this->_post('name');  //收获地址姓名
-//     		$arr['address'] = $this->_post('address');    //收获地址
-//     		$arr['address_phone'] = $this->_post('address_phone');//收货人联系电话
-    		
+
     		if($this->_post('article_img')!='')
     			$arr['head_img'] = $this->_post('article_img');
     		if($_FILES['img']!='')

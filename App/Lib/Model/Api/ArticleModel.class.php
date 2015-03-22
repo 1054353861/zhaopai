@@ -165,7 +165,7 @@ class ArticleModel extends ApiBaseModel {
 	//推荐文章
 	public function getRemmend()
 	{
-		$list = $this->where(array('recommend'=>1))->select();
+		$list = $this->where(array('recommend'=>1,'status'=>0))->select();
 
 		$list_arr = array();
 
@@ -225,7 +225,7 @@ class ArticleModel extends ApiBaseModel {
             }
 		}
 
-		$list = $this->where(array('user_id'=>$user_id))->limit($first * $offset,$offset)
+		$list = $this->where(array('user_id'=>$user_id,'status'=>0))->limit($first * $offset,$offset)
 		->field('id,content,article_img,create_time,longitude,latitude')->order('create_time desc')->select();
 
 
@@ -251,7 +251,7 @@ class ArticleModel extends ApiBaseModel {
         }else{
             $arr_list['photo_info'] = array();
         }
-		$arr_list['article_num'] = $this->where(array('user_id'=>$user_id))->count();
+		$arr_list['article_num'] = $this->where(array('user_id'=>$user_id,'status'=>0))->count();
 
 		return $arr_list;
 	}

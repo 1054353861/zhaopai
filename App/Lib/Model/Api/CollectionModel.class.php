@@ -16,11 +16,12 @@ class CollectionModel extends ApiBaseModel {
 
 		$list_arr = array();
 
-		$list = $this->where(array('c.user_id'=>array('eq',$id)))
+		$list = $this->where(array('c.user_id'=>array('eq',$id),'a.status'=>array('eq',0)))
             ->table('app_collection as c')
-            ->join('app_article as a on a.id = c.article_coll_id')->limit($first * $offset,$offset)
+            ->join('app_article as a on a.id = c.article_coll_id')
             ->order('c.create_time desc')->order('a.create_time desc')
-            ->field('a.id,a.content,a.article_img,a.user_id,a.create_time')->select();
+            ->field('a.id,a.content,a.article_img,a.user_id,a.create_time')
+            ->limit($first * $offset,$offset)->select();
 
 		parent::public_file_dir($list,array('article_img'));
 

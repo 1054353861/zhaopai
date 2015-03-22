@@ -36,8 +36,9 @@
 
                 $arr_list = array();
 
-                $list = D('Article')->where(array('id'=>array('IN',$new_list)))->limit($first * $offset,$offset)
-                ->order('create_time desc')->select();
+                $list = D('Article')->where(array('id'=>array('IN',$new_list),'status'=>array('eq',0)))
+                    ->limit($first * $offset,$offset)
+                    ->order('create_time desc')->select();
 
                 foreach($list as $key=>$value)
                 {
