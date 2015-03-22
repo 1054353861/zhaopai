@@ -28,36 +28,11 @@ class PushAction extends AdminBaseAction {
 	    
 	} 
 	
+	
+	
 	//发送给所有的用户
 	public function seed_to_all () {
-	    $app_key = $this->app_key;
-	    $master_secret = $this->master_secret;
-	     
-	    $client = new JPushClient($app_key, $master_secret);
-	     
-	    try {
-	        $result = $client->push()
-	        ->setPlatform(M\all)
-	        ->setAudience(M\all)
-	        ->setNotification(M\notification('Hellow World'))
-	        ->send();
-	        echo 'Push Success.' . $br;
-	        echo 'sendno : ' . $result->sendno . $br;
-	        echo 'msg_id : ' .$result->msg_id . $br;
-	        echo 'Response JSON : ' . $result->json . $br;
-	    } catch (APIRequestException $e) {
-	        echo 'Push Fail.' . $br;
-	        echo 'Http Code : ' . $e->httpCode . $br;
-	        echo 'code : ' . $e->code . $br;
-	        echo 'message : ' . $e->message . $br;
-	        echo 'Response JSON : ' . $e->json . $br;
-	        echo 'rateLimitLimit : ' . $e->rateLimitLimit . $br;
-	        echo 'rateLimitRemaining : ' . $e->rateLimitRemaining . $br;
-	        echo 'rateLimitReset : ' . $e->rateLimitReset . $br;
-	    } catch (APIConnectionException $e) {
-	        echo 'Push Fail.' . $br;
-	        echo 'message' . $e->getMessage() . $br;
-	    }
+	  $this->push('all','你好！');
 	}
 	
 	
@@ -83,31 +58,37 @@ class PushAction extends AdminBaseAction {
 	}
 	
 	
-	public function edit () {
+    public function edit () {
 	    $result = array();
 	   
-	    $Shop = $this->db['Shop'];
+	    $Label = $this->db['Label'];
 	    $act = $this->_get('act');
 	    $id = $this->_get('id');
 	    
 	    if ($act == 'add') {
 	        if ($this->isPost()) {
-	            $Shop->create();
-	            $Shop->add() ? $this->success('添加成功') : $this->error('添加失败请稍后再试！');
+	            $Label->create();
+	            $Label->add() ? $this->success('添加成功') : $this->error('添加失败请稍后再试！');
 	            exit;
 	        }
 	    } else if ($act == 'update') {
 	        if ($this->isPost()) {
-	            $Shop->create();
-	            $Shop->save_one_data(array('id'=>$id)) ? $this->success('修改成功') : $this->error('修改失败请稍后再试！');
+	            $Label->create();
+	            $Label->save_one_data(array('id'=>$id)) ? $this->success('修改成功') : $this->error('修改失败请稍后再试！');
 	            exit;
 	        } 
 	        
-	        $result = $Shop->get_one_data(array('id'=>$id));
+	        $result = $Label->get_one_data(array('id'=>$id));
+
 	    } else if ($act == 'delete') {
-	       $Shop->delete_data(array('id'=>$id)) ? $this->success('删除成功') : $this->error('删除失败请稍后再试！');
+	       $Label->delete_real(array('id'=>$id)) ? $this->success('删除成功') : $this->error('删除失败请稍后再试！');
 	        exit;
 	    } 
+	    
+	    
+	    parent::data_to_view(array(
+	        'label_status' => $this->label_status,
+	    ));
 	    
 	    parent::global_tpl_view( array(
 	        'action_name'=>'编辑',

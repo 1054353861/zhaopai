@@ -357,6 +357,25 @@ class AppBaseAction extends GlobalParameterAction {
 	    }
 	}
 	
+	
+	/**
+	 * 推送服务
+	 * 发现找不到类
+	 * 进入App/vendor/
+	 * vim composer.json 写入 { "jpush/jpush": "v3.2.1" }
+	 * php composer.phar install
+	 */
+	protected function push ($type,$content) {
+	    import("@.Tool.JgPush");
+	    $JgPush = new JgPush();
+	    
+	    if ($type == 'all') {
+	        $JgPush->seedToAll($content);
+	    } elseif ($type == 'one') {
+	        $JgPush->seedToOne($content);
+	    }
+	}
+	
 }
 
 

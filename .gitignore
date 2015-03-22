@@ -10,3 +10,4 @@ data
 ThinkPHP
 config.inc.php
 App/Uploads/
+App/vendor/
