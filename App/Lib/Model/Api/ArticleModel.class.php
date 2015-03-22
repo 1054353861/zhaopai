@@ -74,11 +74,13 @@ class ArticleModel extends ApiBaseModel {
 		{
 			//最新
 			case 1:
+                $where['status'] = 0;
 				$list_info = $this->where($where)->limit($p * $page_count,$page_count)->order('create_time desc')->select();
 				$list['all_count'] = $this->where($where)->count();
 			break;
 			//最近
 			case 2:
+                $l_where['status'] = 0;
 				//计算经纬度
 				$square_arr = _SquarePoint($lng,$lat,100);
 				//纬度
