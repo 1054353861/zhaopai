@@ -157,6 +157,18 @@ $custom= array (
             0 => array('status'=>0,'explain'=>'正常'),
             1 => array('status'=>1,'explain'=>'热门'),
         ),
+    
+        //文章举报状态
+        'REPORT_STATUS' => array(
+            0 => array('status'=>0,'explain'=>'正常'),
+            1 => array('status'=>1,'explain'=>'举报'),
+        ),
+        //文章状态
+        'ARTICLE_STATUS' => array(
+            0 => array('status'=>0,'explain'=>'正常'),
+            1 => array('status'=>1,'explain'=>'禁用'),
+        ),
+    
 		
 		
 		/* 错误类型 */

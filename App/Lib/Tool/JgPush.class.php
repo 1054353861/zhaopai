@@ -19,6 +19,7 @@ class JgPush {
     
     //发送给所有的用户
     public function seedToAll ($content) {
+        $result_data = array();
         $app_key = $this->app_key;
         $master_secret = $this->master_secret;
          
@@ -30,27 +31,34 @@ class JgPush {
             ->setAudience(M\all)
             ->setNotification(M\notification($content))
             ->send();
-            echo 'Push Success.' . $br;
-            echo 'sendno : ' . $result->sendno . $br;
-            echo 'msg_id : ' .$result->msg_id . $br;
-            echo 'Response JSON : ' . $result->json . $br;
+            $result_data[] = 'Push Success.' . $br;
+            $result_data[] = 'sendno : ' . $result->sendno . $br;
+            $result_data[] = 'msg_id : ' .$result->msg_id . $br;
+            $result_data[] = 'Response JSON : ' . $result->json . $br;
         } catch (APIRequestException $e) {
-            echo 'Push Fail.' . $br;
-            echo 'Http Code : ' . $e->httpCode . $br;
-            echo 'code : ' . $e->code . $br;
-            echo 'message : ' . $e->message . $br;
-            echo 'Response JSON : ' . $e->json . $br;
-            echo 'rateLimitLimit : ' . $e->rateLimitLimit . $br;
-            echo 'rateLimitRemaining : ' . $e->rateLimitRemaining . $br;
-            echo 'rateLimitReset : ' . $e->rateLimitReset . $br;
+            $result_data[] = 'Push Fail.' . $br;
+            $result_data[] = 'Http Code : ' . $e->httpCode . $br;
+            $result_data[] = 'code : ' . $e->code . $br;
+            $result_data[] = 'message : ' . $e->message . $br;
+            $result_data[] = 'Response JSON : ' . $e->json . $br;
+            $result_data[] = 'rateLimitLimit : ' . $e->rateLimitLimit . $br;
+            $result_data[] = 'rateLimitRemaining : ' . $e->rateLimitRemaining . $br;
+            $result_data[] = 'rateLimitReset : ' . $e->rateLimitReset . $br;
         } catch (APIConnectionException $e) {
-            echo 'Push Fail.' . $br;
-            echo 'message' . $e->getMessage() . $br;
+            $result_data[] = 'Push Fail.' . $br;
+            $result_data[] = 'message' . $e->getMessage() . $br;
         }
+        
+        return $result_data;
     }
     
     
-    public function seedToOne () {
+    /**
+     * 推送给单个用户
+     * @param unknown $user
+     * @param unknown $content
+     */
+    public function seedToOne ($user,$content) {
         $app_key = $this->app_key;
         $master_secret = $this->master_secret;
     }

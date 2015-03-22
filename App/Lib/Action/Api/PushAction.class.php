@@ -1,23 +1,13 @@
 <?php
-require_once 'App/vendor/autoload.php';
-
-use JPush\Model as M;
-use JPush\JPushClient;
-use JPush\Exception\APIConnectionException;
-use JPush\Exception\APIRequestException;
-
 
 /**
- * 推送
+ * 推送控制接口
  */
 class PushAction extends ApiBaseAction {
 	
-	protected  $is_check_rbac = false;		//当前控制是否开启身份验证
+	protected  $is_check_rbac = true;		//当前控制是否开启身份验证
 	
 	protected  $not_check_fn = array();	//登陆后无需登录验证方法
-	
-	private $app_key = 'b630b69041d1ec8a7bdef983';
-	private $master_secret = '25610a966468d2f2b1ed926f';
 	
 	
 	//和构造方法
@@ -28,44 +18,32 @@ class PushAction extends ApiBaseAction {
 	
 	//初始化数据库连接
 	protected  $db = array(
-		
+		'PushLog' => 'PushLog'
 	);
 	
 	
-	//发送给所有的用户
-	public function seed_to_all () {
-	    $app_key = $this->app_key;
-	    $master_secret = $this->master_secret;
+	//获取推送记录
+	public function get_push_log_for_user () {
+	    $PushLog = $this->db['PushLog'];
 	    
-	    $client = new JPushClient($app_key, $master_secret);
+	    $user_id = $this->oUser->id;	//用户ID
+	   // $user_id = 7;
 	    
-	    try {
-	        $result = $client->push()
-	        ->setPlatform(M\all)
-	        ->setAudience(M\all)
-	        ->setNotification(M\notification('Hellow World'))
-	        ->send();
-	        echo 'Push Success.' . $br;
-	        echo 'sendno : ' . $result->sendno . $br;
-	        echo 'msg_id : ' .$result->msg_id . $br;
-	        echo 'Response JSON : ' . $result->json . $br;
-	    } catch (APIRequestException $e) {
-	        echo 'Push Fail.' . $br;
-	        echo 'Http Code : ' . $e->httpCode . $br;
-	        echo 'code : ' . $e->code . $br;
-	        echo 'message : ' . $e->message . $br;
-	        echo 'Response JSON : ' . $e->json . $br;
-	        echo 'rateLimitLimit : ' . $e->rateLimitLimit . $br;
-	        echo 'rateLimitRemaining : ' . $e->rateLimitRemaining . $br;
-	        echo 'rateLimitReset : ' . $e->rateLimitReset . $br;
-	    } catch (APIConnectionException $e) {
-	        echo 'Push Fail.' . $br;
-	        echo 'message' . $e->getMessage() . $br;
+	    //用户推送日志
+	    $where = array('to_user_id'=>$user_id,'type'=>1);
+	    $user_log = $PushLog->get_user_log_list($where,'*',500,'id DESC');
+	    
+	    //系统推送日志
+	    $system_log = $PushLog->get_system_log_list();
+	    
+	    $result = array_merge($system_log,$user_log);
+	    
+	    if (!empty($result)) {
+	        parent::callback(C('STATUS_SUCCESS'),'获取成功',$result);
+	    } else {
+	        parent::callback(C('STATUS_NOT_DATA'),'暂无数据');
 	    }
 	}
-	
-	
-	
 	
 }
 

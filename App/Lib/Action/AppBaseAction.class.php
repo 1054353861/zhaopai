@@ -365,15 +365,16 @@ class AppBaseAction extends GlobalParameterAction {
 	 * vim composer.json 写入 { "jpush/jpush": "v3.2.1" }
 	 * php composer.phar install
 	 */
-	protected function push ($type,$content) {
+	protected function push ($content) {
 	    import("@.Tool.JgPush");
 	    $JgPush = new JgPush();
-	    
-	    if ($type == 'all') {
-	        $JgPush->seedToAll($content);
-	    } elseif ($type == 'one') {
-	        $JgPush->seedToOne($content);
-	    }
+	    return $JgPush->seedToAll($content);
+	}
+	
+	protected function push_user ($user_id,$content) {
+	    import("@.Tool.JgPush");
+	    $JgPush = new JgPush();
+	    return $JgPush->seedToOne($user_id,$content);
 	}
 	
 }

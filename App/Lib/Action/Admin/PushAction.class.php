@@ -9,7 +9,7 @@ class PushAction extends AdminBaseAction {
 
 	//初始化数据库连接
 	protected  $db = array(
-        'Shop' => 'Shop'
+        'PushLog' => 'PushLog'
 	);
 
 	/**
@@ -29,77 +29,46 @@ class PushAction extends AdminBaseAction {
 	} 
 	
 	
-	
 	//发送给所有的用户
 	public function seed_to_all () {
-	  $this->push('all','你好！');
-	}
-	
-	
-    public function index () {
-        $result = array();
-      
-        $where = array();
-        $where['is_del'] = 0;
-        //分页
-        $db_result = $this->db['Shop']->get_spe_page_data($where,'*',500,'id DESC');
-        
-	    $result['list'] = $db_result['list'];
-        $result['page_html'] = $db_result['page_html'];
-        
+	  //
+	    $result = array();
+	    
+	    if ($this->isPost()) {
+	        $push_content = $this->_post('push_content');
+	        $this->push($push_content);
+	        $this->db['PushLog']->add_log(0,$push_content);
+	    }   
+	    
 	    parent::global_tpl_view( array(
-	        'action_name'=>'商品列表',
-	        'title_name'=>'商品列表',
-	        'add_name'=>'添加商品'
+	        'action_name'=>'群体推送',
+	        'title_name'=>'群体推送',
+	        'add_name'=>'群体推送'
 	    ));
 	     
-	    parent::data_to_view($result);
+	    //parent::data_to_view($result);
 	    $this->display();
 	}
 	
 	
-    public function edit () {
-	    $result = array();
-	   
-	    $Label = $this->db['Label'];
-	    $act = $this->_get('act');
-	    $id = $this->_get('id');
+	public function seed_to_user () {
 	    
-	    if ($act == 'add') {
-	        if ($this->isPost()) {
-	            $Label->create();
-	            $Label->add() ? $this->success('添加成功') : $this->error('添加失败请稍后再试！');
-	            exit;
-	        }
-	    } else if ($act == 'update') {
-	        if ($this->isPost()) {
-	            $Label->create();
-	            $Label->save_one_data(array('id'=>$id)) ? $this->success('修改成功') : $this->error('修改失败请稍后再试！');
-	            exit;
-	        } 
+	    if ($this->isPost()) {
+	        $push_content = $this->_post('push_content');
+	        $user_id = $this->_get('user_id');
 	        
-	        $result = $Label->get_one_data(array('id'=>$id));
-
-	    } else if ($act == 'delete') {
-	       $Label->delete_real(array('id'=>$id)) ? $this->success('删除成功') : $this->error('删除失败请稍后再试！');
-	        exit;
-	    } 
-	    
-	    
-	    parent::data_to_view(array(
-	        'label_status' => $this->label_status,
-	    ));
+	        $this->db['PushLog']->add_log(1,$push_content,$user_id);
+	        $this->push_user($user_id,$push_content);
+	    }
 	    
 	    parent::global_tpl_view( array(
-	        'action_name'=>'编辑',
-	        'title_name'=>'编辑',
-	        'add_name'=>'编辑'
+	        'action_name'=>'个推',
+	        'title_name'=>'个推',
+	        'add_name'=>'个推'
 	    ));
 	    
-	    parent::data_to_view($result);
+	    //parent::data_to_view($result);
 	    $this->display();
 	}
-	
-	
 	
 }
