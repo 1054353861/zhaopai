@@ -10,7 +10,14 @@ class ArticleAction extends AdminBaseAction {
 	//初始化数据库连接
 	protected  $db = array(
         'Article' => 'Article',
-	    'PushLog'=>'PushLog'
+	    'PushLog'=>'PushLog',
+        'LabelArticle'=>'LabelArticle',
+        'Attention' => 'Attention',
+        'ContentPraise' => 'ContentPraise',
+        'Comment' => 'Comment',
+        'Collection' => 'Collection',
+        'ArticleReport' => 'ArticleReport',
+        'ArticleBehaviorLog' => 'ArticleBehaviorLog'
 	);
 	
 	//文章禁用状态
@@ -91,7 +98,21 @@ class ArticleAction extends AdminBaseAction {
 	        $result = $Article->get_one_data(array('id'=>$id));
 
 	    } else if ($act == 'delete') {
-	       $Article->delete_real(array('id'=>$id)) ? $this->success('删除成功') : $this->error('删除失败请稍后再试！');
+
+            if($Article->delete_real(array('id'=>$id)))
+            {
+                $this->db['Comment']->where(array('article_id'=>$id))->delete();
+                $this->db['ContentPraise']->where(array('article_id'=>$id))->delete();
+                $this->db['LabelArticle']->where(array('article_id'=>$id))->delete();
+                $this->db['Attention']->where(array('attention_id'=>$id))->delete();
+                $this->db['Collection']->where(array('article_coll_id'=>$id))->delete();
+                $this->db['ArticleReport']->where(array('article_id'=>$id))->delete();
+                $this->db['ArticleBehaviorLog']->where(array('article_id'=>$id))->delete();
+                $this->success('删除成功');
+            }else{
+                $this->error('删除失败请稍后再试！');
+            }
+            
 	        exit;
 	    } 
 	    
