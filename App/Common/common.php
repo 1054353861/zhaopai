@@ -822,9 +822,9 @@ function pass_encryption ($str){
     {
         $path = pathinfo($url);
         if($path['extension']!='mp4'){
-            return  '<img width="50" src="/'.C('PUBLIC_VISIT.app_dir').$url.'" />';
+            return  '<img width="50" src="/'.C('PUBLIC_VISIT.app_dir').$path['dirname'].$path['basename'].'" />';
         }else{
-            return  '<embed witdh="50" src="/'.C('PUBLIC_VISIT.app_dir').$url.'"><embed/>';
+            return  '<embed witdh="50" src="/'.C('PUBLIC_VISIT.app_dir').$path['dirname'].$path['basename'].'"><embed/>';
         }
     }
 ?>
