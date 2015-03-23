@@ -36,7 +36,7 @@ class ArticleAction extends AdminBaseAction {
         $result = array();
       
         $where = array();
-        $where['is_report'] = 1;
+        $where['is_report'] = array('gt',0);
         //分页
         $db_result = $this->db['Article']->getListHtml($where,'*',500,'id DESC');
         
