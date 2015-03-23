@@ -43,7 +43,7 @@ class ArticleAction extends AdminBaseAction {
         $result = array();
       
         $where = array();
-        $where['is_report'] = array('gt',0);
+        $this->_get('or')=='is_report' ? $where['is_report'] = array('gt',0) : $where['is_report'] = array('eq',0);
         //分页
         $db_result = $this->db['Article']->getListHtml($where,'*',500,'id DESC');
         
@@ -51,14 +51,14 @@ class ArticleAction extends AdminBaseAction {
         $result['page_html'] = $db_result['page_html'];
         
 	    parent::global_tpl_view( array(
-	        'action_name'=>'举报列表',
-	        'title_name'=>'举报列表',
+	        'action_name'=> $this->_get('or')=='is_report' ? '举报列表' : '文章列表',
+	        'title_name'=> $this->_get('or')=='is_report' ? '举报列表' : '文章列表'
 	    ));
 	     
 	    parent::data_to_view($result);
 	    $this->display();
 	}
-	
+
 	
 	public function edit () {
 	    $result = array();
@@ -112,7 +112,6 @@ class ArticleAction extends AdminBaseAction {
             }else{
                 $this->error('删除失败请稍后再试！');
             }
-            
 	        exit;
 	    } 
 	    

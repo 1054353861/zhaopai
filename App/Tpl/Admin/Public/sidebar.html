@@ -101,7 +101,10 @@
 
                     <ul class="sub-menu">
                         <li >
-                            <a href="{:U('Admin/Article/index_report')}">举报列表</a>
+                            <a href="{:U('Admin/Article/index_report',array('or'=>'is_report'))}">举报列表</a>
+                        </li>
+                        <li >
+                            <a href="{:U('Admin/Article/index_report',array('or'=>'no_report'))}">文章列表</a>
                         </li>
                     </ul>
                 </li>
