@@ -21,7 +21,8 @@ class PhotoAction extends ApiBaseAction {
 	protected  $db = array(
 		'Comment' => 'Comment',
 		'Article' => 'Article',
-		'ContentPraise' => 'ContentPraise'
+		'ContentPraise' => 'ContentPraise',
+        'ArticleReport' => 'ArticleReport'
 	);
 
 	//照片详情
@@ -86,9 +87,31 @@ class PhotoAction extends ApiBaseAction {
     public function photo_report()
     {
         $id = $this->oUser->id;
+
         $article_id = $this->_post('photo_id');
-        $update = array('is_report'=>1);
-        $bool = $this->db['Article']->where(array('id'=>$article_id))->save($update);
-        $bool ? parent::callback(C('STATUS_SUCCESS'),'举报成功','') : parent::callback(C('STATUS_DATA_ERROR'),'举报失败','');
+
+        $ArticleReport = $this->db['ArticleReport'];
+
+        $report_id = $ArticleReport->where(array('user_id'=>$id,'article_id'=>$article_id))->getField('id');
+
+        if($report_id!='')
+        {
+            parent::callback(C('STATUS_SUCCESS'),'请勿重复举报','');
+        }else{
+            $Article = $this->db['Article'];
+
+            $report = $Article->where(array('id'=>$article_id))->getField('is_report');
+
+            $update = array('is_report'=>($report+1));
+
+            $bool = $Article->where(array('id'=>$article_id))->save($update);
+
+            if($bool)
+                $ArticleReport->add(array('user_id'=>$id,'article_id'=>$article_id,'create_time'=>time()));
+
+            $bool ? parent::callback(C('STATUS_SUCCESS'),'举报成功','') : parent::callback(C('STATUS_DATA_ERROR'),'举报失败','');
+        }
     }
+
+
 }
