@@ -96,7 +96,7 @@ class PhotoAction extends ApiBaseAction {
 
         if($report_id!='')
         {
-            parent::callback(C('STATUS_SUCCESS'),'请勿重复举报','');
+            parent::callback(C('STATUS_DATA_ERROR'),'请勿重复举报','');
         }else{
             $Article = $this->db['Article'];
 
