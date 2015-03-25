@@ -223,7 +223,6 @@ class PersonalAction extends ApiBaseAction {
         $info['weibo_status'] = $value['weibo_order_id'] != '0' ? 2 : 1;
         $info['weixin_status'] = $value['weixin_order_id'] != '0' ? 2 : 1;
         $info['phone_status'] = $value['phone'] != '' ? 2 : 1;
-        $info['id'] = $where['id'];
         parent::callback(C('STATUS_SUCCESS'),'获取成功',$info);
     }
 
@@ -261,7 +260,7 @@ class PersonalAction extends ApiBaseAction {
 
 
         //手机号唯一
-        $is_have = $Users->phone_is_have($arr['cell_phone']);		//查看账号是否存在
+        $is_have = $Users->phone_is_have($arr['account']);		//查看账号是否存在
 
         if ($is_have!='')
             parent::callback(C('STATUS_OTHER'),'','此手机号已存在');
