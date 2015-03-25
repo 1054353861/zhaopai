@@ -92,8 +92,8 @@ class JgPush {
                 M\audience(
                     //M\tag(array('tag1','tag2')),
                     //M\alias(array('alias1', 'alias2'),
-                    //M\alias($user_ids),
-                    M\registration_id($user_ids)    //
+                    M\alias($user_ids)
+                    //M\registration_id($user_ids)    //
                  )       
             )
             
@@ -123,7 +123,6 @@ class JgPush {
             $result_data[] = 'Push Fail.' . $br;
             $result_data[] = 'message' . $e->getMessage() . $br;
         }
-        
         return $result_data;
         
         //根据设备注册ID，请求获得详细数据，接口为：Device API
