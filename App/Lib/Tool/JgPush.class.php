@@ -2,8 +2,11 @@
 /**
  * 极光推送
  * @author jason
- *文档地址:https://github.com/jpush/jpush-api-php-client/blob/master/doc/api.md
- *
+ * 下载页 http://docs.jpush.io/server/php_sdk/
+ * 框架下载地址 http://docs.jpush.cn/download/attachments/2228302/vendor.tar.gz
+ * 文档地址:https://github.com/jpush/jpush-api-php-client/blob/master/doc/api.md
+ * 
+ * 使用方法 :把下载的 vendor.tar.gz 文件解压后放在 App 目录下即可
  *
  * 流程
 指定推送的平台(platform)
